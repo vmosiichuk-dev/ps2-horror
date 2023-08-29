@@ -8,9 +8,10 @@ Careful event handling enhances user engagement with UI updates and ensures cons
 
 ## Screenshots
 
-![Desktop Screenshot](screenshot--desktop.webp) <br>
-![Tablet Screenshot](screenshot--tablet.webp){width=50%}
-![Add Form Screenshot](screenshot--add-form.webp){width=50%}
+<img src="screenshot--desktop.webp" alt="Desktop Screenshot" width="100%">
+<br>
+<img src="screenshot--tablet.webp" alt="Tablet Screenshot" width="50%">
+<img src="screenshot--add-form.webp" alt="Add Form Screenshot" width="50%">
 
 ## Getting Started
 You can follow these steps to set up and run the app on your local machine.<br>
