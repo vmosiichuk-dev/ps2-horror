@@ -1,0 +1,138 @@
+.list-item {
+    box-shadow: 4px 4px 12px rgba(0,0,0,.4);
+    height: 185px;
+    list-style: none;
+    margin: 0;
+    max-width: 130px;
+    min-width: 130px;
+    position: relative;
+}
+
+.list-item-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width:100%;
+    background-color: var(--main);
+    backdrop-filter: blur(1.25px) grayscale(.25) contrast(1.15);
+    opacity: 0;
+    transition: opacity .2s cubic-bezier(.46,.03,.52,.96);
+}
+
+.list-item-buttons:hover {
+    opacity: 1;
+}
+
+.btn-sm {
+    border: none;
+    margin: 6px;
+    position:relative;
+    background-color: transparent;
+}
+
+.list-item-data {
+    justify-content: space-between;
+    width: 100%;
+    height: 10%;
+    display: flex;
+    position: absolute;
+    font-weight: 400;
+    z-index: 10;
+    bottom: -2.125rem;
+    font-size: .9375rem;
+}
+
+.list-item-rating {
+    border: none;
+    width: 30px;
+    text-align: right;
+    margin-right: 2px;
+}
+
+.img-cover {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    object-fit: cover;
+    text-align: center;
+    display: flex;
+    align-items: center;
+}
+
+.icon {
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    top: 0;
+}
+
+.btn-sm, 
+.icon {
+    width: 26px;
+    height: 26px;
+}
+
+.status-icon {
+    display: none;
+    position: relative;
+    width: 26px;
+    height: 26px;
+    top: -220px;
+    right: -15px;
+    margin: 1px;
+}
+
+.list-item.wish img.wish,
+.list-item.play img.play {
+    display: inline-block;
+}
+
+.delete-p {
+    position: absolute;
+    top: 0;
+    margin: 0;
+    background: #230505d1;
+    font-family: "Didact Gothic";
+    opacity: 0;
+    transition: opacity .1s cubic-bezier(.46,.03,.52,.96);
+    font-size: .75rem;
+    padding: 4px 0 0 10px;
+    height: calc(100% - 4px);
+    width: calc(100% - 10px);
+}
+
+.list-item-buttons.--active, 
+.delete-p.--active {
+    opacity: 1;
+}
+
+@media screen and (min-width: 650px) {
+    .list-item {
+        height: 283px;
+        max-width:200px;
+        min-width:200px;
+        margin: 0 20px;
+    }
+    .list-item-data {
+        bottom: -3.125rem;
+        font-size: 1.125rem;
+    }
+    .btn-sm, .icon {
+        width: 32px;
+        height: 32px;
+    }
+    .status-icon {  
+        width: 32px;  
+        height: 32px;
+        top: -330px;
+        margin: 2px;
+    }
+    .delete-p {
+        font-weight: 600;
+        font-size: 1rem;
+        padding: 60px 0 0 30px;
+        height: calc(100% - 60px);
+        width: calc(100% - 30px);
+    }
+}

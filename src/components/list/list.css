@@ -1,0 +1,19 @@
+.list {
+    grid-gap: 66px 25px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill,130px);
+    height: calc(100% - 24px);
+    justify-content: space-evenly;
+    margin: 0;
+    overflow-y: scroll;
+    padding: 12px 0;
+}  
+
+@media screen and (min-width: 650px) {
+	.list {
+		height: calc(100% - 40px);
+		padding: 20px 0;
+		grid-template-columns: repeat(auto-fill, 240px);
+		grid-gap: 105px 15px;
+	}
+}
