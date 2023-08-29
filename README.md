@@ -9,10 +9,9 @@ Careful event handling enhances user engagement with UI updates and ensures cons
 ## Screenshots
 
 <img src="screenshot--desktop.webp" alt="Desktop Screenshot" width="100%">
-<br>
 <p float="left">
-    <img src="screenshot--tablet.webp" alt="Tablet Screenshot" width="44.2%">
-    <img src="screenshot--add-form.webp" alt="Add Form Screenshot" width="26.6%">
+    <img src="screenshot--tablet.webp" alt="Tablet Screenshot" width="62.43%">
+    <img src="screenshot--add-form.webp" alt="Add Form Screenshot" width="37.57%">
 </p>
 
 ## Getting Started
