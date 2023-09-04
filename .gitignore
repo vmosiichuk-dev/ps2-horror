@@ -3,3 +3,9 @@
 
 # production
 /build
+
+# environment
+.env
+
+# submodule
+/cors-anywhere
