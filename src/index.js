@@ -11,15 +11,21 @@ iGDB.getToken()
 	.then(res => {
 		console.log(res);
 		res.forEach(game => {
-			game["title"] = game["name"];
-			game["rating"] = game["total_rating"];
-			delete game["name"];
-			delete game["total_rating"];
+			let rating = "N/A";
+			if (game.total_rating) {
+				rating = Math.round(game.total_rating)
+			} else if (game.rating) {
+				rating = Math.round(game.rating)
+			} else if (game.aggregated_rating) {
+				rating = Math.round(game.aggregated_rating)
+			}
+			const src = "https://images.igdb.com/igdb/image/upload/t_cover_big/" + game.cover.image_id + ".jpg";
+			const gameData = {rating: rating, title: game.name, src: src}
 
 			const filters = {wish: false, play: false};
-			const gameData = Object.assign(filters, game);
+			const gameFiltered = Object.assign(filters, gameData);
 
-			allGames.push(gameData);
+			allGames.push(gameFiltered);
 		});
 		console.log(allGames);
 	});

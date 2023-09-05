@@ -26,7 +26,7 @@ class App extends Component {
                 width: "0%",
                 borderRadius: "4px 0 0 4px"
             },
-            data: [
+            data: this.props.allGames/* [
                 {wish: false, play: false, rating: 89, title: "Silent Hill 2" },
                 {wish: false, play: false, rating: 67, title: "Haunting Ground" },
                 {wish: false, play: false, rating: 81, title: "Fatal Frame 2" },
@@ -54,7 +54,7 @@ class App extends Component {
                 {wish: false, play: false, rating: 76, title: "Manhunt" },
                 {wish: false, play: false, rating: 76, title: "Silent Hill 4: The Room" },
                 {wish: false, play: false, rating: 75, title: "Legacy of Kain: Defiance" },
-            ]
+            ] */
         }
     }
 
@@ -249,6 +249,9 @@ class App extends Component {
                 delSrc,
                 activeFilter,
                 progressBarStyle } = this.state;
+
+        console.log(this.props.allGames);
+        console.log(data);
 
         const renderData = this.searchGame(data, searchQuery);
         const filteredData = renderData.filter(item => {

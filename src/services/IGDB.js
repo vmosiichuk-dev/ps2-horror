@@ -37,7 +37,7 @@ class IGDB {
                 "Client-ID": clientID,
                 "Authorization": "Bearer " + token
             },
-            body: "fields cover,name,total_rating; limit 80; where platforms = 8 & themes = (19,21);"
+            body: "fields name, total_rating, cover.image_id; limit 299; where platforms = (8) & themes = (19,21) & themes != 21 &themes != (27,35,39) & player_perspectives != (4,5) & franchises != (463,361) & total_rating != null & id != (22252,69721,13901,3945,1159,20640,281,1137,20545,181961,20829); sort total_rating desc;"
         }
 
         return this.getResource(gamesURL, data);
