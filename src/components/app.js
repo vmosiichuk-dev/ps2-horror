@@ -1,14 +1,14 @@
-import { Component } from "react";
-import AddGame from "../add-game/add-game";
-import Info from "../info/info";
-import SearchPanel from "../search-panel/search-panel";
-import List from "../list/list";
-import del from "./img/del.png";
-import "./app.css";
+import { Component } from "react"
+import AddGame from "./add-game"
+import Info from "./info"
+import SearchPanel from "./search-panel"
+import List from "./list"
+import del from "../assets/img/del.png"
+import "../assets/styles/app.css"
 
 class App extends Component {
     constructor(props) {
-        super(props);
+        super(props)
         this.state = {
             searchQuery: "",
             addedRating: "",
@@ -73,7 +73,7 @@ class App extends Component {
     handleTitleChange = (e) => { this.setState({ addedTitle: e.target.value }) }
 
     decRating = (e) => {
-        e.preventDefault();
+        e.preventDefault()
         if (this.state.addedRating <= 0 || this.state.addedRating === "") {
             this.setState({ addedRating: 0 })
         } else if (this.state.addedRating > 100) {
@@ -84,7 +84,7 @@ class App extends Component {
     }
 
     incRating = (e) => {
-        e.preventDefault();
+        e.preventDefault()
         if (this.state.addedRating >= 100) {
             this.setState({ addedRating: 100 })
         } else if (this.state.addedRating === "") {
@@ -95,7 +95,7 @@ class App extends Component {
     }
 
     addItem = (e) => {
-        e.preventDefault();
+        e.preventDefault()
         const rating = this.state.addedRating,
               title = this.state.addedTitle,
               source = "user-added",
@@ -103,15 +103,15 @@ class App extends Component {
               play = false,
               error = "Enter rating and game title. Title should be at least 4 characters.",
               titleError = "This game title already exists. Please select a unique title.",
-              success = "New game successfully added. Manage your gaming progress.";
+              success = "New game successfully added. Manage your gaming progress."
 
-        const newItem = {wish, play, rating, title, source};
+        const newItem = {wish, play, rating, title, source}
 
-        const titleValidated = this.state.data.some(item => item.title.toLowerCase() === title.toLowerCase());
+        const titleValidated = this.state.data.some(item => item.title.toLowerCase() === title.toLowerCase())
 
         if (titleValidated) {
-            this.setState({ addFormMessage: titleError, addFormClass: "add-message" });
-            this.resetAddFormClass("", error);
+            this.setState({ addFormMessage: titleError, addFormClass: "add-message" })
+            this.resetAddFormClass("", error)
         } else if (rating !== "" && title !== "" && title.length >= 4 && !titleValidated) {
             this.setState(prevState => {
                 const newData = [newItem, ...prevState.data],
@@ -120,7 +120,7 @@ class App extends Component {
                       newProgressBarStyle = {
                           width: newProgressCount,
                           borderRadius: newProgressCount === "100%" ? "4px" : "4px 0 0 4px"
-                      };
+                      }
 
                 return { data: newData, 
                          progressCount: newProgressCount, 
@@ -130,11 +130,11 @@ class App extends Component {
                          addedRating: "", 
                          addedTitle: "",
                          progressBarStyle: newProgressBarStyle }
-            });  
-            this.resetAddFormClass("success", error);
+            })  
+            this.resetAddFormClass("success", error)
         } else {
-            this.setState({ addFormMessage: error, addFormClass: "add-message" });
-            this.resetAddFormClass("", error);
+            this.setState({ addFormMessage: error, addFormClass: "add-message" })
+            this.resetAddFormClass("", error)
         }
     }
 
@@ -158,11 +158,11 @@ class App extends Component {
         this.setState(prevState => {
             const newData = prevState.data.map(item => {
                 if (item.title === title) { return { ...item, [state]: !item[state] } }
-                return item;
-            });
+                return item
+            })
     
             let newPlayCount = prevState.playCount,
-                newWishCount = prevState.wishCount;
+                newWishCount = prevState.wishCount
 
             if (state === "play") {
                 newPlayCount = newData.filter(item => item.play).length
@@ -174,10 +174,10 @@ class App extends Component {
                   newProgressBarStyle = {
                       width: newProgressCount,
                       borderRadius: newProgressCount === "100%" ? "4px" : "4px 0 0 4px"
-                  };
+                  }
            
-            return { data: newData, playCount: newPlayCount, progressCount: newProgressCount, wishCount: newWishCount, progressBarStyle: newProgressBarStyle };
-        });  
+            return { data: newData, playCount: newPlayCount, progressCount: newProgressCount, wishCount: newWishCount, progressBarStyle: newProgressBarStyle }
+        })  
     }
 
     deleteItem = (title) => {   
@@ -190,10 +190,10 @@ class App extends Component {
                   newProgressBarStyle = {
                       width: newProgressCount,
                       borderRadius: newProgressCount === "100%" ? "4px" : "4px 0 0 4px"
-                  };
+                  }
 
-            return { data: newData, playCount: newPlayCount, progressCount: newProgressCount, wishCount: newWishCount, totalCount: newTotalCount, progressBarStyle: newProgressBarStyle };
-        });  
+            return { data: newData, playCount: newPlayCount, progressCount: newProgressCount, wishCount: newWishCount, totalCount: newTotalCount, progressBarStyle: newProgressBarStyle }
+        })  
     }
 
 // ––––––––––––––––––––––––––––––––– <App /> functions ––––––––––––––––––––––––––––––––––
@@ -204,7 +204,7 @@ class App extends Component {
     }
 
     getSearchError = (filteredData) => {
-        const { playCount, wishCount, activeFilter } = this.state;
+        const { playCount, wishCount, activeFilter } = this.state
 
         if (filteredData.length === 0) {
             if (activeFilter === "play" && playCount === 0) {
@@ -213,7 +213,7 @@ class App extends Component {
                     There are no games marked as played yet.<br />
                     To mark a game as played, hover on a game card and press a controller button.
                     </p>
-                );
+                )
             }
             if (activeFilter === "wish" && wishCount === 0) {
                 return (
@@ -221,16 +221,16 @@ class App extends Component {
                     There are no games in your wishlist yet.<br />
                     To add a game to the wishlist, hover on a game card and press a star button.
                     </p>
-                );
+                )
                 }
             return (
                 <p className="search-error --active" role="status">
                     The game you are looking for is not found.<br />
                     You can add a game to the list from the menu in the top left corner.
                 </p>
-            );
+            )
         }
-        return null;
+        return null
     }
 
 // –––––––––––––––––––––––––––––––––—— END functions ––––––––––––––––––––––––––––––––––——
@@ -248,21 +248,21 @@ class App extends Component {
                 addGameIsActive,
                 delSrc,
                 activeFilter,
-                progressBarStyle } = this.state;
+                progressBarStyle } = this.state
 
-        console.log(this.props.allGames);
-        console.log(data);
+        console.log(this.props.allGames)
+        console.log(data)
 
-        const renderData = this.searchGame(data, searchQuery);
+        const renderData = this.searchGame(data, searchQuery)
         const filteredData = renderData.filter(item => {
             if (activeFilter === "play" && !item.play) {
-                return false;
+                return false
             } else if (activeFilter === "wish" && !item.wish) {
-                return false;
+                return false
             }
-            return true;
-        });
-        const searchError = this.getSearchError(filteredData);
+            return true
+        })
+        const searchError = this.getSearchError(filteredData)
 
         return (
             <div className="app">  
@@ -307,8 +307,8 @@ class App extends Component {
                     />
                 </main>
             </div>
-        );
-    };
+        )
+    }
 }
 
-export default App;
+export default App

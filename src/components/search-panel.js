@@ -1,15 +1,15 @@
-import { Component } from "react";
-import game from "../list-item/img/game.png";
-import star from "../list-item/img/star.png";
-import ps from "./img/ps-logo.svg";
-import search from "./img/search.png";
-import del from "./img/del.png";
-import menuImg from "./img/plus.svg";
-import "./search-panel.css";
+import { Component } from "react"
+import game from "../assets/img/game.png"
+import star from "../assets/img/star.png"
+import ps from "../assets/img/ps-logo.svg"
+import search from "../assets/img/search.png"
+import del from "../assets/img/del.png"
+import menuImg from "../assets/img/plus.svg"
+import "../assets/styles/search-panel.css"
 
 class SearchPanel extends Component {
     constructor(props) {
-        super(props);
+        super(props)
         this.state = {
             addGameToggle: true,
             searchQuery: "",
@@ -19,9 +19,9 @@ class SearchPanel extends Component {
     }
 
     onSearchUpdate = (e) => {
-        const searchQuery = e.target.value;
-        this.setState({searchQuery});
-        this.props.onSearchUpdate(searchQuery);
+        const searchQuery = e.target.value
+        this.setState({searchQuery})
+        this.props.onSearchUpdate(searchQuery)
     }
 
     onSearchFocus = () => {
@@ -37,31 +37,31 @@ class SearchPanel extends Component {
     onDeleteClick = () => {
         if (this.state.searchIconSrc === del) {
             this.setState({ searchQuery: "", searchIconSrc: search })
-            this.props.onSearchUpdate("");
+            this.props.onSearchUpdate("")
         }
     }
 
     toggleAddGame = () => {
         this.setState(({ addGameToggle }) => ({ addGameToggle: !addGameToggle }))
-        this.props.onAddGameUpdate(this.state.addGameToggle);
+        this.props.onAddGameUpdate(this.state.addGameToggle)
     }
 
     render() {
-        const { searchQuery, searchIconSrc } = this.state;
-        const { data, playCount, progressCount, activeFilter, onFilterChange, progressBarStyle, addGameIsActive } = this.props;
+        const { searchQuery, searchIconSrc } = this.state
+        const { data, playCount, progressCount, activeFilter, onFilterChange, progressBarStyle, addGameIsActive } = this.props
 
         let searchAlt = "Search",
             searchAria = true,
             menuImgClass = "menu-img",
             menuBtnClass = "btn btn-menu",
             menuAlt = "Open add game form",
-            tabIndex = 0;
+            tabIndex = 0
 
         if (addGameIsActive) { 
-            menuImgClass += " --active"; 
-            menuBtnClass += " --active"; 
-            menuAlt = "Close add game form";
-            tabIndex = -1;
+            menuImgClass += " --active" 
+            menuBtnClass += " --active" 
+            menuAlt = "Close add game form"
+            tabIndex = -1
         }
 
         if (searchIconSrc === del) { searchAlt = "Clear search input"; searchAria = false }
@@ -97,4 +97,4 @@ class SearchPanel extends Component {
     }
 }
 
-export default SearchPanel;
+export default SearchPanel

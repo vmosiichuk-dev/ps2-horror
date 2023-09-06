@@ -1,5 +1,5 @@
-import ps from "./img/ps-logo.svg";
-import "./info.css";
+import ps from "../assets/img/ps-logo.svg"
+import "../assets/styles/info.css"
 
 function Info({ data, playCount, progressCount, progressBarStyle }) {
     return (
@@ -20,7 +20,7 @@ function Info({ data, playCount, progressCount, progressBarStyle }) {
             </section>
 
         </header>
-    );
+    )
 }
 
-export default Info;
+export default Info

@@ -1,12 +1,13 @@
-import React, { Component } from "react";
-import game from "./img/game.png";
-import star from "./img/star.png";
-import question from "./img/question.png";
-import "./list-item.css";
+import React, { Component } from "react"
+import game from "../assets/img/game.png"
+import star from "../assets/img/star.png"
+import question from "../assets/img/question.png"
+import overlay from "../assets/img/overlay.png"
+import "../assets/styles/list-item.css"
 
 class ListItem extends Component {
     constructor(props) {
-        super(props);
+        super(props)
         this.state = {
             delSrc: props.delSrc,
             clickCount: 0,
@@ -17,16 +18,16 @@ class ListItem extends Component {
     } 
 
     handleDeleteClick = () => {
-        const { title, onDelete, delSrc } = this.props;
-        const { clickCount } = this.state;
+        const { title, onDelete, delSrc } = this.props
+        const { clickCount } = this.state
     
         if (clickCount === 0) {
-          this.setState({ delSrc: question, clickCount: 1, activeClass: " --active", confirmDeleteAria: false });
+          this.setState({ delSrc: question, clickCount: 1, activeClass: " --active", confirmDeleteAria: false })
           setTimeout(() => {
-            this.setState({ delSrc: delSrc, clickCount: 0, activeClass: "", confirmDeleteAria: true });
-          }, 3000);
+            this.setState({ delSrc: delSrc, clickCount: 0, activeClass: "", confirmDeleteAria: true })
+          }, 3000)
         } else if (clickCount === 1) {
-          onDelete(title);
+          onDelete(title)
         }
     }
 
@@ -34,22 +35,22 @@ class ListItem extends Component {
         this.setState(() => {
             const newItemButtonsStyle = { opacity: 1 }
             return { itemButtonsStyle: newItemButtonsStyle }
-        });  
+        })  
     }
 
     handleTabBlur = () => {
         this.setState(() => {
             const newItemButtonsStyle = { opacity: 0 }
             return { itemButtonsStyle: newItemButtonsStyle }
-        });  
+        })  
     }
 
     render() {
-        const { itemId, title, rating, src, wish, play, onMarkState } = this.props;
-        const { delSrc, activeClass, itemButtonsStyle, confirmDeleteAria } = this.state;
+        const { itemId, title, rating, src, wish, play, onMarkState } = this.props
+        const { delSrc, activeClass, itemButtonsStyle, confirmDeleteAria } = this.state
 
         let listItemClass = "list-item",
-            deleteAlt = "Delete game";
+            deleteAlt = "Delete game"
 
         if (wish) listItemClass += " wish"
         if (play) listItemClass += " play"
@@ -69,6 +70,7 @@ class ListItem extends Component {
                     </span>
                 </h2>
                 <img className="img-cover" src={src} alt={title + " — PS2 game cover image"} />
+                <img className="img-overlay" src={overlay} alt="" />
                 <div className={"list-item-buttons" + activeClass} tabIndex={0} role="toolbar" aria-activedescendant={itemId + "toolbar--wish"} onFocus={this.handleTabFocus} onBlur={this.handleTabBlur} onMouseOver={this.handleTabFocus} onMouseOut={this.handleTabBlur} style={itemButtonsStyle} >
                     <button type="button" id={itemId + "--toolbar-wish"} className="btn-sm btn-wish" onClick={() => onMarkState("wish")} data-toggle="wish">
                         <img className="icon icon-wish" src={star} alt="Add to wishlist" />
@@ -82,8 +84,8 @@ class ListItem extends Component {
                     <p className={"delete-p" + activeClass} aria-hidden={confirmDeleteAria}>Are you sure?<br/>Click again to delete.</p>
                 </div>
             </li>
-        );
+        )
     }
 }
 
-export default ListItem;
+export default ListItem

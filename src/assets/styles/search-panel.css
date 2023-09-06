@@ -113,12 +113,10 @@
 .search-error {
     display: none;
     color: var(--accent);
-    position: absolute;
     line-height: 1.5rem;
     font-family: "Didact Gothic";
-    top: 14rem;
-    width: 290px;
-    left: calc(50% - 140px);
+    min-width: 290px;
+    text-align: center;
     font-size: 1rem;
 }
 
@@ -163,10 +161,7 @@
         min-width: 115px;
     }
     .search-error {
-        top: 9rem;
-        left: 50px;
         font-size: 1.125rem;
-        width: 600px;
     }
     .btn.btn-menu {
         margin: 6px 12px 6px 0;
@@ -181,9 +176,6 @@
     .mobile-title,
     .mobile-progress {
         display: none;
-    }
-    .search-error {
-        left: 435px;
     }
     .search-panel {
         padding: 30px 45px 30px 39px;

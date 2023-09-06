@@ -1,0 +1,162 @@
+
+.noscript {
+    position: fixed;
+    top: 0;
+	display: grid;
+	align-items: center;
+	grid-template-columns: minmax(50px, 1fr) minmax(230px, 840px) minmax(50px, 1fr);
+}
+
+.noscript-container {
+	transform: scale(.85);
+	opacity: 0;
+	animation: 7s text cubic-bezier(.46,.03,.52,.96) forwards;
+	grid-column: 2;
+	grid-row: 1;
+}
+
+@keyframes text {
+	0%, 10% {
+		transform: scale(.85);
+		opacity: 0;
+	}
+	30% {
+		opacity: 0;
+	}
+	100% {
+		transform: scale(1);
+		opacity: 1;
+	}
+}
+
+
+.noscript-title img {
+    width: 30px;
+    margin: 0 10px -5px 0;
+}
+  
+.noscript-heading {
+	font-size: 1.5rem;
+	margin-bottom: 20px;
+}
+
+.noscript-paragraph {
+	font-size: 1.125rem;
+	margin-bottom: 20px;
+}
+
+.noscript-link {
+	color: #f89c0b;
+	text-decoration: underline;
+	position: relative;
+}
+
+.noscript-title {
+	margin: 42px;
+	font-size: 1rem;
+	z-index: 30;
+	grid-column: 1 / span 3;
+	grid-row: 1;
+	position: relative;
+	align-self: flex-start;
+	animation: 4.5s title cubic-bezier(.46,.03,.52,.96) forwards;
+}
+
+@keyframes title {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+.fog {
+	position: relative;
+	opacity: 0;
+	height: 100vh;
+	width: 100dvw;
+	grid-column: 1 / span 3;
+	grid-row: 1;
+	animation: 4s fog-in cubic-bezier(.46,.03,.52,.96) forwards;
+}
+
+@keyframes fog-in {
+	0% {
+		opacity: 0;
+	}
+	30% {
+		opacity: 0.4;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+.fog-container {
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+}
+
+.fog-img {
+	position: absolute;
+	height: 100vh;
+	width: 300vw;
+}
+
+.fog-img.--1st {
+	background: url("https://madebynomad.dev/ps2-horror/img/fog-1.png") repeat-x;
+	background-size: contain;
+	background-position: center;
+	animation: fog 120s linear infinite;
+}
+
+.fog-img.--2nd {
+	background: url("https://madebynomad.dev/ps2-horror/img/fog-2.png") repeat-x;
+	background-size: contain;
+	background-position: center;
+	animation: fog 80s linear infinite;
+}
+
+@keyframes fog {
+	0% { 
+		transform: translate3d(0, 0, 0);
+	}
+	100% { 
+		transform: translate3d(-200vw, 0, 0);
+	}
+}
+
+@media screen and (min-width: 650px) {
+	.noscript-link {
+		transition: .55s color cubic-bezier(.46,.03,.52,.96);
+		color: var(--accent);
+		text-decoration: none;
+	}
+	.noscript-link:after {
+		display: inline-block;
+		position: absolute;
+		content: "";
+		padding: 0 2px;
+		width: 37%;
+		transition: .55s width cubic-bezier(.46,.03,.52,.96);
+		height: 2px;
+		background-color: #f89c0b;
+		bottom: -4px;
+		left: 0;
+	}
+	.noscript-link:hover:after {
+		width: calc(100% - 4px);
+	}
+	.noscript-link:hover {
+		color: #f89c0b;
+	}
+	.fog-img.--1st {
+		animation: fog 240s linear infinite;
+	}
+	.fog-img.--2nd {
+		animation: fog 160s linear infinite;
+	}
+}

@@ -1,11 +1,10 @@
-import React from "react";
-import { Component } from "react";
-import "./add-game.css";
+import React, { Component } from "react"
+import "../assets/styles/add-game.css"
 
 class AddGame extends Component {
     constructor(props) {
-        super(props);
-        this.addGameRef = React.createRef();
+        super(props)
+        this.addGameRef = React.createRef()
     }  
 
     componentDidMount() { 
@@ -21,15 +20,15 @@ class AddGame extends Component {
             const focusableElements = [document.querySelector(".btn-menu"), ...this.addGameRef.current.querySelectorAll("input, button")],
                   firstElement = focusableElements[0],
                   secondElement = focusableElements[1],
-                  lastElement = focusableElements[focusableElements.length - 1];
+                  lastElement = focusableElements[focusableElements.length - 1]
 
             if (e.key === "Tab") {
                 if (e.shiftKey && document.activeElement === secondElement) {
-                    e.preventDefault();
-                    firstElement.focus();
+                    e.preventDefault()
+                    firstElement.focus()
                 } else if (!e.shiftKey && document.activeElement === lastElement) {
-                    e.preventDefault();
-                    firstElement.focus();
+                    e.preventDefault()
+                    firstElement.focus()
                 }
             }
         }
@@ -45,22 +44,22 @@ class AddGame extends Component {
                 onRatingDecr, 
                 onRatingIncr,
                 addGameIsActive, 
-                onAdd } = this.props; 
+                onAdd } = this.props 
 
         let returnClass = "add-game--return",
             formClass = "add-form-wrapper",
             tabIndex = -1,
-            ariaHidden = true;
+            ariaHidden = true
     
         if (addGameIsActive) { 
-            returnClass += " --fade-in"; 
-            formClass += " --active"; 
-            tabIndex = 0;
-            ariaHidden = false;
+            returnClass += " --fade-in" 
+            formClass += " --active" 
+            tabIndex = 0
+            ariaHidden = false
         }
 
         if (!addGameIsActive) { 
-            returnClass += " --fade-out"; 
+            returnClass += " --fade-out" 
         }
 
         return (
@@ -87,4 +86,4 @@ class AddGame extends Component {
     }
 }
 
-export default AddGame;
+export default AddGame

@@ -1,9 +1,9 @@
 .app {
     margin: 0;
-    display: flex;
+    /* display: flex; */
     align-items: center;
     height: 100dvh;
-    flex-direction: row;
+    /* flex-direction: row; */
     display: grid;
     grid-template-rows: 187px calc(100dvh - 187px);
 }
