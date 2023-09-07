@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Unbounded|Didact+Gothic:wght@400;600&subset=latin,latin-ext");
+@import url("https://fonts.googleapis.com/css?family=Unbounded:subset=latin,latin-ext|Didact+Gothic:wght@400;600&subset=latin,latin-ext");
 
 body {
 	--main: #2e29365c;
@@ -64,57 +64,17 @@ input::placeholder {
 	width: 6px;
 }
 
-noscript {
+.welcome-wrapper {
+    position: fixed;
+    top: 0;
 	display: grid;
 	align-items: center;
 	grid-template-columns: minmax(50px, 1fr) minmax(230px, 840px) minmax(50px, 1fr);
+	background: linear-gradient(to bottom, #2C5364 0%, #203A43 70%, #0F2027 100%);
+	z-index: 30;
 }
 
-.noscript-container {
-	transform: scale(.85);
-	opacity: 0;
-	animation: 7s text cubic-bezier(.46,.03,.52,.96) forwards;
-	grid-column: 2;
-	grid-row: 1;
-}
-
-@keyframes text {
-	0%, 10% {
-		transform: scale(.85);
-		opacity: 0;
-	}
-	30% {
-		opacity: 0;
-	}
-	100% {
-		transform: scale(1);
-		opacity: 1;
-	}
-}
-
-
-.noscript-title img {
-    width: 30px;
-    margin: 0 10px -5px 0;
-}
-  
-.noscript-heading {
-	font-size: 1.5rem;
-	margin-bottom: 20px;
-}
-
-.noscript-paragraph {
-	font-size: 1.125rem;
-	margin-bottom: 20px;
-}
-
-.noscript-link {
-	color: #f89c0b;
-	text-decoration: underline;
-	position: relative;
-}
-
-.noscript-title {
+.welcome-title {
 	margin: 42px;
 	font-size: 1rem;
 	z-index: 30;
@@ -132,6 +92,61 @@ noscript {
 	100% {
 		opacity: 1;
 	}
+}
+
+.welcome-title img {
+    width: 30px;
+    margin: 0 10px -5px 0;
+}
+
+.welcome-container {
+	transform: scale(.85);
+	opacity: 0;
+	grid-column: 2;
+	grid-row: 1;
+	display: grid;
+	animation: 7s text cubic-bezier(.46,.03,.52,.96) forwards;
+}
+
+@keyframes text {
+	0%, 10% {
+		transform: scale(.85);
+		opacity: 0;
+	}
+	30% {
+		opacity: 0;
+	}
+	100% {
+		transform: scale(1);
+		opacity: 1;
+	}
+}
+
+.welcome-container p {
+	margin: 0 0 20px;
+	text-align: center;
+	font-size: 1rem;
+	line-height: 1.5rem;
+}
+
+p.welcome-subtitle {
+	font-size: 1.25rem;
+	line-height: 2rem;
+}
+
+.noscript-link {
+	color: #f89c0b;
+	text-decoration: underline;
+	position: relative;
+}
+
+.btn.btn-welcome {
+	justify-self: center;
+	font-size: .9375rem;
+	font-family: "Unbounded";
+	padding: .875rem 2.25rem;
+	letter-spacing: 2px;
+	margin: 20px 0 0;
 }
 
 .fog {
@@ -170,14 +185,14 @@ noscript {
 }
 
 .fog-img.--1st {
-	background: url("https://madebynomad.dev/ps2-horror/img/fog-1.png") repeat-x;
+	background: url("./img/fog1.png") repeat-x;
 	background-size: contain;
 	background-position: center;
 	animation: fog 120s linear infinite;
 }
 
 .fog-img.--2nd {
-	background: url("https://madebynomad.dev/ps2-horror/img/fog-2.png") repeat-x;
+	background: url("./img/fog2.png") repeat-x;
 	background-size: contain;
 	background-position: center;
 	animation: fog 80s linear infinite;
@@ -193,11 +208,26 @@ noscript {
 }
 
 @media screen and (min-width: 650px) {
+	.btn.btn-welcome {
+		margin: 0;
+	}
+
+	.welcome-container p {
+		font-size: 1.125rem;
+		line-height: initial;
+	}
+
+	p.welcome-subtitle {
+		font-size: 1.5rem;
+		line-height: initial;
+	}
+
 	.noscript-link {
 		transition: .55s color cubic-bezier(.46,.03,.52,.96);
 		color: var(--accent);
 		text-decoration: none;
 	}
+
 	.noscript-link:after {
 		display: inline-block;
 		position: absolute;
@@ -210,15 +240,19 @@ noscript {
 		bottom: -4px;
 		left: 0;
 	}
+
 	.noscript-link:hover:after {
 		width: calc(100% - 4px);
 	}
+
 	.noscript-link:hover {
 		color: #f89c0b;
 	}
+
 	.fog-img.--1st {
 		animation: fog 240s linear infinite;
 	}
+
 	.fog-img.--2nd {
 		animation: fog 160s linear infinite;
 	}

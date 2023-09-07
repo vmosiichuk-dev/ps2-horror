@@ -1,22 +1,21 @@
+import Loader from "./loader"
 import ps from "../assets/img/ps-logo.svg"
-import "../assets/styles/welcome.css"
 
-function Welcome() {
+function Welcome({onWelcomeClick}) {
     return (
-        <div className="noscript">
-            <p class="noscript-title"><span class="a11y">PS2 Game Library — </span><img src={ps} alt=""/>Survival Horror Classics</p>
-            <section class="fog">
-                <div class="fog-container">
-                <div class="fog-img --1st"></div>
-                <div class="fog-img --2nd"></div>
+        <div className="welcome-wrapper">
+            <p className="welcome-title"><span className="a11y">PS2 Game Library — </span><img src={ps} alt=""/>Survival Horror Classics</p>
+            <section className="fog">
+                <div className="fog-container">
+                <div className="fog-img --1st"></div>
+                <div className="fog-img --2nd"></div>
                 </div>
             </section>
-            <div class="noscript-container">
-                <p class="noscript-heading">The spirits won't guide you without scripts.</p>
-                <p class="noscript-paragraph">Unlock the
-                    <a class="noscript-link" href="https://www.enable-javascript.com/" target="_blank" rel="noreferrer">gateway to JavaScript</a>
-                    to explore the haunted world of PS2 horror.
-                </p>
+            <div className="welcome-container">
+                <p className="welcome-subtitle">Witness the evolution of fear with our PS2 Collector's App.</p>
+                <p>Create your own personalised collection, track & share your progress.</p>
+                <button className="btn btn-welcome" onClick={onWelcomeClick}>START</button>
+                <Loader />
             </div>
         </div>
     )

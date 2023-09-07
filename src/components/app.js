@@ -5,6 +5,7 @@ import SearchPanel from "./search-panel"
 import List from "./list"
 import del from "../assets/img/del.png"
 import "../assets/styles/app.css"
+import IGDB from "../services/IGDB"
 
 class App extends Component {
     constructor(props) {
@@ -26,35 +27,8 @@ class App extends Component {
                 width: "0%",
                 borderRadius: "4px 0 0 4px"
             },
-            data: this.props.allGames/* [
-                {wish: false, play: false, rating: 89, title: "Silent Hill 2" },
-                {wish: false, play: false, rating: 67, title: "Haunting Ground" },
-                {wish: false, play: false, rating: 81, title: "Fatal Frame 2" },
-                {wish: false, play: false, rating: 85, title: "Silent Hill 3" }, 
-                {wish: false, play: false, rating: 84, title: "Resident Evil Code: Veronica X" },
-                {wish: false, play: false, rating: 58, title: "Constantine" },
-                {wish: false, play: false, rating: 69, title: "The Haunted Mansion" }, 
-                {wish: false, play: false, rating: 67, title: "The X-Files: Resist or Serve" }, 
-                {wish: false, play: false, rating: 61, title: "Lifeline" },
-                {wish: false, play: false, rating: 78, title: "The Thing" }, 
-                {wish: false, play: false, rating: 60, title: "Echo Night Beyond" },
-                {wish: false, play: false, rating: 65, title: "Obscure" },
-                {wish: false, play: false, rating: 59, title: "Rule of Rose" },
-                {wish: false, play: false, rating: 57, title: "Kuon" },
-                {wish: false, play: false, rating: 74, title: "Fatal Frame" },
-                {wish: false, play: false, rating: 72, title: "Siren" },
-                {wish: false, play: false, rating: 70, title: "Silent Hill: Origins" },
-                {wish: false, play: false, rating: 69, title: "Clock Tower 3" },
-                {wish: false, play: false, rating: 68, title: "Cold Fear" },
-                {wish: false, play: false, rating: 67, title: "Blood Omen 2" },
-                {wish: false, play: false, rating: 67, title: "Manhunt 2" },
-                {wish: false, play: false, rating: 80, title: "Soul Reaver 2" },
-                {wish: false, play: false, rating: 78, title: "Fatal Frame 3: The Tormented" },
-                {wish: false, play: false, rating: 77, title: "Silent Hill: Shattered Memories" },
-                {wish: false, play: false, rating: 76, title: "Manhunt" },
-                {wish: false, play: false, rating: 76, title: "Silent Hill 4: The Room" },
-                {wish: false, play: false, rating: 75, title: "Legacy of Kain: Defiance" },
-            ] */
+            apiDataLoaded: false,
+            data: []
         }
     }
 
@@ -66,7 +40,7 @@ class App extends Component {
         } else if (e.target.value > 100) { 
             this.setState({ addedRating: 100 })
         } else { 
-            this.setState({ addedRating: parseInt(e.target.value.replace(/\D/,'')) }) 
+            this.setState({ addedRating: parseInt(e.target.value.replace(/\D/,"")) }) 
         }
     }
 
@@ -233,6 +207,50 @@ class App extends Component {
         return null
     }
 
+	iGDB = new IGDB()
+    handleWelcomeClick = async () => {
+        try {
+            const allGames = [],
+                  get = await this.iGDB.getToken(),
+                  games = await this.iGDB.getGames(get.access_token)
+
+            games.forEach(game => {
+                let rating = "N/A"
+
+                if (game.total_rating) {
+                    rating = Math.round(game.total_rating)
+                } else if (game.rating) {
+                    rating = Math.round(game.rating)
+                } else if (game.aggregated_rating) {
+                    rating = Math.round(game.aggregated_rating)
+                }
+
+                const src = "https://images.igdb.com/igdb/image/upload/t_cover_big/" + game.cover.image_id + ".jpg",
+                    filters = { wish: false, play: false },
+                    gameData = { rating: rating, title: game.name, src: src }
+
+                const gameFiltered = Object.assign(filters, gameData)
+                allGames.push(gameFiltered)
+            })
+            this.setState({ data: allGames, apiDataLoaded: true })
+            const setTimeoutPromise = () => new Promise(() => {        
+                setTimeout(() => {
+                    this.toggleFilter("all")
+                    this.props.onLoadingComplete()
+                }, 750)
+            })
+            await setTimeoutPromise()
+        } catch (error) {
+          console.error("Error fetching data from the API:", error)
+        }
+    }      
+
+    componentDidUpdate() {
+        if (this.props.welcomeClick && !this.state.apiDataLoaded) {
+            this.handleWelcomeClick()
+        }
+    }
+
 // –––––––––––––––––––––––––––––––––—— END functions ––––––––––––––––––––––––––––––––––——
 
     render() {
@@ -249,9 +267,6 @@ class App extends Component {
                 delSrc,
                 activeFilter,
                 progressBarStyle } = this.state
-
-        console.log(this.props.allGames)
-        console.log(data)
 
         const renderData = this.searchGame(data, searchQuery)
         const filteredData = renderData.filter(item => {
