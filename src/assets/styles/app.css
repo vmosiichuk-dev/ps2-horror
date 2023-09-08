@@ -6,6 +6,11 @@
     /* flex-direction: row; */
     display: grid;
     grid-template-rows: 187px calc(100dvh - 187px);
+    opacity: 0;
+}
+
+.app.--active {
+	animation: 1.175s fade-in .9s cubic-bezier(.46,.03,.52,.96) forwards;
 }
 
 #main {

@@ -74,6 +74,14 @@ input::placeholder {
 	z-index: 30;
 }
 
+.welcome-wrapper.bg-black {
+	background: black;
+}
+
+.welcome-wrapper.--active {
+	animation: 1.25s fade-in cubic-bezier(.46,.03,.52,.96) reverse forwards;
+}
+
 .welcome-title {
 	margin: 42px;
 	font-size: 1rem;
@@ -82,10 +90,10 @@ input::placeholder {
 	grid-row: 1;
 	position: relative;
 	align-self: flex-start;
-	animation: 4.5s title cubic-bezier(.46,.03,.52,.96) forwards;
+	animation: 2.25s fade-in cubic-bezier(.46,.03,.52,.96) forwards;
 }
 
-@keyframes title {
+@keyframes fade-in {
 	0% {
 		opacity: 0;
 	}
@@ -105,10 +113,10 @@ input::placeholder {
 	grid-column: 2;
 	grid-row: 1;
 	display: grid;
-	animation: 7s text cubic-bezier(.46,.03,.52,.96) forwards;
+	animation: 2s scale-up--fade-in cubic-bezier(.46,.03,.52,.96) forwards;
 }
 
-@keyframes text {
+@keyframes scale-up--fade-in {
 	0%, 10% {
 		transform: scale(.85);
 		opacity: 0;
@@ -149,6 +157,25 @@ p.welcome-subtitle {
 	margin: 20px 0 0;
 }
 
+.btn.btn-welcome.--fade-in {
+	opacity: 0;
+	animation: .875s fade-in 1.5s cubic-bezier(.46,.03,.52,.96) forwards;
+}
+
+.btn.btn-welcome.--fade-out,
+.welcome-container p.--fade-out {
+	animation: .375s fade-out cubic-bezier(.46,.03,.52,.96) forwards;
+}
+
+@keyframes fade-out {
+	0% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
+}
+
 .fog {
 	position: relative;
 	opacity: 0;
@@ -156,19 +183,7 @@ p.welcome-subtitle {
 	width: 100dvw;
 	grid-column: 1 / span 3;
 	grid-row: 1;
-	animation: 4s fog-in cubic-bezier(.46,.03,.52,.96) forwards;
-}
-
-@keyframes fog-in {
-	0% {
-		opacity: 0;
-	}
-	30% {
-		opacity: 0.4;
-	}
-	100% {
-		opacity: 1;
-	}
+	animation: 1.5s fade-in cubic-bezier(.46,.03,.52,.96) forwards;
 }
 
 .fog-container {

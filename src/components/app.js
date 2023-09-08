@@ -233,11 +233,12 @@ class App extends Component {
                 allGames.push(gameFiltered)
             })
             this.setState({ data: allGames, apiDataLoaded: true })
-            const setTimeoutPromise = () => new Promise(() => {        
+            this.props.onStateChange("transitionStart")
+            const setTimeoutPromise = () => new Promise(() => {
                 setTimeout(() => {
                     this.toggleFilter("all")
-                    this.props.onLoadingComplete()
-                }, 750)
+                    this.props.onStateChange("apiLoaded")
+                }, 2500)
             })
             await setTimeoutPromise()
         } catch (error) {
@@ -279,8 +280,13 @@ class App extends Component {
         })
         const searchError = this.getSearchError(filteredData)
 
+        let appClass = "app"
+        if (this.props.transitionStart) {
+            appClass += " --active"
+        }
+
         return (
-            <div className="app">  
+            <div className={appClass}>  
                 <Info 
                     data={data} 
                     playCount={playCount}

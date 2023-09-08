@@ -6,28 +6,42 @@ class RootContent extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            welcomeClick: false,
-			apiLoaded: false
+			animationReset: false,
+			apiLoaded: false,
+			transitionStart: false,
+            welcomeClick: false
 		}
 	}
-	
-	handleLoadingComplete = () => {
-		this.setState({ apiLoaded: true })
-		console.log(this.state.apiLoaded)
+
+	handleStateChange = (state) => {
+		if (state === "welcomeClick") {
+			window.sessionStorage.setItem("PS2_SURVIVAL_HORROR_WELCOME_SCREEN", JSON.stringify(true))
+			return this.setState({ [state]: true, animationReset: true })
+		}
+
+		this.setState({ [state]: true })
+		console.log(state + ": true")
 	}
 
-	handleWelcomeClick = () => {
-		this.setState({ welcomeClick: true })
-		console.log(this.state.welcomeClick)
+	componentDidMount() {
+		const welcomeScreen = JSON.parse(window.sessionStorage.getItem("PS2_SURVIVAL_HORROR_WELCOME_SCREEN"))
+		if (welcomeScreen === true) {
+			this.setState({ welcomeClick: true, animationReset: true })
+			console.log("true – fromSession")
+		}
 	}
 
 	render() {
-		const {welcomeClick, apiLoaded} = this.state
+		const { animationReset, apiLoaded, transitionStart, welcomeClick } = this.state
+
 		let welcome = null
-		if (!welcomeClick || !apiLoaded) welcome = <Welcome onWelcomeClick={this.handleWelcomeClick} />
+		if (!welcomeClick || !apiLoaded) {
+			welcome = <Welcome animationReset={animationReset} transitionStart={transitionStart} welcomeClick={welcomeClick} onStateChange={this.handleStateChange} />
+		}
+
 		return (
 			<>
-				<App welcomeClick={welcomeClick} onLoadingComplete={this.handleLoadingComplete}/>
+				<App transitionStart={transitionStart} welcomeClick={welcomeClick} onStateChange={this.handleStateChange} />
 				{welcome}
 			</>
 		)

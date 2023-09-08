@@ -2,10 +2,26 @@
 	display: grid;
 	place-items: center;
 	min-width: 100%; 
-	min-height: 51px;
+	min-height: 100%;
 	position: absolute;
 	bottom: 0;
 	z-index: -10;
+	opacity: 0;
+}
+
+.loader-container.--active {
+	opacity: 1;
+	transition: 1s opacity .75s cubic-bezier(.46,.03,.52,.96);
+}
+
+.loader-gif {
+    top: -2rem;
+    position: relative;
+	animation: 1.5s fade-in cubic-bezier(.46,.03,.52,.96) forwards;
+}
+
+.welcome-wrapper .loader {
+    display: none;
 }
 
 .loader {

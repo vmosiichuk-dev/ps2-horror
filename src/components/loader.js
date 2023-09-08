@@ -1,8 +1,14 @@
+import loaderGif from "../assets/img/welcome.gif"
 import "../assets/styles/loader.css"
 
-function Loader() {
+function Loader({ welcomeClick }) {
+    let loaderContainerClass = "loader-container"
+    if (welcomeClick) {
+        loaderContainerClass += " --active"
+    }
     return (
-        <div className="loader-container">
+        <div className={loaderContainerClass}>
+            <img className="loader-gif" src={loaderGif} alt="" />
             <span className="loader"></span>
         </div>
     )

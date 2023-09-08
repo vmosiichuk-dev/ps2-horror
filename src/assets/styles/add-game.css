@@ -152,11 +152,11 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .add-game--return.--fade-out {
-	animation: 1.25s fade-out cubic-bezier(.46,.03,.52,.96);
+	animation: 1.25s return--fade-out cubic-bezier(.46,.03,.52,.96);
 }
 
 .add-game--return.--fade-in {
-	animation: 1.25s fade-in cubic-bezier(.46,.03,.52,.96);
+	animation: 1.25s return--fade-in cubic-bezier(.46,.03,.52,.96);
 }
 
 .add-item input:focus-visible,
@@ -165,7 +165,7 @@ input[type=number]::-webkit-outer-spin-button {
     border-color: transparent;
 }
 
-@keyframes fade-out {
+@keyframes return--fade-out {
 	0% {
 		opacity: 1;
 		transform: translateX(0);
@@ -176,7 +176,7 @@ input[type=number]::-webkit-outer-spin-button {
 	}
 }
 
-@keyframes fade-in {
+@keyframes return--fade-in {
 	0%, 75% {
 		opacity: 0;
 		transform: translateX(-10px);
