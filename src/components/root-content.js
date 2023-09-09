@@ -20,14 +20,12 @@ class RootContent extends Component {
 		}
 
 		this.setState({ [state]: true })
-		console.log(state + ": true")
 	}
 
 	componentDidMount() {
 		const welcomeScreen = JSON.parse(window.sessionStorage.getItem("PS2_SURVIVAL_HORROR_WELCOME_SCREEN"))
 		if (welcomeScreen === true) {
 			this.setState({ welcomeClick: true, animationReset: true })
-			console.log("true – fromSession")
 		}
 	}
 

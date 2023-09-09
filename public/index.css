@@ -90,7 +90,7 @@ input::placeholder {
 	grid-row: 1;
 	position: relative;
 	align-self: flex-start;
-	animation: 2.25s fade-in cubic-bezier(.46,.03,.52,.96) forwards;
+	animation: 4.5s fade-in cubic-bezier(.46,.03,.52,.96) forwards;
 }
 
 @keyframes fade-in {
@@ -113,7 +113,7 @@ input::placeholder {
 	grid-column: 2;
 	grid-row: 1;
 	display: grid;
-	animation: 2s scale-up--fade-in cubic-bezier(.46,.03,.52,.96) forwards;
+	animation: 4s scale-up--fade-in cubic-bezier(.46,.03,.52,.96) forwards;
 }
 
 @keyframes scale-up--fade-in {
@@ -159,7 +159,7 @@ p.welcome-subtitle {
 
 .btn.btn-welcome.--fade-in {
 	opacity: 0;
-	animation: .875s fade-in 1.5s cubic-bezier(.46,.03,.52,.96) forwards;
+	animation: 1.5s fade-in 3s cubic-bezier(.46,.03,.52,.96) forwards;
 }
 
 .btn.btn-welcome.--fade-out,
@@ -179,11 +179,11 @@ p.welcome-subtitle {
 .fog {
 	position: relative;
 	opacity: 0;
-	height: 100vh;
+	height: 100dvh;
 	width: 100dvw;
 	grid-column: 1 / span 3;
 	grid-row: 1;
-	animation: 1.5s fade-in cubic-bezier(.46,.03,.52,.96) forwards;
+	animation: 3s fade-in cubic-bezier(.46,.03,.52,.96) forwards;
 }
 
 .fog-container {
@@ -195,20 +195,20 @@ p.welcome-subtitle {
 
 .fog-img {
 	position: absolute;
-	height: 100vh;
-	width: 300vw;
+	height: 100dvh;
+	width: 300dvw;
 }
 
 .fog-img.--1st {
 	background: url("./img/fog1.png") repeat-x;
-	background-size: contain;
+	background-size: cover;
 	background-position: center;
 	animation: fog 120s linear infinite;
 }
 
 .fog-img.--2nd {
 	background: url("./img/fog2.png") repeat-x;
-	background-size: contain;
+	background-size: cover;
 	background-position: center;
 	animation: fog 80s linear infinite;
 }

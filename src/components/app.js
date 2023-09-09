@@ -11,24 +11,24 @@ class App extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            searchQuery: "",
-            addedRating: "",
-            addedTitle: "",
-            wishCount: 0,
-            playCount: 0,
-            totalCount: 27,
-            progressCount: "0%",
-            addGameIsActive: false,
+            activeFilter: "all",
             addFormClass: "add-message invisible",
             addFormMessage: "Enter rating and game title. Title should be at least 4 characters.",
+            addGameIsActive: false,
+            addedRating: "",
+            addedTitle: "",
+            apiDataLoaded: false,
+            data: [],
             delSrc: del,
-            activeFilter: "all",
+            playCount: 0,
             progressBarStyle: {
                 width: "0%",
                 borderRadius: "4px 0 0 4px"
             },
-            apiDataLoaded: false,
-            data: []
+            progressCount: "0%",
+            searchQuery: "",
+            totalCount: 54,
+            wishCount: 0,
         }
     }
 

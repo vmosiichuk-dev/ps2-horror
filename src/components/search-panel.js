@@ -52,6 +52,7 @@ class SearchPanel extends Component {
 
         let searchAlt = "Search",
             searchAria = true,
+            searchLabel = "Search",
             menuImgClass = "menu-img",
             menuBtnClass = "btn btn-menu",
             menuAlt = "Open add game form",
@@ -64,7 +65,11 @@ class SearchPanel extends Component {
             tabIndex = -1
         }
 
-        if (searchIconSrc === del) { searchAlt = "Clear search input"; searchAria = false }
+        if (searchIconSrc === del) { 
+            searchAlt = "Clear search input"
+            searchAria = false
+            searchLabel = "Clear" 
+        }
 
         return (
             <nav className="search-panel">
@@ -89,8 +94,10 @@ class SearchPanel extends Component {
                 <section className="search-wrapper" aria-label="Search input" aria-describedby="search-description">
                     <span id="search-description" className="a11y">Filter games that have a matching character string in the title with the character string provided by the user in the input field. When input has focus, it's associated button can be used to clear the input.</span>
                     <input type="text" id="search-input" aria-describedby="search-description" placeholder="Enter game title" value={searchQuery} tabIndex={tabIndex} onChange={this.onSearchUpdate} onFocus={this.onSearchFocus} onBlur={this.onSearchBlur} />
-                    <label htmlFor="search-input" className="search-label">Search</label>
-                    <button className="search-btn" type="button" aria-hidden={searchAria} tabIndex={tabIndex} onClick={this.onDeleteClick}><img className="icon-search" alt={searchAlt} src={searchIconSrc} /></button>
+                    <button className="search-btn" type="button" aria-hidden={searchAria} tabIndex={tabIndex} onClick={this.onDeleteClick}>
+                        <label htmlFor="search-input" className="search-label">{searchLabel}</label>
+                        <img className="icon-search" alt={searchAlt} src={searchIconSrc} />
+                    </button>
                 </section>
             </nav>
         )

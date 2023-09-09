@@ -1,8 +1,10 @@
 .loader-container {
 	display: grid;
 	place-items: center;
-	min-width: 100%; 
-	min-height: 100%;
+	/* min-width: 100%;  */
+	/* min-height: 100%; */
+	width: 100dvw;
+	height: 100dvh;
 	position: absolute;
 	bottom: 0;
 	z-index: -10;
@@ -15,6 +17,8 @@
 }
 
 .loader-gif {
+	max-width: 170dvw;
+	left: -35dvw;
     top: -2rem;
     position: relative;
 	animation: 1.5s fade-in cubic-bezier(.46,.03,.52,.96) forwards;
@@ -104,3 +108,8 @@
 	}
 }
 
+@media screen and (min-width: 650px) {
+	.loader-gif {
+		left: 0;
+	}
+}

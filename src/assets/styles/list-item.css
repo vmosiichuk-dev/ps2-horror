@@ -52,7 +52,7 @@
 
 .img-cover {
     width: 100%;
-    height: calc(100% - 28px);
+    height: calc(100% - 18px);
     position: absolute;
     object-fit: cover;
     text-align: center;
@@ -63,6 +63,7 @@
 }
 
 .img-overlay {
+    width: 100%;
     position: absolute;
 }
 
@@ -140,5 +141,8 @@
         padding: 60px 0 0 30px;
         height: calc(100% - 60px);
         width: calc(100% - 30px);
+    }
+    .img-cover {
+        height: calc(100% - 28px);
     }
 }

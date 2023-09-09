@@ -49,7 +49,8 @@ h1 img {
         height: 100dvh;
         flex-direction: column;
         border-right: 1px solid #867fa6b5;
-		background-color: #2e293696;
+		/* background-color: #2e293696; */
+        background-color: #0f0b1596;
         grid-column: 1;
         grid-row: 1 / span 2;
 	}
