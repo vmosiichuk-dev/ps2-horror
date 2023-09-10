@@ -31,7 +31,7 @@ function Welcome({ animationReset, transitionStart, welcomeClick, onStateChange 
                 </div>
             </section>
             <div className="welcome-container">
-                <p className={subtitleClass}>Witness the evolution of fear with our PS2 Collector's App.</p>
+                <p className={subtitleClass}>Witness the evolution of fear with our PS2 Collection App.</p>
                 <p className={pClass}>Create your own personalised collection, track & share your progress.</p>
                 <button className={buttonClass} onClick={() => onStateChange("welcomeClick")}>START</button>
             </div>

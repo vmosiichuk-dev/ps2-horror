@@ -21,7 +21,7 @@
 
 @media screen and (min-width: 650px) {
     .app {
-        grid-template-rows: 130px calc(100dvh - 130px);
+        grid-template-rows: 145px calc(100dvh - 145px);
     }
     #main {
         padding: 0 45px 0 39px;

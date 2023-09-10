@@ -89,7 +89,7 @@ class SearchPanel extends Component {
                     </button>
                     <button className={`btn ${activeFilter === "all" ? "--active" : ""}`} type="button" tabIndex={tabIndex} onClick={() => onFilterChange("all")}>All games</button>
                     <button className={`play btn ${activeFilter === "play" ? "--active" : ""}`} type="button" tabIndex={tabIndex} onClick={() => onFilterChange("play")}><img className="icon" src={game} alt="" />Played</button>
-                    <button className={`btn ${activeFilter === "wish" ? "--active" : ""}`} type="button" tabIndex={tabIndex} onClick={() => onFilterChange("wish")}><img className="icon" src={star} alt="" />Wishlist</button>
+                    <button className={`btn ${activeFilter === "wish" ? "--active" : ""}`} type="button" tabIndex={tabIndex} onClick={() => onFilterChange("wish")}><img className="icon" src={star} alt="" />Collected</button>
                 </section>
                 <section className="search-wrapper" aria-label="Search input" aria-describedby="search-description">
                     <span id="search-description" className="a11y">Filter games that have a matching character string in the title with the character string provided by the user in the input field. When input has focus, it's associated button can be used to clear the input.</span>

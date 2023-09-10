@@ -151,7 +151,7 @@
 
 @media screen and (min-width: 650px) {
     .search-panel {
-        grid-template-columns: 300px minmax(28px, 1fr) minmax(210px, 370px);
+        grid-template-columns: 330px minmax(28px, 1fr) minmax(210px, 370px);
         padding: 30px 45px 30px 39px;
     }
     .search-wrapper {
@@ -182,7 +182,7 @@
 @media screen and (min-width: 1025px) {
     .mobile-title,
     .mobile-progress {
-        display: none;
+       /*  display: none; */
     }
     .search-panel {
         padding: 30px 45px 30px 39px;
