@@ -210,7 +210,8 @@ class App extends Component {
 	iGDB = new IGDB()
     handleWelcomeClick = async () => {
         try {
-            const allGames = [],
+            const ratedGames = [],
+                  notRatedGames = [],
                   get = await this.iGDB.getToken(),
                   games = await this.iGDB.getGames(get.access_token)
 
@@ -230,8 +231,13 @@ class App extends Component {
                     gameData = { rating: rating, title: game.name, src: src }
 
                 const gameFiltered = Object.assign(filters, gameData)
-                allGames.push(gameFiltered)
+                if (gameFiltered.rating === "N/A") {
+                    notRatedGames.push(gameFiltered)
+                } else {
+                    ratedGames.push(gameFiltered)
+                }
             })
+            const allGames = [...ratedGames, ...notRatedGames]
             this.setState({ data: allGames, apiDataLoaded: true })
             this.props.onStateChange("transitionStart")
             const setTimeoutPromise = () => new Promise(() => {
