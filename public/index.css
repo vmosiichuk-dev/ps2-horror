@@ -23,6 +23,10 @@ body {
 	font-family: "Didact Gothic";
 }
 
+button {
+	cursor: pointer;
+}
+
 input::placeholder {
 	font-size: 1.0625rem;
 }
