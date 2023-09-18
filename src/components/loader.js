@@ -1,4 +1,4 @@
-import loaderGif from "../assets/img/welcome.gif"
+import loaderGif from "../assets/img/welcome3.gif"
 import "../assets/styles/loader.css"
 
 function Loader({ welcomeClick }) {

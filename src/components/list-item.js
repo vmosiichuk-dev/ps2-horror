@@ -98,7 +98,7 @@ class ListItem extends Component {
                     <img className="status-icon wish" src={star} alt="Added to Wishlist" />
                     <img className="status-icon play" src={game} alt="Marked as Played" />
                 </div>
-                <img className="img-cover" src={src} alt={title + " — PS2 game cover image"} />
+                <img className="img-cover" src={src} alt={title + " — PS2 game cover"} />
                 <img className="img-overlay" src={overlay} alt="" />
                 <div className={"list-item-buttons" + activeClass} tabIndex={0} role="toolbar" aria-activedescendant={itemId + "toolbar--wish"} onFocus={this.handleTabFocus} onBlur={this.handleTabBlur} onMouseOver={this.handleTabFocus} onMouseOut={this.handleTabBlur} style={itemButtonsStyle} >
                     <button type="button" id={itemId + "--toolbar-wish"} className="btn-sm btn-wish" onClick={() => onMarkState("wish")} data-toggle="wish">

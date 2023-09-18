@@ -1,67 +1,174 @@
 .info {
-    display: none;
+	display: none;
 }
 
-.progress-bar--container {
-    border-radius: 4px;
-    border: 1px solid #867fa6;
-    color: var(--accent);
-    background-color: transparent;
-    margin: 30px 0 10px;
-    height: 6px;
+.info-img-wrapper {
+	box-shadow: 0 -30px 14px -10px #203a43 inset;
+	width: 100%;
+	height: 49dvh;
+	position: absolute;
+	top: 0;
 }
 
-.progress-bar {
-    border-radius: 4px 0 0 4px;
-    background-color: var(--accent);
-    width: 0%;
-    height: 100%;
-}
-
-.info-p span {
-    float: right;
-}
-
-h1 img {
-    width: 40px;
-    height: 30px;
-    margin-bottom: -2px;
-    position: relative;
-    z-index: 1;
-    object-fit: initial;
-    margin-left: 27px;
+.info-bg-img {
+	left: -50%;
+	z-index: -10;
+	top: -10px;
+	filter: contrast(85%) brightness(110%) saturate(75%) sepia(22%) blur(1px);
+	height: 49dvh;
+	position: absolute;
 }
 
 .info-wrapper {
-    width:60%;
+	width: calc(100% - 50px);
+	padding: 40px 25px;
+	height: calc(100% - 80px);
+	display: grid;
+	position: relative;
+	bottom: 0;
+	background: linear-gradient(to bottom, transparent, #0008 40%);
 }
 
-.progress-count {
-    text-align: center;
+.list-item.info-cover-container {
+	width: 100%;
+	margin: 0 auto;
+}
+
+.info-title {
+	margin: 1.5rem 0 0;
+	text-align: center;
+	font-weight: 600;
+	font-family: 'Unbounded';
+}
+
+.info-subtitle {
+	margin-top: 0;
+	text-align: center;
+	font-size: 1rem;
+	font-weight: 400;
+	font-family: 'Didact Gothic';
+}
+
+.info-flags {
+	display: flex;
+	justify-content: space-around;
+}
+
+.info-flags .flag {
+	color: var(--accent);
+	border-radius: 4px;
+	padding: 4px 8px;
+	background-color: #47819eb8;
+	transition: filter .1s cubic-bezier(.46,.03,.52,.96), border-color .1s cubic-bezier(.46,.03,.52,.96);
+	box-shadow: 0px 0px 4px transparent;
+	width: 93px;
+	margin: 0;
+	border-color: #f5f8ff3d;
+	border-width: 1px;
+	border-style: outset;
+	height: min-content;
+	filter: grayscale(100%) brightness(70%) contrast(180%);
+}
+
+.info .icon {
+	width: 14px;
+	height: 14px;
+	position: relative;
+	top: 1px;
+	margin-right: 4px;
+}
+
+.info-flags .rating {
+	background: transparent;
+	width: 93px;
+	margin: 0;
+	height: min-content;
+	border: none;
+	color: var(--accent);
+	font-family: 'Unbounded';
+	font-weight: 600;
+	font-size: 1.25rem;
+}
+
+.info-description {
+	font-family: 'Didact Gothic';
+}
+
+.info-category {
+	margin: 5px 0;
+}
+
+.info-category-title {
+	margin: 0;
+}
+
+.info-category-item-wrapper {
+	display: flex;
+	gap: 1rem;
+}
+
+.info span, 
+.info a {
+	font-family: 'Didact Gothic';
+}
+
+.info a {
+	color: var(--accent);
+	text-decoration: none;
+}
+
+.info-age-rating-container {
+	display: grid;
+	padding: 40px 25px;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	justify-content: flex-end;
+	gap: 0.75rem;
+}
+
+.info-bg-age {
+	width: 28px;
+	border: 1px solid slategrey;
+	border-radius: 2px;
+	padding: 3px;
+	justify-self: center;
+}
+
+.info .loader-container {
+	backdrop-filter: blur(8px);
+	width: 100%;
+	height: 100%;
+	background: #000a;
+	transition: 1s opacity .75s cubic-bezier(.46,.03,.52,.96);
+	
+/* RE-WRITE WITH ANIMATION */
+	z-index: 0;
+}
+
+.info .loader-gif {
+	top: 0;
+	box-shadow: 8px 8px 12px #0008, -8px -8px 12px #0008, 8px -8px 12px #0008, -8px 8px 12px #0008;
+	border-radius: 9999px;
+}
+
+.info .loader {
+	display: none;
 }
 
 @media screen and (min-width: 1025px) {
-    .info {
-        display: flex;
+	.info {
+		background: linear-gradient(to bottom, transparent, #203a43 55%);
+		overflow: hidden;
+		position: relative;
+		display: flex;
 		width: 356px;
-        justify-content: center;
-        align-items: center;
-        height: 100dvh;
-        flex-direction: column;
-        border-right: 1px solid #867fa6b5;
-		/* background-color: #2e293696; */
-        background-color: #0f0b1596;
-        grid-column: 1;
-        grid-row: 1 / span 2;
+		justify-content: center;
+		align-items: center;
+		height: 100dvh;
+		flex-direction: column;
+		border-right: 1px solid #867fa6b5;
+		grid-column: 1;
+		grid-row: 1 / span 2;
 	}
-    .info h1 {
-        margin: 0 0 5px 0;
-        width: 60%;
-    }
-    .info-p {
-        border-radius: 4px;
-        border: 1px solid #867fa6;
-        padding: 8px 16px;
-        margin: 25px 0;
-    }
 }
