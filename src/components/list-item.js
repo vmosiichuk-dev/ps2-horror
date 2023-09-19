@@ -58,7 +58,7 @@ class ListItem extends Component {
     }
 
     render() {
-        const { itemId, title, src, wish, play, onMarkState } = this.props
+        const { slug, title, src, wish, play, onMarkState, onInfoToggle } = this.props
         const { delSrc, activeClass, itemButtonsStyle, confirmDeleteAria, priceCategory } = this.state
 
         let listItemClass = "list-item",
@@ -93,24 +93,24 @@ class ListItem extends Component {
         }
 
         return (
-            <li className={listItemClass} id={itemId}>
+            <li className={listItemClass} id={slug}>
                 <div className={statusContainerClass}>
                     <img className="status-icon wish" src={star} alt="Added to Wishlist" />
                     <img className="status-icon play" src={game} alt="Marked as Played" />
                 </div>
                 <img className="img-cover" src={src} alt={title + " — PS2 game cover"} />
                 <img className="img-overlay" src={overlay} alt="" />
-                <div className={"list-item-buttons" + activeClass} tabIndex={0} role="toolbar" aria-activedescendant={itemId + "toolbar--wish"} onFocus={this.handleTabFocus} onBlur={this.handleTabBlur} onMouseOver={this.handleTabFocus} onMouseOut={this.handleTabBlur} style={itemButtonsStyle} >
-                    <button type="button" id={itemId + "--toolbar-wish"} className="btn-sm btn-wish" onClick={() => onMarkState("wish")} data-toggle="wish">
+                <div className={"list-item-buttons" + activeClass} tabIndex={0} role="toolbar" aria-activedescendant={slug + "toolbar--wish"} onFocus={this.handleTabFocus} onBlur={this.handleTabBlur} onMouseOver={this.handleTabFocus} onMouseOut={this.handleTabBlur} style={itemButtonsStyle} >
+                    <button type="button" id={slug + "--toolbar-wish"} className="btn-sm btn-wish" onClick={() => onMarkState("wish")} data-toggle="wish">
                         <img className="icon icon-wish" src={star} alt="Add to wishlist" />
                     </button>
-                    <button type="button" id={itemId + "--toolbar-play"} className="btn-sm btn-play" onClick={() => onMarkState("play")} data-toggle="play">
+                    <button type="button" id={slug + "--toolbar-play"} className="btn-sm btn-play" onClick={() => onMarkState("play")} data-toggle="play">
                         <img className="icon icon-played" src={game} alt="Mark as played" />
                     </button>
-                    <button type="button" id={itemId + "--toolbar-info"} className="btn-sm btn-info" onClick={this.handleInfoClick}>
+                    <button type="button" id={slug + "--toolbar-info"} className="btn-sm btn-info" onClick={() => onInfoToggle(slug)}>
                         <img className="icon icon-info" src={info} alt="Toggle game information" />
                     </button>
-                    <button type="button" id={itemId + "--toolbar-delete"} className="btn-sm btn-delete" onClick={this.handleDeleteClick}>
+                    <button type="button" id={slug + "--toolbar-delete"} className="btn-sm btn-delete" onClick={this.handleDeleteClick}>
                         <img className="icon icon-delete" src={delSrc} alt={deleteAlt} />
                     </button>
                     <p className={"delete-p" + activeClass} aria-hidden={confirmDeleteAria}>Are you sure?<br/>Click again to delete.</p>

@@ -19,6 +19,7 @@ class App extends Component {
             addedTitle: "",
             apiDataLoaded: false,
             data: [],
+            infoData: {},
             delSrc: del,
             playCount: 0,
             progressBarStyle: {
@@ -128,10 +129,10 @@ class App extends Component {
 
 // ––––––––––––––––––––––––––––––––– <List /> functions –––––––––––––––––––––––––––––––––
 
-    markState = (title, state) => {
+    markState = (slug, state) => {
         this.setState(prevState => {
             const newData = prevState.data.map(item => {
-                if (item.title === title) { return { ...item, [state]: !item[state] } }
+                if (item.slug === slug) { return { ...item, [state]: !item[state] } }
                 return item
             })
     
@@ -154,9 +155,9 @@ class App extends Component {
         })  
     }
 
-    deleteItem = (title) => {   
+    deleteItem = (slug) => {   
         this.setState(prevState => {
-            const newData = prevState.data.filter(item => item.title !== title),
+            const newData = prevState.data.filter(item => item.slug !== slug),
                   newTotalCount = newData.length,
                   newPlayCount = newData.filter(item => item.play).length,
                   newWishCount = newData.filter(item => item.wish).length,
@@ -226,9 +227,16 @@ class App extends Component {
                     rating = Math.round(game.aggregated_rating)
                 }
 
+                delete game.total_rating
+                delete game.rating
+                delete game.aggregated_rating
+
                 const src = "https://images.igdb.com/igdb/image/upload/t_cover_big/" + game.cover.image_id + ".jpg",
-                    filters = { wish: false, play: false },
-                    gameData = { rating: rating, title: game.name, src: src }
+                      filters = { wish: false, play: false },
+                      gameData = { ...game, rating: rating, title: game.name, src: src }
+
+                delete gameData.name
+                delete gameData.cover
 
                 const gameFiltered = Object.assign(filters, gameData)
                 if (gameFiltered.rating === "N/A") {
@@ -250,7 +258,7 @@ class App extends Component {
         } catch (error) {
           console.error("Error fetching data from the API:", error)
         }
-    }      
+    }  
 
     componentDidUpdate() {
         if (this.props.welcomeClick && !this.state.apiDataLoaded) {
@@ -258,10 +266,18 @@ class App extends Component {
         }
     }
 
+    handleInfoToggle = (slug) => {
+        this.setState(prevState => {
+            const newData = prevState.data.find(item => item.slug === slug)
+            return { infoData: newData }
+        })  
+    } 
+    
 // –––––––––––––––––––––––––––––––––—— END functions ––––––––––––––––––––––––––––––––––——
 
     render() {
-        const { data, 
+        const { data,
+                infoData, 
                 searchQuery,
                 addedRating, 
                 addedTitle, 
@@ -294,7 +310,7 @@ class App extends Component {
         return (
             <div className={appClass}>  
                 <Info 
-                    data={data} 
+                    infoData={infoData} 
                     playCount={playCount}
                     progressCount={progressCount}
                     progressBarStyle={progressBarStyle}
@@ -331,6 +347,7 @@ class App extends Component {
                         delSrc={delSrc}
                         onDelete={this.deleteItem} 
                         onMarkState={this.markState} 
+                        onInfoToggle={this.handleInfoToggle} 
                     />
                 </main>
             </div>

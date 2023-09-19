@@ -1,13 +1,18 @@
 import ListItem from "./list-item"
 import "../assets/styles/list.css"
 
-function List({ onDelete, onMarkState, delSrc, filteredData }) {
+function List({ onDelete, onMarkState, onInfoToggle, delSrc, filteredData }) {
     const renderElements = () => {
-        return filteredData.map(item => {
-            const id = item.title.replace(/\W+/g, "-").toLowerCase()
-    
+        return filteredData.map(item => {    
             return (
-                <ListItem key={id} {...item} itemId={id} delSrc={delSrc} onDelete={() => onDelete(item.title)} onMarkState={toggle => onMarkState(item.title, toggle)} />
+                <ListItem 
+                    {...item} 
+                    key={item.slug} 
+                    delSrc={delSrc} 
+                    onDelete={() => onDelete(item.slug)} 
+                    onMarkState={toggle => onMarkState(item.slug, toggle)} 
+                    onInfoToggle={slug => onInfoToggle(slug)} 
+                />
             )
         })
     }
