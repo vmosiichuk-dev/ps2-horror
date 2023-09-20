@@ -1,15 +1,40 @@
 import Loader from "./loader"
 import game from "../assets/img/game.png"
 import star from "../assets/img/star.png"
-/* import screen from "../assets/img/screen.png" */
-/* import cover from "../assets/img/cover.png" */
-import shadowman from "../assets/img/shadowman.jpg"
-import trapt from "../assets/img/trapt.jpg"
-import kuon from "../assets/img/kuon.jpg"
-import vanhelsing from "../assets/img/vanhelsing.jpg"
 import overlay from "../assets/img/overlay.png"
-import age1 from "../assets/img/age-rating-1.png"
-import age2 from "../assets/img/age-rating-2.png"
+import age1 from "../assets/img/ratings/age-rating-1.png"
+import age2 from "../assets/img/ratings/age-rating-2.png"
+
+import shadowman from "../assets/img/screenshots/shadowman.webp"
+import trapt from "../assets/img/screenshots/trapt.webp"
+import kuon from "../assets/img/screenshots/kuon.webp"
+import vanhelsing from "../assets/img/screenshots/vanhelsing.webp"
+import extermination from "../assets/img/screenshots/extermination.webp"
+import silent2special from "../assets/img/screenshots/silent2special.webp"
+import zombiehunters from "../assets/img/screenshots/zombiehunters.webp"
+import ghostvibration from "../assets/img/screenshots/ghostvibration.webp"
+import berserk from "../assets/img/screenshots/berserk.webp"
+import resident4premium from "../assets/img/screenshots/resident4premium.webp"
+import silentcollection from "../assets/img/screenshots/silentcollection.webp"
+import daemon from "../assets/img/screenshots/daemon.webp"
+import gegege from "../assets/img/screenshots/gegege.webp"
+import gantz from "../assets/img/screenshots/gantz.webp"
+import lifeline from "../assets/img/screenshots/lifeline.webp"
+import fear from "../assets/img/screenshots/fear.webp"
+import rlh from "../assets/img/screenshots/rlh.webp"
+import haunted from "../assets/img/screenshots/haunted.webp"
+import jaws from "../assets/img/screenshots/jaws.webp"
+import turok from "../assets/img/screenshots/turok.webp"
+import galerians from "../assets/img/screenshots/galerians.webp"
+import tairyou from "../assets/img/screenshots/tairyou.webp"
+import baroque from "../assets/img/screenshots/baroque.webp"
+import kingsfield from "../assets/img/screenshots/kingsfield.webp"
+import aliens from "../assets/img/screenshots/aliens.webp"
+import abyss from "../assets/img/screenshots/abyss.webp"
+import michigan from "../assets/img/screenshots/michigan.webp"
+import survivor2 from "../assets/img/screenshots/survivor2.webp"
+import hungryghosts from "../assets/img/screenshots/hungryghosts.webp"
+
 import "../assets/styles/info.css"
 
 function Info({ infoData }) {
@@ -47,8 +72,59 @@ function Info({ infoData }) {
                 }
             })
         }
-        if (infoData.title === "Shadow Man: 2econd Coming") screenshot = shadowman
-        if (infoData.title === "Van Helsing") screenshot = vanhelsing
+
+        switch (infoData.title) {
+            case "Shadow Man: 2econd Coming": {
+                screenshot = shadowman
+                break
+            }
+            case "Van Helsing": {
+                screenshot = vanhelsing
+                break
+            }
+            case "Zombie Hunters": {
+                screenshot = zombiehunters
+                break
+            }
+            case "Ghost Vibration": {
+                screenshot = ghostvibration
+                break
+            }
+            case "The Silent Hill Collection": {
+                screenshot = silentcollection
+                break
+            }
+            case "Daemon Summoner": {
+                screenshot = daemon
+                break
+            }
+            case "GeGeGe no Kitaro: Ibun Yokai Kitan": {
+                screenshot = gegege
+                break
+            }
+            case "Gantz: The Game": {
+                screenshot = gantz
+                break
+            }
+            case "Lifeline": {
+                screenshot = lifeline
+                break
+            }
+            case "The Fear": {
+                screenshot = fear
+                break
+            }
+            case "Run Like Hell: Hunt or Be Hunted": {
+                screenshot = rlh
+                break
+            }
+            case "The Haunted Mansion": {
+                screenshot = haunted
+                break
+            }
+            default: break
+        }
+
         if (infoData.screenshots !== undefined) {
             const firstScreenshotTitles = [
                     infoData.title === "Silent Hill 2: Restless Dreams",
@@ -64,7 +140,7 @@ function Info({ infoData }) {
                     infoData.title === "Vampire Night",
                     infoData.title === "Phase Paradox",
                     infoData.title === "Evil Twin: Cyprien's Chronicles",
-                    infoData.title === "Shadow Tower: Abyss"
+                    infoData.title === "Shadow Tower: Abyss",
                 ],
                 secondScreenshotTitles = [
                     infoData.title === "Resident Evil 4",
@@ -75,12 +151,11 @@ function Info({ infoData }) {
                     infoData.title === "Castlevania: Curse of Darkness",
                     infoData.title === "Drakengard",
                     infoData.title === "King's Field IV",
-                    infoData.title === "ObsCure: The Aftermath",
                     infoData.title === "Aliens Versus Predator: Extinction",
                     infoData.title === "Clock Tower 3",
                     infoData.title === "Devil May Cry 2",
                     infoData.title === "Mystic Nights",
-                    infoData.title === "Resident Evil 4: Premium Edition"
+                    infoData.title === "Resident Evil 4: Premium Edition",
                 ],
                 thirdScreenshotTitles = [
                     infoData.title === "Raw Danger!",
@@ -89,7 +164,7 @@ function Info({ infoData }) {
                     infoData.title === "Resident Evil Outbreak",
                     infoData.title === "Resident Evil Outbreak File #2",
                     infoData.title === "BloodRayne 2",
-                    infoData.title === "The X-Files: Resist or Serve"
+                    infoData.title === "The X-Files: Resist or Serve",
                 ],
                 fourthScreenshotTitles = [
                     infoData.title === "Silent Hill 2",
@@ -100,7 +175,8 @@ function Info({ infoData }) {
                     infoData.title === "Area 51",
                     infoData.title === "Alone in the Dark: The New Nightmare",
                     infoData.title === "Blood Omen 2: Legacy of Kain",
-                    infoData.title === "The Thing"
+                    infoData.title === "The Thing",
+                    infoData.title === "ObsCure: The Aftermath",
                 ]
             let i = 0
             if (firstScreenshotTitles.includes(true)) i = 1
@@ -108,8 +184,78 @@ function Info({ infoData }) {
             if (thirdScreenshotTitles.includes(true)) i = 3
             if (fourthScreenshotTitles.includes(true)) i = 4
             screenshot = "https://images.igdb.com/igdb/image/upload/t_screenshot_big/" + infoData.screenshots[i].image_id + ".jpg"
-            if (infoData.title === "Trapt") screenshot = trapt
-            if (infoData.title === "Kuon") screenshot = kuon
+            
+            switch (infoData.title) {
+                case "Trapt": {
+                    screenshot = trapt
+                    break
+                }
+                case "Kuon": {
+                    screenshot = kuon
+                    break
+                }
+                case "Extermination": {
+                    screenshot = extermination
+                    break
+                }
+                case "Berserk Millennium Empire Arc: Chapter of the Holy Demon War": {
+                    screenshot = berserk
+                    break
+                }
+                case "Silent Hill 2: Special 2 Disc Set": {
+                    screenshot = silent2special
+                    break
+                }
+                case "Jaws Unleashed": {
+                    screenshot = jaws
+                    break
+                }
+                case "Turok: Evolution": {
+                    screenshot = turok
+                    break
+                }
+                case "Galerians: Ash": {
+                    screenshot = galerians
+                    break
+                }
+                case "Simple 2000 Series Vol. 113: The Tairyou Jigoku": {
+                    screenshot = tairyou
+                    break
+                }
+                case "Resident Evil 4: Premium Edition": {
+                    screenshot = resident4premium
+                    break
+                }
+                case "Baroque": {
+                    screenshot = baroque
+                    break
+                }
+                case "King's Field IV": {
+                    screenshot = kingsfield
+                    break
+                }
+                case "Aliens Versus Predator: Extinction": {
+                    screenshot = aliens
+                    break
+                }
+                case "Shadow Tower: Abyss": {
+                    screenshot = abyss
+                    break
+                }
+                case "Michigan: Report from Hell": {
+                    screenshot = michigan
+                    break
+                }
+                case "Resident Evil Survivor 2 Code: Veronica": {
+                    screenshot = survivor2
+                    break
+                }
+                case "Hungry Ghosts": {
+                    screenshot = hungryghosts
+                    break
+                }
+                default: break
+            }
         }
         if (infoData.websites !== undefined) {
             infoData.websites.forEach(item => {
