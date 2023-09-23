@@ -11,7 +11,7 @@
 }
 
 .info-bg-img {
-	left: -20%;
+	left: -25%;
 	z-index: -10;
 	top: -10px;
 	filter: contrast(85%) brightness(110%) saturate(75%) sepia(22%) blur(1px);
@@ -38,7 +38,8 @@
 	margin: 1.5rem 0 0;
 	text-align: center;
 	font-weight: 600;
-	font-family: 'Unbounded';
+	font-family: "Unbounded";
+	font-size: 1.375rem;
 }
 
 .info-subtitle {
@@ -46,7 +47,6 @@
 	text-align: center;
 	font-size: 1rem;
 	font-weight: 400;
-	font-family: 'Didact Gothic';
 }
 
 .info-flags {
@@ -85,32 +85,35 @@
 	height: min-content;
 	border: none;
 	color: var(--accent);
-	font-family: 'Unbounded';
 	font-weight: 600;
 	font-size: 1.25rem;
 }
 
-.info-description {
-	font-family: 'Didact Gothic';
+.info-title,
+.info-flags .rating,
+.info-category-title {
+	font-family: "Unbounded";
 }
 
 .info-category {
 	margin: 5px 0;
+	padding-right: 50px;
 }
 
 .info-category-title {
 	margin: 0;
+	font-size: 1.25rem;
 }
 
 .info-category-item-wrapper {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 1rem;
+	gap: 0.25rem 1rem;
+	margin-top: 0.25rem;
 }
 
-.info span, 
-.info a {
-	font-family: 'Didact Gothic';
+.info {
+	font-family: "Didact Gothic";
 }
 
 .info a {
@@ -120,22 +123,22 @@
 
 .info-age-rating-container {
 	display: grid;
-	padding: 40px 25px;
+	padding: 50px 25px;
 	position: absolute;
 	bottom: 0;
 	right: 0;
 	justify-content: flex-end;
-	gap: 0.75rem;
+	gap: 0.5rem;
 }
 
 .info-bg-age {
-	width: 28px;
-	border: 1px solid slategrey;
-	border-radius: 2px;
+	width: 40px;
+	/* border: 1px solid slategrey; */
+	border-radius: 6px;
 	padding: 3px;
 	justify-self: center;
 }
-
+/* 
 .info .loader-container {
 	backdrop-filter: blur(8px);
 	width: 100%;
@@ -143,8 +146,8 @@
 	background: #000a;
 	transition: 1s opacity .75s cubic-bezier(.46,.03,.52,.96);
 	
-/* RE-WRITE WITH ANIMATION */
-	/* z-index: 0; */
+// RE-WRITE WITH ANIMATION
+	z-index: 0;
 }
 
 .info .loader-gif {
@@ -155,6 +158,16 @@
 
 .info .loader {
 	display: none;
+}
+ */
+
+.info-description {
+	display: -webkit-box;
+	-webkit-line-clamp: 9;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	max-height: 12rem;
 }
 
 @media screen and (min-width: 1025px) {

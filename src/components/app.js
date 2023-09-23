@@ -19,7 +19,19 @@ class App extends Component {
             addedTitle: "",
             apiDataLoaded: false,
             data: [],
-            infoData: {},
+            infoData: {
+                wish: false,
+                play: false,
+                genres: [],
+                involved_companies: [],
+                screenshots: [],
+                summary: "",
+                websites: [],
+                ageRatings: [],
+                rating: "",
+                title: "",
+                src: ""
+            },
             delSrc: del,
             playCount: 0,
             progressBarStyle: {
