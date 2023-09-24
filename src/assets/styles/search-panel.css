@@ -149,6 +149,22 @@
     color: var(--accent);
 }
 
+.progress-bar--container {
+    border-radius: 4px;
+    border: 1px solid #867fa6;
+    color: var(--accent);
+    background-color: transparent;
+    margin: 30px 0 10px;
+    height: 6px;
+}
+
+.progress-bar {
+    border-radius: 4px 0 0 4px;
+    background-color: var(--accent);
+    width: 0%;
+    height: 100%;
+}
+
 @media screen and (min-width: 650px) {
     .search-panel {
         grid-template-columns: 330px minmax(28px, 1fr) minmax(210px, 370px);

@@ -28,6 +28,8 @@ class App extends Component {
                 summary: "",
                 websites: [],
                 ageRatings: [],
+                releaseDate: "",
+                yearsPast: "",
                 rating: "",
                 title: "",
                 src: ""

@@ -69,14 +69,19 @@ class Info extends Component {
     }
 
     static getDerivedStateFromProps(props, state) {
-        const {title, src, play, wish, rating, genres, summary, involved_companies, screenshots, websites} = props.infoData
+        const {title, src, play, wish, rating, genres, summary, first_release_date, involved_companies, screenshots, websites} = props.infoData
         let companyName = "",
             companyLabel = "",
             screenshot = "",
             newSummary = summary,
             newGenres = [],
             newWebsites = []
-        
+
+        const release = new Date((first_release_date * 1000)),
+              releaseDate = release.toLocaleDateString('en-us', { year:"numeric", month:"short", day:"numeric"}),
+              yearNow = new Date(Date.now()).getFullYear(),
+              yearsPast = yearNow - release.getFullYear()
+
         if (websites !== undefined) {
             websites.forEach(website => {
                 let label, url
@@ -601,6 +606,8 @@ class Info extends Component {
                 summary: newSummary,
                 websites: newWebsites,
                 ageRatings: ageRatings,
+                releaseDate: releaseDate,
+                yearsPast: yearsPast,
                 rating: rating,
                 title: title,
                 src: src
@@ -638,7 +645,7 @@ class Info extends Component {
     }
 
     render() {
-        const {title, src, play, wish, rating, genres, summary, companyLabel, companyName, screenshot, websites, ageRatings} = this.state
+        const {title, src, play, wish, rating, genres, summary, companyLabel, companyName, screenshot, websites, ageRatings, releaseDate, yearsPast} = this.state
         
         return (
             <section className="info" aria-label="Game information">
@@ -651,7 +658,7 @@ class Info extends Component {
                         <img className="img-overlay" src={overlay} alt="" />
                     </div>
                     <h2 className="info-title">{title}</h2>
-                    <h3 className="info-subtitle">Sep 24, 2001 (22 years ago)</h3>
+                    <h3 className="info-subtitle">{releaseDate} ({yearsPast} years ago)</h3>
                     <div className="info-flags">
                         <button className={`flag ${play ? "--active" : ""}`} type="button"><img className="icon" src={game} alt="" />Played</button>
                         <button className={`flag ${wish ? "--active" : ""}`} type="button"><img className="icon" src={star} alt="" />Collected</button>

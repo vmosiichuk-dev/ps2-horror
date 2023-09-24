@@ -21,8 +21,8 @@
 
 .info-wrapper {
 	width: calc(100% - 50px);
-	padding: 40px 25px;
-	height: calc(100% - 80px);
+	padding: 35px 25px;
+	height: calc(100% - 70px);
 	display: grid;
 	position: relative;
 	bottom: 0;
@@ -168,6 +168,10 @@
 	overflow: hidden;
 	text-overflow: ellipsis;
 	max-height: 12rem;
+}
+
+.flag.--active {
+	filter: none;
 }
 
 @media screen and (min-width: 1025px) {
