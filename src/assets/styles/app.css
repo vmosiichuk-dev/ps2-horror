@@ -13,10 +13,17 @@
 	animation: 1.175s fade-in .9s cubic-bezier(.46,.03,.52,.96) forwards;
 }
 
+.app.--info {
+	max-width: 1520px;
+    margin: 0 auto;
+}
+
 #main {
-    height:100%;
+    height: calc(100% - 12px);
     width: auto;
     padding: 0 10px;
+    top: -12px;
+    position: relative;
 }
 
 @media screen and (min-width: 650px) {
@@ -30,7 +37,8 @@
 
 @media screen and (min-width: 1025px) {
     .app {
-        grid-template-columns: 356px calc(100dvw - 357px);
+        /* grid-template-columns: 356px calc(100dvw - 357px); */
+        grid-template-columns: max-content 1fr;
     }
     #main {
         grid-column: 2;

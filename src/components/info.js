@@ -13,9 +13,8 @@ import pegi16 from "../assets/img/ratings/pegi16.svg"
 import pegi18 from "../assets/img/ratings/pegi18.svg"
 import jpW from "../assets/img/ratings/jpW.webp"
 import usk12 from "../assets/img/ratings/usk12.svg"
-import game from "../assets/img/game.png"
 import overlay from "../assets/img/overlay.png"
-import star from "../assets/img/star.png"
+import menuImg from "../assets/img/plus.svg"
 
 import abyss from "../assets/img/screenshots/abyss.webp"
 import aliens from "../assets/img/screenshots/aliens.webp"
@@ -62,6 +61,7 @@ class Info extends Component {
             summary: "",
             websites: [],
             ageRatings: [],
+            ageRatingJp: false,
             rating: "",
             title: "",
             src: ""
@@ -69,8 +69,9 @@ class Info extends Component {
     }
 
     static getDerivedStateFromProps(props, state) {
-        const {title, src, play, wish, rating, genres, summary, first_release_date, involved_companies, screenshots, websites} = props.infoData
-        let companyName = "",
+        const {title, src, rating, genres, summary, first_release_date, involved_companies, screenshots, websites} = props.infoData
+        let ageRatingJp = "",
+            companyName = "",
             companyLabel = "",
             screenshot = "",
             newSummary = summary,
@@ -548,7 +549,8 @@ class Info extends Component {
         }
         if (jpWGroup.includes(true)) {
             ageRating = jpW
-            ageRatings.push(ageRating)
+            ageRatings.push(ageRating) 
+            ageRatingJp= true
         }
         if (ceroAGroup.includes(true)) {
             ageRating = ceroA
@@ -597,8 +599,6 @@ class Info extends Component {
 
         if (props.infoData.title !== state.title) {
             return {
-                wish: wish,
-                play: play,
                 genres: newGenres,
                 companyLabel: companyLabel,
                 companyName: companyName,
@@ -606,6 +606,7 @@ class Info extends Component {
                 summary: newSummary,
                 websites: newWebsites,
                 ageRatings: ageRatings,
+                ageRatingJp: ageRatingJp,
                 releaseDate: releaseDate,
                 yearsPast: yearsPast,
                 rating: rating,
@@ -645,10 +646,20 @@ class Info extends Component {
     }
 
     render() {
-        const {title, src, play, wish, rating, genres, summary, companyLabel, companyName, screenshot, websites, ageRatings, releaseDate, yearsPast} = this.state
+        const {title, src, rating, genres, summary, companyLabel, companyName, screenshot, websites, ageRatings, releaseDate, yearsPast, ageRatingJp} = this.state
+        const {openedInfo, onInfoClose} = this.props
+
+        let infoClass = "info",
+            infoAgeRatingClass = "info-age-rating-container"
+
+        if (openedInfo) infoClass += " --active"
+        if (ageRatingJp) infoAgeRatingClass += " --active"
         
         return (
-            <section className="info" aria-label="Game information">
+            <section className={infoClass} aria-label="Game information">
+                <button type="button" className="btn btn-menu" onClick={onInfoClose} tabIndex={0}>
+                    <img className="menu-img --active" src={menuImg} alt="Close game information"/>
+                </button>
                 <div className="info-img-wrapper">   
                     <img className="info-bg-img" src={screenshot} alt=""/>
                 </div>
@@ -658,17 +669,16 @@ class Info extends Component {
                         <img className="img-overlay" src={overlay} alt="" />
                     </div>
                     <h2 className="info-title">{title}</h2>
-                    <h3 className="info-subtitle">{releaseDate} ({yearsPast} years ago)</h3>
-                    <div className="info-flags">
-                        <button className={`flag ${play ? "--active" : ""}`} type="button"><img className="icon" src={game} alt="" />Played</button>
-                        <button className={`flag ${wish ? "--active" : ""}`} type="button"><img className="icon" src={star} alt="" />Collected</button>
-                        <button className="rating" type="button">{rating}</button>
+                    <div className="info-subtitle-wrapper">
+                        <h3 className="info-subtitle">{releaseDate} ({yearsPast} years ago)</h3>
+                        <div className="rating btn --active">{rating}</div>
+                        <p className="rating-label">Rating</p>
                     </div>
                     {summary !== "" ? <p className="info-description">{summary}</p> : null}
                     {companyName !== "" ? this.renderContainer(companyLabel, companyName) : null}
                     {genres.length > 0 ? this.renderContainer("Genres", genres) : null}                
                     {websites.length > 0 ? this.renderContainer("Links", websites) : null}
-                    <div className="info-age-rating-container">
+                    <div className={infoAgeRatingClass}>
                         {ageRatings.length > 0 ? this.renderAgeRatings(ageRatings) : null}
                     </div>
                 </div>

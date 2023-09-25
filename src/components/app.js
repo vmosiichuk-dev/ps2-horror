@@ -20,20 +20,20 @@ class App extends Component {
             apiDataLoaded: false,
             data: [],
             infoData: {
-                wish: false,
-                play: false,
                 genres: [],
                 involved_companies: [],
                 screenshots: [],
                 summary: "",
                 websites: [],
                 ageRatings: [],
+                ageRatingJp: false,
                 releaseDate: "",
                 yearsPast: "",
                 rating: "",
                 title: "",
                 src: ""
             },
+            openedInfo: false,
             delSrc: del,
             playCount: 0,
             progressBarStyle: {
@@ -280,18 +280,22 @@ class App extends Component {
         }
     }
 
-    handleInfoToggle = (slug) => {
+    openInfo = (slug) => {
         this.setState(prevState => {
             const newData = prevState.data.find(item => item.slug === slug)
-            return { infoData: newData }
+            console.log("set openedInfo value to " + true)
+            return { infoData: newData, openedInfo: true }
         })  
     } 
+
+    closeInfo = () => { this.setState({openedInfo: false}); console.log("set openedInfo value to " + false) }
     
 // –––––––––––––––––––––––––––––––––—— END functions ––––––––––––––––––––––––––––––––––——
 
     render() {
         const { data,
                 infoData, 
+                openedInfo,
                 searchQuery,
                 addedRating, 
                 addedTitle, 
@@ -320,14 +324,16 @@ class App extends Component {
         if (this.props.transitionStart) {
             appClass += " --active"
         }
+        if (!openedInfo) {
+            appClass += " --info"
+        }
 
         return (
             <div className={appClass}>  
                 <Info 
                     infoData={infoData} 
-                    playCount={playCount}
-                    progressCount={progressCount}
-                    progressBarStyle={progressBarStyle}
+                    openedInfo={openedInfo}
+                    onInfoClose={this.closeInfo} 
                 />
                 <SearchPanel  
                     data={data} 
@@ -361,7 +367,7 @@ class App extends Component {
                         delSrc={delSrc}
                         onDelete={this.deleteItem} 
                         onMarkState={this.markState} 
-                        onInfoToggle={this.handleInfoToggle} 
+                        onOpenInfo={this.openInfo} 
                     />
                 </main>
             </div>

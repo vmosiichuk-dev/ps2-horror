@@ -58,7 +58,7 @@ class ListItem extends Component {
     }
 
     render() {
-        const { slug, title, src, wish, play, onMarkState, onInfoToggle } = this.props
+        const { slug, title, src, wish, play, onMarkState, onOpenInfo } = this.props
         const { delSrc, activeClass, itemButtonsStyle, confirmDeleteAria, priceCategory } = this.state
 
         let listItemClass = "list-item",
@@ -107,7 +107,7 @@ class ListItem extends Component {
                     <button type="button" id={slug + "--toolbar-play"} className="btn-sm btn-play" onClick={() => onMarkState("play")} data-toggle="play">
                         <img className="icon icon-played" src={game} alt="Mark as played" />
                     </button>
-                    <button type="button" id={slug + "--toolbar-info"} className="btn-sm btn-info" onClick={() => onInfoToggle(slug)}>
+                    <button type="button" id={slug + "--toolbar-info"} className="btn-sm btn-info" onClick={() => onOpenInfo(slug)}>
                         <img className="icon icon-info" src={info} alt="Toggle game information" />
                     </button>
                     <button type="button" id={slug + "--toolbar-delete"} className="btn-sm btn-delete" onClick={this.handleDeleteClick}>
