@@ -3,7 +3,7 @@
 	align-items: center;
 	position: absolute;
 	height: 100dvh;
-	z-index: 20;
+	z-index: 40;
 	background-color: #131c21fc;
 	padding: 0;
 	transition: left 1.125s cubic-bezier(.46,.03,.52,.96);
@@ -145,8 +145,8 @@ input[type=number]::-webkit-outer-spin-button {
 	margin: 0;
 	font-family: "Didact Gothic";
 	position: absolute;
-	top: 89px;
-	left: calc(50% - 103px);
+	top: 94px;
+	left: calc(50% - 112px);
 	height: 30px;
 	line-height: 27px;
 }
@@ -187,11 +187,11 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 
-@media screen and (min-width: 650px) {
+@media screen and (min-width: 715px) {
 	.add-form-wrapper {
-		width: 356px;
+		width: 429px;
 		border-right: 1px solid #867fa6b5;
-		left: -357px;
+		left: -430px;
 	}
 	.add-game--return {
 		top: 71px;

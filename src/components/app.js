@@ -289,6 +289,8 @@ class App extends Component {
     } 
 
     closeInfo = () => { this.setState({openedInfo: false}); console.log("set openedInfo value to " + false) }
+
+    closeTutorial = () => { this.setState({openedInfo: true}); console.log("set openedInfo value to " + false) }
     
 // –––––––––––––––––––––––––––––––––—— END functions ––––––––––––––––––––––––––––––––––——
 
@@ -322,10 +324,10 @@ class App extends Component {
 
         let appClass = "app"
         if (this.props.transitionStart) {
-            appClass += " --active"
+            appClass += " --animated"
         }
         if (!openedInfo) {
-            appClass += " --info"
+            appClass += " --active"
         }
 
         return (
@@ -333,6 +335,7 @@ class App extends Component {
                 <Info 
                     infoData={infoData} 
                     openedInfo={openedInfo}
+                    onTutorialClose={this.closeTutorial} 
                     onInfoClose={this.closeInfo} 
                 />
                 <SearchPanel  

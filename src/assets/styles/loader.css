@@ -108,7 +108,7 @@
 	}
 }
 
-@media screen and (min-width: 650px) {
+@media screen and (min-width: 715px) {
 	.loader-gif {
 		left: 0;
 	}

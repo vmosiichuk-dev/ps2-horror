@@ -228,7 +228,7 @@ p.welcome-subtitle {
 	}
 }
 
-@media screen and (min-width: 650px) {
+@media screen and (min-width: 715px) {
 	.btn.btn-welcome {
 		margin: 0;
 	}

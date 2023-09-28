@@ -3,7 +3,7 @@
     grid-template-columns: 326px;
     grid-template-rows: repeat(auto-fill, 42px);
     justify-content: center;
-    padding: 10px 0 0 0;
+    padding: 12px 0 0 0;
 }
 
 #search-input {
@@ -54,7 +54,7 @@
 .mobile-title {
     margin: 0;
     font-size: 1.1rem;
-    z-index: 30;
+    z-index: 50;
 }
 
 .mobile-title img {
@@ -67,7 +67,7 @@
     align-items: center;
     height: 30px;
     margin: -5px 0 5px 0;
-    z-index: 30;
+    z-index: 50;
 }
 
 .mobile-progress p {
@@ -95,7 +95,7 @@
 }
 
 .btn.btn-menu {
-    z-index: 30;
+    z-index: 50;
     margin: 6px 6px 6px 0;
 }
 
@@ -135,7 +135,7 @@
   
 .btn:hover {
     border-color: #9c94be;
-    box-shadow: 0px 0px 4px #c1bcda70;
+    box-shadow: 0px 0px 8px #c1bcda70;
     transition: box-shadow .1s cubic-bezier(.46,.03,.52,.96), border-color .1s cubic-bezier(.46,.03,.52,.96);
 }
 
@@ -165,7 +165,7 @@
     height: 100%;
 }
 
-@media screen and (min-width: 650px) {
+@media screen and (min-width: 715px) {
     .search-panel {
         grid-template-columns: 330px minmax(28px, 1fr) minmax(210px, 370px);
         padding: 30px 45px 30px 39px;
@@ -188,6 +188,7 @@
     }
     .btn.btn-menu {
         margin: 6px 12px 6px 0;
+        z-index: 40;
     }
     .play.btn {
         margin-left: 12px;
@@ -201,7 +202,7 @@
        /*  display: none; */
     }
     .search-panel {
-        padding: 30px 45px 30px 39px;
+        padding: 30px 65px 30px 59px;
         grid-column: 2;
     }
     .btn-group {
