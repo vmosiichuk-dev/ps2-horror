@@ -141,51 +141,11 @@ input[type=number]::-webkit-outer-spin-button {
 	color: #26e267;
 }
 
-.add-game--return {
-	margin: 0;
-	font-family: "Didact Gothic";
-	position: absolute;
-	top: 94px;
-	left: calc(50% - 112px);
-	height: 30px;
-	line-height: 27px;
-}
-
-.add-game--return.--fade-out {
-	animation: 1.25s return--fade-out cubic-bezier(.46,.03,.52,.96);
-}
-
-.add-game--return.--fade-in {
-	animation: 1.25s return--fade-in cubic-bezier(.46,.03,.52,.96);
-}
-
 .add-item input:focus-visible,
 .add-item input[type="number"]:focus-visible,
 #search-input:focus-visible {
     border-color: transparent;
 }
-
-@keyframes return--fade-out {
-	0% {
-		opacity: 1;
-		transform: translateX(0);
-	}
-	25%, 100% {
-		opacity: 0;
-		transform: translateX(-10px);
-	}
-}
-
-@keyframes return--fade-in {
-	0%, 75% {
-		opacity: 0;
-		transform: translateX(-10px);
-	}
-	100% {
-		transform: translateX(0);
-	}
-}
-
 
 @media screen and (min-width: 715px) {
 	.add-form-wrapper {
@@ -193,13 +153,7 @@ input[type=number]::-webkit-outer-spin-button {
 		border-right: 1px solid #867fa6b5;
 		left: -430px;
 	}
-	.add-game--return {
-		top: 71px;
-	}
 }
 
-@media screen and (min-width: 1025px) {
-	.add-game--return {
-		display: none;
-	}
+@media screen and (min-width: 1181px) {
 }

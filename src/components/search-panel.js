@@ -11,7 +11,6 @@ class SearchPanel extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            addGameToggle: true,
             searchQuery: "",
             searchIconSrc: search,
             wishlist: false
@@ -41,30 +40,45 @@ class SearchPanel extends Component {
         }
     }
 
-    toggleAddGame = () => {
-        this.setState(({ addGameToggle }) => ({ addGameToggle: !addGameToggle }))
-        this.props.onAddGameUpdate(this.state.addGameToggle)
-    }
-
     render() {
         const { searchQuery, searchIconSrc } = this.state
-        const { data, playCount, progressCount, activeFilter, onFilterChange, progressBarStyle, addGameIsActive } = this.props
+        const { data, playCount, progressCount, activeFilter, onFilterChange, onAsideChange, progressBarStyle, addGameIsActive, aboutIsActive } = this.props
+
+        const btnGroupAside = (mediaClass) => {
+            return (
+                <div className={"btn-group--aside" + mediaClass}>
+                    <button type="button" className={aboutBtnClass} onClick={() => onAsideChange("aboutIsActive")} tabIndex={0}>
+                        <span id="btn-about1"></span>
+                        <span id="btn-about2"></span>
+                    </button>
+                    <button type="button" className={addGameBtnClass} onClick={() => onAsideChange("addGameIsActive")} tabIndex={0}>
+                        <img className={addGameImgClass} src={menuImg} alt={addGameMenuAlt}/>
+                    </button>
+                </div>
+            )
+        }
 
         let searchAlt = "Search",
             searchAria = true,
             searchLabel = "Search",
-            menuImgClass = "menu-img",
-            menuBtnClass = "btn btn-menu",
-            menuAlt = "Open add game form",
+            addGameMenuAlt = "Open add game form",
+            addGameImgClass = "menu-img",
+            addGameBtnClass = "btn btn-menu",
+            aboutBtnClass = "btn btn-about",
             tabIndex = 0
 
         if (addGameIsActive) { 
-            menuImgClass += " --active" 
-            menuBtnClass += " --active" 
-            menuAlt = "Close add game form"
+            addGameMenuAlt = "Close add game form"
+            addGameImgClass += " --active" 
+            addGameBtnClass += " --active" 
+            aboutBtnClass += " --inactive" 
             tabIndex = -1
         }
-
+        if (aboutIsActive) {
+            aboutBtnClass += " --active"  
+            addGameBtnClass += " --inactive" 
+            tabIndex = -1           
+        }
         if (searchIconSrc === del) { 
             searchAlt = "Clear search input"
             searchAria = false
@@ -73,7 +87,11 @@ class SearchPanel extends Component {
 
         return (
             <nav className="search-panel">
-                <h1 className="mobile-title"><span className="a11y">PS2 Game Library — </span><img src={ps} alt=""/>Survival Horror Classics</h1>
+                <div className="mobile-title-wrapper">
+                    <img src={ps} width="30px" alt=""/>
+                    <h1 className="mobile-title"><span className="a11y">PS2 Game Library — </span>Survival Horror Classics</h1>
+                    {btnGroupAside(" mobile")}
+                </div>
                 <section className="mobile-progress" aria-label="Gaming progress information">
                     <p><span className="a11y">Games played:</span><span>{playCount}</span> / <span className="a11y">Total games:</span><span>{data.length}</span></p>
                     <div className="progress-bar--container">
@@ -84,9 +102,7 @@ class SearchPanel extends Component {
                 </section>
                 <section className="btn-group" aria-label="Filter controls" aria-describedby="filter-description">
                     <span id="filter-description" className="a11y">Use filters to show games previously marked as played or the ones added to the wishlist. Combine filters and search to look for games under specific filter option.</span> 
-                    <button type="button" className={menuBtnClass} onClick={this.toggleAddGame} tabIndex={0}>
-                        <img className={menuImgClass} src={menuImg} alt={menuAlt}/>
-                    </button>
+                    {btnGroupAside(" desktop")}
                     <button className={`btn ${activeFilter === "all" ? "--active" : ""}`} type="button" tabIndex={tabIndex} onClick={() => onFilterChange("all")}>All games</button>
                     <button className={`play btn ${activeFilter === "play" ? "--active" : ""}`} type="button" tabIndex={tabIndex} onClick={() => onFilterChange("play")}><img className="icon" src={game} alt="" />Played</button>
                     <button className={`btn ${activeFilter === "wish" ? "--active" : ""}`} type="button" tabIndex={tabIndex} onClick={() => onFilterChange("wish")}><img className="icon" src={star} alt="" />Collected</button>

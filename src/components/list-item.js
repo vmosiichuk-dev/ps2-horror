@@ -4,9 +4,9 @@ import star from "../assets/img/star.png"
 import info from "../assets/img/info.png"
 import question from "../assets/img/question.png"
 import overlay from "../assets/img/overlay.png"
-import loose from "../assets/img/loose.png"
-import cib from "../assets/img/cib.png"
-import newg from "../assets/img/newg.png"
+import looseIcon from "../assets/img/loose.png"
+import cibIcon from "../assets/img/cib.png"
+import newgIcon from "../assets/img/newg.png"
 import "../assets/styles/list-item.css"
 
 class ListItem extends Component {
@@ -58,7 +58,7 @@ class ListItem extends Component {
     }
 
     render() {
-        const { slug, title, src, wish, play, onMarkState, onOpenInfo } = this.props
+        const { slug, title, src, wish, play, loose, cib, newg, onMarkState, onOpenInfo } = this.props
         const { delSrc, activeClass, itemButtonsStyle, confirmDeleteAria, priceCategory } = this.state
 
         let listItemClass = "list-item",
@@ -121,19 +121,25 @@ class ListItem extends Component {
                     </span>
                     <div className="list-item-price">
                         <button type="button" className={btnLooseClass} onClick={() => { this.handlePriceClick("loose") }}>
-                            <img className="cd-icon" src={loose} alt="Loose price" />
-                            <span className="usd">$</span>
-                            <span>86</span>
+                            <img className="cd-icon" src={looseIcon} alt="Loose price" />
+                            <div>
+                                {loose !== "n/a" ? <span className="usd">$</span> : null}
+                                <span>{loose}</span>
+                            </div>
                         </button>
                         <button type="button" className={btnCibClass} onClick={() => { this.handlePriceClick("cib") }}>
-                            <img className="cd-icon" src={cib} alt="CIB price" />
-                            <span className="usd">$</span>
-                            <span>124</span>
+                            <img className="cd-icon" src={cibIcon} alt="CIB price" />
+                            <div>
+                                {cib !== "n/a" ? <span className="usd">$</span> : null}
+                                <span>{cib}</span>
+                            </div>
                         </button>
                         <button type="button" className={btnNewgClass} onClick={() => { this.handlePriceClick("newg") }}>
-                            <img className="cd-icon" src={newg} alt="New price" />
-                            <span className="usd">$</span>
-                            <span>299</span>
+                            <img className="cd-icon" src={newgIcon} alt="New price" />
+                            <div>
+                                {newg !== "n/a" ? <span className="usd">$</span> : null}
+                                <span>{newg}</span>
+                            </div>
                         </button>
                     </div>
                 </h2>

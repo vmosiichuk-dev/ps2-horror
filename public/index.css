@@ -27,8 +27,18 @@ button {
 	cursor: pointer;
 }
 
+button[disabled] {
+	opacity: .5;
+}
+
+button[disabled]:hover {
+	box-shadow: none;
+	border-color: #c1bcda70;
+	cursor: default;
+}
+
 input::placeholder {
-	font-size: 1.0625rem;
+	font-size: 1rem;
 }
 
 .hidden {

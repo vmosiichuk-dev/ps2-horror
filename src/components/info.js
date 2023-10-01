@@ -1,5 +1,6 @@
 import { Component } from "react"
 import "../assets/styles/info.css"
+
 import ceroA from "../assets/img/ratings/ceroA.svg"
 import ceroB from "../assets/img/ratings/ceroB.svg"
 import ceroC from "../assets/img/ratings/ceroC.svg"
@@ -14,15 +15,7 @@ import pegi18 from "../assets/img/ratings/pegi18.svg"
 import jpW from "../assets/img/ratings/jpW.webp"
 import usk12 from "../assets/img/ratings/usk12.svg"
 import overlay from "../assets/img/overlay.png"
-import help from "../assets/img/help.svg"
 import menuImg from "../assets/img/plus.svg"
-import game from "../assets/img/game.png"
-import star from "../assets/img/star.png"
-import info from "../assets/img/info.png"
-import del from "../assets/img/del.png"
-import loose from "../assets/img/loose.png"
-import cib from "../assets/img/cib.png"
-import newg from "../assets/img/newg.png"
 
 import abyss from "../assets/img/screenshots/abyss.webp"
 import aliens from "../assets/img/screenshots/aliens.webp"
@@ -628,7 +621,7 @@ class Info extends Component {
     renderAgeRatings = (ratings) => {  
         return ratings.map(rating => {    
             return (
-                <img className="info-bg-age" src={rating} alt=""/>
+                <img key={rating} className="info-bg-age" src={rating} alt=""/>
             )
         }) 
     }
@@ -653,119 +646,63 @@ class Info extends Component {
         )
     }
 
-    renderGameInfo = () => {    
+    render() {      
         const {title, src, rating, genres, summary, companyLabel, companyName, screenshot, websites, ageRatings, releaseDate, yearsPast, ageRatingJp} = this.state
+        const {openedInfo, onInfoClose} = this.props  
 
-        let infoAgeRatingClass = "info-age-rating-container"
+        let infoClass = "info",
+            infoAgeRatingClass = "info-age-rating-container"
+
+        if (openedInfo) infoClass += " --active"
         if (ageRatingJp) infoAgeRatingClass += " --active"
 
         return (
-            <>
-            <div className="info-img-wrapper">   
-                <img className="info-bg-img" src={screenshot} alt=""/>
-            </div>
-            <div className="info-wrapper">   
-                <div className="list-item info-cover-container">
-                    <img className="img-cover info-bg-cover" src={src} alt={title + " — PS2 game cover"} />
-                    <img className="img-overlay" src={overlay} alt="" />
-                </div>
-                <h2 className="info-title">{title}</h2>
-                <div className="info-subtitle-wrapper">
-                    <h3 className="info-subtitle">{releaseDate} ({yearsPast} years ago)</h3>
-                    <div className="rating btn --active">{rating}</div>
-                    <p className="rating-label">Rating</p>
-                </div>
-                {summary !== "" ? <p className="info-description">{summary}</p> : null}
-                {companyName !== "" ? this.renderContainer(companyLabel, companyName) : null}
-                {genres.length > 0 ? this.renderContainer("Genres", genres) : null}                
-                {websites.length > 0 ? this.renderContainer("Links", websites) : null}
-                <div className={infoAgeRatingClass}>
-                    {ageRatings.length > 0 ? this.renderAgeRatings(ageRatings) : null}
-                </div>
-            </div>
-            </>
-        )
-    }
-
-    renderTutorialInfo = () => {  
-        return (
-            <>
-            <div className="info-wrapper tutorial">
-                <article aria-labelledby="about-title">
-                    <h2 id="about-title" className="info-title">About the App</h2>
-                    <p><b>Welcome to our PS2 Horror Collection Manager!</b><br/>This app empowers you to curate and explore your PS2 horror collection, discover new titles, and plan your expenses and collector's journey ahead. Experience the captivating world of survival horror on the PS2, where storytelling, audiovisual design, and emotional engagement converge to create unforgettable experiences.</p>
-                </article>
-                <article aria-labelledby="controls-title">
-                    <h2 id="controls-title" className="info-title">Controls &amp; Tips</h2>
-                    <div className="info-controls">
-                        <h3>Action buttons:</h3>
-                        <div className="info-control-option">
-                            <img className="info-control-icon" src={star} alt=""/>
-                            <p>Add a game to your collection and track your progress by selecting the <b>'All games'</b> filter.<br/>Check the value of your collection under the <b>'Collected'</b> filter.</p>
-                        </div>
-                        <div className="info-control-option">
-                            <img className="info-control-icon" src={game} alt=""/>
-                            <p>Add a game to your list of played games and monitor your progress via the <b>'Played'</b> filter.</p>
-                        </div>
-                        <div className="info-control-option">
-                            <img className="info-control-icon" src={info} alt=""/>
-                            <p>Load game details in the left sidebar.<br/>Return to this window by clicking the <b>'Help'</b> icon in the top right corner of the sidebar.</p>
-                        </div>
-                        <div className="info-control-option">
-                            <img className="info-control-icon" src={del} alt=""/>
-                            <p>Delete a game from the library entirely.<br/>Click twice to confirm your choice.</p>
-                        </div>
-                    </div>
-                    <div className="info-controls">
-                        <h3 className="mt-2">Price buttons:</h3>
-                        <div className="info-control-option">
-                            <img className="info-control-icon price" src={loose} alt=""/>
-                            <p>Loose: Choose this option if you own a the disc itself, without or with damaged casing.</p>
-                        </div>
-                        <div className="info-control-option">
-                            <img className="info-control-icon price" src={cib} alt=""/>
-                            <p>CIB: Choose this option if you own a complete in box used copy of the game.</p>
-                        </div>
-                        <div className="info-control-option">
-                            <img className="info-control-icon price" src={newg} alt=""/>
-                            <p>New: Choose this option if you own a sealed copy of the game or never used in perfect condition.</p>
-                        </div>
-                    </div>
-                </article>
-                <footer>
-                    <p>Copyright 2023</p>
-                    <div className="divider"></div>
-                    <a className="nmd" href="https://madebynomad.dev">madebynomad</a>
-                    <div className="divider"></div>
-                    <a href="https://www.gnu.org/licenses/gpl-3.0.html#license-text">GNU GPLv3</a>
-                </footer>
-            </div>
-            </>  
-        )
-    }
-
-    render() {      
-        const {title} = this.state  
-        const {openedInfo, onInfoClose, onTutorialClose} = this.props  
-
-        let infoClass = "info",
-            stateEmpty = true
-
-        if (title !== "") stateEmpty = false
-        if (openedInfo) infoClass += " --active"
-
-        return (
             <section className={infoClass} aria-label="Game information">
-                <button type="button" className="btn btn-menu" onClick={openedInfo ? onInfoClose : onTutorialClose} tabIndex={0} disabled={stateEmpty}>
-                    {openedInfo 
-                        ? <img className="menu-img --help" src={help} alt="Close game information"/>
-                        : <img className="menu-img --active" src={menuImg} alt="Close game information"/>
-                    }
+                <button type="button" className="btn btn-menu" onClick={onInfoClose} tabIndex={0}>
+                    <img className="menu-img --active" src={menuImg} alt="Close game information"/>
                 </button>
-                {openedInfo ? this.renderGameInfo() : this.renderTutorialInfo()}
+                <div className="info-img-wrapper">   
+                    <img className="info-bg-img" src={screenshot} alt=""/>
+                </div>
+                <div className="info-wrapper">   
+                    <div className="list-item info-cover-container">
+                        <img className="img-cover info-bg-cover" src={src} alt={title + " — PS2 game cover"} />
+                        <img className="img-overlay" src={overlay} alt="" />
+                    </div>
+                    <h2 className="info-title">{title}</h2>
+                    <div className="info-subtitle-wrapper">
+                        <h3 className="info-subtitle">{releaseDate} ({yearsPast} years ago)</h3>
+                        <div className="rating btn --active">{rating}</div>
+                        <p className="rating-label">Rating</p>
+                    </div>
+                    {summary !== "" ? <p className="info-description">{summary}</p> : null}
+                    {companyName !== "" ? this.renderContainer(companyLabel, companyName) : null}
+                    {genres.length > 0 ? this.renderContainer("Genres", genres) : null}                
+                    {websites.length > 0 ? this.renderContainer("Links", websites) : null}
+                    <div className={infoAgeRatingClass}>
+                        {ageRatings.length > 0 ? this.renderAgeRatings(ageRatings) : null}
+                    </div>
+                </div>
             </section>
         )
     }
 }
 
 export default Info
+
+// TODO
+
+// Finish styles for Info
+
+// ListItem buttons visible on mobile?
+
+// Move Played progress to Played filter
+// All Games - show Collected progress
+// Collected - show combined price from selected price options
+
+// Move item price border to item state
+
+// Ability to change rating, price
+
+// Deleted games written into deletedGames state
+// When adding - search deleted games

@@ -33,12 +33,7 @@
         display: grid;
         grid-template-rows: 145px calc(100dvh - 145px);
     }
-    #main {
-        padding: 0 45px 0 39px;
-    }
-}
-
-@media screen and (min-width: 1025px) {
+    
     .app.--active {
         max-width: none;
         margin: 0;
@@ -47,5 +42,9 @@
     #main {
         grid-column: 2;
         grid-row: 2;
+        padding: 0 45px 0 39px;
     }
+}
+
+@media screen and (min-width: 1181px) {
 }

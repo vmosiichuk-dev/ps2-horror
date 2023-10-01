@@ -35,38 +35,22 @@ class AddGame extends Component {
     }
 
     render() {
-        const { addedRating, 
-                addedTitle, 
-                addFormClass, 
-                addFormMessage, 
-                onRatingChange, 
-                onTitleChange, 
-                onRatingDecr, 
-                onRatingIncr,
-                addGameIsActive, 
-                onAdd } = this.props 
+        const { addedRating, addedTitle, addFormClass, addFormMessage, onRatingChange, onTitleChange, onRatingDecr, onRatingIncr, addGameIsActive, onAdd } = this.props 
 
-        let returnClass = "add-game--return",
-            formClass = "add-form-wrapper",
+        let formClass = "add-form-wrapper",
             tabIndex = -1,
             ariaHidden = true
     
         if (addGameIsActive) { 
-            returnClass += " --fade-in" 
             formClass += " --active" 
             tabIndex = 0
             ariaHidden = false
-        }
-
-        if (!addGameIsActive) { 
-            returnClass += " --fade-out" 
         }
 
         return (
             <aside className={formClass} tabIndex={-1} ref={this.addGameRef}>  
                 <div className="add-item" aria-hidden={ariaHidden}>
                     <span className="a11y" id="add-game-description">To add a game to the library provide a game title and rating of the game. Title should be at least 4 characters long and rating should be a number from 0 to 100. You can decrease and increase an input for rating by 1 using respective buttons. Both fields are required to submit a form.</span>
-                    <p className={returnClass} aria-hidden={true}>Return to library</p>
                     <h3>Add a game to the list</h3>
                     <form className="add-form" onSubmit={onAdd} aria-label="Add game form" aria-describedby="add-game-description">
                         <label htmlFor="add-game-title" className="add-title--label">Game title (at least 4 characters)</label>

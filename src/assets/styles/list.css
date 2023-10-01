@@ -17,7 +17,7 @@
 	}
 }
 
-@media screen and (min-width: 1025px) {
+@media screen and (min-width: 1181px) {
     .list {
         justify-content: space-between;
     }

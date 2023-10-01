@@ -21,14 +21,18 @@
     display: grid;
     align-items: center;
     justify-content: center;
-    height: calc(100% + 26px);
-    width: calc(100% + 26px);
+    /* height: calc(100% + 26px); */
+    /* width: calc(100% + 26px); */
     transition: opacity .2s cubic-bezier(.46,.03,.52,.96);
     grid-template-columns: 26px 1fr 26px;
     grid-template-rows: 1fr 26px 18px 26px 5px 26px 17px 26px 1fr;
-    margin: -13px;
+    /* margin: -13px; */
     position: relative;
     z-index: 30;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    border-radius: 6px;
 }
 
 .list-item-buttons:hover {
@@ -63,6 +67,16 @@
     position:relative;
     justify-self: center;
     background-color: transparent;
+}
+
+.btn-sm.btn-wish,
+.btn-sm.btn-play {
+    margin-right: -26px;
+}
+
+.btn-sm.btn-info,
+.btn-sm.btn-delete {
+    margin-left: -26px;
 }
 
 .btn-sm.btn-wish {
@@ -185,10 +199,11 @@
 }
 
 .list-item-price {
-    width: 100%;
+    width: calc(100% + 8px);
     display: flex;
     justify-content: space-between;
     font-size: .9375rem;
+    margin: 0 -4px;
 }
 
 .list-item-price .btn {
@@ -196,13 +211,15 @@
     margin: 0 -5px;
     display: flex;
     align-items: flex-end;
-    padding: 0 2px 2px;
+    padding: 1px 2px 3px;
     border-radius: 4px;
     border-width: 1px;
     border-style: solid;
     background: #010e257d;
     color: #b8cbcbdb;
     border-color: #000;
+    min-width: 45px;
+    justify-content: space-evenly;
 }
 
 .cd-icon {
@@ -223,7 +240,7 @@
 .usd {
     position: relative;
     margin: 0 1px 0 2px;
-    top: -2px;
+    top: -1px;
     font-size: .5rem;
 }
 
@@ -299,6 +316,16 @@
         height: 34px;
     }
 
+    .btn-sm.btn-wish,
+    .btn-sm.btn-play {
+        margin-right: -34px;
+    }
+    
+    .btn-sm.btn-info,
+    .btn-sm.btn-delete {
+        margin-left: -34px;
+    }
+
     .list-item-status-container {
         top: 12px;
         right: -19px;
@@ -310,11 +337,11 @@
     }
 
     .list-item-buttons {
-        height: calc(100% + 34px);
-        width: calc(100% + 34px);
+        /* height: calc(100% + 34px); */
+        /* width: calc(100% + 34px); */
         grid-template-columns: 34px 1fr 34px;
         grid-template-rows: 1fr 34px 16px 34px 18px 34px 16px 34px 1fr;
-        margin: -17px;
+        /* margin: -17px; */
     }
 
     .delete-p {
@@ -330,8 +357,15 @@
         height: calc(100% - 22px);
     }
 
+    .list-item-price {
+        width: 100%;
+        margin: 0;
+    }
+
     .list-item-price .btn {
+        padding: 0 2px 2px;
         font-size: .9375rem;
+        min-width: 50px;
     }
 
     .usd {
