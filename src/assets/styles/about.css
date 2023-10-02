@@ -24,6 +24,7 @@
 	bottom: 0;
 	background: linear-gradient(to bottom, transparent, #0008 40%);
 	font-size: .8125rem;
+	overflow-y: scroll;
 }
 
 .about-wrapper p {
@@ -129,6 +130,24 @@ footer a.nmd {
 
 .about .menu-img {
 	transition: none;
+}
+
+.prices-article {
+	padding-bottom: 1.875rem;
+}
+
+.prices-title {
+	margin-bottom: 0;
+}
+
+.prices-subtitle {
+	margin: .875rem 0 .25rem;
+}
+
+.about-title,
+.about-controls:last-of-type,
+.about-control-option:last-of-type {
+	margin-bottom: .75rem;
 }
 
 @media screen and (max-width: 1181px) {
