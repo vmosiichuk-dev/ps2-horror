@@ -637,7 +637,7 @@ class Info extends Component {
             })
         }
         return (
-            <div className="info-category">
+            <div className={"info-category " + title.toLowerCase()}>
                 <h3 className="info-category-title">{title}</h3>
                 <div className="info-category-item-wrapper">
                     {typeof state === "string" ? <span key={state} className="info-span">{state}</span> : renderElements()}
@@ -664,6 +664,7 @@ class Info extends Component {
                 <div className="info-img-wrapper">   
                     <img className="info-bg-img" src={screenshot} alt=""/>
                 </div>
+                <div className="info-tablet-bg"></div>
                 <div className="info-wrapper">   
                     <div className="list-item info-cover-container">
                         <img className="img-cover info-bg-cover" src={src} alt={title + " — PS2 game cover"} />
