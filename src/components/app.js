@@ -20,7 +20,10 @@ class App extends Component {
             addedRating: "",
             addedTitle: "",
             apiDataLoaded: false,
+            searchDataLoaded: false,
             data: [],
+            searchData: [],
+            searchRadioValue: "",
             infoData: {
                 genres: [],
                 involved_companies: [],
@@ -49,91 +52,16 @@ class App extends Component {
         }
     }
 
-// –––––––––––––––––––––––––––––––– <AddGame /> functions ––––––––––––––––––––––––––––––––––
+// –––––––––––––––––––––––––––––––– <Info /> functions ––––––––––––––––––––––––––––––––––
+
+    openInfo = (slug) => this.setState(prevState => {
+        const newData = prevState.data.find(item => item.slug === slug)
+        return { infoData: newData, openedInfo: true, aboutIsActive: false, addGameIsActive: false }
+    })  
+
+    closeInfo = () => this.setState({openedInfo: false})
     
-    handleRatingChange = (e) => {
-        if (e.target.value < 0 || e.target.value === "") { 
-            this.setState({ addedRating: 0 })
-        } else if (e.target.value > 100) { 
-            this.setState({ addedRating: 100 })
-        } else { 
-            this.setState({ addedRating: parseInt(e.target.value.replace(/\D/,"")) }) 
-        }
-    }
-
-    handleTitleChange = (e) => { this.setState({ addedTitle: e.target.value }) }
-
-    decRating = (e) => {
-        e.preventDefault()
-        if (this.state.addedRating <= 0 || this.state.addedRating === "") {
-            this.setState({ addedRating: 0 })
-        } else if (this.state.addedRating > 100) {
-            this.setState({ addedRating: 100 })
-        } else {
-            this.setState({ addedRating: this.state.addedRating - 1 })
-        }
-    }
-
-    incRating = (e) => {
-        e.preventDefault()
-        if (this.state.addedRating >= 100) {
-            this.setState({ addedRating: 100 })
-        } else if (this.state.addedRating === "") {
-            this.setState({ addedRating: 1 })
-        } else {
-            this.setState({ addedRating: this.state.addedRating + 1 })
-        }
-    }
-
-    addItem = (e) => {
-        e.preventDefault()
-        const rating = this.state.addedRating,
-              title = this.state.addedTitle,
-              source = "user-added",
-              wish = false,
-              play = false,
-              error = "Enter rating and game title. Title should be at least 4 characters.",
-              titleError = "This game title already exists. Please select a unique title.",
-              success = "New game successfully added. Manage your gaming progress."
-
-        const newItem = {wish, play, rating, title, source}
-
-        const titleValidated = this.state.data.some(item => item.title.toLowerCase() === title.toLowerCase())
-
-        if (titleValidated) {
-            this.setState({ addFormMessage: titleError, addFormClass: "add-message" })
-            this.resetAddFormClass("", error)
-        } else if (rating !== "" && title !== "" && title.length >= 4 && !titleValidated) {
-            this.setState(prevState => {
-                const newData = [newItem, ...prevState.data],
-                      newTotalCount = newData.length,
-                      newProgressCount = Math.round(this.state.playCount / newTotalCount * 100) + "%",
-                      newProgressBarStyle = {
-                          width: newProgressCount,
-                          borderRadius: newProgressCount === "100%" ? "4px" : "4px 0 0 4px"
-                      }
-
-                return { data: newData, 
-                         progressCount: newProgressCount, 
-                         totalCount: newTotalCount, 
-                         addFormMessage: success, 
-                         addFormClass: "add-message success", 
-                         addedRating: "", 
-                         addedTitle: "",
-                         progressBarStyle: newProgressBarStyle }
-            })  
-            this.resetAddFormClass("success", error)
-        } else {
-            this.setState({ addFormMessage: error, addFormClass: "add-message" })
-            this.resetAddFormClass("", error)
-        }
-    }
-
-    resetAddFormClass = (str, error) => {
-        setTimeout(() => {
-            this.setState({ addFormClass: `add-message ${str} invisible`, addFormMessage: error })
-        }, 8000)
-    }
+    closeTutorial = () => this.setState({openedInfo: true})
 
 // ––––––––––––––––––––––––––––– <SearchPanel /> functions ––––––––––––––––––––––––––––––
 
@@ -335,51 +263,59 @@ class App extends Component {
         {title: "Zombie Hunters 2", prices: {loose: "n/a", cib: "100", newg: "135"}},
     ]
 
+    filterGame = (game) => {
+        let rating = "N/A"
+
+        if (game.total_rating) {
+            rating = Math.round(game.total_rating)
+        } else if (game.rating) {
+            rating = Math.round(game.rating)
+        } else if (game.aggregated_rating) {
+            rating = Math.round(game.aggregated_rating)
+        }
+
+        delete game.total_rating
+        delete game.rating
+        delete game.aggregated_rating
+        
+        let gamePrice = this.gamePrices.find(item => item.title === game.name)
+        if (gamePrice === undefined) gamePrice = {prices: { loose: 'n/a', cib: 'n/a', newg: 'n/a' }}
+
+        const src = "https://images.igdb.com/igdb/image/upload/t_cover_big/" + game.cover.image_id + ".jpg",
+              filters = { wish: false, play: false },
+              gameData = { ...game, rating: rating, title: game.name, src: src, ...gamePrice.prices }
+
+        delete gameData.name
+        delete gameData.cover
+
+        return Object.assign(filters, gameData)
+    }
+
 	iGDB = new IGDB()
+
     handleWelcomeClick = async () => {
         try {
             const ratedGames = [],
                   notRatedGames = [],
+                  body = "fields genres.name, name, total_rating, rating, aggregated_rating, cover.image_id, first_release_date, involved_companies.developer, involved_companies.company.name, screenshots.image_id, slug, summary, websites.category, websites.url; limit 88; where platforms = (8) & genres != (4,10,16,34) & themes = (19,21) & themes != (35,39) & keywords != (5340) & player_perspectives != (4,5) & franchises != (463,824) & id != (3837,2862,6200,5143,2861,210296,43614,11286,5868,43262,43264,20829,1159,43301,253324,85965,172551,91643,43633,43210,49405,132163,136,260797,77219,127959,20640,37045,144966,203260,13901,24096,64108,72157,73012); sort total_rating desc;",
                   get = await this.iGDB.getToken(),
-                  games = await this.iGDB.getGames(get.access_token)
+                  games = await this.iGDB.getGames(get.access_token, body)
 
             games.forEach(game => {
-                let rating = "N/A"
-
-                if (game.total_rating) {
-                    rating = Math.round(game.total_rating)
-                } else if (game.rating) {
-                    rating = Math.round(game.rating)
-                } else if (game.aggregated_rating) {
-                    rating = Math.round(game.aggregated_rating)
-                }
-
-                delete game.total_rating
-                delete game.rating
-                delete game.aggregated_rating
-
-                const gamePrice = this.gamePrices.find(item => item.title === game.name)
-                console.log(gamePrice)
-                console.log(gamePrice.prices)
-                
-                const src = "https://images.igdb.com/igdb/image/upload/t_cover_big/" + game.cover.image_id + ".jpg",
-                      filters = { wish: false, play: false },
-                      gameData = { ...game, rating: rating, title: game.name, src: src, ...gamePrice.prices }
-
-                delete gameData.name
-                delete gameData.cover
-
-                const gameFiltered = Object.assign(filters, gameData)
+                const gameFiltered = this.filterGame(game)
                 if (gameFiltered.rating === "N/A") {
                     notRatedGames.push(gameFiltered)
                 } else {
                     ratedGames.push(gameFiltered)
                 }
             })
+
             const allGames = [...ratedGames, ...notRatedGames]
             const initialData = allGames.find(item => item.slug === "silent-hill-2")
+
             this.setState({ data: allGames, apiDataLoaded: true, infoData: initialData })
             this.props.onStateChange("transitionStart")
+
             const setTimeoutPromise = () => new Promise(() => {
                 setTimeout(() => {
                     this.toggleFilter("all")
@@ -398,17 +334,84 @@ class App extends Component {
         }
     }
 
-    openInfo = (slug) => {
-        this.setState(prevState => {
-            const newData = prevState.data.find(item => item.slug === slug)
-            console.log("set openedInfo value to " + true)
-            return { infoData: newData, openedInfo: true, aboutIsActive: false, addGameIsActive: false }
-        })  
+// –––––––––––––––––––––––––––––––– <AddGame /> functions ––––––––––––––––––––––––––––––––––
+    
+    handleTitleChange = (e) => { this.setState({ addedTitle: e.target.value }) }
+
+    resetAddFormClass = (str, error) => {
+        let isActive = true
+        if (str === "success") isActive = false
+        setTimeout(() => {
+            this.setState({ addFormClass: `add-message ${str} invisible`, addFormMessage: error, addGameIsActive: isActive })
+        }, 5000)
+    }
+
+    handleSearchRadioChange = (e) => this.setState({searchRadioValue: e.target.value})
+
+    handleAddGameSearch = async (e) => {
+        e.preventDefault()
+        try {
+            const title = this.state.addedTitle,
+                  body = `search "${title}"; fields id,name; where platforms = (8); limit 299;`,
+                  get = await this.iGDB.getToken(),
+                  games = await this.iGDB.getGames(get.access_token, body),
+                  error = "Enter game title. Title should be at least 4 characters."
+
+            if (title !== "" && title.length >= 4) {
+                this.setState({ searchData: games, searchDataLoaded: true, addedTitle: "" })
+            } else {
+                this.setState({ addFormMessage: error, addFormClass: "add-message" })
+                this.resetAddFormClass("", error)
+            }
+        } catch (error) {
+            console.error("Error fetching data from the API:", error)
+        }
+    }  
+
+    handleAddGameSubmit = async (e) => {
+        e.preventDefault()
+        try {
+            const radioValue = this.state.searchRadioValue,
+                  body = `fields genres.name, name, total_rating, rating, aggregated_rating, cover.image_id, first_release_date, involved_companies.developer, involved_companies.company.name, screenshots.image_id, slug, summary, websites.category, websites.url; where id = ${radioValue};`,
+                  get = await this.iGDB.getToken(),
+                  game = await this.iGDB.getGames(get.access_token, body),
+                  gameFiltered = this.filterGame(game[0]),
+                  error = "Enter game title. Title should be at least 4 characters.",
+                  titleError = "This game already exists in your library. Please select a unique game.",
+                  success = "New game successfully added. Manage your collection progress."
+
+            const titleValidated = this.state.data.some(item => item.title.toLowerCase() === gameFiltered.title.toLowerCase())
+
+            if (titleValidated) {
+                this.setState({ addFormMessage: titleError, addFormClass: "add-message" })
+                this.resetAddFormClass("", error)
+            } else if (radioValue !== "" && !titleValidated) {
+                this.setState(prevState => {
+                    const newData = [gameFiltered, ...prevState.data],
+                          newTotalCount = newData.length,
+                          newProgressCount = Math.round(this.state.playCount / newTotalCount * 100) + "%",
+                          newProgressBarStyle = {width: newProgressCount, borderRadius: newProgressCount === "100%" ? "4px" : "4px 0 0 4px"}
+
+                    return { data: newData, 
+                             progressCount: newProgressCount, 
+                             totalCount: newTotalCount, 
+                             addFormMessage: success, 
+                             addFormClass: "add-message success", 
+                             addedTitle: "",
+                             progressBarStyle: newProgressBarStyle,
+                             searchData: [],
+                             searchDataLoaded: false, 
+                             searchRadioValue: "" }
+                })  
+                this.resetAddFormClass("success", error)
+            } else {
+                this.setState({ addFormMessage: error, addFormClass: "add-message" })
+                this.resetAddFormClass("", error)
+            }
+        } catch (error) {
+            console.error("Error fetching data from the API:", error)
+        }
     } 
-
-    closeInfo = () => { this.setState({openedInfo: false}); console.log("set openedInfo value to " + false) }
-
-    closeTutorial = () => { this.setState({openedInfo: true}); console.log("set openedInfo value to " + false) }
     
 // –––––––––––––––––––––––––––––––––—— END functions ––––––––––––––––––––––––––––––––––——
 
@@ -428,7 +431,9 @@ class App extends Component {
                 aboutIsActive,
                 delSrc,
                 activeFilter,
-                progressBarStyle } = this.state
+                progressBarStyle,
+                searchData,
+                searchDataLoaded } = this.state
 
         const renderData = this.searchGame(data, searchQuery)
         const filteredData = renderData.filter(item => {
@@ -471,7 +476,6 @@ class App extends Component {
                 />
                 <AddGame 
                     addedRating={addedRating} 
-                    addedTitle={addedTitle} 
                     addFormClass={addFormClass}
                     addFormMessage={addFormMessage}
                     addGameIsActive={addGameIsActive}
@@ -480,6 +484,12 @@ class App extends Component {
                     onRatingDecr={this.decRating} 
                     onRatingIncr={this.incRating} 
                     onAdd={this.addItem} 
+                    addedTitle={addedTitle} 
+                    searchData={searchData}
+                    searchDataLoaded={searchDataLoaded}
+                    onSearchRadioChange={this.handleSearchRadioChange}
+                    onAddGameSearch={this.handleAddGameSearch} 
+                    onAddGameSubmit={this.handleAddGameSubmit} 
                 />
                 <main className="list-wrapper" id="main"> 
                     {searchError}  
