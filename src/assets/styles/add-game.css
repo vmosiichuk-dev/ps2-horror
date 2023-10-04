@@ -16,11 +16,11 @@
     left: 0;
 }
   
-.add-item h3 {
-	max-width: 250px;
-	font-size: 1.75rem;
+.add-item .addgame-title {
+	font-size: 1.25rem;
 	margin: 2.5rem 0 1.5rem 0;
 	text-align: center;
+	font-family: "Unbounded";
 }
 
 .add-form {
@@ -32,6 +32,7 @@
 	margin-bottom: .25rem;
 	grid-row: 1;
 	grid-column: 1;
+	text-align: center;
 }
 
 .add-item input {
@@ -40,28 +41,13 @@
 	border-radius: 4px;
 	color: var(--accent);
 	background: transparent;    
-	font-size: 1.125rem;
+	font-size: 1rem;
 	transition: box-shadow .1s cubic-bezier(.46,.03,.52,.96), border-color .1s cubic-bezier(.46,.03,.52,.96);
 	border: 1px solid #867fa6b5;
 	padding: 4px 12px;
 	text-align: center;
 	transition: outline-color .2s cubic-bezier(.46,.03,.52,.96), border-color .2s cubic-bezier(.46,.03,.52,.96), border-radius .15s cubic-bezier(.46,.03,.52,.96);
 	width: 204px;
-}
-
-.add-item input[type="number"] {
-	width: calc(100% - 26px);
-	border-radius: 0;
-	grid-row: 2;
-	margin: 0;
-	appearance: textfield;
-	-moz-appearance: textfield;
-	-webkit-appearance: textfield;
-}
-
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button { 
-	-webkit-appearance: none;
 }
 
 .add-form .btn {
@@ -73,39 +59,7 @@ input[type=number]::-webkit-outer-spin-button {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	width: 340px;
-}
-
-.add-rating-wrapper {
-	margin: 10px 0;
-	display: grid;
-	width: 230px;
-	grid-template-columns: 42px 1fr 42px;
-}
-
-.add-rating--label {
-	font-family: "Didact Gothic";
-	align-self: start;
-	margin-left: 3px;
-	grid-column: 1 / span 3;
-	margin-bottom: 6px;
-}
-
-.add-rating-wrapper .btn {
-	width: 42px;
-	height: 42px;
-	margin: 0;
-	padding: 0;
-	font-family: "Unbounded";
-	grid-row: 2;
-}
-
-.btn.btn-increase {
-    border-radius: 0 4px 4px 0;
-}
-
-.btn.btn-decrease {
-    border-radius: 4px 0 0 4px;
+	width: 280px;
 }
 
 .btn.btn-add-submit {
@@ -133,7 +87,6 @@ input[type=number]::-webkit-outer-spin-button {
 	font-family: "Didact Gothic";
 	color: #f89c0b;
 	transition: .5s opacity cubic-bezier(.46,.03,.52,.96);
-	width: 216px;
 	margin-top: 1rem;
 	margin-bottom: 0;
 }
@@ -143,7 +96,6 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .add-item input:focus-visible,
-.add-item input[type="number"]:focus-visible,
 #search-input:focus-visible {
     border-color: transparent;
 }
@@ -186,7 +138,7 @@ input[type=number]::-webkit-outer-spin-button {
 	display: grid;
 	width: 100%;
 	gap: .5rem;
-	max-height: 53dvh;
+	max-height: 40dvh;
  	overflow-y: scroll;
 }
 
@@ -213,7 +165,21 @@ input[type=number]::-webkit-outer-spin-button {
 		border-right: 1px solid #867fa6b5;
 		left: -430px;
 	}
-}
 
-@media screen and (min-width: 1181px) {
+	.add-item, 
+	.add-form {
+		width: 340px;
+	}
+	
+	.add-item .addgame-title {
+		font-size: 1.5rem;
+	}
+
+	.add-item input {
+		font-size: 1.125rem;
+	}
+
+	.searchdata {
+		max-height: 53dvh;
+	}
 }

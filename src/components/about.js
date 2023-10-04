@@ -48,13 +48,6 @@ class About extends Component {
 
         return (
             <aside className={aboutClass} tabIndex={-1} ref={this.aboutRef}>
-                {/* <button type="button" className="btn btn-menu" onClick={onTutorialClose} tabIndex={0} disabled={}>
-                    <img className={menuImgClass} src={menuImg} alt={menuAlt}/>
-                    {aboutIsActive 
-                        ? <img className="menu-img --help" src={help} alt="Close game information"/>
-                        : <img className="menu-img --active" src={menuImg} alt="Close game information"/>
-                    }
-                </button> */}
                 <div className="about-wrapper">
                     <article className="about-article" aria-labelledby="about-title">
                         <h2 id="about-title" className="about-title">About the App</h2>
@@ -115,9 +108,9 @@ class About extends Component {
                     <footer>
                         <p>Copyright 2023</p>
                         <div className="divider"></div>
-                        <a className="nmd" href="https://madebynomad.dev">madebynomad</a>
+                        <a className="nmd" href="https://madebynomad.dev" target="_blank" rel="noopener noreferrer">madebynomad</a>
                         <div className="divider"></div>
-                        <a href="https://www.gnu.org/licenses/gpl-3.0.html#license-text">GNU GPLv3</a>
+                        <a href="https://www.gnu.org/licenses/gpl-3.0.html#license-text" target="_blank" rel="noopener noreferrer">GNU GPLv3</a>
                     </footer>
                 </div>
             </aside>

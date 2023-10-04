@@ -14,10 +14,9 @@ class App extends Component {
         this.state = {
             activeFilter: "all",
             addFormClass: "add-message invisible",
-            addFormMessage: "Enter rating and game title. Title should be at least 4 characters.",
+            addFormMessage: "Enter a game title. Title should be at least 4 characters.",
             addGameIsActive: false,
             aboutIsActive: false,
-            addedRating: "",
             addedTitle: "",
             apiDataLoaded: false,
             searchDataLoaded: false,
@@ -40,15 +39,20 @@ class App extends Component {
             },
             openedInfo: false,
             delSrc: del,
+            searchQuery: "",
+            totalCount: 88,
             playCount: 0,
-            progressBarStyle: {
+            progressPlayCount: "0%",
+            progressbarPlayStyle: {
                 width: "0%",
                 borderRadius: "4px 0 0 4px"
             },
-            progressCount: "0%",
-            searchQuery: "",
-            totalCount: 54,
             wishCount: 0,
+            progressWishCount: "0%",
+            progressbarWishStyle: {
+                width: "0%",
+                borderRadius: "4px 0 0 4px"
+            },
         }
     }
 
@@ -101,21 +105,52 @@ class App extends Component {
             })
     
             let newPlayCount = prevState.playCount,
-                newWishCount = prevState.wishCount
+                newProgressPlayCount = prevState.progressPlayCount,
+                newProgressbarPlayStyle = prevState.progressbarPlayStyle
+
+            let newWishCount = prevState.wishCount,
+                newProgressWishCount = prevState.progressWishCount,
+                newProgressbarWishStyle = prevState.progressbarWishStyle
 
             if (state === "play") {
                 newPlayCount = newData.filter(item => item.play).length
+                const progress = this.countProgress(newPlayCount)
+                newProgressPlayCount = progress[0]
+                newProgressbarPlayStyle = progress[1]
             } else {
                 newWishCount = newData.filter(item => item.wish).length
+                const progress = this.countProgress(newWishCount)
+                newProgressWishCount = progress[0]
+                newProgressbarWishStyle = progress[1]
             }
 
-            const newProgressCount = Math.round(newPlayCount / this.state.totalCount * 100) + "%",
-                  newProgressBarStyle = {
-                      width: newProgressCount,
-                      borderRadius: newProgressCount === "100%" ? "4px" : "4px 0 0 4px"
-                  }
-           
-            return { data: newData, playCount: newPlayCount, progressCount: newProgressCount, wishCount: newWishCount, progressBarStyle: newProgressBarStyle }
+            return { data: newData, 
+                     playCount: newPlayCount, progressPlayCount: newProgressPlayCount, progressbarPlayStyle: newProgressbarPlayStyle,
+                     wishCount: newWishCount, progressWishCount: newProgressWishCount, progressbarWishStyle: newProgressbarWishStyle }
+        })  
+    }
+
+    countProgress = (newCount) => {
+        let result = []
+        const newProgressCount = Math.round(newCount / this.state.totalCount * 100) + "%",
+              newProgressbarStyle = {
+                  width: newProgressCount,
+                  borderRadius: newProgressCount === "100%" ? "4px" : "4px 0 0 4px"
+              }
+
+        result.push(newProgressCount, newProgressbarStyle)
+        return result
+    }   
+
+    handlePriceCategoryChange = (slug, category) => {
+        this.setState(prevState => {
+            const newData = prevState.data.map(item => {
+                if (item.slug === slug) { return { ...item, priceCategory: category } }
+                return item
+            })
+            console.log(prevState.data)
+            console.log(newData)
+            return { data: newData }
         })  
     }
 
@@ -157,8 +192,8 @@ class App extends Component {
             if (activeFilter === "wish" && wishCount === 0) {
                 return (
                     <p className="search-error --active" role="status">
-                    There are no games in your wishlist yet.<br />
-                    To add a game to the wishlist, hover on a game card and press a star button.
+                    There are no games in your collection yet.<br />
+                    To add a game to the collection, hover on a game card and press a star button.
                     </p>
                 )
                 }
@@ -279,11 +314,11 @@ class App extends Component {
         delete game.aggregated_rating
         
         let gamePrice = this.gamePrices.find(item => item.title === game.name)
-        if (gamePrice === undefined) gamePrice = {prices: { loose: 'n/a', cib: 'n/a', newg: 'n/a' }}
+        if (gamePrice === undefined) gamePrice = {prices: { loose: "n/a", cib: "n/a", newg: "n/a" }}
 
         const src = "https://images.igdb.com/igdb/image/upload/t_cover_big/" + game.cover.image_id + ".jpg",
               filters = { wish: false, play: false },
-              gameData = { ...game, rating: rating, title: game.name, src: src, ...gamePrice.prices }
+              gameData = { ...game, rating: rating, title: game.name, src: src, ...gamePrice.prices, priceCategory: "" }
 
         delete gameData.name
         delete gameData.cover
@@ -342,14 +377,20 @@ class App extends Component {
         let isActive = true
         if (str === "success") isActive = false
         setTimeout(() => {
-            this.setState({ addFormClass: `add-message ${str} invisible`, addFormMessage: error, addGameIsActive: isActive })
+            this.setState({ addFormClass: `add-message ${str} invisible`, addGameIsActive: isActive })
+            this.resetAddFormMessage(error)
         }, 5000)
+    }
+
+    resetAddFormMessage = (error) => {
+        setTimeout(() => {
+            this.setState({  addFormMessage: error })
+        }, 750)
     }
 
     handleSearchRadioChange = (e) => this.setState({searchRadioValue: e.target.value})
 
-    handleAddGameSearch = async (e) => {
-        e.preventDefault()
+    handleAddGameSearch = async () => {
         try {
             const title = this.state.addedTitle,
                   body = `search "${title}"; fields id,name; where platforms = (8); limit 299;`,
@@ -376,9 +417,9 @@ class App extends Component {
                   get = await this.iGDB.getToken(),
                   game = await this.iGDB.getGames(get.access_token, body),
                   gameFiltered = this.filterGame(game[0]),
-                  error = "Enter game title. Title should be at least 4 characters.",
+                  error = "Enter a game title. Title should be at least 4 characters.",
                   titleError = "This game already exists in your library. Please select a unique game.",
-                  success = "New game successfully added. Manage your collection progress."
+                  success = "New game successfully added. You can now manage your collection."
 
             const titleValidated = this.state.data.some(item => item.title.toLowerCase() === gameFiltered.title.toLowerCase())
 
@@ -420,18 +461,19 @@ class App extends Component {
                 infoData, 
                 openedInfo,
                 searchQuery,
-                addedRating, 
                 addedTitle, 
                 playCount, 
+                progressPlayCount,
+                progressbarPlayStyle,
                 wishCount, 
-                progressCount, 
+                progressWishCount,
+                progressbarWishStyle,
                 addFormClass,
                 addFormMessage,
                 addGameIsActive,
                 aboutIsActive,
                 delSrc,
                 activeFilter,
-                progressBarStyle,
                 searchData,
                 searchDataLoaded } = this.state
 
@@ -461,9 +503,11 @@ class App extends Component {
                     data={data} 
                     filteredData={filteredData} 
                     playCount={playCount}
+                    progressPlayCount={progressPlayCount}
+                    progressbarPlayStyle={progressbarPlayStyle}
                     wishCount={wishCount}
-                    progressCount={progressCount}
-                    progressBarStyle={progressBarStyle}
+                    progressWishCount={progressWishCount}
+                    progressbarWishStyle={progressbarWishStyle}
                     addGameIsActive={addGameIsActive}
                     aboutIsActive={aboutIsActive}
                     activeFilter={activeFilter}
@@ -475,18 +519,13 @@ class App extends Component {
                     aboutIsActive={aboutIsActive}
                 />
                 <AddGame 
-                    addedRating={addedRating} 
+                    addedTitle={addedTitle} 
                     addFormClass={addFormClass}
                     addFormMessage={addFormMessage}
                     addGameIsActive={addGameIsActive}
-                    onRatingChange={this.handleRatingChange} 
-                    onTitleChange={this.handleTitleChange} 
-                    onRatingDecr={this.decRating} 
-                    onRatingIncr={this.incRating} 
-                    onAdd={this.addItem} 
-                    addedTitle={addedTitle} 
                     searchData={searchData}
                     searchDataLoaded={searchDataLoaded}
+                    onTitleChange={this.handleTitleChange} 
                     onSearchRadioChange={this.handleSearchRadioChange}
                     onAddGameSearch={this.handleAddGameSearch} 
                     onAddGameSubmit={this.handleAddGameSubmit} 
@@ -499,6 +538,7 @@ class App extends Component {
                         onDelete={this.deleteItem} 
                         onMarkState={this.markState} 
                         onOpenInfo={this.openInfo} 
+                        onPriceCategoryChange={this.handlePriceCategoryChange}
                     />
                 </main>
             </div>

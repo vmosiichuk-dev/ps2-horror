@@ -36,6 +36,7 @@ import kingsfield from "../assets/img/screenshots/kingsfield.webp"
 import kuon from "../assets/img/screenshots/kuon.webp"
 import lifeline from "../assets/img/screenshots/lifeline.webp"
 import michigan from "../assets/img/screenshots/michigan.webp"
+import ps2collage from "../assets/img/screenshots/ps2collage.webp"
 import resident4premium from "../assets/img/screenshots/resident4premium.webp"
 import rlh from "../assets/img/screenshots/rlh.webp"
 import shadowman from "../assets/img/screenshots/shadowman.webp"
@@ -80,7 +81,7 @@ class Info extends Component {
             newWebsites = []
 
         const release = new Date((first_release_date * 1000)),
-              releaseDate = release.toLocaleDateString('en-us', { year:"numeric", month:"short", day:"numeric"}),
+              releaseDate = release.toLocaleDateString("en-us", { year:"numeric", month:"short", day:"numeric"}),
               yearNow = new Date(Date.now()).getFullYear(),
               yearsPast = yearNow - release.getFullYear()
 
@@ -237,7 +238,7 @@ class Info extends Component {
                     screenshot = evildeadr; break }
                 case "Zombie Hunters 2": {
                     screenshot = zombiehunters2; break }
-                default: break
+                default: { screenshot = ps2collage; break }
             }
         } else if (screenshots.length > 0 || screenshots[i] !== undefined) {
             screenshot = "https://images.igdb.com/igdb/image/upload/t_screenshot_big/" + screenshots[i].image_id + ".jpg"
@@ -613,9 +614,9 @@ class Info extends Component {
                 rating: rating,
                 title: title,
                 src: src
-            };
+            }
         }
-        return null;
+        return null
     }
 
     renderAgeRatings = (ratings) => {  
@@ -631,7 +632,7 @@ class Info extends Component {
             return state.map(item => {    
                 return (
                     title === "Links" 
-                    ? <a key={item.label} href={item.url}>{item.label}</a> 
+                    ? <a key={item.label} href={item.url} target="_blank" rel="noopener noreferrer">{item.label}</a> 
                     : <span key={item} className="info-span">{item}</span>
                 )
             })
@@ -663,6 +664,7 @@ class Info extends Component {
                 </button>
                 <div className="info-img-wrapper">   
                     <img className="info-bg-img" src={screenshot} alt=""/>
+                    <div className="info-bg-div"></div>
                 </div>
                 <div className="info-tablet-bg"></div>
                 <div className="info-wrapper">   
@@ -690,20 +692,3 @@ class Info extends Component {
 }
 
 export default Info
-
-// TODO
-
-// Finish styles for Info
-
-// ListItem buttons visible on mobile?
-
-// Move Played progress to Played filter
-// All Games - show Collected progress
-// Collected - show combined price from selected price options
-
-// Move item price border to item state
-
-// Ability to change rating, price
-
-// Deleted games written into deletedGames state
-// When adding - search deleted games

@@ -1,5 +1,5 @@
 .info {
-	background: linear-gradient(to bottom, transparent, #203a43 55%);
+	background: linear-gradient(to bottom, transparent, #203a43 160%);
 	overflow: hidden;
 	position: relative;
 	display: flex;
@@ -17,6 +17,7 @@
 
 .info.--active {
 	width: 100dvw;
+	background: linear-gradient(to bottom, transparent, #203a43 51%);
 }
 
 .info-img-wrapper {
@@ -36,6 +37,16 @@
 	position: absolute;
 }
 
+.info-bg-div {
+	left: 0;
+	z-index: -20;
+	top: 0;
+	height: 50dvh;
+	position: absolute;
+	background-color: #1c3940;
+	width: 100%;
+}
+
 .info-wrapper {
 	width: calc(100% - 50px);
 	padding: 25px;
@@ -51,6 +62,7 @@
 .list-item.info-cover-container {
 	width: 100%;
 	margin: 0 auto;
+	overflow: hidden;
 }
 
 .info-title {
@@ -279,11 +291,22 @@
 	}
 }
 
+@media screen and (560px <= width <= 1181px) {
+	.info-bg-img {
+		height: 47dvh;
+		left: 0;
+		width: 100%;
+		object-fit: cover;
+	}
+}
+
 @media screen and (715px <= width <= 1181px) {
 	.info {
 		z-index: 60;
+	}
+
+	.info.--active {
 		background: linear-gradient(to bottom, transparent, #203a43 42%);
-		/* check whether to move above background change to initial style */
 	}
 
 	.info-wrapper {
@@ -302,13 +325,6 @@
 		width: 100dvw;
 		height: 100dvh;
 		background: linear-gradient(to bottom, transparent, #0008 40%);
-	}
-
-	.info-bg-img {
-		height: 47dvh;
-		left: 0;
-		width: 100%;
-		object-fit: cover;
 	}
 
 	.info-img-wrapper {

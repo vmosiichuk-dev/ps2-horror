@@ -1,7 +1,7 @@
 import ListItem from "./list-item"
 import "../assets/styles/list.css"
 
-function List({ onDelete, onMarkState, onOpenInfo, delSrc, filteredData }) {
+function List({ onDelete, onMarkState, onPriceCategoryChange, onOpenInfo, delSrc, filteredData }) {
     const renderElements = () => {
         return filteredData.map(item => {    
             return (
@@ -12,6 +12,7 @@ function List({ onDelete, onMarkState, onOpenInfo, delSrc, filteredData }) {
                     onDelete={() => onDelete(item.slug)} 
                     onMarkState={toggle => onMarkState(item.slug, toggle)} 
                     onOpenInfo={slug => onOpenInfo(slug)} 
+                    onPriceCategoryChange={category => onPriceCategoryChange(item.slug, category)} 
                 />
             )
         })

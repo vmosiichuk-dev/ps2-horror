@@ -12,8 +12,7 @@ class SearchPanel extends Component {
         super(props)
         this.state = {
             searchQuery: "",
-            searchIconSrc: search,
-            wishlist: false
+            searchIconSrc: search
         }
     }
 
@@ -40,9 +39,34 @@ class SearchPanel extends Component {
         }
     }
 
+    renderProgress = (data, count, progressCount, progressbarStyle, label) => {
+        return (
+            <section className="mobile-progress" aria-label="Gaming progress information">
+                <p><span className="a11y">{"Games in " + label.toLowerCase() + ":"}</span><span>{count}</span> / <span className="a11y">Total games:</span><span>{data.length}</span></p>
+                <div className="progress-bar--container">
+                    <p className={"progress-bar-label " + label.toLowerCase()}>{label + " progress"}</p>
+                    <div className="progress-bar" style={progressbarStyle}></div>
+                </div>
+                <span className="a11y">Percentage progress count:</span>
+                <span className="mobile-progress--span progress-count">{progressCount}</span>
+            </section>
+        )
+    }
+
+    renderCollectionValue = () => {
+        return (
+            <section className="mobile-progress" aria-label="Gaming progress information">
+                <p><span className="a11y">Games played:</span><span></span> / <span className="a11y">Total games:</span><span></span></p>
+                <span className="a11y">Percentage progress count:</span>
+                <span className="mobile-progress--span progress-count"></span>
+            </section>
+        )
+    }
+
     render() {
         const { searchQuery, searchIconSrc } = this.state
-        const { data, playCount, progressCount, activeFilter, onFilterChange, onAsideChange, progressBarStyle, addGameIsActive, aboutIsActive } = this.props
+        const { data, activeFilter, onFilterChange, onAsideChange, addGameIsActive, aboutIsActive, 
+                playCount, progressPlayCount, progressbarPlayStyle, wishCount, progressWishCount, progressbarWishStyle } = this.props
 
         const btnGroupAside = (mediaClass) => {
             return (
@@ -65,7 +89,11 @@ class SearchPanel extends Component {
             addGameImgClass = "menu-img",
             addGameBtnClass = "btn btn-menu",
             aboutBtnClass = "btn btn-about",
-            tabIndex = 0
+            tabIndex = 0,
+            count = wishCount, 
+            progressCount = progressWishCount, 
+            progressbarStyle = progressbarWishStyle,
+            label = "Collection"
 
         if (addGameIsActive) { 
             addGameMenuAlt = "Close add game form"
@@ -84,6 +112,12 @@ class SearchPanel extends Component {
             searchAria = false
             searchLabel = "Clear" 
         }
+        if (activeFilter === "play") {
+            count = playCount
+            progressCount = progressPlayCount
+            progressbarStyle = progressbarPlayStyle
+            label = "Played"
+        }
 
         return (
             <nav className="search-panel">
@@ -92,16 +126,9 @@ class SearchPanel extends Component {
                     <h1 className="mobile-title"><span className="a11y">PS2 Game Library — </span>Survival Horror Classics</h1>
                     {btnGroupAside(" mobile")}
                 </div>
-                <section className="mobile-progress" aria-label="Gaming progress information">
-                    <p><span className="a11y">Games played:</span><span>{playCount}</span> / <span className="a11y">Total games:</span><span>{data.length}</span></p>
-                    <div className="progress-bar--container">
-                        <div className="progress-bar" style={progressBarStyle}></div>
-                    </div>
-                    <span className="a11y">Percentage progress count:</span>
-                    <span className="mobile-progress--span progress-count">{progressCount}</span>
-                </section>
+                {this.renderProgress(data, count, progressCount, progressbarStyle, label)}
                 <section className="btn-group" aria-label="Filter controls" aria-describedby="filter-description">
-                    <span id="filter-description" className="a11y">Use filters to show games previously marked as played or the ones added to the wishlist. Combine filters and search to look for games under specific filter option.</span> 
+                    <span id="filter-description" className="a11y">Use filters to show games previously marked as played or the ones added to your collection. Combine filters and search to look for games under specific filter option.</span> 
                     {btnGroupAside(" desktop")}
                     <button className={`btn ${activeFilter === "all" ? "--active" : ""}`} type="button" tabIndex={tabIndex} onClick={() => onFilterChange("all")}>All games</button>
                     <button className={`play btn ${activeFilter === "play" ? "--active" : ""}`} type="button" tabIndex={tabIndex} onClick={() => onFilterChange("play")}><img className="icon" src={game} alt="" />Played</button>

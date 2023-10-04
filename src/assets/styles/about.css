@@ -150,6 +150,16 @@ footer a.nmd {
 	margin-bottom: .75rem;
 }
 
+@media screen and (max-width: 715px) {
+	.about {
+		height: calc(100dvh - 50px);
+		padding: 100px 0 0;
+	}
+	.about-wrapper {
+		padding: 0 25px 25px;
+	}
+}
+
 @media screen and (max-width: 1181px) {
 	.about-article {
 		padding-top: 1.875rem;

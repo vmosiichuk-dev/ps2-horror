@@ -1,6 +1,6 @@
 .list-item {
     box-shadow: 3px 3px 15px rgba(0,0,0,.4);
-    height: 185px;
+    height: 181px;
     list-style: none;
     margin: 0;
     max-width: 130px;
@@ -21,12 +21,9 @@
     display: grid;
     align-items: center;
     justify-content: center;
-    /* height: calc(100% + 26px); */
-    /* width: calc(100% + 26px); */
     transition: opacity .2s cubic-bezier(.46,.03,.52,.96);
     grid-template-columns: 26px 1fr 26px;
     grid-template-rows: 1fr 26px 18px 26px 5px 26px 17px 26px 1fr;
-    /* margin: -13px; */
     position: relative;
     z-index: 30;
     margin: 0;
@@ -121,7 +118,6 @@
 
 .img-cover {
     width: 100%;
-    height: calc(100% - 18px);
     position: absolute;
     object-fit: cover;
     text-align: center;
@@ -129,7 +125,8 @@
     align-items: center;
     bottom: 0;
     filter: sepia(12%) brightness(97%) saturate(85%) contrast(97%) invert(4%);
-    border-radius: 0 0 6px 6px;
+    border-radius: 6px;
+    max-height: 181px;
 }
 
 .img-overlay {
@@ -188,7 +185,7 @@
 
 .list-item-status-container {
     position: absolute;
-    top: 13px;
+    top: 11px;
     right: -17px;
     z-index: 10;
     display: grid;
@@ -297,28 +294,16 @@
         margin: 0 20px;
     }
 
+    .img-cover {
+        max-height: 226px;
+    }
+
     .list-item:nth-child(2n) {
         box-shadow: -5px 5px 15px rgba(0,0,0,.4);
     }
 
     .list-item-data {
-        /* bottom: -2.5rem; */
         font-size: 1rem;
-    }
-
-    .list-item .icon {
-        width: 28px;
-        height: 28px;
-    }
-
-    .btn-sm {
-        width: 34px;
-        height: 34px;
-    }
-
-    .btn-sm.btn-wish,
-    .btn-sm.btn-play {
-        margin-right: -34px;
     }
     
     .btn-sm.btn-info,
@@ -327,21 +312,11 @@
     }
 
     .list-item-status-container {
-        top: 12px;
-        right: -19px;
-    }
-
-    .status-icon {
-        width: 28px;
-        height: 28px;
+        top: 17px;
     }
 
     .list-item-buttons {
-        /* height: calc(100% + 34px); */
-        /* width: calc(100% + 34px); */
-        grid-template-columns: 34px 1fr 34px;
-        grid-template-rows: 1fr 34px 16px 34px 18px 34px 16px 34px 1fr;
-        /* margin: -17px; */
+        grid-template-rows: 1fr 26px 18px 26px 1.5fr 26px 18px 26px 1fr;
     }
 
     .delete-p {
@@ -352,10 +327,6 @@
         top: 28px;
         left: 28px;
     } 
-
-    .img-cover {
-        height: calc(100% - 22px);
-    }
 
     .list-item-price {
         width: 100%;

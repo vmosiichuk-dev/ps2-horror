@@ -8,7 +8,6 @@
 
 #search-input {
     color: var(--accent);
-	/* background: #221e29d1; */
 	background: #0f0b1596;
     border-radius: 4px;
     border: 1px solid #c1bcda70;
@@ -24,7 +23,6 @@
     border: 1px solid #c1bcda70;
     padding: 3px 8px 4px 8px;
     margin: 6px 0;
-	/* background-color: #2e293696; */
 	background-color: #1f182b96;
     transition: box-shadow .1s cubic-bezier(.46,.03,.52,.96), border-color .1s cubic-bezier(.46,.03,.52,.96);
     box-shadow: 0px 0px 4px transparent;
@@ -42,7 +40,7 @@
     min-width: 210px;
     max-width: 370px;
     height: 42px;
-    margin: 5px 0;
+    margin: 5px 0 14px;
 }
 
 .icon-search {
@@ -71,8 +69,7 @@
     display: flex;
     align-items: center;
     height: 30px;
-    /* z-index: 50; */
-    margin: -2px 0 14px 0;
+    margin: -2px 0 9px 0;
 }
 
 .mobile-progress p {
@@ -161,6 +158,22 @@
     background-color: transparent;
     margin: 30px 0 10px;
     height: 6px;
+    position: relative;
+}
+
+.progress-bar-label {
+    position: absolute;
+    font-family: "Didact Gothic";
+    font-size: .875rem;
+    width: 114px;
+    top: -22px;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+}
+
+.progress-bar-label.played {
+    width: 96px;
 }
 
 .progress-bar {

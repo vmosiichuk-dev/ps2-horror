@@ -58,8 +58,8 @@ class ListItem extends Component {
     }
 
     render() {
-        const { slug, title, src, wish, play, loose, cib, newg, onMarkState, onOpenInfo } = this.props
-        const { delSrc, activeClass, itemButtonsStyle, confirmDeleteAria, priceCategory } = this.state
+        const { slug, title, src, wish, play, loose, cib, newg, onMarkState, onOpenInfo, onPriceCategoryChange, priceCategory } = this.props
+        const { delSrc, activeClass, itemButtonsStyle, confirmDeleteAria } = this.state
 
         let listItemClass = "list-item",
             btnLooseClass = "btn btn-loose",
@@ -95,14 +95,14 @@ class ListItem extends Component {
         return (
             <li className={listItemClass} id={slug}>
                 <div className={statusContainerClass}>
-                    <img className="status-icon wish" src={star} alt="Added to Wishlist" />
+                    <img className="status-icon wish" src={star} alt="Added to Collection" />
                     <img className="status-icon play" src={game} alt="Marked as Played" />
                 </div>
                 <img className="img-cover" src={src} alt={title + " — PS2 game cover"} />
                 <img className="img-overlay" src={overlay} alt="" />
                 <div className={"list-item-buttons" + activeClass} tabIndex={0} role="toolbar" aria-activedescendant={slug + "toolbar--wish"} onFocus={this.handleTabFocus} onBlur={this.handleTabBlur} onMouseOver={this.handleTabFocus} onMouseOut={this.handleTabBlur} style={itemButtonsStyle} >
                     <button type="button" id={slug + "--toolbar-wish"} className="btn-sm btn-wish" onClick={() => onMarkState("wish")} data-toggle="wish">
-                        <img className="icon icon-wish" src={star} alt="Add to wishlist" />
+                        <img className="icon icon-wish" src={star} alt="Add to collection" />
                     </button>
                     <button type="button" id={slug + "--toolbar-play"} className="btn-sm btn-play" onClick={() => onMarkState("play")} data-toggle="play">
                         <img className="icon icon-played" src={game} alt="Mark as played" />
@@ -120,21 +120,21 @@ class ListItem extends Component {
                         {title}
                     </span>
                     <div className="list-item-price">
-                        <button type="button" className={btnLooseClass} onClick={() => { this.handlePriceClick("loose") }}>
+                        <button type="button" className={btnLooseClass} onClick={() => onPriceCategoryChange("loose")}>
                             <img className="cd-icon" src={looseIcon} alt="Loose price" />
                             <div>
                                 {loose !== "n/a" ? <span className="usd">$</span> : null}
                                 <span>{loose}</span>
                             </div>
                         </button>
-                        <button type="button" className={btnCibClass} onClick={() => { this.handlePriceClick("cib") }}>
+                        <button type="button" className={btnCibClass} onClick={() => onPriceCategoryChange("cib") }>
                             <img className="cd-icon" src={cibIcon} alt="CIB price" />
                             <div>
                                 {cib !== "n/a" ? <span className="usd">$</span> : null}
                                 <span>{cib}</span>
                             </div>
                         </button>
-                        <button type="button" className={btnNewgClass} onClick={() => { this.handlePriceClick("newg") }}>
+                        <button type="button" className={btnNewgClass} onClick={() => onPriceCategoryChange("newg") }>
                             <img className="cd-icon" src={newgIcon} alt="New price" />
                             <div>
                                 {newg !== "n/a" ? <span className="usd">$</span> : null}

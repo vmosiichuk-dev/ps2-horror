@@ -1,9 +1,7 @@
 .app {
     margin: 0;
-    /* display: flex; */
     align-items: center;
     height: 100dvh;
-    /* flex-direction: row; */
     display: block;
     grid-template-rows: 195px calc(100dvh - 195px);
     grid-template-columns: max-content 1fr;
@@ -44,7 +42,4 @@
         grid-row: 2;
         padding: 0 45px 0 39px;
     }
-}
-
-@media screen and (min-width: 1181px) {
 }
