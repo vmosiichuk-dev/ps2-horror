@@ -8,7 +8,7 @@ Careful event handling enhances user engagement with UI updates and ensures cons
 
 ## v2.0 Showcase
 
-![new_git](https://github.com/vladnomad/ps2-horror/assets/98449247/50e43d4a-97a4-41f4-b862-3d4e66219ac3)
+https://github.com/vladnomad/ps2-horror/assets/98449247/dd02fbdd-89c0-4baa-b6c2-e8e063469565
 
 ## What's New in v2.0
 
