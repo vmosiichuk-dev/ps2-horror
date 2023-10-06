@@ -8,7 +8,7 @@ Careful event handling enhances user engagement with UI updates and ensures cons
 
 ## v2.0 Showcase
 
-https://github.com/vladnomad/ps2-horror/assets/98449247/8e903011-dadd-46a1-abee-80a0dba21ae9
+![new_git](https://github.com/vladnomad/ps2-horror/assets/98449247/50e43d4a-97a4-41f4-b862-3d4e66219ac3)
 
 ## What's New in v2.0
 
@@ -19,7 +19,7 @@ Carefully constructed request from the International Gaming Database allows you 
 Upon meticulous market research, pricing information in three categories (loose, CIB, and new) were added for each of the 88 games. Each game now has a set of 3 buttons indicating a price for each of the categories with matching icons. When you select a price category, a game cover is styled with a border corresponding to its value: bronze, silver, or gold.
 
 ### Welcome & About Section
-Welcome section was introduced to enrich UX while loading the initial data from the API in the background. Also with the introduction of several new features, an About section was added to explain controls and provide insights into how pricing is handled. Main section and controls design was improved, as well as, app's interactivity and custom open/close animations for slide in window's toggle buttons were introduced.
+Welcome section was introduced to enrich UX while loading the initial data from the API in the background. With the introduction of several new features, an About section was added to explain controls and provide insights into how pricing is handled. Main section and controls design were improved, as well as, app's interactivity and custom open/close animations for slide in window's toggle buttons were introduced.
 
 ## v1.0 Screenshots  
 
@@ -63,10 +63,10 @@ The game list showcases an array of PS2 survival horror titles, accompanied by p
 ### Intuitive Search Mechanism
 The search bar enables users to search for specific games by title. The list dynamically updates to display matching results as users type, leveraging real-time feedback. This instant feedback enhances the search experience and helps users find games efficiently.
 
-### Interactive Gameplay Tracking
+### Interactive Progress Tracking
 A progress bar visually represents the percentage of games played / collected from the entire library depending on the filter selected. This interactive element intends to encourage engagement and exploration of the entire collection.
 
-### Marking Played Games and Wishlist
+### Played and Collected Markers
 Users have the ability to mark games as played or add them to their collection with intuitive buttons, providing a straightforward way to manage their collection, while icons are used to indicate changes.
 
 ### Streamlined Game Addition
