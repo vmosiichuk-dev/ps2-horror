@@ -6,20 +6,20 @@ It's component-based architecture serves to create modular, reusable, and self-c
 
 Careful event handling enhances user engagement with UI updates and ensures consistent behavior across different user interactions. The semantic structure of the application and proper markup adheres to HTML5 and WCAG standards, promoting accessibility and providing search engine optimization. CSS classes are dynamically modified to reflect changes in the app's state. The app's visual design centers around simplicity, promoting effortless navigation and engagement. The minimalist approach helps to reduces clutter and distractions, allowing users to focus on essential information and interactions.
 
+## v2.0 Showcase
+
+https://github.com/vladnomad/ps2-horror/assets/98449247/8e903011-dadd-46a1-abee-80a0dba21ae9
+
 ## What's New in v2.0
 
 ### IGDB API
-Carefully constructed request from the International Gaming Database allows you to explore an expanded collection of PS2 horror games. Initial load now presents the user with 88 titles, which is 3 times more than in v1.0. Get detailed information about each game, including the full title, release date, game summary, developer, genres, links, cover, screenshot for Info background, and age ratings. Alternative and missing data were carefully crafted to provide a seamless user experience. The revamped AddGame feature now allows you to search for any PS2 title in the IGDB. You can select and add individual titles to your library, and duplicate titles are automatically prevented.
+Carefully constructed request from the International Gaming Database allows you to explore an expanded collection of PS2 horror games. Initial load now presents the user with 88 titles, which is 3 times more than in v1.0. Get detailed information about each game, including the full title, release date, game summary, developer, genres, links, cover, screenshot for Info background, and age ratings. If not available, alternative data were programmed in to provide a seamless user experience. The revamped AddGame feature now allows you to search for any PS2 title in the IGDB. You can select and add individual titles to your library, and duplicate titles are automatically prevented.
 
 ### Pricing Insights
 Upon meticulous market research, pricing information in three categories (loose, CIB, and new) were added for each of the 88 games. Each game now has a set of 3 buttons indicating a price for each of the categories with matching icons. When you select a price category, a game cover is styled with a border corresponding to its value: bronze, silver, or gold.
 
 ### Welcome & About Section
-Welcome section was introduced to enrich UX and load initial data from the API in the background. Also with the introduction of several new features, I have added an About section to explain controls and provide insights into how pricing is handled. Copyright and license information is provided in the footer of this section, alongside a link to my main portfolio page. I have also improved overall design, as well as, app's interactivity and added custom open/close animations for slide in window's toggle buttons.
-
-## v2.0 Showcase
-
-https://drive.google.com/uc?export=download&id=1NHyo-KMFYK_3lhnGdvacV63zjB7HMx97
+Welcome section was introduced to enrich UX while loading the initial data from the API in the background. Also with the introduction of several new features, an About section was added to explain controls and provide insights into how pricing is handled. Main section and controls design was improved, as well as, app's interactivity and custom open/close animations for slide in window's toggle buttons were introduced.
 
 ## v1.0 Screenshots  
 
@@ -78,8 +78,12 @@ The user interface embodies an intuitive design, ensuring users promptly compreh
 ## Future Improvements
 I am committed to improving the PS2 Survival Horror Classics Game Library App to provide an even better user experience. Here are some potential future enhancements I'm considering:
 
-- ~~**Integration with IGDB API**~~ <br> 
-~~I'm exploring the possibility of integrating with the IGDB (Internet Game Database) API to enrich the game addition process by selecting games by title from the database and fill added games with relevant metadata and cover images.~~
+- :white_check_mark: **Integration with IGDB API** <br> 
+I'm exploring the possibility of integrating with the IGDB (Internet Game Database) API to enrich the game addition process by selecting games by title from the database and fill added games with relevant metadata and cover images.
+- **Value Calculation** <br>
+I will use the prices of each item to calculate the current value of your collection based on your selected price options. This value will be displayed under the Collected filter.
+- **Wishlist Filter** <br>
+With the addition of new border styles associated with pricing options for collected games, I want to use a star indicator for a 4th filter - Wishlist. This will allow the user to plan their collector's journey and see the value of the games added to a wishlist for all price categories.
 - **User Accounts and Syncing** <br>
 I'm also considering implementing user accounts, enabling users to create profiles, save their progress, and synchronize their collections across different devices.
 - **Rating Sorting** <br>
