@@ -8,18 +8,11 @@ Careful event handling enhances user engagement with UI updates and ensures cons
 
 ## v2.0 Showcase
 
-https://github.com/vladnomad/ps2-horror/assets/98449247/dd02fbdd-89c0-4baa-b6c2-e8e063469565
+https://github.com/vladnomad/ps2-horror/assets/98449247/e3b27adb-c308-46df-9fb8-e78426fc870d
 
 ## What's New in v2.0
 
-### IGDB API
-Carefully constructed request from the International Gaming Database allows you to explore an expanded collection of PS2 horror games. Initial load now presents the user with 88 titles, which is 3 times more than in v1.0. Get detailed information about each game, including the full title, release date, game summary, developer, genres, links, cover, screenshot for Info background, and age ratings. If not available, alternative data were programmed in to provide a seamless user experience. The revamped AddGame feature now allows you to search for any PS2 title in the IGDB. You can select and add individual titles to your library, and duplicate titles are automatically prevented.
-
-### Pricing Insights
-Upon meticulous market research, pricing information in three categories (loose, CIB, and new) were added for each of the 88 games. Each game now has a set of 3 buttons indicating a price for each of the categories with matching icons. When you select a price category, a game cover is styled with a border corresponding to its value: bronze, silver, or gold.
-
-### Welcome & About Section
-Welcome section was introduced to enrich UX while loading the initial data from the API in the background. With the introduction of several new features, an About section was added to explain controls and provide insights into how pricing is handled. Main section and controls design were improved, as well as, app's interactivity and custom open/close animations for slide in window's toggle buttons were introduced.
+Integration with the IGDB API lets you explore each game's rich details and brings a substantial expansion of an initial game collection of PS2 horror games, presenting users with 88 titles, a threefold increase from v1.0. Plus, you can now add games to your library directly from the database. Furthermore, I have conducted a market research to provide pricing insights in three distinct categories (loose, CIB, and new). With an enhanced Welcome section to improve initial loading experience and an informative About section to clarify controls and pricing methodologies, the design and interactivity has been given a significant upgrade throughout the app. 
 
 ## v1.0 Screenshots  
 
@@ -57,6 +50,15 @@ npm start
 
 ## Features
 
+### v2.0 IGDB API
+Explore an expanded collection of PS2 horror games integrated from the International Gaming Database (IGDB) API. Initial load presents users with 88 titles, a threefold increase from v1.0. Get detailed information about each game, including the full title, release date, game summary, developer, genres, links, cover art, background screenshots for Info, and age ratings. Even when information is not readily available, alternative data has been thoughtfully programmed to ensure a smooth user experience. The revamped AddGame feature now allows you to search for any PS2 title within the IGDB database, enabling you to select and add individual titles to your library while automatically preventing duplicate entries.
+
+### v2.0 Pricing Insights
+In-depth market research has led to the inclusion of comprehensive pricing information for each of the 88 games, categorized into three distinct tiers: loose, complete-in-box (CIB), and new. Each game now features a set of three buttons, each representing a different pricing category, complete with matching icons. Selecting a price category makes the game cover adopt a corresponding border — bronze, silver, or gold — reflecting its estimated value.
+
+### v2.0 Welcome & About Section
+Welcome section was introduced to enrich user experience while loading the initial data from the API seamlessly in the background. With the introduction of several new features, an About section was added to explain controls and provide insights into how pricing is handled. An improved design across the main section and controls, alongside enhanced interactivity and custom open/close animations for slide-in window toggle buttons. These enhancements ensure a more immersive and user-friendly experience throughout the app.
+
 ### Game List and Filtering
 The game list showcases an array of PS2 survival horror titles, accompanied by pertinent metadata and icons denoting played and collected status. This carefully designed layout ensures that users can quickly scan through the list and identify relevant information. Users can selectively filter the list to display played games, collected items, or the entire library. This feature allows users to focus on specific subsets of the game library, enhancing usability for users with varied preferences.
 
@@ -78,15 +80,15 @@ The user interface embodies an intuitive design, ensuring users promptly compreh
 ## Future Improvements
 I am committed to improving the PS2 Survival Horror Classics Game Library App to provide an even better user experience. Here are some potential future enhancements I'm considering:
 
-- :white_check_mark: **Integration with IGDB API** <br> 
+- [x] **Integration with IGDB API** <br> 
 I'm exploring the possibility of integrating with the IGDB (Internet Game Database) API to enrich the game addition process by selecting games by title from the database and fill added games with relevant metadata and cover images.
-- **Value Calculation** <br>
+- [ ] **Value Calculation** <br>
 I will use the prices of each item to calculate the current value of your collection based on your selected price options. This value will be displayed under the Collected filter.
-- **Wishlist Filter** <br>
+- [ ] **Wishlist Filter** <br>
 With the addition of new border styles associated with pricing options for collected games, I want to use a star indicator for a 4th filter - Wishlist. This will allow the user to plan their collector's journey and see the value of the games added to a wishlist for all price categories.
-- **User Accounts and Syncing** <br>
+- [ ] **User Accounts and Syncing** <br>
 I'm also considering implementing user accounts, enabling users to create profiles, save their progress, and synchronize their collections across different devices.
-- **Rating Sorting** <br>
+- [ ] **Rating Sorting** <br>
 This enhancement would enable users to quickly identify and access the highest-rated games in their collection, enhancing their gameplay experience.
 
 ## Acknowledgments
