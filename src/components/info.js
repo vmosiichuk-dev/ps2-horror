@@ -6,14 +6,21 @@ import ceroB from "../assets/img/ratings/ceroB.svg"
 import ceroC from "../assets/img/ratings/ceroC.svg"
 import ceroD from "../assets/img/ratings/ceroD.svg"
 import ceroZ from "../assets/img/ratings/ceroZ.svg"
-import esrbT from "../assets/img/ratings/esrbT.svg"
+import esrbAO from "../assets/img/ratings/esrbAO.svg"
+import esrbE from "../assets/img/ratings/esrbE.svg"
+import esrbE10 from "../assets/img/ratings/esrbE10.svg"
+import esrbEC from "../assets/img/ratings/esrbEC.svg"
 import esrbM from "../assets/img/ratings/esrbM.svg"
+import esrbRP from "../assets/img/ratings/esrbRP.svg"
+import esrbT from "../assets/img/ratings/esrbT.svg"
+import pegi3 from "../assets/img/ratings/pegi3.svg"
 import pegi7 from "../assets/img/ratings/pegi7.svg"
 import pegi12 from "../assets/img/ratings/pegi12.svg"
 import pegi16 from "../assets/img/ratings/pegi16.svg"
 import pegi18 from "../assets/img/ratings/pegi18.svg"
-import jpW from "../assets/img/ratings/jpW.webp"
 import usk12 from "../assets/img/ratings/usk12.svg"
+import grac18 from "../assets/img/ratings/grac18.svg"
+import jpW from "../assets/img/ratings/jpW.webp"
 import overlay from "../assets/img/overlay.png"
 import menuImg from "../assets/img/plus.svg"
 
@@ -71,7 +78,7 @@ class Info extends Component {
     }
 
     static getDerivedStateFromProps(props, state) {
-        const {title, src, rating, genres, summary, first_release_date, involved_companies, screenshots, websites} = props.infoData
+        const {title, src, rating, genres, summary, first_release_date, involved_companies, screenshots, websites, ageRatings} = props.infoData
         let ageRatingJp = "",
             companyName = "",
             companyLabel = "",
@@ -326,154 +333,38 @@ class Info extends Component {
             default: break
         }
 
-        const esrbTGroup = [
-            title === "Fatal Frame",
-            title === "Disaster Report",
-            title === "Simple 2000 Series Vol. 113: The Tairyou Jigoku",
-            title === "Vampire Night",
-            title === "Galerians: Ash",
-            title === "The Haunted Mansion",
-            title === "Raw Danger!",
-            title === "Echo Night: Beyond",
-            title === "Baroque",
-            title === "King's Field IV",
-            title === "Aliens Versus Predator: Extinction",
-            title === "Van Helsing",
-            title === "Ghosthunter",
-        ]
         const esrbMGroup = [
-            title === "Blood Omen 2: Legacy of Kain",
-            title === "Shadow Man: 2econd Coming",
-            title === "Clock Tower 3",
-            title === "Extermination",
-            title === "Alone in the Dark: The New Nightmare",
-            title === "Castlevania: Curse of Darkness",
-            title === "Trapt",
-            title === "Darkwatch",
-            title === "The Suffering",
-            title === "The Suffering: Ties That Bind",
-            title === "Manhunt",
-            title === "Manhunt 2",
-            title === "Cold Fear",
-            title === "Jaws Unleashed",
-            title === "BloodRayne 2",
-            title === "Killer7",
-            title === "Resident Evil 4",
             title === "Resident Evil 4: Premium Edition",
-            title === "Silent Hill: Shattered Memories",
-            title === "Fatal Frame III: The Tormented",
-            title === "Silent Hill: Origins",
-            title === "Silent Hill 4: The Room",
-            title === "Silent Hill 3",
             title === "The Silent Hill Collection",
-            title === "Area 51",
-            title === "Legacy of Kain: Defiance",
-            title === "The X-Files: Resist or Serve",
-            title === "Alone in the Dark",
-            title === "ObsCure",
-            title === "Drakengard",
-            title === "Turok: Evolution",
-            title === "ObsCure: The Aftermath",
-            title === "Onimusha 2: Samurai's Destiny",
-            title === "Fatal Frame II: Crimson Butterfly",
-            title === "Silent Hill 2",
-            title === "Silent Hill 2: Restless Dreams",
-            title === "Silent Hill 2: Special 2 Disc Set",
-            title === "Devil May Cry 3: Dante's Awakening - Special Edition",
-            title === "Legacy of Kain: Soul Reaver 2",
-            title === "Constantine",
-            title === "Resident Evil Outbreak",
-            title === "Resident Evil Outbreak File #2",
-            title === "Siren",
-            title === "Kuon",
-            title === "Return to Castle Wolfenstein",
-            title === "Rule of Rose",
-            title === "Haunting Ground",
-            title === "Devil May Cry 2",
-            title === "BloodRayne",
-            title === "Resident Evil Code: Veronica X",
-            title === "The Thing",
-            title === "Resident Evil: Dead Aim",
-            title === "Onimusha: Warlords",
-            title === "Run Like Hell: Hunt or Be Hunted",
-            title === "Lifeline",
-            title === "Dino Stalker",
-            title === "Evil Dead: Regeneration",
-            title === "Evil Dead: A Fistful of Boomstick",
         ]
         const pegi7Group = [
             title === "The Haunted Mansion",
             title === "Raw Danger!",
-            title === "Echo Night: Beyond",
         ]
         const pegi12Group = [
             title === "Baroque",
             title === "King's Field IV",
-            title === "Aliens Versus Predator: Extinction",
-            title === "Alone in the Dark: The New Nightmare",
-            title === "Castlevania: Curse of Darkness",
-            title === "Trapt",
-            title === "Gregory Horror Show",
-            title === "Zombie Hunters",
             title === "Ghosthunter",
         ]
         const pegi16Group = [
             title === "Van Helsing",
-            title === "Legacy of Kain: Defiance",
             title === "The X-Files: Resist or Serve",
-            title === "Alone in the Dark",
-            title === "ObsCure",
-            title === "Drakengard",
-            title === "Turok: Evolution",
-            title === "ObsCure: The Aftermath",
             title === "Onimusha 2: Samurai's Destiny",
-            title === "Fatal Frame II: Crimson Butterfly",
-            title === "Silent Hill 2",
-            title === "Silent Hill 2: Restless Dreams",
-            title === "Silent Hill 2: Special 2 Disc Set",
-            title === "Devil May Cry 3: Dante's Awakening - Special Edition",
-            title === "Legacy of Kain: Soul Reaver 2",
             title === "Constantine",
-            title === "Resident Evil Outbreak",
-            title === "Resident Evil Outbreak File #2",
-            title === "Siren",
-            title === "Kuon",
-            title === "Return to Castle Wolfenstein",
             title === "Rule of Rose",
             title === "Haunting Ground",
-            title === "Devil May Cry 2",
             title === "BloodRayne",
-            title === "Resident Evil Code: Veronica X",
             title === "Curse: The Eye of Isis",
-            title === "Daemon Summoner",
-            title === "Dino Stalker",
-            title === "Evil Dead: A Fistful of Boomstick",
         ]
         const pegi18Group = [
-            title === "Darkwatch",
             title === "The Suffering",
             title === "The Suffering: Ties That Bind",
-            title === "Manhunt",
             title === "Manhunt 2",
-            title === "Cold Fear",
             title === "Jaws Unleashed",
-            title === "BloodRayne 2",
-            title === "Killer7",
-            title === "Resident Evil 4",
             title === "Resident Evil 4: Premium Edition",
-            title === "Silent Hill: Shattered Memories",
             title === "Fatal Frame III: The Tormented",
-            title === "Silent Hill: Origins",
-            title === "Silent Hill 4: The Room",
-            title === "Silent Hill 3",
             title === "The Silent Hill Collection",
-            title === "Area 51",
             title === "Forbidden Siren 2",
-            title === "Evil Dead: Regeneration",
-            title === "Zombie Hunters 2",
-        ]
-        const ceroAGroup = [
-            title === "Gregory Horror Show",
         ]
         const ceroBGroup = [
             title === "Simple 2000 Series Vol. 113: The Tairyou Jigoku",
@@ -487,19 +378,15 @@ class Info extends Component {
             title === "Raw Danger!",
             title === "King's Field IV",
             title === "Van Helsing",
-            title === "Castlevania: Curse of Darkness",
             title === "Trapt",
             title === "Fatal Frame III: The Tormented",
-            title === "Silent Hill: Origins",
-            title === "Silent Hill 4: The Room",
+            title === "Silent Hill 2",
+            title === "Silent Hill 2: Restless Dreams",
+            title === "Silent Hill 2: Special 2 Disc Set",
             title === "Silent Hill 3",
             title === "The Silent Hill Collection",
             title === "Area 51",
             title === "Fatal Frame II: Crimson Butterfly",
-            title === "Silent Hill 2",
-            title === "Silent Hill 2: Restless Dreams",
-            title === "Silent Hill 2: Special 2 Disc Set",
-            title === "Devil May Cry 3: Dante's Awakening - Special Edition",
             title === "Legacy of Kain: Soul Reaver 2",
             title === "Constantine",
             title === "Resident Evil Outbreak",
@@ -519,18 +406,13 @@ class Info extends Component {
         const ceroDGroup = [
             title === "Resident Evil 4",
             title === "Resident Evil 4: Premium Edition",
-            title === "Silent Hill: Shattered Memories",
             title === "Haunting Ground",
-            title === "Devil May Cry 2",
             title === "BloodRayne",
-            title === "Resident Evil Code: Veronica X",
             title === "Hungry Ghosts",
             title === "Gantz: The Game",
-            title === "Zombie Hunters 2",
         ]
         const ceroZGroup = [
             title === "Killer7",
-            title === "Zombie Hunters",
             title === "Michigan: Report from Hell",
             title === "Berserk Millennium Empire Arc: Chapter of the Holy Demon War",
         ]
@@ -540,65 +422,94 @@ class Info extends Component {
         ]
         const jpWGroup = [
             title === "The Fear",
-            title === "Mystic Nights",
             title === "Phase Paradox",
             title === "Shadow Tower: Abyss",
         ]
 
-        let ageRating = "", ageRatings = []
+        let ageRating = "", ageRatingsImg = []
 
-        if (usk12Group.includes(true)) {
-            ageRating = usk12
-            ageRatings.push(ageRating)
+        if (ageRatings.length > 0) {
+            ageRatings.forEach(item => {
+                console.log(item)
+                let rating
+                switch (item) {
+                    case 1:  rating = pegi3; break
+                    case 2:  rating = pegi7; break
+                    case 3:  rating = pegi12; break
+                    case 4:  rating = pegi16; break
+                    case 5:  rating = pegi18; break
+                    case 6:  rating = esrbRP; break
+                    case 7:  rating = esrbEC; break
+                    case 8:  rating = esrbE; break
+                    case 9:  rating = esrbE10; break
+                    case 10: rating = esrbT; break
+                    case 11: rating = esrbM; break
+                    case 12: rating = esrbAO; break
+                    case 13: rating = ceroA; break
+                    case 14: rating = ceroB; break
+                    case 15: rating = ceroC; break
+                    case 16: rating = ceroD; break
+                    case 17: rating = ceroZ; break
+                    case 20: rating = usk12; break
+                    default: rating = "empty"; break
+                }
+                console.log(rating)
+                if (rating !== "empty") ageRatingsImg.push(rating)
+            })
         }
+
         if (jpWGroup.includes(true)) {
             ageRating = jpW
-            ageRatings.push(ageRating) 
+            ageRatingsImg.push(ageRating) 
             ageRatingJp= true
         }
-        if (ceroAGroup.includes(true)) {
+        if (title === "Mystic Nights") {
+            ageRating = grac18
+            ageRatingsImg.push(ageRating) 
+        }
+        if (usk12Group.includes(true)) {
+            ageRating = usk12
+            ageRatingsImg.push(ageRating)
+        }
+        if (title === "Gregory Horror Show") {
             ageRating = ceroA
-            ageRatings.push(ageRating)
+            ageRatingsImg.push(ageRating)
         }
         if (ceroBGroup.includes(true)) {
             ageRating = ceroB
-            ageRatings.push(ageRating)
+            ageRatingsImg.push(ageRating)
         }
         if (ceroCGroup.includes(true)) {
             ageRating = ceroC
-            ageRatings.push(ageRating)
+            ageRatingsImg.push(ageRating)
         }
         if (ceroDGroup.includes(true)) {
             ageRating = ceroD
-            ageRatings.push(ageRating)
+            ageRatingsImg.push(ageRating)
         }
         if (ceroZGroup.includes(true)) {
             ageRating = ceroZ
-            ageRatings.push(ageRating)
+            ageRatingsImg.push(ageRating)
         }
         if (pegi7Group.includes(true)) {
             ageRating = pegi7
-            ageRatings.push(ageRating)
+            ageRatingsImg.push(ageRating)
         }
         if (pegi12Group.includes(true)) {
             ageRating = pegi12
-            ageRatings.push(ageRating)
+            ageRatingsImg.push(ageRating)
         }
         if (pegi16Group.includes(true)) {
             ageRating = pegi16
-            ageRatings.push(ageRating)
+            ageRatingsImg.push(ageRating)
         }
         if (pegi18Group.includes(true)) {
             ageRating = pegi18
-            ageRatings.push(ageRating)
-        }
-        if (esrbTGroup.includes(true)) {
-            ageRating = esrbT
-            ageRatings.push(ageRating)
+            ageRatingsImg.push(ageRating)
         }
         if (esrbMGroup.includes(true)) {
             ageRating = esrbM
-            ageRatings.push(ageRating)
+            ageRatingsImg.push(ageRating)
         } 
 
         if (props.infoData.title !== state.title) {
@@ -609,7 +520,7 @@ class Info extends Component {
                 screenshot: screenshot,
                 summary: newSummary,
                 websites: newWebsites,
-                ageRatings: ageRatings,
+                ageRatings: ageRatingsImg,
                 ageRatingJp: ageRatingJp,
                 releaseDate: releaseDate,
                 yearsPast: yearsPast,
@@ -675,11 +586,16 @@ class Info extends Component {
                         <img className="img-overlay" src={overlay} alt="" />
                     </div>
                     <h2 className="info-title">{title}</h2>
-                    <div className="info-subtitle-wrapper">
-                        {releaseDate === "" ? null : <h3 className="info-subtitle">{releaseDate} ({yearsPast} years ago)</h3>}
-                        <div className="rating btn --active">{rating}</div>
-                        <p className="rating-label">Rating</p>
-                    </div>
+                    {releaseDate === "" 
+                      ? <div className="info-subtitle-wrapper">
+                            <h3 className="info-subtitle">Cancelled / Never released</h3>
+                        </div>
+                      : <div className="info-subtitle-wrapper">
+                            <h3 className="info-subtitle">{releaseDate} ({yearsPast} years ago)</h3>
+                            <div className="rating btn --active">{rating}</div>
+                            <p className="rating-label">Rating</p>
+                        </div>
+                    }
                     {summary !== "" ? <p className="info-description">{summary}</p> : null}
                     {companyName !== "" ? this.renderContainer(companyLabel, companyName) : null}
                     {genres.length > 0 ? this.renderContainer("Genres", genres) : null}                

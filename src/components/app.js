@@ -297,7 +297,8 @@ class App extends Component {
     ]
 
     filterGame = (game) => {
-        let rating = "N/A"
+        let rating = "N/A",
+            ageRatings = []
 
         if (game.total_rating) {
             rating = Math.round(game.total_rating)
@@ -307,16 +308,28 @@ class App extends Component {
             rating = Math.round(game.aggregated_rating)
         }
 
+        console.log(game.age_ratings)
+
+        if (game.age_ratings === undefined) {
+            ageRatings = []
+        } else if (game.age_ratings.length > 0) {
+            game.age_ratings.forEach(item => {
+                ageRatings.push(item.rating)
+                console.log(item.rating)
+            })
+        }
+
         delete game.total_rating
         delete game.rating
         delete game.aggregated_rating
+        delete game.age_ratings
         
         let gamePrice = this.gamePrices.find(item => item.title === game.name)
         if (gamePrice === undefined) gamePrice = {prices: { loose: "n/a", cib: "n/a", newg: "n/a" }}
 
         const src = "https://images.igdb.com/igdb/image/upload/t_cover_big/" + game.cover.image_id + ".jpg",
               filters = { wish: false, play: false },
-              gameData = { ...game, rating: rating, title: game.name, src: src, ...gamePrice.prices, priceCategory: "" }
+              gameData = { ...game, rating: rating, ageRatings: ageRatings, title: game.name, src: src, ...gamePrice.prices, priceCategory: "" }
 
         delete gameData.name
         delete gameData.cover
@@ -330,7 +343,7 @@ class App extends Component {
         try {
             const ratedGames = [],
                   notRatedGames = [],
-                  body = "fields genres.name, name, total_rating, rating, aggregated_rating, cover.image_id, first_release_date, involved_companies.developer, involved_companies.company.name, screenshots.image_id, slug, summary, websites.category, websites.url; limit 88; where platforms = (8) & genres != (4,10,16,34) & themes = (19,21) & themes != (35,39) & keywords != (5340) & player_perspectives != (4,5) & franchises != (463,824) & id != (3837,2862,6200,5143,2861,210296,43614,11286,5868,43262,43264,20829,1159,43301,253324,85965,172551,91643,43633,43210,49405,132163,136,260797,77219,127959,20640,37045,144966,203260,13901,24096,64108,72157,73012); sort total_rating desc;",
+                  body = "fields genres.name, name, total_rating, rating, aggregated_rating, age_ratings.rating, cover.image_id, first_release_date, involved_companies.developer, involved_companies.company.name, screenshots.image_id, slug, summary, websites.category, websites.url; limit 88; where platforms = (8) & genres != (4,10,16,34) & themes = (19,21) & themes != (35,39) & keywords != (5340) & player_perspectives != (4,5) & franchises != (463,824) & id != (3837,2862,6200,5143,2861,210296,43614,11286,5868,43262,43264,20829,1159,43301,253324,85965,172551,91643,43633,43210,49405,132163,136,260797,77219,127959,20640,37045,144966,203260,13901,24096,64108,72157,73012); sort total_rating desc;",
                   get = await this.iGDB.getToken(),
                   games = await this.iGDB.getGames(get.access_token, body)
 
@@ -418,7 +431,7 @@ class App extends Component {
         e.preventDefault()
         try {
             const radioValue = this.state.searchRadioValue,
-                  body = `fields genres.name, name, total_rating, rating, aggregated_rating, cover.image_id, first_release_date, involved_companies.developer, involved_companies.company.name, screenshots.image_id, slug, summary, websites.category, websites.url; where id = ${radioValue};`,
+                  body = `fields genres.name, name, total_rating, rating, aggregated_rating, age_ratings.rating, cover.image_id, first_release_date, involved_companies.developer, involved_companies.company.name, screenshots.image_id, slug, summary, websites.category, websites.url; where id = ${radioValue};`,
                   get = await this.iGDB.getToken(),
                   game = await this.iGDB.getGames(get.access_token, body),
                   gameFiltered = this.filterGame(game[0]),
