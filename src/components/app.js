@@ -148,8 +148,6 @@ class App extends Component {
                 if (item.slug === slug) { return { ...item, priceCategory: category } }
                 return item
             })
-            console.log(prevState.data)
-            console.log(newData)
             return { data: newData }
         })  
     }
@@ -359,7 +357,8 @@ class App extends Component {
             })
             await setTimeoutPromise()
         } catch (error) {
-          console.error("Error fetching data from the API:", error)
+            this.props.onError()
+            console.error("Error fetching data from the API:", error)
         }
     }  
 
@@ -374,10 +373,8 @@ class App extends Component {
     handleTitleChange = (e) => { this.setState({ addedTitle: e.target.value }) }
 
     resetAddFormClass = (str, error) => {
-        let isActive = true
-        if (str === "success") isActive = false
         setTimeout(() => {
-            this.setState({ addFormClass: `add-message ${str} invisible`, addGameIsActive: isActive })
+            this.setState({ addFormClass: `add-message ${str} invisible` })
             this.resetAddFormMessage(error)
         }, 5000)
     }
@@ -396,15 +393,23 @@ class App extends Component {
                   body = `search "${title}"; fields id,name; where platforms = (8); limit 299;`,
                   get = await this.iGDB.getToken(),
                   games = await this.iGDB.getGames(get.access_token, body),
-                  error = "Enter game title. Title should be at least 4 characters."
-
-            if (title !== "" && title.length >= 4) {
+                  error = "Enter a game title. Title should be at least 3 characters.",
+                  errorAPI = `No PS2 games found with the title '${title}'. Check the spelling or try another title.`
+            console.log(games)
+            console.log(games.length)
+            console.log(games.length < 1)
+            if (games.length < 1 && title.length >= 3) {
+                this.setState({ searchData: [], searchDataLoaded: false, addedTitle: "", addFormMessage: errorAPI, addFormClass: "add-message" })
+                this.resetAddFormClass("", errorAPI)
+            } else if (title !== "" && title.length >= 3) {
                 this.setState({ searchData: games, searchDataLoaded: true, addedTitle: "" })
             } else {
                 this.setState({ addFormMessage: error, addFormClass: "add-message" })
                 this.resetAddFormClass("", error)
             }
         } catch (error) {
+            this.setState({ searchData: [], searchDataLoaded: false, addedTitle: "", addFormMessage: error, addFormClass: "add-message" })
+            this.resetAddFormClass("", error)
             console.error("Error fetching data from the API:", error)
         }
     }  
@@ -417,7 +422,7 @@ class App extends Component {
                   get = await this.iGDB.getToken(),
                   game = await this.iGDB.getGames(get.access_token, body),
                   gameFiltered = this.filterGame(game[0]),
-                  error = "Enter a game title. Title should be at least 4 characters.",
+                  error = "Enter a game title. Title should be at least 3 characters.",
                   titleError = "This game already exists in your library. Please select a unique game.",
                   success = "New game successfully added. You can now manage your collection."
 
@@ -450,6 +455,8 @@ class App extends Component {
                 this.resetAddFormClass("", error)
             }
         } catch (error) {
+            this.setState({ addFormMessage: error, addFormClass: "add-message" })
+            this.resetAddFormClass("", error)
             console.error("Error fetching data from the API:", error)
         }
     } 

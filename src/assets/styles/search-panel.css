@@ -1,9 +1,11 @@
 .search-panel {
     display: grid;
     grid-template-columns: 326px;
-    grid-template-rows: repeat(auto-fill, 42px);
     justify-content: center;
-    padding: 12px 0 0 0;
+    /* grid-template-rows: repeat(auto-fill, 42px);
+    padding: 12px 0 0 0; */
+    grid-template-rows: repeat(3, 42px) 60px;
+    padding: 9px 0 0 0;
 }
 
 #search-input {
@@ -49,7 +51,6 @@
 }
 
 .mobile-title-wrapper {
-    z-index: 50;
     display: flex;
     align-items: center;
     padding-bottom: .25rem;
@@ -68,8 +69,9 @@
 .mobile-progress {    
     display: flex;
     align-items: center;
-    height: 30px;
-    margin: -2px 0 9px 0;
+    /* height: 30px;
+    margin: -2px 0 9px 0; */
+    padding: 6px 0 0px 0;
 }
 
 .mobile-progress p {
@@ -193,45 +195,38 @@
     min-width: 30px;
 }
 
-.btn-about * {
+.btn-about span {
 	content: "";
 	background: white;
 	position: absolute;
+	width: 2px;
+	left: 50%;
+	transform: translateX(-50%);
+	border-radius: 3px;
 	transition: all 1.125s cubic-bezier(.46,.03,.52,.96);  
 }
 
 #btn-about1 {
-	transform: translateX(-50%);
-	left: 50%;
-	border-radius: 3px;
-	width: 2px;
-	height: 2px;
 	top: 8px;
+	height: 2px;
 }
 
 #btn-about2 {
-	transform: translateX(-50%);
-	left: 50%;
 	top : 13px;
-	width: 2px;
 	height: 7px;
-	border-radius: 3px;
+}
+
+.btn-about.--active #btn-about1,
+.btn-about.--active #btn-about2 {
+	top: 14px;
+	height: 12px;
 }
 
 .btn-about.--active #btn-about1 {
-	top: 50%;
-	left: 50%;
 	transform: translate(-50%, -50%) rotate(225deg);
-	width: 2px;
-	height: 12px;
-	border-radius: 3px;
 }
 
 .btn-about.--active #btn-about2 {
-	top: 50%;
-	left: 50%;
-	width: 2px;
-	height: 12px;
 	transform: translate(-50%, -50%) rotate(-225deg);
 }
 
@@ -241,6 +236,7 @@
  
 .btn-group--aside.mobile {
     display: flex;
+    z-index: 50;
     gap: 5px;
 }
 
@@ -251,7 +247,7 @@
 }
 
 
-@media screen and (max-width: 715px) {
+@media screen and (max-width: 809px) {
     .mobile-progress {    
         order: 1;
     }
@@ -279,7 +275,7 @@
     }
 }
 
-@media screen and (min-width: 715px) {
+@media screen and (min-width: 809px) {
     .search-panel {
         grid-template-columns: 340px minmax(28px, 1fr) minmax(210px, 370px);
         padding: 30px 65px 30px 59px;

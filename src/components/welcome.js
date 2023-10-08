@@ -1,7 +1,7 @@
 import Loader from "./loader"
 import ps from "../assets/img/ps-logo.svg"
 
-function Welcome({ animationReset, transitionStart, welcomeClick, onStateChange }) {
+function Welcome({ animationReset, transitionStart, welcomeClick, onStateChange, loaderError }) {
     let buttonClass = "btn btn-welcome",
         wrapperClass = "welcome-wrapper bg-black",
         subtitleClass = "welcome-subtitle",
@@ -35,7 +35,7 @@ function Welcome({ animationReset, transitionStart, welcomeClick, onStateChange 
                 <p className={pClass}>Create your own personalised collection, track & share your progress.</p>
                 <button className={buttonClass} onClick={() => onStateChange("welcomeClick")}>START</button>
             </div>
-            <Loader welcomeClick={welcomeClick} />
+            <Loader welcomeClick={welcomeClick} loaderError={loaderError} />
         </div>
     )
 }

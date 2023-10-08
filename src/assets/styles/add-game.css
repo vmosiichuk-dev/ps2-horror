@@ -159,7 +159,7 @@
 	font-family: "Didact Gothic";
 }
 
-@media screen and (min-width: 715px) {
+@media screen and (min-width: 809px) {
 	.add-form-wrapper {
 		width: 429px;
 		border-right: 1px solid #867fa6b5;

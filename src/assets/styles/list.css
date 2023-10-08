@@ -10,7 +10,7 @@
     scrollbar-color: #5b718486 #6e6e6e86;
 }  
 
-@media screen and (min-width: 715px) {
+@media screen and (min-width: 809px) {
     .list {
 		grid-template-columns: repeat(auto-fill, 200px);
 		grid-gap: 78px 15px;

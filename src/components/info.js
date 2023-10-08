@@ -81,9 +81,11 @@ class Info extends Component {
             newWebsites = []
 
         const release = new Date((first_release_date * 1000)),
-              releaseDate = release.toLocaleDateString("en-us", { year:"numeric", month:"short", day:"numeric"}),
               yearNow = new Date(Date.now()).getFullYear(),
               yearsPast = yearNow - release.getFullYear()
+
+        let releaseDate = release.toLocaleDateString("en-us", { year:"numeric", month:"short", day:"numeric"})
+        if (releaseDate === "Invalid Date") releaseDate = ""
 
         if (websites !== undefined) {
             websites.forEach(website => {
@@ -674,7 +676,7 @@ class Info extends Component {
                     </div>
                     <h2 className="info-title">{title}</h2>
                     <div className="info-subtitle-wrapper">
-                        <h3 className="info-subtitle">{releaseDate} ({yearsPast} years ago)</h3>
+                        {releaseDate === "" ? null : <h3 className="info-subtitle">{releaseDate} ({yearsPast} years ago)</h3>}
                         <div className="rating btn --active">{rating}</div>
                         <p className="rating-label">Rating</p>
                     </div>

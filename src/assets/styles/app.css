@@ -1,6 +1,6 @@
 .app {
     margin: 0;
-    align-items: center;
+    /* align-items: center; */
     height: 100dvh;
     display: block;
     grid-template-rows: 195px calc(100dvh - 195px);
@@ -26,7 +26,7 @@
     position: relative;
 }
 
-@media screen and (min-width: 715px) {
+@media screen and (min-width: 809px) {
     .app {
         display: grid;
         grid-template-rows: 145px calc(100dvh - 145px);

@@ -127,6 +127,7 @@
     filter: sepia(12%) brightness(97%) saturate(85%) contrast(97%) invert(4%);
     border-radius: 6px;
     max-height: 181px;
+    height: 92%;
 }
 
 .img-overlay {
@@ -169,13 +170,14 @@
     opacity: 0;
     transition: opacity .1s cubic-bezier(.46,.03,.52,.96);
     font-size: .75rem;
-    padding: 129px 0 0 16px;
-    height: calc(100% - 155px);
-    width: calc(100% - 42px);
-    top: 26px;
-    left: 26px;
+    padding: 110px 0 0 15px;
+    height: calc(100% - 110px);
+    width: calc(100% - 15px);
+    top: 13px;
+    left: 13px;
     margin: -13px;
     border-radius: 6px;
+    cursor: default;
 }
 
 .list-item-buttons.--active, 
@@ -286,7 +288,7 @@
     filter: invert(89%) sepia(59%) saturate(3802%) hue-rotate(313deg) brightness(108%) contrast(98%);
 }
 
-@media screen and (min-width: 715px) {
+@media screen and (min-width: 809px) {
     .list-item {
         box-shadow: 5px 5px 15px rgba(0,0,0,.4);
         height: 226px;
@@ -322,10 +324,8 @@
     .delete-p {
         font-size: .875rem;
         padding: 145px 0 0 24px;
-        height: calc(100% - 175px);
-        width: calc(100% - 54px);
-        top: 28px;
-        left: 28px;
+        height: calc(100% - 145px);
+        width: calc(100% - 24px);
     } 
 
     .list-item-price {

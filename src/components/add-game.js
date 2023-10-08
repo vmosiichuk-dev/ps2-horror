@@ -38,7 +38,6 @@ class AddGame extends Component {
     }
 
     handleSearchKeydown = (e) => {
-        console.log(e)
         if (e.key === "Enter") {
             e.preventDefault()
             this.props.onAddGameSearch()
