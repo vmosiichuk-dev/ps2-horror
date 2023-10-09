@@ -288,7 +288,7 @@
     filter: invert(89%) sepia(59%) saturate(3802%) hue-rotate(313deg) brightness(108%) contrast(98%);
 }
 
-@media screen and (min-width: 809px) {
+@media screen and (min-width: 809px) and (orientation: portrait), (hover: hover) {
     .list-item {
         box-shadow: 5px 5px 15px rgba(0,0,0,.4);
         height: 226px;

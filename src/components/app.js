@@ -183,7 +183,7 @@ class App extends Component {
                 return (
                     <p className="search-error --active" role="status">
                     There are no games marked as played yet.<br />
-                    To mark a game as played, hover on a game card and press a controller button.
+                    To mark a game as played, hover or click on a game card and press a controller button.
                     </p>
                 )
             }
@@ -191,14 +191,14 @@ class App extends Component {
                 return (
                     <p className="search-error --active" role="status">
                     There are no games in your collection yet.<br />
-                    To add a game to the collection, hover on a game card and press a star button.
+                    To add a game to the collection, hover or click on a game card and press a star button.
                     </p>
                 )
                 }
             return (
                 <p className="search-error --active" role="status">
                     The game you are looking for is not found.<br />
-                    You can add a game to the list from the menu in the top left corner.
+                    You can add a game to the list from the menu in the navigation bar (+ plus sign).
                 </p>
             )
         }
@@ -308,14 +308,11 @@ class App extends Component {
             rating = Math.round(game.aggregated_rating)
         }
 
-        console.log(game.age_ratings)
-
         if (game.age_ratings === undefined) {
             ageRatings = []
         } else if (game.age_ratings.length > 0) {
             game.age_ratings.forEach(item => {
                 ageRatings.push(item.rating)
-                console.log(item.rating)
             })
         }
 
@@ -408,9 +405,7 @@ class App extends Component {
                   games = await this.iGDB.getGames(get.access_token, body),
                   error = "Enter a game title. Title should be at least 3 characters.",
                   errorAPI = `No PS2 games found with the title '${title}'. Check the spelling or try another title.`
-            console.log(games)
-            console.log(games.length)
-            console.log(games.length < 1)
+                  
             if (games.length < 1 && title.length >= 3) {
                 this.setState({ searchData: [], searchDataLoaded: false, addedTitle: "", addFormMessage: errorAPI, addFormClass: "add-message" })
                 this.resetAddFormClass("", errorAPI)
@@ -473,6 +468,9 @@ class App extends Component {
             console.error("Error fetching data from the API:", error)
         }
     } 
+
+    addLandscapeOverflow = () => document.body.classList.add('--overflow')
+    removeLandscapeOverflow = () => document.body.classList.remove('--overflow')
     
 // –––––––––––––––––––––––––––––––––—— END functions ––––––––––––––––––––––––––––––––––——
 
@@ -495,7 +493,8 @@ class App extends Component {
                 delSrc,
                 activeFilter,
                 searchData,
-                searchDataLoaded } = this.state
+                searchDataLoaded,
+                apiDataLoaded } = this.state
 
         const renderData = this.searchGame(data, searchQuery)
         const filteredData = renderData.filter(item => {
@@ -511,6 +510,8 @@ class App extends Component {
         let appClass = "app"
         if (this.props.transitionStart)  appClass += " --animated"
         if (!openedInfo) appClass += " --active"
+        if (!apiDataLoaded || (aboutIsActive || addGameIsActive)) this.addLandscapeOverflow()
+        if (apiDataLoaded && (!aboutIsActive && !addGameIsActive)) this.removeLandscapeOverflow()
 
         return (
             <div className={appClass}>  

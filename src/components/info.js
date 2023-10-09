@@ -430,8 +430,8 @@ class Info extends Component {
 
         if (ageRatings.length > 0) {
             ageRatings.forEach(item => {
-                console.log(item)
                 let rating
+                
                 switch (item) {
                     case 1:  rating = pegi3; break
                     case 2:  rating = pegi7; break
@@ -453,7 +453,7 @@ class Info extends Component {
                     case 20: rating = usk12; break
                     default: rating = "empty"; break
                 }
-                console.log(rating)
+
                 if (rating !== "empty") ageRatingsImg.push(rating)
             })
         }

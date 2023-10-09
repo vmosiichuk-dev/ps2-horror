@@ -149,17 +149,19 @@ footer a.nmd {
 	margin-bottom: .75rem;
 }
 
-@media screen and (max-width: 809px) {
-	.about-wrapper {
-		padding: 0 25px 25px;
-	}
-
+@media screen and (max-width: 809px) and (hover: none) {
 	.about-article {
 		padding-top: 1.25rem;
 	}
 }
 
-@media screen and (min-width: 809px) {	
+@media screen and (max-width: 1023px) and (hover: none) {
+	.about-wrapper {
+		padding: 0 25px 25px;
+	}
+}
+
+@media screen and (min-width: 809px) and (orientation: portrait), (hover: hover) {	
 	.about {
 		width: 429px;
 		left: -430px;
@@ -201,5 +203,40 @@ footer a.nmd {
 
 	.about-title {
 		font-size: 1.375rem;
+	}
+}
+
+@media (orientation: landscape) and (hover: none) and (pointer: coarse) {
+	footer {
+		justify-content: center;
+		gap: 1rem;
+	}
+
+	.about-wrapper {
+		padding: 0 60px 25px;
+		width: calc(100% - 120px);
+	}
+
+	.about-control-icon {
+		margin-top: 3px;
+	}
+
+	.about-controls h3 {
+		margin-bottom: .5rem;
+	}
+
+	@media screen and (843px <= width <= 1023px) {
+		.about-wrapper {
+			padding: 25px 60px 25px;
+			height: calc(100% - 50px);
+		}
+
+		.about-title {
+			margin-top: 1.25rem;
+		}
+
+		.about-article {
+			margin-bottom: .75rem;
+		}
 	}
 }

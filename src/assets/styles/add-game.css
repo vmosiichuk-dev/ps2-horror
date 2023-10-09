@@ -159,7 +159,7 @@
 	font-family: "Didact Gothic";
 }
 
-@media screen and (min-width: 809px) {
+@media screen and (min-width: 809px) and (orientation: portrait), (hover: hover) {
 	.add-form-wrapper {
 		width: 429px;
 		border-right: 1px solid #867fa6b5;
@@ -181,5 +181,36 @@
 
 	.searchdata {
 		max-height: 53dvh;
+	}
+}
+
+@media (orientation: landscape) and (hover: none) and (pointer: coarse) {
+	.add-item, .add-form {
+		width: 100%;
+		padding: 0 55px;
+		max-width: 530px;
+	}
+
+	.add-item .addgame-title {
+		margin-top: 1.25rem;
+		margin-bottom: .75rem;
+	}
+
+	.searchdata {
+		max-height: 30dvh;
+	}
+
+	.add-message {
+		margin-top: .625rem;
+	}
+
+	@media screen and (809px <= width <= 1023px) {
+		.searchdata {
+			max-height: 39dvh;
+		}
+		
+		.add-message {
+			margin-top: .5rem;
+		}
 	}
 }

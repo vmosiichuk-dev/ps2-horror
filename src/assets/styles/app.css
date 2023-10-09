@@ -26,7 +26,7 @@
     position: relative;
 }
 
-@media screen and (min-width: 809px) {
+@media screen and (min-width: 809px) and (orientation: portrait), (hover: hover) {
     .app {
         display: grid;
         grid-template-rows: 145px calc(100dvh - 145px);
@@ -41,5 +41,18 @@
         grid-column: 2;
         grid-row: 2;
         padding: 0 45px 0 39px;
+    }
+}
+
+@media (orientation: landscape) and (hover: none) and (pointer: coarse) {
+    .app {
+        grid-template-rows: 112px;
+        max-width: 749px;
+    }
+
+    #main {
+        min-width: calc(100dvw - 20px);
+        overflow: hidden;
+        height: calc(100dvh - 112px);
     }
 }

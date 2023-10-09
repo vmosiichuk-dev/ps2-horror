@@ -16,7 +16,7 @@ body {
 	background: #2c5364;
 	background: -webkit-linear-gradient(to bottom, #2c5364 0%, #203a43 70%, #0f2027 100%);
 	background: linear-gradient(to bottom, #2c5364 0%, #203a43 70%, #0f2027 100%);
-	overflow-y: hidden;
+	overflow: hidden;
 }
 
 .info-p, h2, img, button, input, input::placeholder {
@@ -286,5 +286,55 @@ p.welcome-subtitle {
 
 	.fog-img.--2nd {
 		animation: fog 160s linear infinite;
+	}
+}
+
+@media (orientation: landscape) and (hover: none) and (pointer: coarse) {
+	@media screen and (max-width: 843px) {
+		.welcome-container p {
+			max-width: 380px;
+			margin: 0 auto 20px;
+		}
+	}
+
+	body {
+		overflow: initial;
+	}
+
+	body.--overflow {
+		overflow: hidden;
+	}
+
+	.welcome-title {
+		margin: 20px;
+	}
+
+	.welcome-container {
+		margin-top: 2rem;
+	}
+
+	.btn.btn-welcome {
+		margin: 0;
+	}
+}
+
+@media screen and (min-width: 1023px) {
+	@media (orientation: landscape) and (hover: none) and (pointer: coarse) {
+		.welcome-title {
+			margin: 42px;
+		}
+	
+		.welcome-container {
+			margin-top: 0;
+		}
+	
+		.welcome-container p {
+			max-width: inherit;
+			margin: 0 0 20px;
+		}
+	
+		.btn.btn-welcome {
+			margin: 20px 0 0;
+		}
 	}
 }

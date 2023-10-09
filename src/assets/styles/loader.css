@@ -41,10 +41,29 @@
 	opacity: 1;
 }
 
+@media (orientation: landscape) and (hover: none) and (pointer: coarse) {
+	.loader-gif {
+		max-width: 38dvw;
+		top: .5rem;
+	}
+
+	.loader-error {
+		bottom: 20px;
+		right: 20px;
+		max-width: 140px;
+	}
+}
+
 @media screen and (min-width: 809px) {
 	.loader-error {
 		padding: 12px 12px 14px 12px;
 		max-width: 385px;
+	}
+
+	@media (orientation: landscape) and (hover: none) and (pointer: coarse) {
+		.loader-error {
+			max-width: 220px;
+		}
 	}
 }
 
@@ -52,5 +71,13 @@
 	.loader-error {
 		max-width: 430px;
 		font-size: 1.125rem;
+	}
+	
+	@media (orientation: landscape) and (hover: none) and (pointer: coarse) {
+		.loader-error {
+			bottom: 20%;
+			right: initial;
+			padding: 24px 24px 26px 24px;
+		}
 	}
 }

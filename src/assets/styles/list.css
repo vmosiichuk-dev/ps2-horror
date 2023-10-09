@@ -10,15 +10,23 @@
     scrollbar-color: #5b718486 #6e6e6e86;
 }  
 
-@media screen and (min-width: 809px) {
+@media screen and (min-width: 809px) and (orientation: portrait), (hover: hover) {
     .list {
 		grid-template-columns: repeat(auto-fill, 200px);
 		grid-gap: 78px 15px;
 	}
 }
 
-@media screen and (min-width: 1181px) {
+@media screen and (min-width: 1181px) and (orientation: portrait), (hover: hover) {
     .list {
         justify-content: space-between;
+    }
+}
+
+@media (orientation: landscape) and (hover: none) and (pointer: coarse) {
+    .list {
+        overflow-x: hidden;
+        justify-content: space-between;
+        padding: 12px 14px 0;
     }
 }
