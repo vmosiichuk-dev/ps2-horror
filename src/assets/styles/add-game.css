@@ -18,13 +18,13 @@
   
 .add-item .addgame-title {
 	font-size: 1.25rem;
-	margin: 2.5rem 0 1.5rem 0;
+	margin: 0 0 1.5rem;
 	text-align: center;
 	font-family: "Unbounded";
 }
 
 .add-form {
-	width: 65%;
+	/* width: 65%; */
 }
 
 .add-title--label {
@@ -59,7 +59,7 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	width: 280px;
+	width: 79dvw;
 }
 
 .btn.btn-add-submit {
@@ -87,8 +87,9 @@
 	font-family: "Didact Gothic";
 	color: #f89c0b;
 	transition: .5s opacity cubic-bezier(.46,.03,.52,.96);
-	margin-top: 1rem;
-	margin-bottom: 0;
+	margin: 0;
+	text-align: center;
+	text-wrap: balance;
 }
 
 .add-message.success {
@@ -117,6 +118,7 @@
 	padding: 0 0 0 4px;
 	margin: 0;
 	outline-offset: -3px;
+	overflow: hidden;
 }
 
 .search-symbol {
@@ -131,15 +133,53 @@
 	grid-template-rows: .5fr 1fr;
 	grid-template-columns: 2fr .5fr;
 	width: 100%;
-	margin-bottom: 1.25rem;
+	margin-bottom: .25rem;
+}
+
+.searchdata-container {
+	width: 100%;
+	position: relative;
+	overflow-y: hidden;
+	/* margin: -.25rem 0; */
 }
 
 .searchdata {
 	display: grid;
-	width: 100%;
 	gap: .5rem;
 	max-height: 40dvh;
  	overflow-y: scroll;
+	padding-top: .5rem;
+	position: relative;
+}
+
+.searchdata-border {
+	width: 97%;
+	height: 1px;
+	z-index: 50;
+}
+
+.searchdata-border.--t-dashed {
+	top: 0;
+	position: absolute;
+	border-top: 1px dashed #867fa6;
+}
+
+.searchdata-border.--t-solid {
+	top: 0;
+	position: absolute;
+	border-top: 1px solid #867fa6;
+}
+
+.searchdata-border.--b-solid {
+	bottom: 0;
+	position: relative;
+	border-bottom: 1px solid #867fa6;
+}
+
+.searchdata-border.--b-dashed {
+	bottom: 0;
+	position: absolute;
+	border-bottom: 1px dashed #867fa6;
 }
 
 .searchdata-radio-wrapper {
@@ -155,11 +195,7 @@
 	margin: 0 8px 0 0;
 }
 
-.searchdata-radio-wrapper {
-	font-family: "Didact Gothic";
-}
-
-@media screen and (min-width: 809px) and (orientation: portrait), (hover: hover) {
+@media screen and (min-width: 809px) {
 	.add-form-wrapper {
 		width: 429px;
 		border-right: 1px solid #867fa6b5;
@@ -184,33 +220,52 @@
 	}
 }
 
-@media (orientation: landscape) and (hover: none) and (pointer: coarse) {
+@media screen and (orientation: landscape) and (hover: none) and (max-width: 1023px) {
+	.add-form-wrapper {
+		width: 100dvw;
+		left: -100dvw;
+		border: none;
+	}
+
 	.add-item, .add-form {
-		width: 100%;
+		/* width: 100%;
 		padding: 0 55px;
-		max-width: 530px;
+		max-width: 530px; */
 	}
 
 	.add-item .addgame-title {
-		margin-top: 1.25rem;
 		margin-bottom: .75rem;
 	}
 
 	.searchdata {
-		max-height: 30dvh;
+		max-height: 32dvh;
 	}
 
 	.add-message {
-		margin-top: .625rem;
+		margin-bottom: .5rem;
 	}
 
-	@media screen and (809px <= width <= 1023px) {
+	@media (min-width: 809px) {
 		.searchdata {
-			max-height: 39dvh;
+			max-height: 37dvh;
 		}
 		
 		.add-message {
 			margin-top: .5rem;
+		}
+
+		.add-item, .add-form {
+			/* max-width: 630px; */
+		}
+
+		.btn.btn-add-submit {
+			margin-top: .875rem;
+		}
+	}
+
+	@media (min-width: 925px) {
+		.searchdata {
+			max-height: 41dvh;
 		}
 	}
 }

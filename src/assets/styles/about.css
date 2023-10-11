@@ -23,7 +23,7 @@
 	position: relative;
 	bottom: 0;
 	background: linear-gradient(to bottom, transparent, #0008 40%);
-	font-size: .8125rem;
+	font-size: .875rem;
 	overflow-y: scroll;
 }
 
@@ -35,7 +35,7 @@
 	height: fit-content;
 	text-align: center;
 	font-weight: 600;
-	font-size: .875rem;
+	font-size: 1.0625rem;
 	font-family: "Unbounded";
 }
 
@@ -54,7 +54,7 @@
 
 .about-controls h3 {
 	display: block;
-	font-size: .75rem;
+	font-size: .875rem;
 	font-family: "Unbounded";
 	margin: .25rem 0 -.25rem;
 }
@@ -153,15 +153,19 @@ footer a.nmd {
 	.about-article {
 		padding-top: 1.25rem;
 	}
+
+	.about-wrapper {
+		line-height: 1.275rem;
+	}
 }
 
-@media screen and (max-width: 1023px) and (hover: none) {
+@media screen and (max-width: 1079px) and (hover: none) {
 	.about-wrapper {
 		padding: 0 25px 25px;
 	}
 }
 
-@media screen and (min-width: 809px) and (orientation: portrait), (hover: hover) {	
+@media screen and (min-width: 809px) {
 	.about {
 		width: 429px;
 		left: -430px;
@@ -173,6 +177,10 @@ footer a.nmd {
 		width: calc(100% - 70px);
 		padding: 35px;
 		height: calc(100% - 70px);
+	}
+
+	.about-wrapper p {
+		font-size: 1rem;
 	}
 
 	.about-controls h3 {
@@ -202,19 +210,14 @@ footer a.nmd {
 	}
 
 	.about-title {
-		font-size: 1.375rem;
+		font-size: 1.25rem;
 	}
 }
 
-@media (orientation: landscape) and (hover: none) and (pointer: coarse) {
+@media screen and (orientation: landscape) and (hover: none) {
 	footer {
 		justify-content: center;
 		gap: 1rem;
-	}
-
-	.about-wrapper {
-		padding: 0 60px 25px;
-		width: calc(100% - 120px);
 	}
 
 	.about-control-icon {
@@ -225,10 +228,17 @@ footer a.nmd {
 		margin-bottom: .5rem;
 	}
 
-	@media screen and (843px <= width <= 1023px) {
+	@media (min-width: 843px) and (max-width: 1079px) {
+		.about {
+			width: 100dvw;
+			left: -100dvw;
+			border: none;
+		}
+
 		.about-wrapper {
 			padding: 25px 60px 25px;
 			height: calc(100% - 50px);
+			width: calc(100% - 120px);
 		}
 
 		.about-title {

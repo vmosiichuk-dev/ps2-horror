@@ -289,14 +289,7 @@ p.welcome-subtitle {
 	}
 }
 
-@media (orientation: landscape) and (hover: none) and (pointer: coarse) {
-	@media screen and (max-width: 843px) {
-		.welcome-container p {
-			max-width: 380px;
-			margin: 0 auto 20px;
-		}
-	}
-
+@media screen and (orientation: landscape) and (hover: none) and (max-width: 1365px) {
 	body {
 		overflow: initial;
 	}
@@ -316,10 +309,17 @@ p.welcome-subtitle {
 	.btn.btn-welcome {
 		margin: 0;
 	}
+
+	@media (max-width: 843px) {
+		.welcome-container p {
+			max-width: 380px;
+			margin: 0 auto 20px;
+		}
+	}
 }
 
 @media screen and (min-width: 1023px) {
-	@media (orientation: landscape) and (hover: none) and (pointer: coarse) {
+	@media (orientation: landscape) and (hover: none) {
 		.welcome-title {
 			margin: 42px;
 		}
@@ -336,5 +336,11 @@ p.welcome-subtitle {
 		.btn.btn-welcome {
 			margin: 20px 0 0;
 		}
+	}
+}
+
+@media screen and (min-width: 1365px) {
+	html {
+		overflow: hidden
 	}
 }

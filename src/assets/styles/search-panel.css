@@ -6,6 +6,7 @@
     padding: 12px 0 0 0; */
     grid-template-rows: repeat(3, 42px) 60px;
     padding: 9px 0 0 0;
+    margin: auto 0;
 }
 
 #search-input {
@@ -96,6 +97,7 @@
 .btn-group .btn {
     white-space: nowrap;    
     font-size: .875rem;
+    min-width: 98px;
 }
 
 .btn.btn-menu {
@@ -246,11 +248,11 @@
     transition: transform 1.125s ease, .825s opacity .3s ease;
 }
 
-@media screen and (min-width: 809px) and (orientation: portrait), (hover: hover) {
+@media screen and (min-width: 809px) and (((orientation: portrait) or (hover: hover)) or ((orientation: landscape) and (min-width: 1079px))) {
     .search-panel {
-        grid-template-columns: 340px minmax(28px, 1fr) minmax(210px, 370px);
-        padding: 30px 65px 30px 59px;
-        grid-column: 2;
+        grid-template-columns: 370px minmax(30px, 1fr) minmax(210px, 370px);
+        grid-template-rows: repeat(2, 42px);
+        padding: 0 36px;
         align-items: center;
     }
 
@@ -286,6 +288,7 @@
 
     .btn-group .btn {
         font-size: 1rem;
+        min-width: 105px;
     }
 
     .play.btn {
@@ -294,20 +297,28 @@
     }
 }
 
-@media screen and (min-width: 1181px) and (orientation: portrait), (hover: hover) {
+@media screen and (min-width: 1365px) {
     .search-panel {
-        grid-template-columns: 370px minmax(28px, 1fr) minmax(210px, 370px);
+        padding: 0 44px 4px;
     }
 
-    .mobile-title,
     .mobile-progress {
         font-size: 1rem;
+    }
+
+    .mobile-title {
+        font-size: 1.125rem;
     }
 
     .btn.btn-menu,
     .btn.btn-about {
         margin: 6px 12px 6px 0;
         z-index: 40;
+    }
+
+    .btn-group--aside .btn.btn-menu, 
+    .btn-group--aside .btn.btn-about {
+        min-width: 30px;
     }
 
     .btn-group--aside.desktop {
@@ -324,13 +335,60 @@
     }
 }
 
-@media screen and (max-width: 809px) and (hover: none) {
+@media screen and (max-width: 809px) {
     .mobile-progress {    
         order: 1;
     }
 }
 
-@media screen and (max-width: 1181px) and (hover: none) {
+@media screen and (orientation: landscape) and (hover: none) and (max-width: 1079px) {
+    .mobile-progress {
+        order: -1;
+        /* grid-column: 3; */
+    }
+
+    .mobile-title-wrapper,
+    .btn-group {
+        grid-column: 3;
+    }
+
+    .search-panel {
+        padding: 12px 25px;
+        max-height: 88px;
+        grid-template-columns: minmax(210px, 370px) minmax(28px, 1fr) 340px;
+        grid-template-rows: repeat(2, 42px);
+        min-width: calc(100dvw - 50px);
+    }
+
+    .search-btn,
+    .search-wrapper {
+        flex-direction: row-reverse;
+    }
+
+    .search-wrapper {
+        grid-row: 2;
+        margin: 0;
+    }
+
+    .search-label {
+        margin-left: 7px;
+        margin-right: 5px;
+    }
+
+    @media (max-width: 843px) {
+        .search-panel {
+            /* grid-template-columns: minmax(210px, 370px) minmax(12px, 1fr) 320px; */
+        }
+    }
+}
+
+@media screen and (orientation: landscape) and (hover: none) and (min-width: 1079px) and (max-width: 1365px) {
+    .search-panel {
+        /* min-width: calc(100dvw - 48px); */
+    }
+}
+
+@media screen and (max-width: 1365px) {
     .btn.btn-about.--active,
     .btn.btn-about.--inactive {
         transform: translateX(35px);
@@ -340,48 +398,9 @@
     .btn.btn-about.--inactive {
         opacity: 0;
     }
-    
+
     .btn-group--aside .btn.--active {
         z-index: 70;
         background: var(--dark);
-    }   
-
-    .btn-group .btn {
-        padding: 4px 8px 5px 8px;
-        min-width: 95px;  
-    }
-
-    @media (orientation: landscape) and (hover: none) and (pointer: coarse) {
-        .mobile-progress {
-            order: -1;
-            /* grid-column: 3; */
-        }
-
-        .mobile-title-wrapper,
-        .btn-group {
-            grid-column: 3;
-        }
-
-        .search-panel {
-            padding: 12px 25px;
-            max-height: 88px;
-            grid-template-columns: minmax(210px, 370px) minmax(28px, 1fr) 340px;
-            min-width: calc(100dvw - 50px);
-        }
-
-        .search-btn,
-        .search-wrapper {
-            flex-direction: row-reverse;
-        }
-
-        .search-wrapper {
-            grid-row: 2;
-            margin: 0;
-        }
-
-        .search-label {
-            margin-left: 7px;
-            margin-right: 5px;
-        }
     }
 }

@@ -45,6 +45,16 @@ class AddGame extends Component {
     }
 
     renderSearchData = (searchData) => {
+        return (
+            <div className="searchdata">
+                <div className="searchdata-border --t-solid"></div>
+                {this.renderSearchDataElements(searchData)}
+                <div className="searchdata-border --b-solid"></div>
+            </div>
+        )
+    }
+
+    renderSearchDataElements = (searchData) => {
         return searchData.map(item => {    
             return (
                 <div className="searchdata-radio-wrapper" key={item.id}>
@@ -79,14 +89,16 @@ class AddGame extends Component {
                             <input type="text" placeholder="Enter title" name="title" id="add-game-title" onChange={onTitleChange} value={addedTitle} tabIndex={tabIndex} autoComplete="off"/>
                             <button type="button" className="btn btn-add-search" onClick={onAddGameSearch} tabIndex={tabIndex}><span className="search-symbol">&#9740;</span></button>
                         </section>
-                        <section className="searchdata" aria-label="Seacrh results group" onChange={onSearchRadioChange}>
-                            {this.renderSearchData(searchData)}
+                        <p className={addFormClass} role="status">{addFormMessage}</p> 
+                        <section className="searchdata-container" aria-label="Seacrh results group" onChange={onSearchRadioChange}>
+                            <div className="searchdata-border --t-dashed"></div>
+                            {searchData.length < 1 ? null : this.renderSearchData(searchData)}
+                            <div className="searchdata-border --b-dashed"></div>
                         </section>
                         {searchDataLoaded 
                             ? <button type="submit" className="btn btn-add-submit" tabIndex={tabIndex}>Submit</button>
                             : null
                         }
-                        <p className={addFormClass} role="status">{addFormMessage}</p> 
                     </form>
                 </div>
             </aside>

@@ -426,20 +426,36 @@ class App extends Component {
         e.preventDefault()
         try {
             const radioValue = this.state.searchRadioValue,
-                  body = `fields genres.name, name, total_rating, rating, aggregated_rating, age_ratings.rating, cover.image_id, first_release_date, involved_companies.developer, involved_companies.company.name, screenshots.image_id, slug, summary, websites.category, websites.url; where id = ${radioValue};`,
+                  radioError = "To add a game to the library, you must first select it from the list.",
+                  error = "Enter a game title. Title should be at least 3 characters."
+
+            if (radioValue === "") {
+                console.log("radioValue is empty")
+                this.setState({ addFormMessage: radioError, addFormClass: "add-message" })
+                this.resetAddFormClass("", error)
+                return
+            }
+
+            const body = `fields genres.name, name, total_rating, rating, aggregated_rating, age_ratings.rating, cover.image_id, first_release_date, involved_companies.developer, involved_companies.company.name, screenshots.image_id, slug, summary, websites.category, websites.url; where id = ${radioValue};`,
                   get = await this.iGDB.getToken(),
                   game = await this.iGDB.getGames(get.access_token, body),
                   gameFiltered = this.filterGame(game[0]),
-                  error = "Enter a game title. Title should be at least 3 characters.",
                   titleError = "This game already exists in your library. Please select a unique game.",
                   success = "New game successfully added. You can now manage your collection."
 
-            const titleValidated = this.state.data.some(item => item.title.toLowerCase() === gameFiltered.title.toLowerCase())
+            const duplicate = this.state.data.some(item => item.title.toLowerCase() === gameFiltered.title.toLowerCase())
 
-            if (titleValidated) {
+            console.log(game)
+            console.log(gameFiltered)
+            console.log("radio = " + radioValue)
+            console.log("duplicate = " + duplicate)
+            
+            if (duplicate) {
+                console.log("duplicate")
                 this.setState({ addFormMessage: titleError, addFormClass: "add-message" })
                 this.resetAddFormClass("", error)
-            } else if (radioValue !== "" && !titleValidated) {
+            } else {
+                console.log("radioValue is not empty && not duplicate")
                 this.setState(prevState => {
                     const newData = [gameFiltered, ...prevState.data],
                           newTotalCount = newData.length,
@@ -458,9 +474,6 @@ class App extends Component {
                              searchRadioValue: "" }
                 })  
                 this.resetAddFormClass("success", error)
-            } else {
-                this.setState({ addFormMessage: error, addFormClass: "add-message" })
-                this.resetAddFormClass("", error)
             }
         } catch (error) {
             this.setState({ addFormMessage: error, addFormClass: "add-message" })
