@@ -238,6 +238,10 @@ p.welcome-subtitle {
 	}
 }
 
+
+/* ––——– MEDIA QUERIES ——–––––––––––––———————————————————————————————————————————— */
+
+
 @media screen and (min-width: 809px) {
 	.btn.btn-welcome {
 		margin: 0;
@@ -289,6 +293,7 @@ p.welcome-subtitle {
 	}
 }
 
+
 @media screen and (orientation: landscape) and (hover: none) and (max-width: 1365px) {
 	body {
 		overflow: initial;
@@ -318,28 +323,28 @@ p.welcome-subtitle {
 	}
 }
 
-@media screen and (min-width: 1023px) {
-	@media (orientation: landscape) and (hover: none) {
-		.welcome-title {
-			margin: 42px;
-		}
-	
-		.welcome-container {
-			margin-top: 0;
-		}
-	
-		.welcome-container p {
-			max-width: inherit;
-			margin: 0 0 20px;
-		}
-	
-		.btn.btn-welcome {
-			margin: 20px 0 0;
-		}
+
+@media screen and (min-width: 1023px) and (orientation: landscape) and (hover: none) {
+	.welcome-title {
+		margin: 42px;
+	}
+
+	.welcome-container {
+		margin-top: 0;
+	}
+
+	.welcome-container p {
+		max-width: inherit;
+		margin: 0 0 20px;
+	}
+
+	.btn.btn-welcome {
+		margin: 20px 0 0;
 	}
 }
 
-@media screen and (min-width: 1365px) {
+
+@media screen and (((max-width: 1279px) and (orientation: portrait)) or ((min-width: 1079px) and (orientation: landscape)) or (min-width: 1365px)) {
 	html {
 		overflow: hidden
 	}

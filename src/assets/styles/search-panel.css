@@ -6,7 +6,9 @@
     padding: 12px 0 0 0; */
     grid-template-rows: repeat(3, 42px) 60px;
     padding: 9px 0 0 0;
-    margin: auto 0;
+    /* margin: auto 0; */
+    grid-row: 1;
+    grid-column: 1;
 }
 
 #search-input {
@@ -73,6 +75,7 @@
     /* height: 30px;
     margin: -2px 0 9px 0; */
     padding: 6px 0 0px 0;
+    margin: -6px 0 0 0;
 }
 
 .mobile-progress p {
@@ -252,7 +255,7 @@
     .search-panel {
         grid-template-columns: 370px minmax(30px, 1fr) minmax(210px, 370px);
         grid-template-rows: repeat(2, 42px);
-        padding: 0 36px;
+        padding: 14px 36px;
         align-items: center;
     }
 
@@ -274,7 +277,6 @@
         grid-column: 3;
         /* margin: -5px 0 0 0; */
         height: auto;
-        margin: -5px 0 5px 0;
     }
 
     .mobile-progress .progress-bar--container {
@@ -299,7 +301,9 @@
 
 @media screen and (min-width: 1365px) {
     .search-panel {
-        padding: 0 44px 4px;
+        grid-column: 2;
+        padding: 30px 44px;
+        max-width: calc(100dvw - 518px);
     }
 
     .mobile-progress {
@@ -353,9 +357,8 @@
     }
 
     .search-panel {
-        padding: 12px 25px;
-        max-height: 88px;
-        grid-template-columns: minmax(210px, 370px) minmax(28px, 1fr) 340px;
+        padding: 14px 25px;
+        grid-template-columns: minmax(210px, 370px) minmax(22px, 1fr) minmax(320px, 334px);
         grid-template-rows: repeat(2, 42px);
         min-width: calc(100dvw - 50px);
     }
@@ -384,7 +387,7 @@
 
 @media screen and (orientation: landscape) and (hover: none) and (min-width: 1079px) and (max-width: 1365px) {
     .search-panel {
-        /* min-width: calc(100dvw - 48px); */
+        min-width: calc(100dvw - 72px);
     }
 }
 

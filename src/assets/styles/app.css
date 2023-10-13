@@ -1,10 +1,8 @@
 .app {
     margin: 0;
-    /* align-items: center; */
     height: 100dvh;
-    display: block;
+    display: grid;
     grid-template-rows: 195px calc(100dvh - 195px);
-    grid-template-columns: max-content 1fr;
     opacity: 0;
 }
 
@@ -12,66 +10,47 @@
 	animation: 1.175s fade-in .9s cubic-bezier(.46,.03,.52,.96) forwards;
 }
 
-.app.--active {
-    display: grid;
-	max-width: 1490px;
-    margin: 0 auto;
-}
-
 #main {
-    height: calc(100% - 12px);
+    height: 100%;
     width: auto;
     padding: 0 10px;
-    top: -12px;
-    position: relative;
+    grid-row: 2;
+    grid-column: 1;
+    min-width: calc(100dvw - 20px);
 }
+
+
+/* ––——– MEDIA QUERIES ——–––––––––––––———————————————————————————————————————————— */
+
 
 @media screen and (min-width: 809px) and ((orientation: portrait) or (hover: hover)) {
     .app {
         grid-template-rows: 112px calc(100dvh - 112px);
     }
-
-    #main {
-        min-width: 790px;
-    }
 }
+
 
 @media screen and (min-width: 1365px) {
     .app {
-        display: grid;
+        grid-template-columns: 430px 1fr;
         grid-template-rows: 145px calc(100dvh - 145px);
-    }
-    
-    .app.--active {
-        max-width: none;
-        margin: 0;
     }
 
     #main {
         grid-column: 2;
-        grid-row: 2;
-        /* padding: 0 45px 0 39px; */
+        min-width: calc(100dvw - 448px);
+    }
+
+    @media (orientation: landscape) and (hover: none) {
+        #main {
+            padding: 0 10px;
+        }
     }
 }
 
-@media screen and (orientation: landscape) and (hover: none) {
-    @media (max-width: 1365px) {
-        .app {
-            grid-template-rows: 112px;
-            max-width: 749px;
-        }
 
-        #main {
-            min-width: calc(100dvw - 20px);
-            overflow: hidden;
-            height: calc(100dvh - 112px);
-        }
-    }
-
-    @media (min-width: 1365px) {
-        #main {
-            min-width: calc(100dvw - 450px);
-            padding: 0 10px;
-        }
+@media screen and (orientation: landscape) and (hover: none) and (max-width: 1365px) {
+    .app {
+        grid-template-rows: 112px calc(100dvh - 112px);
     }
 }

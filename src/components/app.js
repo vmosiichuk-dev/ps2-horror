@@ -522,7 +522,6 @@ class App extends Component {
 
         let appClass = "app"
         if (this.props.transitionStart)  appClass += " --animated"
-        if (!openedInfo) appClass += " --active"
         if (!apiDataLoaded || (aboutIsActive || addGameIsActive)) this.addLandscapeOverflow()
         if (apiDataLoaded && (!aboutIsActive && !addGameIsActive)) this.removeLandscapeOverflow()
 

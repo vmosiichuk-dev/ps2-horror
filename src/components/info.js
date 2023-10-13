@@ -1,5 +1,9 @@
 import { Component } from "react"
+import overlay from "../assets/img/overlay.png"
+import menuImg from "../assets/img/plus.svg"
 import "../assets/styles/info.css"
+
+// Age Rating Images
 
 import ceroA from "../assets/img/ratings/ceroA.svg"
 import ceroB from "../assets/img/ratings/ceroB.svg"
@@ -21,8 +25,8 @@ import pegi18 from "../assets/img/ratings/pegi18.svg"
 import usk12 from "../assets/img/ratings/usk12.svg"
 import grac18 from "../assets/img/ratings/grac18.svg"
 import jpW from "../assets/img/ratings/jpW.webp"
-import overlay from "../assets/img/overlay.png"
-import menuImg from "../assets/img/plus.svg"
+
+// Alternative Screenshots
 
 import abyss from "../assets/img/screenshots/abyss.webp"
 import aliens from "../assets/img/screenshots/aliens.webp"
@@ -94,11 +98,29 @@ class Info extends Component {
         let releaseDate = release.toLocaleDateString("en-us", { year:"numeric", month:"short", day:"numeric"})
         if (releaseDate === "Invalid Date") releaseDate = ""
 
+        if (genres !== undefined) {
+            genres.forEach(genre => newGenres.push(genre.name))
+        }
+
+        if (involved_companies !== undefined) {
+            involved_companies.forEach(item => {
+                if (item.developer) {
+                    companyLabel = "Developer"
+                    companyName = item.company.name
+                }
+            })
+
+            if (involved_companies.length > 0 && companyLabel !== "Developer") {
+                companyLabel = "Publisher"
+                companyName = involved_companies[0].company.name
+            }
+        }
+
         if (websites !== undefined) {
             websites.forEach(website => {
                 let label, url
                 url = website.url
-
+                
                 switch (website.category) {
                     case 1:  label = "Official"; break
                     case 2:  label = "Wikia"; break
@@ -123,24 +145,6 @@ class Info extends Component {
                 const newWebsite = Object.assign({label: label, url: url})
                 newWebsites.push(newWebsite)
             })
-        }
-
-        if (genres !== undefined) {
-            genres.forEach(genre => newGenres.push(genre.name))
-        }
-
-        if (involved_companies !== undefined) {
-            involved_companies.forEach(item => {
-                if (item.developer) {
-                    companyLabel = "Developer"
-                    companyName = item.company.name
-                }
-            })
-
-            if (involved_companies.length > 0 && companyLabel !== "Developer") {
-                companyLabel = "Publisher"
-                companyName = involved_companies[0].company.name
-            }
         }
 
         const firstGroup = [
@@ -198,9 +202,9 @@ class Info extends Component {
         ]
 
         let i = 0
-        if (firstGroup.includes(true)) i = 1
+        if (firstGroup.includes(true))  i = 1
         if (secondGroup.includes(true)) i = 2
-        if (thirdGroup.includes(true)) i = 3
+        if (thirdGroup.includes(true))  i = 3
         if (fourthGroup.includes(true)) i = 4
 
         if (screenshots === undefined) {
@@ -228,6 +232,8 @@ class Info extends Component {
                 case "Gantz: The Game": {
                     screenshot = gantz
                     newSummary = "Gantz: The Game is an immersive adaptation of the popular manga and anime series. Fight surreal and deadly battle against menacing alien creatures, strategize and adapt to survive increasingly challenging encounters and unlock the mysteries surrounding character's predicament. The game boasts stunning visuals that capture the essence of the source material."
+                    companyLabel = "Developer"
+                    companyName = "KCEJ East"
                     break }
                 case "Lifeline": {
                     screenshot = lifeline; break }
@@ -430,8 +436,7 @@ class Info extends Component {
 
         if (ageRatings.length > 0) {
             ageRatings.forEach(item => {
-                let rating
-                
+                let rating    
                 switch (item) {
                     case 1:  rating = pegi3; break
                     case 2:  rating = pegi7; break
@@ -458,21 +463,21 @@ class Info extends Component {
             })
         }
 
+        if (title === "Mystic Nights") {
+            ageRating = grac18
+            ageRatingsImg.push(ageRating) 
+        }
+        if (title === "Gregory Horror Show") {
+            ageRating = ceroA
+            ageRatingsImg.push(ageRating)
+        }
         if (jpWGroup.includes(true)) {
             ageRating = jpW
             ageRatingsImg.push(ageRating) 
             ageRatingJp= true
         }
-        if (title === "Mystic Nights") {
-            ageRating = grac18
-            ageRatingsImg.push(ageRating) 
-        }
         if (usk12Group.includes(true)) {
             ageRating = usk12
-            ageRatingsImg.push(ageRating)
-        }
-        if (title === "Gregory Horror Show") {
-            ageRating = ceroA
             ageRatingsImg.push(ageRating)
         }
         if (ceroBGroup.includes(true)) {
@@ -528,14 +533,13 @@ class Info extends Component {
                 title: title,
                 src: src
             }
-        }
-        return null
+        } else return null
     }
 
     renderAgeRatings = (ratings) => {  
         return ratings.map(rating => {    
             return (
-                <img key={rating} className="info-bg-age" src={rating} alt=""/>
+                <img key={rating} className="info-age-rating" src={rating} alt=""/>
             )
         }) 
     }
@@ -553,7 +557,7 @@ class Info extends Component {
         return (
             <div className={"info-category " + title.toLowerCase()}>
                 <h3 className="info-category-title">{title}</h3>
-                <div className="info-category-item-wrapper">
+                <div className="info-category-items">
                     {typeof state === "string" ? <span key={state} className="info-span">{state}</span> : renderElements()}
                 </div>
             </div>
