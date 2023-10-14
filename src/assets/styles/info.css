@@ -1,3 +1,5 @@
+/* ===== INFO ==================================================================== */
+
 .info {
 	display: flex;
 	justify-content: center;
@@ -32,7 +34,7 @@
 .info-bg-img {
 	height: 50dvh;
 	position: absolute;
-	top: -10px;
+	top: -1px;
 	left: -10%;
 	z-index: -10;
 	filter: contrast(85%) brightness(85%) saturate(75%) sepia(25%) blur(1px);
@@ -60,6 +62,7 @@
 	bottom: 0;
 	background: linear-gradient(to bottom, transparent, #0008 40%);
 	font-size: .875rem;
+	grid-template-rows: 30dvh max-content 7dvh;
 }
 
 .info-wrapper * {
@@ -94,6 +97,8 @@
 	font-weight: 600;
 	text-align: center;
 	text-wrap: balance;
+	align-self: flex-end;
+	margin: 0;
 }
 
 .info-subtitle {
@@ -103,7 +108,7 @@
 
 .info-category {
 	margin: 5px 0;
-	padding-right: 50px;
+	padding-right: 25px;
 }
 
 .info-category-title {
@@ -150,7 +155,7 @@
 	-webkit-box-orient: vertical;
 	-webkit-line-clamp: 6;
 	max-height: 12rem;
-	margin-top: 0.5rem;
+	margin: 0.5rem 0;
 }
 
 .rating {
@@ -175,7 +180,7 @@
 	align-items: center;
 	height: fit-content;
 	gap: .75rem;
-	margin: 0.5rem 0 0 .5rem;
+	margin: 0 0 0 .5rem;
 }
 
 .info .btn.btn-menu {
@@ -186,9 +191,17 @@
 	margin: 12px 20px;
 }
 
+.info-tablet-bg {
+	display: none;
+	width: 100dvw;
+	height: 100dvh;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background: linear-gradient(to bottom, transparent, #0008 40%);
+}
 
-/* ––——– MEDIA QUERIES —— PROGRESSIVE ———————————————————————————————————————————— */
-
+/* ––——– INFO –– MEDIA QUERIES ——————————————————————————————————————————————————— */
 
 @media screen and (min-width: 389px) {
 	.info-wrapper {
@@ -205,10 +218,6 @@
 		max-height: 12rem;
 	}
 
-	.info-subtitle-wrapper {
-		margin: 0 0 0 .5rem;
-	}
-
 	.info-age-rating {
 		width: 40px;
 	}
@@ -222,7 +231,6 @@
 	}
 }
 
-
 @media screen and (min-width: 427px) and (max-width: 809px) {
 	.info-description {
 		-webkit-line-clamp: 11;
@@ -234,7 +242,6 @@
 		height: 43dvh;
 	}
 }
-
 
 @media screen and (min-width: 560px) and (max-width: 1365px) {
 	.info-bg-img {
@@ -250,7 +257,6 @@
 		}
 	}
 }
-
 
 @media screen and (min-width: 1365px) {
 	.info,
@@ -268,20 +274,11 @@
 	}
 
 	.info-wrapper {
-		min-width: calc(100% - 70px);
+		min-width: calc(430px - 70px);
 	}
 }
 
-
-/* ––——– MEDIA QUERIES —— SPECIFIC —————————————————————————————————–––—————————— */
-
-
-@media screen and (max-width: 809px) {
-	#controls-title {
-		margin-top: .9375rem;
-	}
-}
-
+/* ––——– INFO —– MEDIA QUERIES —— PORTRAIT —————————————————————————————————–————– */
 
 @media screen and (min-width: 809px) and (max-width: 1279px) and ((orientation: portrait) or (hover: hover)) {
 	.info.--active {
@@ -294,6 +291,7 @@
 		position: absolute;
 		bottom: 0;
 		background: transparent;
+		grid-template-rows: auto;
 	}
 
 	.info-description {
@@ -304,12 +302,7 @@
 	}
 
 	.info-tablet-bg {
-		width: 100dvw;
-		height: 100dvh;
-		position: absolute;
-		top: 0;
-		left: 0;
-		background: linear-gradient(to bottom, transparent, #0008 40%);
+		display: block;
 	}
 
 	.list-item.info-cover-container {
@@ -320,8 +313,6 @@
 
 	.info-title {
 		padding: 0 70px;
-		margin-top: 0;
-		margin-bottom: 0.25rem;
 		grid-column: 1;
 		grid-row: 4;
 
@@ -330,11 +321,11 @@
 	.info-subtitle-wrapper {
 		grid-column: 1;
 		grid-row: 5;
-		margin: 0 0 1rem 1rem;
 	}
 
 	.info-wrapper .info-category {
 		grid-column: 2;
+		padding-right: 70px;
 	}
 
 	.info-category.developer,
@@ -382,7 +373,6 @@
 	}
 }
 
-
 @media screen and (min-width: 1023px) and (max-width: 1365px) and ((orientation: portrait) or (hover: hover)) {	
 	.info-wrapper {
 		width: 60dvw;
@@ -391,7 +381,7 @@
 	}
 
 	.info-description {
-		padding: 0px 25px;
+		padding: 0;
 		max-height: 21rem;
 		-webkit-line-clamp: 16;
 	}
@@ -418,20 +408,13 @@
 			-webkit-line-clamp: 8;
 		}
 
-		.info-title {
-			margin-top: 2.25rem;
-			margin-bottom: .5rem;
-		}
-
 		.info .btn.btn-menu {
 			top: .25rem;
 		}
 	}
 }
 
-
-/* ––——– MEDIA QUERIES —— LANDSCAPE ————————————————————————————————–––—————————— */
-
+/* ––——– INFO —– MEDIA QUERIES —— LANDSCAPE —————————————————————————————————–———– */
 
 @media screen and (orientation: landscape) and (hover: none) and (max-width: 1079px) {
 	.info {
@@ -445,11 +428,13 @@
 
 	.info-description {
 		max-height: 8rem;
-		margin-top: 3.25rem;
 		-webkit-line-clamp: 6;
 	}
-}
 
+	.info-wrapper {
+		grid-template-rows: 54dvh max-content 14dvh;
+	}
+}
 
 @media screen and (hover: none) {
 	.rating-label {
@@ -462,7 +447,6 @@
 	}
 }
 
-
 @media screen and (orientation: landscape) and (hover: none) and (min-width: 1079px) and (max-width: 1365px) {
 	.info-wrapper {
 		width: 55dvw;
@@ -473,10 +457,5 @@
 	.info-description {
 		max-height: 11rem;
 		-webkit-line-clamp: 8;
-	}
-
-	.info-subtitle-wrapper {
-		margin-top: 1rem;
-		margin-bottom: 2rem;
 	}
 }

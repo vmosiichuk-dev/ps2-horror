@@ -600,7 +600,7 @@ class Info extends Component {
                             <p className="rating-label">Rating</p>
                         </div>
                     }
-                    {summary !== "" ? <p className="info-description">{summary}</p> : null}
+                    {(summary !== "" || summary === undefined) ? <p className="info-description">{summary}</p> : null}
                     {companyName !== "" ? this.renderContainer(companyLabel, companyName) : null}
                     {genres.length > 0 ? this.renderContainer("Genres", genres) : null}                
                     {websites.length > 0 ? this.renderContainer("Links", websites) : null}

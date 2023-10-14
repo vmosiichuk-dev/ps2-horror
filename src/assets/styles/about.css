@@ -149,6 +149,14 @@ footer a.nmd {
 	margin-bottom: .75rem;
 }
 
+
+@media screen and (max-width: 809px) {
+	#controls-title {
+		margin-top: .9375rem;
+	}
+}
+
+
 @media screen and (max-width: 809px) and (hover: none) {
 	.about-article {
 		padding-top: 1.25rem;
@@ -159,11 +167,13 @@ footer a.nmd {
 	}
 }
 
+
 @media screen and (max-width: 1079px) and (hover: none) {
 	.about-wrapper {
 		padding: 0 25px 25px;
 	}
 }
+
 
 @media screen and (min-width: 809px) {
 	.about {
@@ -213,6 +223,7 @@ footer a.nmd {
 		font-size: 1.25rem;
 	}
 }
+
 
 @media screen and (orientation: landscape) and (hover: none) {
 	footer {
