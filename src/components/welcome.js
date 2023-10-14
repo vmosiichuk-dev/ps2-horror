@@ -3,7 +3,7 @@ import ps from "../assets/img/ps-logo.svg"
 
 function Welcome({ animationReset, transitionStart, welcomeClick, onStateChange, loaderError }) {
     let buttonClass = "btn btn-welcome",
-        wrapperClass = "welcome-wrapper bg-black",
+        wrapperClass = "welcome-wrapper",
         subtitleClass = "welcome-subtitle",
         pClass = ""
 
@@ -26,8 +26,8 @@ function Welcome({ animationReset, transitionStart, welcomeClick, onStateChange,
             <p className="welcome-title"><span className="a11y">PS2 Game Library — </span><img src={ps} alt=""/>Survival Horror Classics</p>
             <section className="fog">
                 <div className="fog-container">
-                <div className="fog-img --1st"></div>
-                <div className="fog-img --2nd"></div>
+                    <div className="fog-img --1st"></div>
+                    <div className="fog-img --2nd"></div>
                 </div>
             </section>
             <div className="welcome-container">

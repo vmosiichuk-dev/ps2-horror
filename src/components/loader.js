@@ -2,14 +2,14 @@ import loaderGif from "../assets/img/loader.gif"
 import "../assets/styles/loader.css"
 
 function Loader({ welcomeClick, loaderError }) {
-    let loaderContainerClass = "loader-container",
+    let loaderClass = "loader",
         loaderErrorClass = "loader-error"
 
-    if (welcomeClick) loaderContainerClass += " --active"
+    if (welcomeClick) loaderClass += " --active"
     if (loaderError) loaderErrorClass += " --active"
 
     return (
-        <div className={loaderContainerClass}>
+        <div className={loaderClass}>
             <img className="loader-gif" src={loaderGif} alt="" />
             <p className={loaderErrorClass}>An error occured while connecting to the database. Try reloading the page or visit our PS2 Collection App later.</p>
         </div>

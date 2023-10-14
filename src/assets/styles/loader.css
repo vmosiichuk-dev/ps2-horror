@@ -1,4 +1,6 @@
-.loader-container {
+/* ===== LOADER ================================================================= */
+
+.loader {
 	display: grid;
 	place-items: center;
 	width: 100dvw;
@@ -9,7 +11,7 @@
 	opacity: 0;
 }
 
-.loader-container.--active {
+.loader.--active {
 	opacity: 1;
 	transition: 1s opacity .75s cubic-bezier(.46,.03,.52,.96);
 }
@@ -40,6 +42,8 @@
 .loader-error.--active {
 	opacity: 1;
 }
+
+/* ––——– LOADER –– MEDIA QUERIES ——–––––––––––––—————————————————————————–——————— */
 
 @media screen and (orientation: landscape) and (hover: none) {
 	.loader-gif {

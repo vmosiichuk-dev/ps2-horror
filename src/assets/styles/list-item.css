@@ -1,3 +1,5 @@
+/* ===== LIST ITEM ================================================================= */
+
 .list-item {
     box-shadow: 3px 3px 15px rgba(0,0,0,.4);
     height: 181px;
@@ -288,15 +290,13 @@
     filter: invert(89%) sepia(59%) saturate(3802%) hue-rotate(313deg) brightness(108%) contrast(98%);
 }
 
-
-/* ––——– MEDIA QUERIES ——–––––––––––––———————————————————————————————————————————— */
-
+/* ––——– LIST ITEM —— MEDIA QUERIES ——–––––––––––––———————————————————————————————— */
 
 @media screen and (min-width: 1365px) {
     .list-item {
         box-shadow: 5px 5px 15px rgba(0,0,0,.4);
         height: 226px;
-        max-width:160px;
+        max-width: 160px;
         margin: 0 18px;
     }
 
@@ -324,10 +324,6 @@
     .list-item-buttons {
         grid-template-rows: 1fr 26px 18px 26px 1.5fr 26px 18px 26px 1fr;
         opacity: 0;
-    }
-
-    .list-item-buttons:hover {
-        opacity: 1;
     }
 
     .delete-p {

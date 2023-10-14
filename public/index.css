@@ -1,3 +1,5 @@
+/* ===== INDEX ==================================================================== */
+
 @import url("https://fonts.googleapis.com/css?family=Unbounded|Didact+Gothic:wght@400;600&subset=latin,latin-ext");
 
 body {
@@ -8,18 +10,18 @@ body {
 	--silver: #f7fdff;
 	--gold: #fdd45f;
 	--shadow: 14px 14px 0px -4px #4c4c45;
-	margin: 0;
 	font-family: "Unbounded", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Helvetica Neue", sans-serif;
-	color: var(--accent);
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+	margin: 0;
+	color: var(--accent);
 	background: #2c5364;
 	background: -webkit-linear-gradient(to bottom, #2c5364 0%, #203a43 70%, #0f2027 100%);
 	background: linear-gradient(to bottom, #2c5364 0%, #203a43 70%, #0f2027 100%);
 	overflow: hidden;
 }
 
-.info-p, h2, img, button, input, input::placeholder {
+h2, img, button, input, input::placeholder {
 	font-family: "Didact Gothic";
 }
 
@@ -39,10 +41,6 @@ button[disabled]:hover {
 
 input::placeholder {
 	font-size: 1rem;
-}
-
-.hidden {
-	display: none;
 }
 
 .invisible {
@@ -86,12 +84,8 @@ input::placeholder {
 	display: grid;
 	align-items: center;
 	grid-template-columns: minmax(50px, 1fr) minmax(230px, 840px) minmax(50px, 1fr);
-	background: linear-gradient(to bottom, #2c5364 0%, #203a43 70%, #0f2027 100%);
-	z-index: 30;
-}
-
-.welcome-wrapper.bg-black {
 	background: black;
+	z-index: 30;
 }
 
 .welcome-wrapper.--active {
@@ -238,9 +232,7 @@ p.welcome-subtitle {
 	}
 }
 
-
-/* ––——– MEDIA QUERIES ——–––––––––––––———————————————————————————————————————————— */
-
+/* ––——– INDEX –– MEDIA QUERIES ——————————————————————————————————————————————————— */
 
 @media screen and (min-width: 809px) {
 	.btn.btn-welcome {
@@ -249,18 +241,20 @@ p.welcome-subtitle {
 
 	.welcome-container p {
 		font-size: 1.125rem;
-		line-height: initial;
 	}
 
 	p.welcome-subtitle {
 		font-size: 1.5rem;
-		line-height: initial;
 	}
 
 	.noscript-link {
 		transition: .55s color cubic-bezier(.46,.03,.52,.96);
 		color: var(--accent);
 		text-decoration: none;
+	}
+
+	.noscript-link:hover {
+		color: #f89c0b;
 	}
 
 	.noscript-link:after {
@@ -280,10 +274,6 @@ p.welcome-subtitle {
 		width: calc(100% - 4px);
 	}
 
-	.noscript-link:hover {
-		color: #f89c0b;
-	}
-
 	.fog-img.--1st {
 		animation: fog 240s linear infinite;
 	}
@@ -291,8 +281,14 @@ p.welcome-subtitle {
 	.fog-img.--2nd {
 		animation: fog 160s linear infinite;
 	}
-}
 
+	@media (max-width: 1023px) and ((orientation: portrait) or ((min-width: 843px) and (max-width: 925px) and (orientation: landscape))) {
+		.welcome-container p {
+			max-width: 500px;
+			margin: 0 auto 20px;
+		}
+	}
+}
 
 @media screen and (orientation: landscape) and (hover: none) and (max-width: 1365px) {
 	body {
@@ -323,7 +319,6 @@ p.welcome-subtitle {
 	}
 }
 
-
 @media screen and (min-width: 1023px) and (orientation: landscape) and (hover: none) {
 	.welcome-title {
 		margin: 42px;
@@ -342,7 +337,6 @@ p.welcome-subtitle {
 		margin: 20px 0 0;
 	}
 }
-
 
 @media screen and (((max-width: 1279px) and (orientation: portrait)) or ((min-width: 1079px) and (orientation: landscape)) or (min-width: 1365px)) {
 	html {
