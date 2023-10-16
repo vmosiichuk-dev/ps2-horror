@@ -4,7 +4,11 @@ import RootContent from "./components/root-content"
 
 const root = createRoot(document.getElementById("root"))
 root.render(
-	<StrictMode>
-		<RootContent />
-	</StrictMode>
+	process.env.NODE_ENV === "development" 
+	? (
+		<StrictMode>
+			<RootContent />
+		</StrictMode>
+	  ) 
+	: <RootContent />
 )

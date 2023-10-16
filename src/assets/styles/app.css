@@ -1,3 +1,5 @@
+/* ===== APP ================================================================== */
+
 .app {
     margin: 0;
     height: 100dvh;
@@ -18,8 +20,6 @@
     grid-column: 1;
     min-width: calc(100dvw - 20px);
 }
-
-/* ––——– MEDIA QUERIES ——–––––––––––––———————————————————————————————————————————— */
 
 @media screen and (min-width: 809px) and ((orientation: portrait) or (hover: hover)) {
     .app {

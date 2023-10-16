@@ -16,7 +16,7 @@
 	transition: 1s opacity .75s cubic-bezier(.46,.03,.52,.96);
 }
 
-.loader-gif {
+.loader__gif {
 	max-width: 60dvw;
 	left: 0;
     top: -2rem;
@@ -24,14 +24,14 @@
 	animation: 1.5s fade-in cubic-bezier(.46,.03,.52,.96) forwards;
 }
 
-.loader-error {
+.loader__error {
 	opacity: 0;
 	text-align: center;
 	font-family: "Didact Gothic";
 	position: absolute;
 	bottom: 20%;
 	margin: 0;
-	padding: 6px 12px 8px 12px;
+	padding: 6px 12px 8px;
 	border: 1px solid #c1bcda70;
 	border-radius: 6px;
 	background-color: #c1bcda36;
@@ -39,19 +39,17 @@
 	transition: .3s opacity cubic-bezier(.46,.03,.52,.96);
 }
 
-.loader-error.is-active {
+.loader__error.is-active {
 	opacity: 1;
 }
 
-/* ––——– LOADER –– MEDIA QUERIES ——–––––––––––––—————————————————————————–——————— */
-
 @media screen and (orientation: landscape) and (hover: none) {
-	.loader-gif {
+	.loader__gif {
 		max-width: 38dvw;
 		top: .5rem;
 	}
 
-	.loader-error {
+	.loader__error {
 		bottom: 20px;
 		right: 20px;
 		max-width: 140px;
@@ -59,31 +57,31 @@
 }
 
 @media screen and (min-width: 809px) {
-	.loader-error {
-		padding: 12px 12px 14px 12px;
+	.loader__error {
+		padding: 12px 12px 14px;
 		max-width: 385px;
 	}
 
 	@media (orientation: landscape) and (hover: none) {
-		.loader-gif {
+		.loader__gif {
 			max-width: 32dvw;
 		}
 
-		.loader-error {
+		.loader__error {
 			max-width: 220px;
 		}
 	}
 }
 
 @media screen and (min-width: 1023px) {
-	.loader-error {
+	.loader__error {
 		max-width: 430px;
 		font-size: 1.125rem;
-		padding: 24px 24px 26px 24px;
+		padding: 24px 24px 26px;
 	}
 	
 	@media (orientation: landscape) and (hover: none) {
-		.loader-error {
+		.loader__error {
 			bottom: 15%;
 			right: initial;
 		}

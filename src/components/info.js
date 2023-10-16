@@ -4,7 +4,6 @@ import menuImg from "../assets/img/plus.svg"
 import "../assets/styles/info.css"
 
 // Age Rating Images
-
 import ceroA from "../assets/img/ratings/ceroA.svg"
 import ceroB from "../assets/img/ratings/ceroB.svg"
 import ceroC from "../assets/img/ratings/ceroC.svg"
@@ -27,7 +26,6 @@ import grac18 from "../assets/img/ratings/grac18.svg"
 import jpW from "../assets/img/ratings/jpW.webp"
 
 // Alternative Screenshots
-
 import abyss from "../assets/img/screenshots/abyss.webp"
 import aliens from "../assets/img/screenshots/aliens.webp"
 import baroque from "../assets/img/screenshots/baroque.webp"
@@ -615,7 +613,6 @@ class Info extends Component {
                     <div className="info__description-wrapper">
                         {(summary !== "" && summary !== undefined)
                         ? <p className="info__description">{summary}</p> 
-                        /* : <p className="info__description">{newSummary}</p> */
                         : (
                             <p className="info__description">
                               {title} is a noteworthy addition to the PlayStation 2 library, offering a captivating and visually stunning

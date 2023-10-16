@@ -2,10 +2,10 @@ import Loader from "./loader"
 import ps from "../assets/img/ps-logo.svg"
 
 function Welcome({ animationReset, transitionStart, welcomeClick, onStateChange, loaderError }) {
-    let buttonClass = "btn btn-welcome",
-        wrapperClass = "welcome-wrapper",
-        subtitleClass = "welcome-subtitle",
-        pClass = ""
+    let buttonClass = "btn --welcome",
+        wrapperClass = "welcome",
+        subtitleClass = "welcome__subtitle",
+        pClass = "welcome__text"
 
     if (!welcomeClick) {
         buttonClass += " has-faded-in"
@@ -23,14 +23,14 @@ function Welcome({ animationReset, transitionStart, welcomeClick, onStateChange,
 
     return (
         <div className={wrapperClass}>
-            <p className="welcome-title"><span className="a11y">PS2 Game Library — </span><img src={ps} alt=""/>Survival Horror Classics</p>
-            <section className="fog">
-                <div className="fog-container">
-                    <div className="fog-img --1st"></div>
-                    <div className="fog-img --2nd"></div>
+            <p className="welcome__title"><span className="_a11y">PS2 Game Library — </span><img src={ps} alt=""/>Survival Horror Classics</p>
+            <section className="fog__section">
+                <div className="fog__container">
+                    <div className="fog --one"></div>
+                    <div className="fog --two"></div>
                 </div>
             </section>
-            <div className="welcome-container">
+            <div className="welcome__container">
                 <p className={subtitleClass}>Witness the evolution of fear with our PS2 Collection App.</p>
                 <p className={pClass}>Create your own personalised collection, track & share your progress.</p>
                 <button className={buttonClass} onClick={() => onStateChange("welcomeClick")}>START</button>

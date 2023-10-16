@@ -3,7 +3,7 @@ import AddGame from "./add-game"
 import About from "./about"
 import Info from "./info"
 import SearchPanel from "./search-panel"
-import GameList from "./game_list"
+import GameList from "./game-list"
 import del from "../assets/img/del.png"
 import noCover from "../assets/img/no-cover.webp" 
 import "../assets/styles/app.css"
@@ -567,7 +567,7 @@ class App extends Component {
                     onAddGameSearch={this.handleAddGameSearch} 
                     onAddGameSubmit={this.handleAddGameSubmit} 
                 />
-                <main className="list-wrapper" id="main"> 
+                <main id="main"> 
                     {searchError}  
                     <GameList 
                         filteredData={filteredData} 

@@ -1,5 +1,5 @@
 import Game from "./game"
-import "../assets/styles/game_list.css"
+import "../assets/styles/game-list.css"
 
 function GameList({ onDelete, onMarkState, onPriceCategoryChange, onOpenInfo, delSrc, filteredData }) {
     const renderGames = () => {
@@ -21,7 +21,7 @@ function GameList({ onDelete, onMarkState, onPriceCategoryChange, onOpenInfo, de
     const games = renderGames()
 
     return (
-        <ul className="game_list">
+        <ul className="game-list">
             {games}
         </ul>
     )
