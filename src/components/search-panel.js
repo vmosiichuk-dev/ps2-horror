@@ -44,7 +44,7 @@ class SearchPanel extends Component {
             <section className="mobile-progress" aria-label="Gaming progress information">
                 <p><span className="a11y">{"Games in " + label.toLowerCase() + ":"}</span><span>{count}</span> / <span className="a11y">Total games:</span><span>{data.length}</span></p>
                 <div className="progress-bar--container">
-                    <p className={"progress-bar-label " + label.toLowerCase()}>{label + " progress"}</p>
+                    <p className={"progress-bar-label --" + label.toLowerCase()}>{label + " progress"}</p>
                     <div className="progress-bar" style={progressbarStyle}></div>
                 </div>
                 <span className="a11y">Percentage progress count:</span>
@@ -86,9 +86,9 @@ class SearchPanel extends Component {
             searchAria = true,
             searchLabel = "Search",
             addGameMenuAlt = "Open add game form",
-            addGameImgClass = "menu-img",
-            addGameBtnClass = "btn btn-menu",
-            aboutBtnClass = "btn btn-about",
+            addGameImgClass = "btn__img",
+            addGameBtnClass = "btn --menu",
+            aboutBtnClass = "btn --about",
             tabIndex = 0,
             count = wishCount, 
             progressCount = progressWishCount, 
@@ -97,14 +97,14 @@ class SearchPanel extends Component {
 
         if (addGameIsActive) { 
             addGameMenuAlt = "Close add game form"
-            addGameImgClass += " --active" 
-            addGameBtnClass += " --active" 
-            aboutBtnClass += " --inactive" 
+            addGameImgClass += " is-active" 
+            addGameBtnClass += " is-active" 
+            aboutBtnClass += " is-inactive" 
             tabIndex = -1
         }
         if (aboutIsActive) {
-            aboutBtnClass += " --active"  
-            addGameBtnClass += " --inactive" 
+            aboutBtnClass += " is-active"  
+            addGameBtnClass += " is-inactive" 
             tabIndex = -1           
         }
         if (searchIconSrc === del) { 
@@ -130,9 +130,9 @@ class SearchPanel extends Component {
                 <section className="btn-group" aria-label="Filter controls" aria-describedby="filter-description">
                     <span id="filter-description" className="a11y">Use filters to show games previously marked as played or the ones added to your collection. Combine filters and search to look for games under specific filter option.</span> 
                     {btnGroupAside(" desktop")}
-                    <button className={`btn ${activeFilter === "all" ? "--active" : ""}`} type="button" tabIndex={tabIndex} onClick={() => onFilterChange("all")}>All games</button>
-                    <button className={`play btn ${activeFilter === "play" ? "--active" : ""}`} type="button" tabIndex={tabIndex} onClick={() => onFilterChange("play")}><img className="icon" src={game} alt="" />Played</button>
-                    <button className={`btn ${activeFilter === "wish" ? "--active" : ""}`} type="button" tabIndex={tabIndex} onClick={() => onFilterChange("wish")}><img className="icon" src={star} alt="" />Collected</button>
+                    <button className={`btn ${activeFilter === "all" ? "is-active" : ""}`} type="button" tabIndex={tabIndex} onClick={() => onFilterChange("all")}>All games</button>
+                    <button className={`btn --played ${activeFilter === "play" ? "is-active" : ""}`} type="button" tabIndex={tabIndex} onClick={() => onFilterChange("play")}><img className="icon" src={game} alt="" />Played</button>
+                    <button className={`btn ${activeFilter === "wish" ? "is-active" : ""}`} type="button" tabIndex={tabIndex} onClick={() => onFilterChange("wish")}><img className="icon" src={star} alt="" />Collected</button>
                 </section>
                 <section className="search-wrapper" aria-label="Search input" aria-describedby="search-description">
                     <span id="search-description" className="a11y">Filter games that have a matching character string in the title with the character string provided by the user in the input field. When input has focus, it's associated button can be used to clear the input.</span>

@@ -3,8 +3,9 @@ import AddGame from "./add-game"
 import About from "./about"
 import Info from "./info"
 import SearchPanel from "./search-panel"
-import List from "./list"
+import GameList from "./game_list"
 import del from "../assets/img/del.png"
+import noCover from "../assets/img/no-cover.webp" 
 import "../assets/styles/app.css"
 import IGDB from "../services/IGDB"
 
@@ -95,7 +96,7 @@ class App extends Component {
         }
     }
 
-// ––––––––––––––––––––––––––––––––– <List /> functions –––––––––––––––––––––––––––––––––
+// ––––––––––––––––––––––––––––––––– <GameList /> functions –––––––––––––––––––––––––––––––––
 
     markState = (slug, state) => {
         this.setState(prevState => {
@@ -181,7 +182,7 @@ class App extends Component {
         if (filteredData.length === 0) {
             if (activeFilter === "play" && playCount === 0) {
                 return (
-                    <p className="search-error --active" role="status">
+                    <p className="search-error is-active" role="status">
                     There are no games marked as played yet.<br />
                     To mark a game as played, hover or click on a game card and press a controller button.
                     </p>
@@ -189,14 +190,14 @@ class App extends Component {
             }
             if (activeFilter === "wish" && wishCount === 0) {
                 return (
-                    <p className="search-error --active" role="status">
+                    <p className="search-error is-active" role="status">
                     There are no games in your collection yet.<br />
                     To add a game to the collection, hover or click on a game card and press a star button.
                     </p>
                 )
                 }
             return (
-                <p className="search-error --active" role="status">
+                <p className="search-error is-active" role="status">
                     The game you are looking for is not found.<br />
                     You can add a game to the list from the menu in the navigation bar (+ plus sign).
                 </p>
@@ -324,8 +325,11 @@ class App extends Component {
         let gamePrice = this.gamePrices.find(item => item.title === game.name)
         if (gamePrice === undefined) gamePrice = {prices: { loose: "n/a", cib: "n/a", newg: "n/a" }}
 
-        const src = "https://images.igdb.com/igdb/image/upload/t_cover_big/" + game.cover.image_id + ".jpg",
-              filters = { wish: false, play: false },
+        let src = ""
+        game.cover !== undefined 
+            ? src = "https://images.igdb.com/igdb/image/upload/t_cover_big/" + game.cover.image_id + ".jpg" 
+            : src = noCover
+        const filters = { wish: false, play: false },
               gameData = { ...game, rating: rating, ageRatings: ageRatings, title: game.name, src: src, ...gamePrice.prices, priceCategory: "" }
 
         delete gameData.name
@@ -565,7 +569,7 @@ class App extends Component {
                 />
                 <main className="list-wrapper" id="main"> 
                     {searchError}  
-                    <List 
+                    <GameList 
                         filteredData={filteredData} 
                         delSrc={delSrc}
                         onDelete={this.deleteItem} 

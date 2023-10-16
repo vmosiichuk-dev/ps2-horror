@@ -7,9 +7,9 @@ import overlay from "../assets/img/overlay.png"
 import looseIcon from "../assets/img/loose.png"
 import cibIcon from "../assets/img/cib.png"
 import newgIcon from "../assets/img/newg.png"
-import "../assets/styles/list-item.css"
+import "../assets/styles/game.css"
 
-class ListItem extends Component {
+class Game extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -27,7 +27,7 @@ class ListItem extends Component {
         const { clickCount } = this.state
     
         if (clickCount === 0) {
-          this.setState({ delSrc: question, clickCount: 1, activeClass: " --active", confirmDeleteAria: false })
+          this.setState({ delSrc: question, clickCount: 1, activeClass: " is-active", confirmDeleteAria: false })
           setTimeout(() => {
             this.setState({ delSrc: delSrc, clickCount: 0, activeClass: "", confirmDeleteAria: true })
           }, 3000)
@@ -61,32 +61,32 @@ class ListItem extends Component {
         const { slug, title, src, wish, play, loose, cib, newg, onMarkState, onOpenInfo, onPriceCategoryChange, priceCategory } = this.props
         const { delSrc, activeClass, itemButtonsStyle, confirmDeleteAria } = this.state
 
-        let listItemClass = "list-item",
+        let listItemClass = "game",
             btnLooseClass = "btn btn-loose",
             btnCibClass = "btn btn-cib",
             btnNewgClass = "btn btn-newg",
-            statusContainerClass = "list-item-status-container",
+            statusContainerClass = "game__status-container",
             deleteAlt = "Delete game"
 
-        if (wish) listItemClass += " wish"
-        if (play) listItemClass += " play"
+        if (wish) listItemClass += " --wish"
+        if (play) listItemClass += " --play"
         if (delSrc === question) deleteAlt = "Confirm deletion"
-        if (!confirmDeleteAria) statusContainerClass += " --active"
+        if (!confirmDeleteAria) statusContainerClass += " is-active"
 
         switch (priceCategory) {
             case "loose": {
                 listItemClass += " --loose" 
-                btnLooseClass += " --active"
+                btnLooseClass += " is-active"
                 break
             }
             case "cib": {
                 listItemClass += " --cib" 
-                btnCibClass += " --active"
+                btnCibClass += " is-active"
                 break
             }
             case "newg": {
                 listItemClass += " --newg" 
-                btnNewgClass += " --active"
+                btnNewgClass += " is-active"
                 break
             }
             default: break
@@ -95,12 +95,12 @@ class ListItem extends Component {
         return (
             <li className={listItemClass} id={slug}>
                 <div className={statusContainerClass}>
-                    <img className="status-icon wish" src={star} alt="Added to Collection" />
-                    <img className="status-icon play" src={game} alt="Marked as Played" />
+                    <img className="game__status --wish" src={star} alt="Added to Collection" />
+                    <img className="game__status --play" src={game} alt="Marked as Played" />
                 </div>
-                <img className="img-cover" src={src} alt={title + " — PS2 game cover"} />
-                <img className="img-overlay" src={overlay} alt="" />
-                <div className={"list-item-buttons" + activeClass} tabIndex={0} role="toolbar" aria-activedescendant={slug + "toolbar--wish"} onFocus={this.handleTabFocus} onBlur={this.handleTabBlur} onMouseOver={this.handleTabFocus} onMouseOut={this.handleTabBlur} style={itemButtonsStyle} >
+                <img className="game__cover-img" src={src} alt={title + " — PS2 game cover"} />
+                <img className="game__cover-overlay" src={overlay} alt="" />
+                <div className={"game-buttons" + activeClass} tabIndex={0} role="toolbar" aria-activedescendant={slug + "toolbar--wish"} onFocus={this.handleTabFocus} onBlur={this.handleTabBlur} onMouseOver={this.handleTabFocus} onMouseOut={this.handleTabBlur} style={itemButtonsStyle} >
                     <button type="button" id={slug + "--toolbar-wish"} className="btn-sm btn-wish" onClick={() => onMarkState("wish")} data-toggle="wish">
                         <img className="icon icon-wish" src={star} alt="Add to collection" />
                     </button>
@@ -115,11 +115,11 @@ class ListItem extends Component {
                     </button>
                     <p className={"delete-p" + activeClass} aria-hidden={confirmDeleteAria}>Are you sure?<br/>Click again to delete.</p>
                 </div>
-                <h2 className="list-item-data">
-                    <span className="list-item-name">
+                <h2 className="game-data">
+                    <span className="game-name">
                         {title}
                     </span>
-                    <div className="list-item-price">
+                    <div className="game-price">
                         <button type="button" className={btnLooseClass} onClick={() => onPriceCategoryChange("loose")}>
                             <img className="cd-icon" src={looseIcon} alt="Loose price" />
                             <div>
@@ -148,4 +148,4 @@ class ListItem extends Component {
     }
 }
 
-export default ListItem
+export default Game

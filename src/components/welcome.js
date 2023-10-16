@@ -8,17 +8,17 @@ function Welcome({ animationReset, transitionStart, welcomeClick, onStateChange,
         pClass = ""
 
     if (!welcomeClick) {
-        buttonClass += " --fade-in"
+        buttonClass += " has-faded-in"
     }     
     if (welcomeClick) {
-        subtitleClass += " --fade-out"
-        pClass += "--fade-out"
+        subtitleClass += " has-faded-out"
+        pClass += "has-faded-out"
     }
     if (welcomeClick && animationReset) {
-        buttonClass += " --fade-out"
+        buttonClass += " has-faded-out"
     }
     if (transitionStart) {
-        wrapperClass += " --active"
+        wrapperClass += " is-active"
     }
 
     return (

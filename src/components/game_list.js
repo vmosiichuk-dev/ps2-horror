@@ -1,11 +1,11 @@
-import ListItem from "./list-item"
-import "../assets/styles/list.css"
+import Game from "./game"
+import "../assets/styles/game_list.css"
 
-function List({ onDelete, onMarkState, onPriceCategoryChange, onOpenInfo, delSrc, filteredData }) {
-    const renderElements = () => {
+function GameList({ onDelete, onMarkState, onPriceCategoryChange, onOpenInfo, delSrc, filteredData }) {
+    const renderGames = () => {
         return filteredData.map(item => {    
             return (
-                <ListItem 
+                <Game 
                     {...item} 
                     key={item.slug} 
                     delSrc={delSrc} 
@@ -18,13 +18,13 @@ function List({ onDelete, onMarkState, onPriceCategoryChange, onOpenInfo, delSrc
         })
     }
 
-    const elements = renderElements()
+    const games = renderGames()
 
     return (
-        <ul className="list">
-            {elements}
+        <ul className="game_list">
+            {games}
         </ul>
     )
 }
 
-export default List
+export default GameList

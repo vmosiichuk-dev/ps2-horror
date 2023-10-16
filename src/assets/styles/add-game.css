@@ -12,7 +12,7 @@
 	justify-content: center;
 }
 
-.add-form-wrapper.--active {
+.add-form-wrapper.is-active {
     left: 0;
 }
   
@@ -71,7 +71,7 @@
 	margin: 1.25rem auto 0;
 }
 
-.menu-img {
+.btn__img {
     width: 12px;
     height: 12px;
 	margin-top: 4px;
@@ -79,7 +79,7 @@
     filter: invert(100%) sepia(1%) saturate(7482%) hue-rotate(296deg) brightness(109%) contrast(100%);
 }
 
-.menu-img.--active {
+.btn__img.is-active {
     transform: rotateZ(225deg);
 }
 

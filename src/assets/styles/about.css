@@ -10,7 +10,7 @@
 	font-family: "Didact Gothic";
 }
 
-.about.--active {
+.about.is-active {
     left: 0;
 }
 
@@ -109,7 +109,7 @@ footer a.nmd {
 	top: -1px;
 }
 
-.about .btn.btn-menu {
+.about .btn.btn--menu {
 	right: 0;
 	position: absolute;
 	top: .25rem;
@@ -117,17 +117,17 @@ footer a.nmd {
 	margin: 12px 20px;
 }
 
-.about.--active .btn.btn-menu {
+.about.is-active .btn.btn--menu {
 	padding: 1px 6px 1px 4px;
 }
 
-.menu-img.--help {
+.btn__img.--help {
 	width: 20px;
 	height: 20px;
 	margin-top: 2px;
 }
 
-.about .menu-img {
+.about .btn__img {
 	transition: none;
 }
 

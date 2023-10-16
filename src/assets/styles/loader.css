@@ -11,7 +11,7 @@
 	opacity: 0;
 }
 
-.loader.--active {
+.loader.is-active {
 	opacity: 1;
 	transition: 1s opacity .75s cubic-bezier(.46,.03,.52,.96);
 }
@@ -39,7 +39,7 @@
 	transition: .3s opacity cubic-bezier(.46,.03,.52,.96);
 }
 
-.loader-error.--active {
+.loader-error.is-active {
 	opacity: 1;
 }
 

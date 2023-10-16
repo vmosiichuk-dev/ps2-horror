@@ -5,8 +5,8 @@ function Loader({ welcomeClick, loaderError }) {
     let loaderClass = "loader",
         loaderErrorClass = "loader-error"
 
-    if (welcomeClick) loaderClass += " --active"
-    if (loaderError) loaderErrorClass += " --active"
+    if (welcomeClick) loaderClass += " is-active"
+    if (loaderError) loaderErrorClass += " is-active"
 
     return (
         <div className={loaderClass}>

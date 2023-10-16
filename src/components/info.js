@@ -75,6 +75,7 @@ class Info extends Component {
             websites: [],
             ageRatings: [],
             ageRatingJp: false,
+            releaseDate: "",
             rating: "",
             title: "",
             src: ""
@@ -96,10 +97,9 @@ class Info extends Component {
               yearsPast = yearNow - release.getFullYear()
 
         let releaseDate = release.toLocaleDateString("en-us", { year:"numeric", month:"short", day:"numeric"})
-        if (releaseDate === "Invalid Date") releaseDate = ""
 
         if (genres !== undefined) {
-            genres.forEach(genre => newGenres.push(genre.name))
+            genres.forEach((genre, i) => { if (i < 4) newGenres.push(genre.name) })
         }
 
         if (involved_companies !== undefined) {
@@ -118,33 +118,35 @@ class Info extends Component {
 
         if (websites !== undefined) {
             websites.forEach(website => {
-                let label, url
-                url = website.url
-                
-                switch (website.category) {
-                    case 1:  label = "Official"; break
-                    case 2:  label = "Wikia"; break
-                    case 3:  label = "Wikipedia"; break
-                    case 4:  label = "Facebook"; break
-                    case 5:  label = "Twitter"; break
-                    case 6:  label = "Twitch"; break
-                    case 8:  label = "Instagram"; break
-                    case 9:  label = "Youtube"; break
-                    case 10: label = "Iphone"; break
-                    case 11: label = "Ipad"; break
-                    case 12: label = "Android"; break
-                    case 13: label = "Steam"; break
-                    case 14: label = "Reddit"; break
-                    case 15: label = "Itch"; break
-                    case 16: label = "Epicgames"; break
-                    case 17: label = "Gog"; break
-                    case 18: label = "Discord"; break
-                    default: break
-                }
+                const categoryGroup = [
+                    website.category === 1,
+                    website.category === 2,
+                    website.category === 3,
+                    website.category === 6,
+                    website.category === 9,
+                    website.category === 14
+                ]
 
-                const newWebsite = Object.assign({label: label, url: url})
-                newWebsites.push(newWebsite)
+                if (categoryGroup.includes(true)) {
+                    let label, url
+                    url = website.url
+                    switch (website.category) {
+                        case 1:  label = "Official"; break
+                        case 2:  label = "Wikia"; break
+                        case 3:  label = "Wikipedia"; break
+                        case 6:  label = "Twitch"; break
+                        case 9:  label = "Youtube"; break
+                        case 14: label = "Reddit"; break
+                        default: break
+                    }
+
+                    const newWebsite = Object.assign({label: label, url: url})
+                    newWebsites.push(newWebsite)
+                }
             })
+        } else {
+            const newWebsite = Object.assign({label: "Google", url: `https://www.google.com/search?q=${title.toLowerCase().replace(/ /g, '+')}+ps2`})
+            newWebsites.push(newWebsite)
         }
 
         const firstGroup = [
@@ -539,26 +541,27 @@ class Info extends Component {
     renderAgeRatings = (ratings) => {  
         return ratings.map(rating => {    
             return (
-                <img key={rating} className="info-age-rating" src={rating} alt=""/>
+                <img key={rating} className="info__age" src={rating} alt=""/>
             )
         }) 
     }
 
-    renderContainer = (title, state) => { 
+    renderCategory = (title, state) => { 
         const renderElements = () => {
             return state.map(item => {    
                 return (
                     title === "Links" 
-                    ? <a key={item.label} href={item.url} target="_blank" rel="noopener noreferrer">{item.label}</a> 
-                    : <span key={item} className="info-span">{item}</span>
+                    ? <a key={item.label} href={item.url} className="info__category-link" target="_blank" rel="noopener noreferrer">{item.label}</a> 
+                    : <span key={item}>{item}</span>
                 )
             })
         }
+
         return (
-            <div className={"info-category " + title.toLowerCase()}>
-                <h3 className="info-category-title">{title}</h3>
-                <div className="info-category-items">
-                    {typeof state === "string" ? <span key={state} className="info-span">{state}</span> : renderElements()}
+            <div className={"info__category _" + title.toLowerCase()}>
+                <h3 className="info__category-title">{title}</h3>
+                <div className="info__category-items">
+                    {typeof state === "string" ? <span key={state}>{state}</span> : renderElements()}
                 </div>
             </div>
         )
@@ -569,41 +572,68 @@ class Info extends Component {
         const {openedInfo, onInfoClose} = this.props  
 
         let infoClass = "info",
-            infoAgeRatingClass = "info-age-rating-container"
+            infoAgeRatingClass = "info__age-container",
+            infoTitleWrapperClass = "info__title-wrapper",
+            infoContainerClass = "info__container",
+            ps2LifeCycle = "middle"
 
-        if (openedInfo) infoClass += " --active"
-        if (ageRatingJp) infoAgeRatingClass += " --active"
+        if (openedInfo) infoClass += " is-active"
+        if (ageRatingJp) infoAgeRatingClass += " has-jp"
+        if (ageRatings.length < 1) infoTitleWrapperClass += " has-space"
+        if (genres.length < 1 || companyName === "" || websites.length < 1) infoContainerClass += " has-space"
+        if (+releaseDate.slice(-4) <= 2004) ps2LifeCycle = "early"
+        if (+releaseDate.slice(-4) >= 2009) ps2LifeCycle = "late"
 
         return (
             <section className={infoClass} aria-label="Game information">
-                <button type="button" className="btn btn-menu" onClick={onInfoClose} tabIndex={0}>
-                    <img className="menu-img --active" src={menuImg} alt="Close game information"/>
+                <button className="btn --menu" type="button" onClick={onInfoClose} tabIndex={0}>
+                    <img className="btn__img is-active" src={menuImg} alt="Close game information"/>
                 </button>
-                <div className="info-img-wrapper">   
-                    <img className="info-bg-img" src={screenshot} alt=""/>
-                    <div className="info-bg-div"></div>
+                <div className="info__screenshot">   
+                    <img className="screenshot__img" src={screenshot} alt=""/>
+                    <div className="screenshot__bg"></div>
                 </div>
-                <div className="info-tablet-bg"></div>
-                <div className="info-wrapper">   
-                    <div className="list-item info-cover-container">
-                        <img className="img-cover info-bg-cover" src={src} alt={title + " — PS2 game cover"} />
-                        <img className="img-overlay" src={overlay} alt="" />
+                <div className="info__tablet-bg"></div>
+                <div className={infoContainerClass}>   
+                    <div className="game _cover">
+                        <img className="game__cover-img" src={src} alt={title + " — PS2 game cover"} />
+                        <img className="game__cover-overlay" src={overlay} alt="" />
                     </div>
-                    <h2 className="info-title">{title}</h2>
-                    {releaseDate === "" 
-                      ? <div className="info-subtitle-wrapper">
-                            <h3 className="info-subtitle">Cancelled / Never released</h3>
-                        </div>
-                      : <div className="info-subtitle-wrapper">
-                            <h3 className="info-subtitle">{releaseDate} ({yearsPast} years ago)</h3>
-                            <div className="rating btn --active">{rating}</div>
-                            <p className="rating-label">Rating</p>
-                        </div>
-                    }
-                    {(summary !== "" || summary === undefined) ? <p className="info-description">{summary}</p> : null}
-                    {companyName !== "" ? this.renderContainer(companyLabel, companyName) : null}
-                    {genres.length > 0 ? this.renderContainer("Genres", genres) : null}                
-                    {websites.length > 0 ? this.renderContainer("Links", websites) : null}
+                    <div className={infoTitleWrapperClass}>
+                        <h2 className="info__title">{title}</h2>
+                        {releaseDate !== "Invalid Date" 
+                          ? <div className="info__subtitle-wrapper">
+                                <h3 className="info__subtitle">{releaseDate} ({yearsPast} years ago)</h3>
+                                <div className="btn --rating is-active">{rating}</div>
+                                <p className="btn__label">Rating</p>
+                            </div>
+                          :  <div className="info__subtitle-wrapper">
+                                <h3 className="info__subtitle">Cancelled / Never released</h3>
+                            </div>
+                        }
+                    </div>
+                    <div className="info__description-wrapper">
+                        {(summary !== "" && summary !== undefined)
+                        ? <p className="info__description">{summary}</p> 
+                        /* : <p className="info__description">{newSummary}</p> */
+                        : (
+                            <p className="info__description">
+                              {title} is a noteworthy addition to the PlayStation 2 library, offering a captivating and visually stunning
+                              {genres.length > 0 ? ` ${genres[0].charAt(0).toLowerCase() + genres[0].substring(1)} experience` : " experience" }
+                              {genres.length > 1 ? ` with ${genres[1].toLowerCase()} gameplay elements. ` : ". " }
+                              {companyName !== "" ? `The game was ${companyLabel.slice(0, -2).toLowerCase()}ed by ${companyName}` : null } 
+                              {companyName !== "" && releaseDate !== "Invalid Date" ? ` in ${releaseDate.slice(-4)}, making its debut during the ${ps2LifeCycle} stages of the PS2's lifecycle. ` : null}
+                              {companyName !== "" && releaseDate === "Invalid Date" ? ", but was cancelled before being published. " : null}
+                              {companyName === "" && releaseDate !== "Invalid Date" ? `The game was released in ${releaseDate.slice(-4)}, making its debut during the ${ps2LifeCycle} stages of the PS2's lifecycle. ` : null}
+                              {companyName === "" && releaseDate === "Invalid Date" ? "The game was cancelled before being published. " : null}
+                              {websites.length > 0 ? `If you're keen to know more about this unique title, follow the provided links.` : null }
+                            </p>
+                          )
+                        }
+                    </div>
+                    {companyName !== "" ? this.renderCategory(companyLabel, companyName) : null}
+                    {genres.length > 0 ? this.renderCategory("Genres", genres) : null}                
+                    {websites.length > 0 ? this.renderCategory("Links", websites) : null}
                     <div className={infoAgeRatingClass}>
                         {ageRatings.length > 0 ? this.renderAgeRatings(ageRatings) : null}
                     </div>

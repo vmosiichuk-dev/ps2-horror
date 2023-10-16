@@ -88,7 +88,7 @@ input::placeholder {
 	z-index: 30;
 }
 
-.welcome-wrapper.--active {
+.welcome-wrapper.is-active {
 	animation: 1.25s fade-in cubic-bezier(.46,.03,.52,.96) reverse forwards;
 }
 
@@ -167,13 +167,13 @@ p.welcome-subtitle {
 	margin: 20px 0 0;
 }
 
-.btn.btn-welcome.--fade-in {
+.btn.btn-welcome.has-faded-in {
 	opacity: 0;
 	animation: 1.5s fade-in 3s cubic-bezier(.46,.03,.52,.96) forwards;
 }
 
-.btn.btn-welcome.--fade-out,
-.welcome-container p.--fade-out {
+.btn.btn-welcome.has-faded-out,
+.welcome-container p.has-faded-out {
 	animation: .375s fade-out cubic-bezier(.46,.03,.52,.96) forwards;
 }
 

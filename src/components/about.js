@@ -44,7 +44,7 @@ class About extends Component {
         const {aboutIsActive} = this.props  
 
         let aboutClass = "about"
-        if (aboutIsActive) aboutClass += " --active"
+        if (aboutIsActive) aboutClass += " is-active"
 
         return (
             <aside className={aboutClass} tabIndex={-1} ref={this.aboutRef}>

@@ -73,7 +73,7 @@ class AddGame extends Component {
             ariaHidden = true
     
         if (addGameIsActive) { 
-            formClass += " --active" 
+            formClass += " is-active" 
             tabIndex = 0
             ariaHidden = false
         }

@@ -33,7 +33,7 @@
     box-shadow: 0px 0px 4px transparent;
 }
 
-.btn.--active {
+.btn.is-active {
     border-color: #9c94be;
     box-shadow: 0px 0px 4px #c1bcda70;
 }
@@ -103,12 +103,12 @@
     min-width: 98px;
 }
 
-.btn.btn-menu {
+.btn.--menu {
     z-index: 50;
     margin: 6px 6px 6px 0;
 }
 
-.play.btn {
+.btn.--played {
     margin-left: 6px;
     margin-right: 6px;
 }
@@ -131,7 +131,7 @@
     font-size: 1rem;
 }
 
-.search-error.--active {
+.search-error.is-active {
     display: block;
 }
 
@@ -179,7 +179,7 @@
     right: 0;
 }
 
-.progress-bar-label.played {
+.progress-bar-label.--played {
     width: 96px;
 }
 
@@ -190,7 +190,7 @@
     height: 100%;
 }
 
-.btn.btn-about {
+.btn.--about {
     width: 30px;
     height: 30px;
     position: relative;
@@ -200,7 +200,7 @@
     min-width: 30px;
 }
 
-.btn-about span {
+.btn.--about span {
 	content: "";
 	background: white;
 	position: absolute;
@@ -221,17 +221,17 @@
 	height: 7px;
 }
 
-.btn-about.--active #btn-about1,
-.btn-about.--active #btn-about2 {
+.btn.--about.is-active #btn-about1,
+.btn.--about.is-active #btn-about2 {
 	top: 14px;
 	height: 12px;
 }
 
-.btn-about.--active #btn-about1 {
+.btn.--about.is-active #btn-about1 {
 	transform: translate(-50%, -50%) rotate(225deg);
 }
 
-.btn-about.--active #btn-about2 {
+.btn.--about.is-active #btn-about2 {
 	transform: translate(-50%, -50%) rotate(-225deg);
 }
 
@@ -245,8 +245,8 @@
     gap: 5px;
 }
 
-.btn-group--aside.mobile .btn.btn-menu, 
-.btn-group--aside.mobile .btn.btn-about {
+.btn-group--aside.mobile .btn.--menu, 
+.btn-group--aside.mobile .btn.--about {
     margin: 0;
     transition: transform 1.125s ease, .825s opacity .3s ease;
 }
@@ -255,7 +255,7 @@
     .search-panel {
         grid-template-columns: 370px minmax(30px, 1fr) minmax(210px, 370px);
         grid-template-rows: repeat(2, 42px);
-        padding: 14px 36px;
+        padding: 14px 36px 0;
         align-items: center;
     }
 
@@ -293,35 +293,39 @@
         min-width: 105px;
     }
 
-    .play.btn {
+    .btn.--played {
         margin-left: 12px;
         margin-right: 12px;
     }
+    
+    @media (max-width: 1365px) {
+        .search-panel {
+            grid-template-columns: 370px minmax(30px, 1fr) minmax(210px, 326px);
+        }
+    }
 }
 
-@media screen and (min-width: 1365px) {
+@media screen and (min-width: 1279px) {
     .search-panel {
         grid-column: 2;
-        padding: 30px 44px;
-        max-width: calc(100dvw - 518px);
     }
 
     .mobile-progress {
-        font-size: 1rem;
+        font-size: .9375rem;
     }
 
     .mobile-title {
-        font-size: 1.125rem;
+        font-size: 1rem;
     }
 
-    .btn.btn-menu,
-    .btn.btn-about {
+    .btn.--menu,
+    .btn.--about {
         margin: 6px 12px 6px 0;
         z-index: 40;
     }
 
-    .btn-group--aside .btn.btn-menu, 
-    .btn-group--aside .btn.btn-about {
+    .btn-group--aside .btn.--menu, 
+    .btn-group--aside .btn.--about {
         min-width: 30px;
     }
 
@@ -336,6 +340,21 @@
     .mobile-title-wrapper {
         justify-content: flex-start;
         gap: 12px;
+    }
+}
+
+@media screen and (min-width: 1365px) {
+    .search-panel {
+        padding: 30px 44px 0;
+        max-width: calc(100dvw - 518px);
+    }
+
+    .mobile-progress {
+        font-size: 1rem;
+    }
+
+    .mobile-title {
+        font-size: 1.125rem;
     }
 }
 
@@ -385,24 +404,24 @@
     }
 }
 
-@media screen and (orientation: landscape) and (hover: none) and (min-width: 1079px) and (max-width: 1365px) {
+@media screen and (orientation: landscape) and (hover: none) and (min-width: 1079px) and (max-width: 1279px) {
     .search-panel {
         min-width: calc(100dvw - 72px);
     }
 }
 
-@media screen and (max-width: 1365px) {
-    .btn.btn-about.--active,
-    .btn.btn-about.--inactive {
+@media screen and (max-width: 1279px) {
+    .btn.--about.is-active,
+    .btn.--about.is-inactive {
         transform: translateX(35px);
     }
 
-    .btn.btn-menu.--inactive, 
-    .btn.btn-about.--inactive {
+    .btn.--menu.is-inactive, 
+    .btn.--about.is-inactive {
         opacity: 0;
     }
 
-    .btn-group--aside .btn.--active {
+    .btn-group--aside .btn.is-active {
         z-index: 70;
         background: var(--dark);
     }

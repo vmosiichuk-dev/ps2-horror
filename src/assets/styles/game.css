@@ -1,6 +1,6 @@
-/* ===== LIST ITEM ================================================================= */
+/* ===== GAME ================================================================= */
 
-.list-item {
+.game {
     box-shadow: 3px 3px 15px rgba(0,0,0,.4);
     height: 181px;
     list-style: none;
@@ -11,15 +11,15 @@
     border-radius: 6px;
 }
 
-.list-item:nth-child(2n) {
+.game:nth-child(2n) {
     box-shadow: -3px 3px 15px rgba(0,0,0,.4);
 }
 
-.list-item:last-child {
+.game:last-child {
     margin-bottom: 68px;
 }
 
-.list-item-buttons {
+.game-buttons {
     display: grid;
     align-items: center;
     justify-content: center;
@@ -34,7 +34,7 @@
     border-radius: 6px;
 }
 
-.list-item-buttons:hover {
+.game-buttons:hover {
     opacity: 1;
 }
 
@@ -51,7 +51,7 @@
     top: 0;
 }
 
-.list-item .icon {
+.game .icon {
     padding: 3px;
     background: #0008;
     border-radius: 9999px;
@@ -98,7 +98,7 @@
     grid-row: 8;
 }
 
-.list-item-data {
+.game-data {
     justify-content: space-between;
     width: 100%;
     display: flex;
@@ -111,14 +111,14 @@
     bottom: 0;
 }
 
-.list-item-rating {
+.game-rating {
     border: none;
     width: 30px;
     text-align: right;
     margin-right: 2px;
 }
 
-.img-cover {
+.game__cover-img {
     width: 100%;
     position: absolute;
     object-fit: cover;
@@ -132,13 +132,13 @@
     height: 92%;
 }
 
-.img-overlay {
+.game__cover-overlay {
     width: 100%;
     position: absolute;
     border-radius: 6px 6px 0 0;
 }
 
-.status-icon {
+.game__status {
     visibility: hidden;
     position: relative;
     width: 22px;
@@ -151,18 +151,18 @@
     cursor: pointer;
 }
 
-.list-item.wish img.wish,
-.list-item.play img.play {
-    visibility: visible;
-    background: #0008;
-}
-
-.list-item.wish img.wish {
+.game__status.--wish {
     border-color: #f9ab1e;
 }
 
-.list-item.play img.play {
+.game__status.--play {
     border-color: #1e90ff;
+}
+
+.game.--wish .game__status.--wish,
+.game.--play .game__status.--play {
+    visibility: visible;
+    background: #0008;
 }
 
 .delete-p {
@@ -182,12 +182,12 @@
     cursor: default;
 }
 
-.list-item-buttons.--active, 
-.delete-p.--active {
+.game-buttons.is-active, 
+.delete-p.is-active {
     opacity: 1;
 }
 
-.list-item-status-container {
+.game__status-container {
     position: absolute;
     top: 11px;
     right: -17px;
@@ -195,11 +195,11 @@
     display: grid;
 }
 
-.list-item-status-container.--active {
+.game__status-container.is-active {
     z-index: 40;
 }
 
-.list-item-price {
+.game-price {
     width: calc(100% + 8px);
     display: flex;
     justify-content: space-between;
@@ -207,7 +207,7 @@
     margin: 0 -4px;
 }
 
-.list-item-price .btn {
+.game-price .btn {
     font-size: .75rem;
     margin: 0 -5px;
     display: flex;
@@ -225,13 +225,13 @@
 
 .cd-icon {
     filter: invert(75%) sepia(9%) saturate(389%) hue-rotate(140deg) brightness(91%) contrast(91%);
-    width: 9px;
-    height: 9px;
-    margin-bottom: 3px;
+    width: 13px;
+    height: 13px;
+    margin-bottom: 1px;
     margin-left: 2px;
 }
 
-.list-item-name {
+.game-name {
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
@@ -245,70 +245,70 @@
     font-size: .5rem;
 }
 
-.btn.btn-loose.--active, 
-.btn.btn-cib.--active, 
-.btn.btn-newg.--active {
+.btn.btn-loose.is-active, 
+.btn.btn-cib.is-active, 
+.btn.btn-newg.is-active {
     background-color: #002939;
 }
 
-.btn.btn-loose.--active, 
-.list-item.--loose {
+.btn.btn-loose.is-active, 
+.game.--loose {
     border-color: var(--bronze);
 }
 
-.btn.btn-cib.--active, 
-.list-item.--cib {
+.btn.btn-cib.is-active, 
+.game.--cib {
     border-color: var(--silver);
 }
 
-.btn.btn-newg.--active, 
-.list-item.--newg {
+.btn.btn-newg.is-active, 
+.game.--newg {
     border-color: var(--gold);
 }
 
-.btn.btn-loose.--active {
+.btn.btn-loose.is-active {
     color: var(--bronze);
 }
 
-.btn.btn-cib.--active {
+.btn.btn-cib.is-active {
     color: var(--silver);
 }
 
-.btn.btn-newg.--active {
+.btn.btn-newg.is-active {
     color: var(--gold);
 }
 
-.btn.btn-loose.--active .cd-icon {
+.btn.btn-loose.is-active .cd-icon {
     filter: invert(81%) sepia(76%) saturate(3751%) hue-rotate(313deg) brightness(97%) contrast(98%);
 }
 
-.btn.btn-cib.--active .cd-icon {
+.btn.btn-cib.is-active .cd-icon {
     filter: invert(100%) sepia(11%) saturate(3879%) hue-rotate(176deg) brightness(100%) contrast(105%);
 }
 
-.btn.btn-newg.--active .cd-icon {
+.btn.btn-newg.is-active .cd-icon {
     filter: invert(89%) sepia(59%) saturate(3802%) hue-rotate(313deg) brightness(108%) contrast(98%);
 }
 
-/* ––——– LIST ITEM —— MEDIA QUERIES ——–––––––––––––———————————————————————————————— */
+/* ––——– GAME —— MEDIA QUERIES ——–––––––––––––———————————————————————————————— */
 
 @media screen and (min-width: 1365px) {
-    .list-item {
+    .game {
         box-shadow: 5px 5px 15px rgba(0,0,0,.4);
         height: 226px;
         max-width: 160px;
         margin: 0 18px;
     }
 
-    .img-cover {
+    .game__cover-img {
         max-height: 226px;
     }
 
-    .list-item:nth-child(2n) {
+    .game:nth-child(2n) {
         box-shadow: -5px 5px 15px rgba(0,0,0,.4);
     }
 
-    .list-item-data {
+    .game-data {
         font-size: 1rem;
     }
     
@@ -317,11 +317,11 @@
         margin-left: -34px;
     }
 
-    .list-item-status-container {
+    .game__status-container {
         top: 17px;
     }
 
-    .list-item-buttons {
+    .game-buttons {
         grid-template-rows: 1fr 26px 18px 26px 1.5fr 26px 18px 26px 1fr;
         opacity: 0;
     }
@@ -333,12 +333,12 @@
         width: calc(100% - 24px);
     } 
 
-    .list-item-price {
+    .game-price {
         width: 100%;
         margin: 0;
     }
 
-    .list-item-price .btn {
+    .game-price .btn {
         padding: 0 2px 2px;
         font-size: .9375rem;
         min-width: 50px;
@@ -349,7 +349,6 @@
     }
 
     .cd-icon {
-        width: 12px;
-        height: 12px;
+        margin-bottom: 3px;
     }    
 }
