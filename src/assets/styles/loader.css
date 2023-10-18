@@ -27,7 +27,7 @@
 .loader__error {
 	opacity: 0;
 	text-align: center;
-	font-family: "Didact Gothic";
+	font-family: var(--didact-gothic);
 	position: absolute;
 	bottom: 20%;
 	margin: 0;

@@ -22,12 +22,13 @@
 	background: linear-gradient(to bottom, transparent, #203a43 51%);
 }
 
-.info .btn--menu {
+.btn--close {
 	position: absolute;
 	top: .25rem;
 	right: 0;
 	padding: 4px 8px;
 	margin: 12px 20px;
+	z-index: 10;
 }
 
 .info__screenshot {
@@ -293,7 +294,7 @@
 		border-right: 1px solid #867fa6b5;
 	}
 
-	.info .btn--menu {
+	.btn--close {
 		display: none;
 	}
 
@@ -337,14 +338,14 @@
 		background: linear-gradient(to bottom, transparent, #203a43 42%);
 	}
 
-	.info .btn--menu {
+	.btn--close {
 		top: 46dvh;
 		right: 2.5dvw;
 		opacity: 0;
 		transition: .5s opacity cubic-bezier(.46,.03,.52,.96);
 	}
 
-	.info.is-active .btn--menu {
+	.btn--close.is-active {
 		opacity: 1;
 		transition: .5s opacity .625s cubic-bezier(.46,.03,.52,.96);
 	}
@@ -425,7 +426,7 @@
 }
 
 @media screen and (min-width: 1023px) and (max-width: 1279px) and ((orientation: portrait) or (hover: hover)) {	
-	.info .btn--menu {
+	.btn--close {
 		top: 47.25dvh;
 	}
 

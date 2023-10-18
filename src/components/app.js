@@ -2,7 +2,7 @@ import { Component } from "react"
 import AddGame from "./add-game"
 import About from "./about"
 import Info from "./info"
-import SearchPanel from "./search-panel"
+import Navigation from "./navigation"
 import GameList from "./game-list"
 import del from "../assets/img/del.png"
 import noCover from "../assets/img/no-cover.webp" 
@@ -68,7 +68,7 @@ class App extends Component {
     
     closeTutorial = () => this.setState({openedInfo: true})
 
-// ––––––––––––––––––––––––––––– <SearchPanel /> functions ––––––––––––––––––––––––––––––
+// ––––––––––––––––––––––––––––– <Navigation /> functions ––––––––––––––––––––––––––––––
 
     updateSearch = (searchQuery) => { this.setState({searchQuery}) }
 
@@ -186,13 +186,13 @@ class App extends Component {
         return data.filter(item => item.title.toLowerCase().includes(searchQuery.toLowerCase()))
     }
 
-    getSearchError = (filteredData) => {
+    getMainError = (filteredData) => {
         const { playCount, wishCount, activeFilter } = this.state
 
         if (filteredData.length === 0) {
             if (activeFilter === "play" && playCount === 0) {
                 return (
-                    <p className="search-error is-active" role="status">
+                    <p className="main__error is-active" role="status">
                     There are no games marked as played yet.<br />
                     To mark a game as played, hover or click on a game card and press a controller button.
                     </p>
@@ -200,14 +200,14 @@ class App extends Component {
             }
             if (activeFilter === "wish" && wishCount === 0) {
                 return (
-                    <p className="search-error is-active" role="status">
+                    <p className="main__error is-active" role="status">
                     There are no games in your collection yet.<br />
                     To add a game to the collection, hover or click on a game card and press a star button.
                     </p>
                 )
-                }
+            }
             return (
-                <p className="search-error is-active" role="status">
+                <p className="main__error is-active" role="status">
                     The game you are looking for is not found.<br />
                     You can add a game to the list from the menu in the navigation bar (+ plus sign).
                 </p>
@@ -386,10 +386,16 @@ class App extends Component {
         }
     }  
 
+    addLandscapeOverflow = () => document.body.classList.add('body--overflow')
+    removeLandscapeOverflow = () => document.body.classList.remove('body--overflow')
+
     componentDidUpdate() {
-        if (this.props.welcomeClick && !this.state.apiDataLoaded) {
-            this.handleWelcomeClick()
-        }
+        const {welcomeClick} = this.props
+        const {apiDataLoaded, openedInfo} = this.state
+
+        if (welcomeClick && !apiDataLoaded) this.handleWelcomeClick()
+        if (!apiDataLoaded || !openedInfo) this.addLandscapeOverflow()
+        if (apiDataLoaded && openedInfo) this.removeLandscapeOverflow()
     }
 
 // –––––––––––––––––––––––––––––––– <AddGame /> functions ––––––––––––––––––––––––––––––––––
@@ -496,8 +502,6 @@ class App extends Component {
         }
     } 
 
-    addLandscapeOverflow = () => document.body.classList.add('body--overflow')
-    removeLandscapeOverflow = () => document.body.classList.remove('body--overflow')
     
 // –––––––––––––––––––––––––––––––––—— END functions ––––––––––––––––––––––––––––––––––——
 
@@ -520,8 +524,7 @@ class App extends Component {
                 delSrc,
                 activeFilter,
                 searchData,
-                searchDataLoaded,
-                apiDataLoaded } = this.state
+                searchDataLoaded } = this.state
 
         const renderData = this.searchGame(data, searchQuery)
         const filteredData = renderData.filter(item => {
@@ -532,12 +535,10 @@ class App extends Component {
             }
             return true
         })
-        const searchError = this.getSearchError(filteredData)
+        const mainError = this.getMainError(filteredData)
 
         let appClass = "app"
         if (this.props.transitionStart)  appClass += " has-faded-in"
-        if (!apiDataLoaded || (aboutIsActive || addGameIsActive)) this.addLandscapeOverflow()
-        if (apiDataLoaded && (!aboutIsActive && !addGameIsActive)) this.removeLandscapeOverflow()
 
         return (
             <div className={appClass}>  
@@ -546,7 +547,7 @@ class App extends Component {
                     openedInfo={openedInfo}
                     onInfoClose={this.closeInfo} 
                 />
-                <SearchPanel  
+                <Navigation  
                     data={data} 
                     filteredData={filteredData} 
                     playCount={playCount}
@@ -577,8 +578,8 @@ class App extends Component {
                     onAddGameSearch={this.handleAddGameSearch} 
                     onAddGameSubmit={this.handleAddGameSubmit} 
                 />
-                <main id="main"> 
-                    {searchError}  
+                <main className="main"> 
+                    {mainError}  
                     <GameList 
                         filteredData={filteredData} 
                         delSrc={delSrc}

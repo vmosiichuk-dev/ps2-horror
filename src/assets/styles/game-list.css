@@ -5,10 +5,10 @@
     grid-gap: 78px 25px;
     justify-content: space-between;
     grid-template-columns: repeat(auto-fill,130px);
-    min-width: calc(100dvw - 48px);
-    height: calc(100% - 14px);
+    min-width: calc(100dvw - 50px);
+    height: calc(100% - 15px);
     margin: 0;
-    padding: 14px 14px 0;
+    padding: 15px 15px 0;
     overflow-y: scroll;
     overflow-x: hidden;
     scrollbar-color: #5b718486 #6e6e6e86;
@@ -16,13 +16,13 @@
 
 @media screen and (min-width: 389px) and (max-width: 1279px) and ((orientation: portrait) or (hover: hover)) {
     .game-list {
-        padding: 14px 24px 0;
+        padding: 15px 24px 0;
         min-width: calc(100dvw - 68px);
     }
 
     @media (min-width: 427px) and (max-width: 809px) {
         .game-list {
-            padding: 14px 36px 0;
+            padding: 15px 36px 0;
             min-width: calc(100dvw - 92px);
         }
     }
@@ -30,12 +30,12 @@
 
 @media screen and (orientation: landscape) and (hover: none) {
     .game-list {
-        grid-gap: 78px 24px;
+        grid-gap: 78px 23px;
     }
 
     @media (min-width: 1079px) {
         .game-list {
-            padding: 14px 24px 0;
+            padding: 15px 24px 0;
             min-width: calc(100dvw - 68px);
         }
     }

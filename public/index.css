@@ -28,12 +28,38 @@ body {
 }
 
 body, input::placeholder {
-	font-size: 1rem;
 	font-family: var(--didact-gothic);
+}
+
+input::placeholder {
+	font-size: .875rem;
 }
 
 button {
 	cursor: pointer;
+}
+
+.btn {
+    color: var(--accent);
+    border-radius: 4px;
+    border: 1px solid #c1bcda70;
+    padding: 3px 8px 4px 8px;
+    margin: 6px 0;
+	background-color: #1f182b96;
+    transition: box-shadow .1s cubic-bezier(.46,.03,.52,.96), border-color .1s cubic-bezier(.46,.03,.52,.96);
+    box-shadow: 0px 0px 4px transparent;
+    font-family: var(--didact-gothic);
+}
+  
+.btn:hover {
+    border-color: #9c94be;
+    box-shadow: 0px 0px 8px #c1bcda70;
+    transition: box-shadow .1s cubic-bezier(.46,.03,.52,.96), border-color .1s cubic-bezier(.46,.03,.52,.96);
+}
+
+.btn.is-active {
+    border-color: #9c94be;
+    box-shadow: 0px 0px 4px #c1bcda70;
 }
 
 .a11y {
@@ -74,6 +100,7 @@ button {
 	grid-template-columns: minmax(50px, 1fr) minmax(230px, 840px) minmax(50px, 1fr);
 	background: black;
 	z-index: 30;
+	font-family: var(--unbounded);
 }
 
 .welcome.is-active {
@@ -151,12 +178,12 @@ button {
   	text-underline-offset: 4px;
 }
 
-.btn--welcome {
+.btn.btn--welcome {
 	justify-self: center;
 	font-size: .9375rem;
-	font-family: var(--unbounded);
 	padding: .875rem 2.25rem;
 	letter-spacing: 2px;
+	font-family: var(--unbounded);
 }
 
 .btn--welcome.has-faded-in {
@@ -282,6 +309,12 @@ button {
 		.welcome__container {
 			margin-top: 0;
 		}
+	}
+}
+
+@media screen and (min-width: 1279px) {
+	input::placeholder {
+		font-size: 1.0625rem;
 	}
 }
 

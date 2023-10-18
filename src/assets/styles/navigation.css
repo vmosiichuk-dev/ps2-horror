@@ -1,0 +1,339 @@
+.nav {
+    display: grid;
+    grid-template-columns: 326px;
+    justify-content: center;
+    grid-template-rows: repeat(4, 42px);
+    margin: auto auto 3px;
+    grid-row: 1;
+    grid-column: 1;
+}
+
+.nav__title,
+.nav__search-label,
+.nav__progress-count,
+.nav__progress-percent {
+    font-family: var(--unbounded);
+}
+
+.nav__title-wrapper {
+    display: flex;
+    align-items: center;
+    padding-bottom: .25rem;
+    justify-content: space-between;
+}
+
+.nav__title,
+.nav__progress {
+    font-size: .875rem;
+}
+
+.nav__title {
+    margin: 0;
+}
+
+.nav__progress {    
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 5px;
+}
+
+.nav__progress-count {
+    display: inline-flex;
+    margin: 0;
+}
+
+.nav__progress-bar {
+    border-radius: 4px;
+    border: 1px solid #867fa6;
+    height: 6px;
+    position: relative;
+    width: 100%;
+    margin: 0 14px 4px;
+}
+
+.progress-bar__label {
+    position: absolute;
+    width: 114px;
+    top: -22px;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+}
+
+.progress-bar__label--played {
+    width: 96px;
+}
+
+.progress-bar {
+    border-radius: 4px 0 0 4px;
+    background-color: var(--accent);
+    width: 0%;
+    height: 100%;
+}
+
+.nav__filters {
+    display: flex;
+    justify-content: space-between;
+}
+
+.nav__controls-desktop {
+    display: none;
+}
+ 
+.nav__controls-mobile {
+    display: flex;
+    z-index: 50;
+    gap: 5px;
+}
+
+.btn--menu {
+    z-index: 50;
+    margin: 6px 6px 6px 0;
+}
+
+.btn--about {
+    width: 30px;
+    height: 30px;
+    position: relative;
+    margin: 0 auto;
+    z-index: 50;
+    margin: 6px 6px 6px 0;
+    min-width: 30px;
+}
+
+.btn-about__span {
+	content: "";
+	background: white;
+	position: absolute;
+	width: 2px;
+	left: 50%;
+	transform: translateX(-50%);
+	border-radius: 3px;
+	transition: all 1.125s cubic-bezier(.46,.03,.52,.96);  
+}
+
+.btn-about__span--one {
+	top: 8px;
+	height: 2px;
+}
+
+.btn-about__span--two {
+	top : 13px;
+	height: 7px;
+}
+
+.btn--about.is-active .btn-about__span--one,
+.btn--about.is-active .btn-about__span--two {
+	top: 14px;
+	height: 12px;
+}
+
+.btn--about.is-active .btn-about__span--one {
+	transform: translate(-50%, -50%) rotate(225deg);
+}
+
+.btn--about.is-active .btn-about__span--two {
+	transform: translate(-50%, -50%) rotate(-225deg);
+}
+
+.nav__controls-mobile .btn--menu, 
+.nav__controls-mobile .btn--about {
+    margin: 0;
+    transition: transform 1.125s ease, .825s opacity .3s ease;
+}
+
+.btn--filter {  
+    font-size: .875rem;
+    min-width: 98px;
+}
+
+.btn--played {
+    margin-left: 12px;
+    margin-right: 12px;
+}
+
+.nav__filter-icon {
+    width: 14px;
+    height: 14px;
+    position: relative;
+    top: 1px;
+    margin-right: 4px;
+}
+
+.nav__search {
+    display: flex;
+    align-items: center;
+    grid-column: 1;
+}
+
+.nav__search-input {
+    color: var(--accent);
+	background: #0f0b1596;
+    border-radius: 4px;
+    border: 1px solid #c1bcda70;
+    width: 100%;
+    padding: 0px 12px;
+    line-height: 28px;
+}
+
+.nav__search-btn {
+    border: none;
+    padding: 0;
+    background: transparent;
+    display: flex;
+}
+
+.nav__search-label {
+    margin-left: 10px;
+    margin-right: 8px;
+    font-size: .875rem;
+    min-width: 60px;
+    text-align: center;
+    color: var(--accent);
+}
+
+.nav__search-icon {
+    display: block;
+    width: 20px;
+}
+
+@media screen and (min-width: 809px) and (((orientation: portrait) or (hover: hover)) or ((orientation: landscape) and (min-width: 1079px))) {
+    .nav {
+        grid-template-columns: 370px minmax(30px, 1fr) minmax(210px, 342px);
+        grid-template-rows: repeat(2, 42px);
+        align-items: center;
+        margin: auto 36px 3px;
+    }
+
+    .nav__progress {    
+        grid-column: 3;
+    }
+
+    .btn--filter {
+        font-size: 1rem;
+        min-width: 105px;
+    }
+
+    .nav__search {
+        grid-column: 3;
+    }
+
+    .nav__search-input {
+        text-align: right;
+        font-size: 1.125rem;
+    }
+}
+
+@media screen and (min-width: 1279px) {
+    .nav {
+        grid-column: 2;
+    }
+
+    .nav__title-wrapper {
+        justify-content: flex-start;
+        gap: 12px;
+    }
+
+    .nav__title {
+        font-size: 1rem;
+    }
+
+    .nav__progress {
+        font-size: .9375rem;
+    }
+
+    .progress-bar__label {
+        width: 123px;
+    }
+
+    .progress-bar__label--played {
+        width: 105px;
+    }
+
+    .nav__controls-desktop {
+        display: flex;
+    }
+
+    .nav__controls-mobile {
+        display: none;
+    }
+
+    .btn--menu,
+    .btn--about {
+        margin: 6px 12px 6px 0;
+        min-width: 30px;
+    }
+}
+
+@media screen and (min-width: 1365px) {
+    .nav {
+        margin: auto 42px 3px;
+    }
+
+    .nav__title {
+        font-size: 1.125rem;
+    }
+
+    .nav__progress {
+        font-size: 1rem;
+    }
+
+    .progress-bar__label {
+        width: 131px;
+    }
+
+    .progress-bar__label--played {
+        width: 113px;
+    }
+}
+
+@media screen and (max-width: 809px) {
+    .nav__progress {    
+        order: 1;
+    }
+}
+
+@media screen and (orientation: landscape) and (hover: none) and (max-width: 1079px) {
+    .nav {
+        grid-template-columns: minmax(210px, 370px) minmax(22px, 1fr) minmax(320px, 334px);
+        grid-template-rows: repeat(2, 42px);
+        margin: auto 25px 3px;
+    }
+
+    .nav__title-wrapper,
+    .nav__filters {
+        grid-column: 3;
+    }
+
+    .nav__progress {
+        order: -1;
+        padding-bottom: 10px;
+    }
+
+    .nav__search,
+    .nav__search-btn {
+        flex-direction: row-reverse;
+    }
+
+    .nav__search {
+        grid-row: 2;
+    }
+}
+
+@media screen and (max-width: 1279px) {
+    .btn--menu.is-inactive, 
+    .btn--about.is-inactive {
+        opacity: 0;
+    }
+
+    .btn--about.is-active,
+    .btn--about.is-inactive {
+        transform: translateX(35px);
+    }
+
+    .btn--menu.is-active, 
+    .btn--about.is-active {
+        z-index: 70;
+        background: var(--dark);
+    }
+}

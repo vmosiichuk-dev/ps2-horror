@@ -1,10 +1,10 @@
 /* ===== APP ================================================================== */
 
 .app {
-    margin: 0;
-    height: 100dvh;
     display: grid;
-    grid-template-rows: 181px calc(100dvh - 181px);
+    grid-template-rows: 180px calc(100dvh - 180px);
+    height: 100dvh;
+    margin: 0;
     opacity: 0;
 }
 
@@ -12,18 +12,35 @@
 	animation: 1.175s fade-in .9s cubic-bezier(.46,.03,.52,.96) forwards;
 }
 
-#main {
+.main {
     height: 100%;
-    width: auto;
     padding: 0 10px;
     grid-row: 2;
     grid-column: 1;
-    min-width: calc(100dvw - 20px);
 }
 
-@media screen and (min-width: 809px) and ((orientation: portrait) or (hover: hover)) {
-    .app {
-        grid-template-rows: 98px calc(100dvh - 98px);
+.main__error {
+    display: none;
+    color: var(--accent);
+    line-height: 1.5rem;
+    min-width: 290px;
+    text-align: center;
+    font-size: 1rem;
+}
+
+.main__error.is-active {
+    display: block;
+}
+
+@media screen and (min-width: 809px)  {
+    .main__error {
+        font-size: 1.125rem;
+    }
+    
+    @media ((orientation: portrait) or (hover: hover)) {
+        .app {
+            grid-template-rows: 98px calc(100dvh - 98px);
+        }
     }
 }
 
@@ -32,15 +49,8 @@
         grid-template-columns: 430px 1fr;
     }
 
-    #main {
+    .main {
         grid-column: 2;
-        min-width: calc(100dvw - 448px);
-    }
-
-    @media (orientation: landscape) and (hover: none) {
-        #main {
-            padding: 0 10px;
-        }
     }
 }
 
@@ -52,6 +62,6 @@
 
 @media screen and (orientation: landscape) and (hover: none) and (max-width: 1279px) {
     .app {
-        grid-template-rows: 112px calc(100dvh - 112px);
+        grid-template-rows: 100px calc(100dvh - 100px);
     }
 }

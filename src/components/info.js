@@ -570,12 +570,16 @@ class Info extends Component {
         const {openedInfo, onInfoClose} = this.props  
 
         let infoClass = "info",
+            btnCloseClass = "btn btn--close",
             infoAgeRatingClass = "info__age-container",
             infoTitleWrapperClass = "info__title-wrapper",
             infoContainerClass = "info__container",
             ps2LifeCycle = "middle"
 
-        if (openedInfo) infoClass += " is-active"
+        if (openedInfo) { 
+            infoClass += " is-active"
+            btnCloseClass += " is-active"
+        }
         if (ageRatingJp) infoAgeRatingClass += " has-jp"
         if (ageRatings.length < 1) infoTitleWrapperClass += " has-space"
         if (genres.length < 1 || companyName === "" || websites.length < 1) infoContainerClass += " has-space"
@@ -584,7 +588,7 @@ class Info extends Component {
 
         return (
             <section className={infoClass} aria-label="Game information">
-                <button className="btn btn--menu" type="button" onClick={onInfoClose} tabIndex={0}>
+                <button className={btnCloseClass} type="button" onClick={onInfoClose} tabIndex={0}>
                     <img className="btn__img is-active" src={menuImg} alt="Close game information"/>
                 </button>
                 <div className="info__screenshot">   

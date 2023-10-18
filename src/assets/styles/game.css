@@ -60,7 +60,7 @@
 .game__icon {
     width: 13px;
     height: 13px;
-    margin-bottom: 3px;
+    margin-bottom: 1px;
     margin-left: 2px;
     filter: var(--filter-fallback);
 }
@@ -78,11 +78,11 @@
 }
 
 .game:nth-child(2n) {
-    box-shadow: -3px 3px 15px rgba(0,0,0,.4);
+    /* box-shadow: -3px 3px 15px rgba(0,0,0,.4); */
 }
 
 .game:last-child {
-    margin-bottom: 68px;
+    margin-bottom: 72px;
 }
 
 .game-buttons {
