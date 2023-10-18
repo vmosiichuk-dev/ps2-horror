@@ -7,8 +7,74 @@
     margin: 0;
     max-width: 130px;
     position: relative;
-    border: 2px solid transparent;
     border-radius: 6px;
+    border: 2px solid;
+    border-color: transparent;
+}
+
+.game--loose {
+    border-color: var(--bronze);
+}
+
+.game--cib {
+    border-color: var(--silver);
+}
+
+.game--newg {
+    border-color: var(--gold);
+}
+
+.btn--price {
+    font-size: .75rem;
+    margin: 0 -5px;
+    display: flex;
+    align-items: flex-end;
+    padding: 1px 2px 3px;
+    border-radius: 4px;
+    border: 1px solid;
+    min-width: 45px;
+    justify-content: space-evenly;
+    color: #b8cbcbdb;
+    border-color: #000;
+    background-color: #010e257d;
+}
+
+.btn--price.btn--loose {
+    color: var(--bronze);
+    border-color: var(--bronze);
+    background-color: #002939;
+}
+
+.btn--price.btn--cib {
+    color: var(--silver);
+    border-color: var(--silver);
+    background-color: #002939;
+}
+
+.btn--price.btn--newg {
+    color: var(--gold);
+    border-color: var(--gold);
+    background-color: #002939;
+}
+
+.game__icon {
+    width: 13px;
+    height: 13px;
+    margin-bottom: 3px;
+    margin-left: 2px;
+    filter: var(--filter-fallback);
+}
+
+.game__icon--loose {
+    filter: var(--filter-bronze);
+}
+
+.game__icon--cib {
+    filter: var(--filter-silver);
+}
+
+.game__icon--newg {
+    filter: var(--filter-gold);
 }
 
 .game:nth-child(2n) {
@@ -168,7 +234,6 @@
 .delete-p {
     position: absolute;
     background: #230505d1;
-    font-family: "Didact Gothic";
     opacity: 0;
     transition: opacity .1s cubic-bezier(.46,.03,.52,.96);
     font-size: .75rem;
@@ -207,30 +272,6 @@
     margin: 0 -4px;
 }
 
-.game-price .btn {
-    font-size: .75rem;
-    margin: 0 -5px;
-    display: flex;
-    align-items: flex-end;
-    padding: 1px 2px 3px;
-    border-radius: 4px;
-    border-width: 1px;
-    border-style: solid;
-    background: #010e257d;
-    color: #b8cbcbdb;
-    border-color: #000;
-    min-width: 45px;
-    justify-content: space-evenly;
-}
-
-.cd-icon {
-    filter: invert(75%) sepia(9%) saturate(389%) hue-rotate(140deg) brightness(91%) contrast(91%);
-    width: 13px;
-    height: 13px;
-    margin-bottom: 1px;
-    margin-left: 2px;
-}
-
 .game-name {
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -243,51 +284,6 @@
     margin: 0 1px 0 2px;
     top: -1px;
     font-size: .5rem;
-}
-
-.btn.btn-loose.is-active, 
-.btn.btn-cib.is-active, 
-.btn.btn-newg.is-active {
-    background-color: #002939;
-}
-
-.btn.btn-loose.is-active, 
-.game.--loose {
-    border-color: var(--bronze);
-}
-
-.btn.btn-cib.is-active, 
-.game.--cib {
-    border-color: var(--silver);
-}
-
-.btn.btn-newg.is-active, 
-.game.--newg {
-    border-color: var(--gold);
-}
-
-.btn.btn-loose.is-active {
-    color: var(--bronze);
-}
-
-.btn.btn-cib.is-active {
-    color: var(--silver);
-}
-
-.btn.btn-newg.is-active {
-    color: var(--gold);
-}
-
-.btn.btn-loose.is-active .cd-icon {
-    filter: invert(81%) sepia(76%) saturate(3751%) hue-rotate(313deg) brightness(97%) contrast(98%);
-}
-
-.btn.btn-cib.is-active .cd-icon {
-    filter: invert(100%) sepia(11%) saturate(3879%) hue-rotate(176deg) brightness(100%) contrast(105%);
-}
-
-.btn.btn-newg.is-active .cd-icon {
-    filter: invert(89%) sepia(59%) saturate(3802%) hue-rotate(313deg) brightness(108%) contrast(98%);
 }
 
 /* ––——– GAME —— MEDIA QUERIES ——–––––––––––––———————————————————————————————— */

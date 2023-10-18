@@ -1,4 +1,5 @@
 /* ===== INDEX ==================================================================== */
+
 @import url("https://fonts.googleapis.com/css?family=Unbounded|Didact+Gothic:wght@400;600&subset=latin,latin-ext");
 
 body {
@@ -9,7 +10,13 @@ body {
 	--silver: #f7fdff;
 	--gold: #fdd45f;
 	--shadow: 14px 14px 0px -4px #4c4c45;
-	font-family: "Unbounded", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Helvetica Neue", sans-serif;
+	--filter-bronze: invert(81%) sepia(76%) saturate(3751%) hue-rotate(313deg) brightness(97%) contrast(98%);
+	--filter-silver: invert(100%) sepia(11%) saturate(3879%) hue-rotate(176deg) brightness(100%) contrast(105%);
+	--filter-gold: invert(89%) sepia(59%) saturate(3802%) hue-rotate(313deg) brightness(108%) contrast(98%);
+	--filter-fallback: invert(75%) sepia(9%) saturate(389%) hue-rotate(140deg) brightness(91%) contrast(91%);
+	--unbounded: "Unbounded", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Helvetica Neue", sans-serif;
+	--didact-gothic: "Didact Gothic", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Helvetica Neue", sans-serif;
+	font-family: ;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	margin: 0;
@@ -20,34 +27,16 @@ body {
 	overflow: hidden;
 }
 
-h2, img, button, input, input::placeholder {
-	font-family: "Didact Gothic";
+body, input::placeholder {
+	font-size: 1rem;
+	font-family: var(--didact-gothic);
 }
 
 button {
 	cursor: pointer;
 }
 
-button[disabled] {
-	opacity: .5;
-}
-
-button[disabled]:hover {
-	box-shadow: none;
-	border-color: #c1bcda70;
-	cursor: default;
-}
-
-input::placeholder {
-	font-size: 1rem;
-}
-
-.invisible {
-	opacity: 0;
-	transition: .5s opacity cubic-bezier(.46,.03,.52,.96);
-}
-
-._a11y {
+.a11y {
     position: absolute;
 	top: -200dvh;
 	left: -200dvw;
@@ -162,20 +151,20 @@ input::placeholder {
   	text-underline-offset: 4px;
 }
 
-.btn.--welcome {
+.btn--welcome {
 	justify-self: center;
 	font-size: .9375rem;
-	font-family: "Unbounded";
+	font-family: var(--unbounded);
 	padding: .875rem 2.25rem;
 	letter-spacing: 2px;
 }
 
-.btn.--welcome.has-faded-in {
+.btn--welcome.has-faded-in {
 	opacity: 0;
 	animation: 1.5s fade-in 3s cubic-bezier(.46,.03,.52,.96) forwards;
 }
 
-.btn.--welcome.has-faded-out,
+.btn--welcome.has-faded-out,
 .welcome__container p.has-faded-out {
 	animation: .375s fade-out cubic-bezier(.46,.03,.52,.96) forwards;
 }
@@ -212,13 +201,17 @@ input::placeholder {
 	width: 300dvw;
 }
 
-.fog.--one {
-	background: url("./img/fog1.png") center/cover repeat-x;
+.fog--one {
+	background: url("./img/fog1.png") repeat-x;
+	background-position: center;
+	background-size: cover;
 	animation: fog 120s linear infinite;
 }
 
-.fog.--two {
-	background: url("./img/fog2.png") center/cover repeat-x;
+.fog--two {
+	background: url("./img/fog2.png") repeat-x;
+	background-position: center;
+	background-size: cover;
 	animation: fog 80s linear infinite;
 }
 
@@ -243,11 +236,11 @@ input::placeholder {
 		font-size: 1.5rem;
 	}
 
-	.fog.--one {
+	.fog--one {
 		animation: fog 240s linear infinite;
 	}
 
-	.fog.--two {
+	.fog--two {
 		animation: fog 160s linear infinite;
 	}
 
@@ -263,7 +256,7 @@ input::placeholder {
 		overflow: initial;
 	}
 
-	body.--overflow {
+	.body--overflow {
 		overflow: hidden;
 	}
 

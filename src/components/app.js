@@ -145,10 +145,20 @@ class App extends Component {
 
     handlePriceCategoryChange = (slug, category) => {
         this.setState(prevState => {
-            const newData = prevState.data.map(item => {
-                if (item.slug === slug) { return { ...item, priceCategory: category } }
-                return item
+            const game = prevState.data.find(item => {
+                return item.slug === slug
             })
+
+            const newData = prevState.data.map(item => {
+                if (item.slug === slug && game.priceCategory === category) { 
+                    return { ...item, priceCategory: "" } 
+                } else if (item.slug === slug) { 
+                    return { ...item, priceCategory: category } 
+                } else {
+                    return item
+                }
+            })
+
             return { data: newData }
         })  
     }
@@ -486,8 +496,8 @@ class App extends Component {
         }
     } 
 
-    addLandscapeOverflow = () => document.body.classList.add('--overflow')
-    removeLandscapeOverflow = () => document.body.classList.remove('--overflow')
+    addLandscapeOverflow = () => document.body.classList.add('body--overflow')
+    removeLandscapeOverflow = () => document.body.classList.remove('body--overflow')
     
 // –––––––––––––––––––––––––––––––––—— END functions ––––––––––––––––––––––––––––––––––——
 
@@ -525,7 +535,7 @@ class App extends Component {
         const searchError = this.getSearchError(filteredData)
 
         let appClass = "app"
-        if (this.props.transitionStart)  appClass += " --animated"
+        if (this.props.transitionStart)  appClass += " has-faded-in"
         if (!apiDataLoaded || (aboutIsActive || addGameIsActive)) this.addLandscapeOverflow()
         if (apiDataLoaded && (!aboutIsActive && !addGameIsActive)) this.removeLandscapeOverflow()
 

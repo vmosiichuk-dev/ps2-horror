@@ -584,7 +584,7 @@ class Info extends Component {
 
         return (
             <section className={infoClass} aria-label="Game information">
-                <button className="btn --menu" type="button" onClick={onInfoClose} tabIndex={0}>
+                <button className="btn btn--menu" type="button" onClick={onInfoClose} tabIndex={0}>
                     <img className="btn__img is-active" src={menuImg} alt="Close game information"/>
                 </button>
                 <div className="info__screenshot">   
@@ -602,7 +602,7 @@ class Info extends Component {
                         {releaseDate !== "Invalid Date" 
                           ? <div className="info__subtitle-wrapper">
                                 <h3 className="info__subtitle">{releaseDate} ({yearsPast} years ago)</h3>
-                                <div className="btn --rating is-active">{rating}</div>
+                                <div className="btn btn--rating is-active">{rating}</div>
                                 <p className="btn__label">Rating</p>
                             </div>
                           :  <div className="info__subtitle-wrapper">

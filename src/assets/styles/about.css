@@ -1,179 +1,81 @@
+/* ===== ABOUT ==================================================================== */
+
 .about {
 	position: absolute;
 	height: 100dvh;
 	z-index: 40;
 	background: linear-gradient(to bottom, #131c21, #203a43 55%);
-	padding: 0;
 	transition: left 1.125s cubic-bezier(.46,.03,.52,.96);
-	left: -110dvw;
+	left: -100dvw;
 	width: 100dvw;
-	font-family: "Didact Gothic";
 }
 
 .about.is-active {
     left: 0;
 }
 
-.about-wrapper {
-	width: calc(100% - 50px);
+.about__wrapper {
 	padding: 25px;
-	height: calc(100% - 25px);
+	height: calc(100% - 50px);
 	display: grid;
-	align-content: space-between;
-	position: relative;
-	bottom: 0;
 	background: linear-gradient(to bottom, transparent, #0008 40%);
 	font-size: .875rem;
+	line-height: 1.275rem;
 	overflow-y: scroll;
 }
 
-.about-wrapper p {
-	margin: 0;
-}
-
-.about-title {
-	height: fit-content;
+.about__title {
+	margin: 1.75rem 0;
 	text-align: center;
-	font-weight: 600;
 	font-size: 1.0625rem;
 	font-family: "Unbounded";
 }
 
-.about-title,
-.about-control-option {
-	margin: .25rem 0 .25rem;
-}
-
-#about-title {
+.about__title--mt {
 	margin-top: 0;
 }
 
-.about-controls {
-	margin-bottom: 1rem;
+.about__p {
+	margin: 0;
 }
 
-.about-controls h3 {
-	display: block;
-	font-size: .875rem;
-	font-family: "Unbounded";
-	margin: .25rem 0 -.25rem;
-}
-
-.about-controls h3.mt-2 {
-	margin-top: .625rem;
-}
-
-.about-controls p {
-	grid-column: 2;
-}
-
-.about-control-option {
+.about__control {
 	display: grid;
 	grid-template-columns: 30px 1fr;
 	align-items: center;
+	margin: .25rem 0 .25rem;
 }
 
-.about-control-icon {
-	grid-column: 1;
-	grid-row: 1;
-	width: 18px;
-	height: 18px;
+.about__icon-loose {
+    filter: var(--filter-bronze);
 }
 
-.about-control-icon.price {
-	filter: invert(75%) sepia(9%) saturate(389%) hue-rotate(140deg) brightness(91%) contrast(91%);
+.about__icon-cib {
+    filter: var(--filter-silver);
 }
 
-footer {
+.about__icon-newg {
+    filter: var(--filter-gold);
+}
+
+.about__footer {
 	display: flex;
 	justify-content: space-between;
+	padding-top: 1.875rem;
 }
 
-footer div {
-	display: flex;
-	gap: .375rem;
-}
-
-footer .divider::before {
+.about__divider::before {
 	content: "|";
 }
 
-footer a {
-	text-decoration: none;
+.about__link {
 	color: var(--accent);
-}
-
-footer a.nmd {
 	position: relative;
-	font-size: .875rem;
-	top: -1px;
+	top: -2px;
+	text-underline-offset: 2px;
 }
 
-.about .btn.btn--menu {
-	right: 0;
-	position: absolute;
-	top: .25rem;
-	padding: 4px 9px;
-	margin: 12px 20px;
-}
-
-.about.is-active .btn.btn--menu {
-	padding: 1px 6px 1px 4px;
-}
-
-.btn__img.--help {
-	width: 20px;
-	height: 20px;
-	margin-top: 2px;
-}
-
-.about .btn__img {
-	transition: none;
-}
-
-.prices-article {
-	padding-bottom: 1.875rem;
-}
-
-.prices-title {
-	margin-bottom: 0;
-}
-
-.prices-subtitle {
-	margin: .875rem 0 .25rem;
-}
-
-.about-title,
-.about-controls:last-of-type,
-.about-control-option:last-of-type {
-	margin-bottom: .75rem;
-}
-
-
-@media screen and (max-width: 809px) {
-	#controls-title {
-		margin-top: .9375rem;
-	}
-}
-
-
-@media screen and (max-width: 809px) and (hover: none) {
-	.about-article {
-		padding-top: 1.25rem;
-	}
-
-	.about-wrapper {
-		line-height: 1.275rem;
-	}
-}
-
-
-@media screen and (max-width: 1079px) and (hover: none) {
-	.about-wrapper {
-		padding: 0 25px 25px;
-	}
-}
-
+/* ––——– ABOUT –– MEDIA QUERIES ——————————————————————————————————————————————————— */
 
 @media screen and (min-width: 809px) {
 	.about {
@@ -182,61 +84,26 @@ footer a.nmd {
 		border-right: 1px solid #867fa6b5;
 	}
 
-	.about-wrapper {
-		font-size: .9375rem;
-		width: calc(100% - 70px);
+	.about__wrapper {
 		padding: 35px;
 		height: calc(100% - 70px);
-	}
-
-	.about-wrapper p {
 		font-size: 1rem;
+		line-height: 1.4rem;
 	}
 
-	.about-controls h3 {
-		font-size: 1rem;
-	}
-
-	.about-title,
-	.about-control-option {
-		margin: 1rem 0;
-	}
-
-	.about-controls h3 {
-		margin: 0 0 -.5rem;
-	}
-
-	.about-controls h3.mt-2 {
-		margin-top: 1.5rem;
-	}
-
-	.about-controls h3.mt-2 {
-		margin-top: 1.5rem;
-	}
-
-	footer a.nmd {
-		font-size: 1.125rem;
-		top: -3px;
-	}
-
-	.about-title {
+	.about__title {
 		font-size: 1.25rem;
+	}
+
+	.about__control {
+		margin: .875rem 0;
 	}
 }
 
-
 @media screen and (orientation: landscape) and (hover: none) {
-	footer {
+	.about__footer {
 		justify-content: center;
 		gap: 1rem;
-	}
-
-	.about-control-icon {
-		margin-top: 3px;
-	}
-
-	.about-controls h3 {
-		margin-bottom: .5rem;
 	}
 
 	@media (min-width: 843px) and (max-width: 1079px) {
@@ -246,18 +113,9 @@ footer a.nmd {
 			border: none;
 		}
 
-		.about-wrapper {
-			padding: 25px 60px 25px;
+		.about__wrapper {
+			padding: 25px 60px;
 			height: calc(100% - 50px);
-			width: calc(100% - 120px);
-		}
-
-		.about-title {
-			margin-top: 1.25rem;
-		}
-
-		.about-article {
-			margin-bottom: .75rem;
 		}
 	}
 }

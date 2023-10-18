@@ -2,7 +2,7 @@ import Loader from "./loader"
 import ps from "../assets/img/ps-logo.svg"
 
 function Welcome({ animationReset, transitionStart, welcomeClick, onStateChange, loaderError }) {
-    let buttonClass = "btn --welcome",
+    let buttonClass = "btn btn--welcome",
         wrapperClass = "welcome",
         subtitleClass = "welcome__subtitle",
         pClass = "welcome__text"
@@ -12,7 +12,7 @@ function Welcome({ animationReset, transitionStart, welcomeClick, onStateChange,
     }     
     if (welcomeClick) {
         subtitleClass += " has-faded-out"
-        pClass += "has-faded-out"
+        pClass += " has-faded-out"
     }
     if (welcomeClick && animationReset) {
         buttonClass += " has-faded-out"
@@ -23,11 +23,11 @@ function Welcome({ animationReset, transitionStart, welcomeClick, onStateChange,
 
     return (
         <div className={wrapperClass}>
-            <p className="welcome__title"><span className="_a11y">PS2 Game Library — </span><img src={ps} alt=""/>Survival Horror Classics</p>
+            <p className="welcome__title"><span className="a11y">PS2 Game Library — </span><img src={ps} alt=""/>Survival Horror Classics</p>
             <section className="fog__section">
                 <div className="fog__container">
-                    <div className="fog --one"></div>
-                    <div className="fog --two"></div>
+                    <div className="fog fog--one"></div>
+                    <div className="fog fog--two"></div>
                 </div>
             </section>
             <div className="welcome__container">

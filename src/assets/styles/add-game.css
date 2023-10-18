@@ -1,3 +1,10 @@
+.invisible {
+	opacity: 0;
+	transition: .5s opacity cubic-bezier(.46,.03,.52,.96);
+}
+
+
+
 .add-form-wrapper {
 	display: flex;
 	align-items: center;

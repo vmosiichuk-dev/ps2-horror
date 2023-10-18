@@ -13,7 +13,6 @@
 	z-index: 60;
 	left: 0;
 	overflow: hidden;
-	font-family: "Didact Gothic";
 	background: linear-gradient(to bottom, transparent, #203a43 160%);
 	transition: left .125s ease, 1s width .125s cubic-bezier(.46,.03,.52,.96);
 }
@@ -23,7 +22,7 @@
 	background: linear-gradient(to bottom, transparent, #203a43 51%);
 }
 
-.info .btn.--menu {
+.info .btn--menu {
 	position: absolute;
 	top: .25rem;
 	right: 0;
@@ -109,7 +108,7 @@
 
 .info__title,
 .info__category-title,
-.btn.--rating {
+.btn--rating {
 	font-family: "Unbounded";
 }
 
@@ -138,7 +137,7 @@
 	font-weight: 400;
 }
 
-.btn.--rating {
+.btn--rating {
 	cursor: default;
 } 
 
@@ -150,7 +149,7 @@
 	transition: opacity .1s cubic-bezier(.46,.03,.52,.96);
 }
 
-.btn.--rating:hover + .btn__label {
+.btn--rating:hover + .btn__label {
 	opacity: 1;
 }
 
@@ -294,7 +293,7 @@
 		border-right: 1px solid #867fa6b5;
 	}
 
-	.info .btn.--menu {
+	.info .btn--menu {
 		display: none;
 	}
 
@@ -338,14 +337,14 @@
 		background: linear-gradient(to bottom, transparent, #203a43 42%);
 	}
 
-	.info .btn.--menu {
+	.info .btn--menu {
 		top: 46dvh;
 		right: 2.5dvw;
 		opacity: 0;
 		transition: .5s opacity cubic-bezier(.46,.03,.52,.96);
 	}
 
-	.info.is-active .btn.--menu {
+	.info.is-active .btn--menu {
 		opacity: 1;
 		transition: .5s opacity .625s cubic-bezier(.46,.03,.52,.96);
 	}
@@ -426,7 +425,7 @@
 }
 
 @media screen and (min-width: 1023px) and (max-width: 1279px) and ((orientation: portrait) or (hover: hover)) {	
-	.info .btn.--menu {
+	.info .btn--menu {
 		top: 47.25dvh;
 	}
 
@@ -495,7 +494,7 @@
 		transition: 2s opacity .1s cubic-bezier(.46,.03,.52,.96);
 	}
 
-	.btn.--rating:active + .btn__label {
+	.btn--rating:active + .btn__label {
 		opacity: 1;
 		transition: opacity .1s cubic-bezier(.46,.03,.52,.96);;
 	}

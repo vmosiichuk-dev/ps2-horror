@@ -8,7 +8,7 @@
     opacity: 0;
 }
 
-.app.--animated {
+.app.has-faded-in {
 	animation: 1.175s fade-in .9s cubic-bezier(.46,.03,.52,.96) forwards;
 }
 

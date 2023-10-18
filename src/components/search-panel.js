@@ -42,12 +42,12 @@ class SearchPanel extends Component {
     renderProgress = (data, count, progressCount, progressbarStyle, label) => {
         return (
             <section className="mobile-progress" aria-label="Gaming progress information">
-                <p><span className="_a11y">{"Games in " + label.toLowerCase() + ":"}</span><span>{count}</span> / <span className="_a11y">Total games:</span><span>{data.length}</span></p>
+                <p><span className="a11y">{"Games in " + label.toLowerCase() + ":"}</span><span>{count}</span> / <span className="a11y">Total games:</span><span>{data.length}</span></p>
                 <div className="progress-bar--container">
                     <p className={"progress-bar-label --" + label.toLowerCase()}>{label + " progress"}</p>
                     <div className="progress-bar" style={progressbarStyle}></div>
                 </div>
-                <span className="_a11y">Percentage progress count:</span>
+                <span className="a11y">Percentage progress count:</span>
                 <span className="mobile-progress--span progress-count">{progressCount}</span>
             </section>
         )
@@ -56,8 +56,8 @@ class SearchPanel extends Component {
     renderCollectionValue = () => {
         return (
             <section className="mobile-progress" aria-label="Gaming progress information">
-                <p><span className="_a11y">Games played:</span><span></span> / <span className="_a11y">Total games:</span><span></span></p>
-                <span className="_a11y">Percentage progress count:</span>
+                <p><span className="a11y">Games played:</span><span></span> / <span className="a11y">Total games:</span><span></span></p>
+                <span className="a11y">Percentage progress count:</span>
                 <span className="mobile-progress--span progress-count"></span>
             </section>
         )
@@ -123,19 +123,19 @@ class SearchPanel extends Component {
             <nav className="search-panel">
                 <div className="mobile-title-wrapper">
                     <img src={ps} width="30px" alt=""/>
-                    <h1 className="mobile-title"><span className="_a11y">PS2 Game Library — </span>Survival Horror Classics</h1>
+                    <h1 className="mobile-title"><span className="a11y">PS2 Game Library — </span>Survival Horror Classics</h1>
                     {btnGroupAside(" mobile")}
                 </div>
                 {this.renderProgress(data, count, progressCount, progressbarStyle, label)}
                 <section className="btn-group" aria-label="Filter controls" aria-describedby="filter-description">
-                    <span id="filter-description" className="_a11y">Use filters to show games previously marked as played or the ones added to your collection. Combine filters and search to look for games under specific filter option.</span> 
+                    <span id="filter-description" className="a11y">Use filters to show games previously marked as played or the ones added to your collection. Combine filters and search to look for games under specific filter option.</span> 
                     {btnGroupAside(" desktop")}
                     <button className={`btn ${activeFilter === "all" ? "is-active" : ""}`} type="button" tabIndex={tabIndex} onClick={() => onFilterChange("all")}>All games</button>
                     <button className={`btn --played ${activeFilter === "play" ? "is-active" : ""}`} type="button" tabIndex={tabIndex} onClick={() => onFilterChange("play")}><img className="icon" src={game} alt="" />Played</button>
                     <button className={`btn ${activeFilter === "wish" ? "is-active" : ""}`} type="button" tabIndex={tabIndex} onClick={() => onFilterChange("wish")}><img className="icon" src={star} alt="" />Collected</button>
                 </section>
                 <section className="search-wrapper" aria-label="Search input" aria-describedby="search-description">
-                    <span id="search-description" className="_a11y">Filter games that have a matching character string in the title with the character string provided by the user in the input field. When input has focus, it's associated button can be used to clear the input.</span>
+                    <span id="search-description" className="a11y">Filter games that have a matching character string in the title with the character string provided by the user in the input field. When input has focus, it's associated button can be used to clear the input.</span>
                     <input type="text" id="search-input" aria-describedby="search-description" placeholder="Enter game title" value={searchQuery} tabIndex={tabIndex} onChange={this.onSearchUpdate} onFocus={this.onSearchFocus} onBlur={this.onSearchBlur} />
                     <button className="search-btn" type="button" aria-hidden={searchAria} tabIndex={tabIndex} onClick={this.onDeleteClick}>
                         <label htmlFor="search-input" className="search-label">{searchLabel}</label>
