@@ -81,10 +81,13 @@ class Info extends Component {
     }
 
     static getDerivedStateFromProps(props, state) {
-        const {title, src, rating, genres, summary, first_release_date, involved_companies, screenshots, websites, ageRatings} = props.infoData
+        const { title, src, rating, genres, summary, first_release_date, 
+            companyLabel, companyName, screenshots, websites, ageRatings
+        } = props.infoData
+
         let ageRatingJp = "",
-            companyName = "",
-            companyLabel = "",
+            newCompanyLabel = "",
+            newCompanyName = "",
             screenshot = "",
             newSummary = summary,
             newGenres = [],
@@ -96,23 +99,9 @@ class Info extends Component {
 
         let releaseDate = release.toLocaleDateString("en-us", { year:"numeric", month:"short", day:"numeric"})
 
-        if (genres !== undefined) {
-            genres.forEach((genre, i) => { if (i < 4) newGenres.push(genre.name) })
-        }
-
-        if (involved_companies !== undefined) {
-            involved_companies.forEach(item => {
-                if (item.developer) {
-                    companyLabel = "Developer"
-                    companyName = item.company.name
-                }
-            })
-
-            if (involved_companies.length > 0 && companyLabel !== "Developer") {
-                companyLabel = "Publisher"
-                companyName = involved_companies[0].company.name
-            }
-        }
+        if (genres !== undefined) newGenres = genres
+        if (companyLabel !== undefined) newCompanyLabel = companyLabel
+        if (companyName !== undefined) newCompanyName = companyName
 
         if (websites !== undefined) {
             websites.forEach(website => {
@@ -216,8 +205,8 @@ class Info extends Component {
                 case "Zombie Hunters": {
                     screenshot = zombiehunters; break }
                 case "Ghost Vibration": {
-                    companyLabel = "Developer"
-                    companyName = "Artoon Co., Ltd."
+                    newCompanyLabel = "Developer"
+                    newCompanyName = "Artoon Co., Ltd."
                     newGenres = ["Action"]
                     screenshot = ghostvibration; break }
                 case "The Silent Hill Collection": {
@@ -232,8 +221,8 @@ class Info extends Component {
                 case "Gantz: The Game": {
                     screenshot = gantz
                     newSummary = "Gantz: The Game is an immersive adaptation of the popular manga and anime series. Fight surreal and deadly battle against menacing alien creatures, strategize and adapt to survive increasingly challenging encounters and unlock the mysteries surrounding character's predicament. The game boasts stunning visuals that capture the essence of the source material."
-                    companyLabel = "Developer"
-                    companyName = "KCEJ East"
+                    newCompanyLabel = "Developer"
+                    newCompanyName = "KCEJ East"
                     break }
                 case "Lifeline": {
                     screenshot = lifeline; break }
@@ -256,7 +245,7 @@ class Info extends Component {
                 default: { screenshot = ps2collage; break }
             }
         } else if (screenshots.length > 0 || screenshots[i] !== undefined) {
-            screenshot = "https://images.igdb.com/igdb/image/upload/t_screenshot_big/" + screenshots[i].image_id + ".jpg"
+            screenshot = "https://images.igdb.com/igdb/image/upload/t_screenshot_big/" + screenshots[i] + ".jpg"
         }
 
         switch (title) {
@@ -520,8 +509,8 @@ class Info extends Component {
         if (props.infoData.title !== state.title) {
             return {
                 genres: newGenres,
-                companyLabel: companyLabel,
-                companyName: companyName,
+                companyLabel: newCompanyLabel,
+                companyName: newCompanyName,
                 screenshot: screenshot,
                 summary: newSummary,
                 websites: newWebsites,

@@ -138,6 +138,8 @@ button {
 	grid-row: 1;
 	display: grid;
 	animation: 4s scale-up--fade-in cubic-bezier(.46,.03,.52,.96) forwards;
+	
+	min-width: max-content;
 }
 
 @keyframes scale-up--fade-in {

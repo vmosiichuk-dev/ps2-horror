@@ -10,7 +10,8 @@ class RootContent extends Component {
 			apiLoaded: false,
 			transitionStart: false,
             welcomeClick: false,
-			loaderError: false
+			loaderError: false,
+			buttonText: ""
 		}
 	}
 
@@ -23,23 +24,32 @@ class RootContent extends Component {
 		this.setState({ [state]: true })
 	}
 
-	handleError = () => {
-		this.setState({ loaderError: true })
-	}
+	handleError = () => this.setState({ loaderError: true })
 
 	componentDidMount() {
 		const welcomeScreen = JSON.parse(window.sessionStorage.getItem("PS2_SURVIVAL_HORROR_WELCOME_SCREEN"))
+
 		if (welcomeScreen) {
 			this.setState({ welcomeClick: true, animationReset: true })
+		}
+		
+		const startButtonText = "START",
+			  continueButtonText = "CONTINUE",
+			  localGameData = JSON.parse(window.localStorage.getItem("PS2_SURVIVAL_HORROR_GAME_DATA"))
+			  
+		if (localGameData !== null && localGameData.length > 0) {
+			this.setState({ buttonText: continueButtonText })
+		} else {
+			this.setState({ buttonText: startButtonText })
 		}
 	}
 
 	render() {
-		const { animationReset, apiLoaded, transitionStart, welcomeClick, loaderError } = this.state
+		const { animationReset, apiLoaded, transitionStart, welcomeClick, loaderError, buttonText, subtitleText } = this.state
 
 		let welcome = null
 		if (!welcomeClick || !apiLoaded) {
-			welcome = <Welcome animationReset={animationReset} transitionStart={transitionStart} welcomeClick={welcomeClick} loaderError={loaderError} onStateChange={this.handleStateChange} />
+			welcome = <Welcome animationReset={animationReset} transitionStart={transitionStart} welcomeClick={welcomeClick} loaderError={loaderError} buttonText={buttonText} subtitleText={subtitleText} onStateChange={this.handleStateChange} />
 		}
 
 		return (

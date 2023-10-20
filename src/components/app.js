@@ -61,12 +61,18 @@ class App extends Component {
 
     openInfo = (slug) => this.setState(prevState => {
         const newData = prevState.data.find(item => item.slug === slug)
-        return { infoData: newData, openedInfo: true, aboutIsActive: false, addGameIsActive: false }
+
+        return { 
+            infoData: newData, 
+            openedInfo: true, 
+            aboutIsActive: false, 
+            addGameIsActive: false 
+        }
     })  
 
-    closeInfo = () => this.setState({openedInfo: false})
+    closeInfo = () => this.setState({ openedInfo: false })
     
-    closeTutorial = () => this.setState({openedInfo: true})
+    closeTutorial = () => this.setState({ openedInfo: true })
 
 // ––––––––––––––––––––––––––––– <Navigation /> functions ––––––––––––––––––––––––––––––
 
@@ -101,46 +107,59 @@ class App extends Component {
     markState = (slug, state) => {
         this.setState(prevState => {
             const newData = prevState.data.map(item => {
-                if (item.slug === slug) { return { ...item, [state]: !item[state] } }
+                if (item.slug === slug) { 
+                    return { ...item, [state]: !item[state] } 
+                }
+
                 return item
             })
-    
-            let newPlayCount = prevState.playCount,
-                newProgressPlayCount = prevState.progressPlayCount,
-                newProgressbarPlayStyle = prevState.progressbarPlayStyle
 
-            let newWishCount = prevState.wishCount,
-                newProgressWishCount = prevState.progressWishCount,
-                newProgressbarWishStyle = prevState.progressbarWishStyle
+            const newPlayCount = newData.filter(item => item.play).length,
+                  newWishCount = newData.filter(item => item.wish).length,
+                  progress = this.countProgress(newData.length, [newPlayCount, newWishCount])
 
             if (state === "play") {
-                newPlayCount = newData.filter(item => item.play).length
-                const progress = this.countProgress(newPlayCount)
-                newProgressPlayCount = progress[0]
-                newProgressbarPlayStyle = progress[1]
+                return { 
+                    data: newData, 
+                    playCount: newPlayCount, 
+                    progressPlayCount: progress.play.progressCount, 
+                    progressbarPlayStyle: progress.play.progressbarStyle
+                }
             } else {
-                newWishCount = newData.filter(item => item.wish).length
-                const progress = this.countProgress(newWishCount)
-                newProgressWishCount = progress[0]
-                newProgressbarWishStyle = progress[1]
+                return { 
+                    data: newData, 
+                    wishCount: newWishCount, 
+                    progressWishCount: progress.wish.progressCount, 
+                    progressbarWishStyle: progress.wish.progressbarStyle
+                }
             }
-
-            return { data: newData, 
-                     playCount: newPlayCount, progressPlayCount: newProgressPlayCount, progressbarPlayStyle: newProgressbarPlayStyle,
-                     wishCount: newWishCount, progressWishCount: newProgressWishCount, progressbarWishStyle: newProgressbarWishStyle }
         })  
+
+        this.setLocalGameData()
+        this.setLocalProgressData()
     }
 
-    countProgress = (newCount) => {
-        let result = []
-        const newProgressCount = Math.round(newCount / this.state.totalCount * 100) + "%",
-              newProgressbarStyle = {
-                  width: newProgressCount,
-                  borderRadius: newProgressCount === "100%" ? "4px" : "4px 0 0 4px"
-              }
+    countProgress = (totalCount, counts) => {
+        let countsResult = {}
 
-        result.push(newProgressCount, newProgressbarStyle)
-        return result
+        counts.forEach((count, i) => {
+            const state = i === 0 ? "play" : "wish",
+                  progressCount = Math.round(count / totalCount * 100) + "%"
+    
+            const result = {
+                [state]: {
+                    progressCount: progressCount, 
+                    progressbarStyle: {
+                        width: progressCount,
+                        borderRadius: progressCount === "100%" ? "4px" : "4px 0 0 4px"
+                    }
+                }
+            }
+
+            countsResult = {...countsResult, ...result}
+        })
+
+        return countsResult
     }   
 
     handlePriceCategoryChange = (slug, category) => {
@@ -161,22 +180,30 @@ class App extends Component {
 
             return { data: newData }
         })  
+
+        this.setLocalGameData()
     }
 
     deleteItem = (slug) => {   
         this.setState(prevState => {
             const newData = prevState.data.filter(item => item.slug !== slug),
-                  newTotalCount = newData.length,
                   newPlayCount = newData.filter(item => item.play).length,
                   newWishCount = newData.filter(item => item.wish).length,
-                  newProgressCount = Math.round(newPlayCount / newTotalCount * 100) + "%",
-                  newProgressBarStyle = {
-                      width: newProgressCount,
-                      borderRadius: newProgressCount === "100%" ? "4px" : "4px 0 0 4px"
-                  }
+                  progress = this.countProgress(newData.length, [newPlayCount, newWishCount])
 
-            return { data: newData, playCount: newPlayCount, progressCount: newProgressCount, wishCount: newWishCount, totalCount: newTotalCount, progressBarStyle: newProgressBarStyle }
+            return { 
+                data: newData, 
+                playCount: newPlayCount, 
+                progressPlayCount: progress.play.progressCount, 
+                progressbarPlayStyle: progress.play.progressbarStyle,
+                wishCount: newWishCount, 
+                progressWishCount: progress.wish.progressCount, 
+                progressbarWishStyle: progress.wish.progressbarStyle
+            }
         })  
+
+        this.setLocalGameData()
+        this.setLocalProgressData()
     }
 
 // ––––––––––––––––––––––––––––––––– <App /> functions ––––––––––––––––––––––––––––––––––
@@ -197,8 +224,7 @@ class App extends Component {
                     To mark a game as played, hover or click on a game card and press a controller button.
                     </p>
                 )
-            }
-            if (activeFilter === "wish" && wishCount === 0) {
+            } else if (activeFilter === "wish" && wishCount === 0) {
                 return (
                     <p className="main__error is-active" role="status">
                     There are no games in your collection yet.<br />
@@ -309,7 +335,11 @@ class App extends Component {
 
     filterGame = (game) => {
         let rating = "N/A",
-            ageRatings = []
+            ageRatings = [],
+            genres = [],
+            screenshots = [],
+            companyLabel = "",
+            companyName = ""
 
         if (game.total_rating) {
             rating = Math.round(game.total_rating)
@@ -322,15 +352,38 @@ class App extends Component {
         if (game.age_ratings === undefined) {
             ageRatings = []
         } else if (game.age_ratings.length > 0) {
-            game.age_ratings.forEach(item => {
-                ageRatings.push(item.rating)
+            game.age_ratings.forEach(item => ageRatings.push(item.rating))
+        }
+
+        if (game.genres !== undefined) {
+            game.genres.forEach((genre, i) => { if (i < 4) genres.push(genre.name) })
+        }
+
+        if (game.involved_companies !== undefined) {
+            game.involved_companies.forEach(item => {
+                if (item.developer) {
+                    companyLabel = "Developer"
+                    companyName = item.company.name
+                }
             })
+
+            if (game.involved_companies.length > 0 && companyLabel !== "Developer") {
+                companyLabel = "Publisher"
+                companyName = game.involved_companies[0].company.name
+            }
+        }
+
+        if (game.screenshots !== undefined) {
+            game.screenshots.forEach(item => screenshots.push(item.image_id))
         }
 
         delete game.total_rating
         delete game.rating
         delete game.aggregated_rating
         delete game.age_ratings
+        delete game.genres
+        delete game.involved_companies
+        delete game.screenshots
         
         let gamePrice = this.gamePrices.find(item => item.title === game.name)
         if (gamePrice === undefined) gamePrice = {prices: { loose: "n/a", cib: "n/a", newg: "n/a" }}
@@ -339,8 +392,20 @@ class App extends Component {
         game.cover !== undefined 
             ? src = "https://images.igdb.com/igdb/image/upload/t_cover_big/" + game.cover.image_id + ".jpg" 
             : src = noCover
-        const filters = { wish: false, play: false },
-              gameData = { ...game, rating: rating, ageRatings: ageRatings, title: game.name, src: src, ...gamePrice.prices, priceCategory: "" }
+        const filters = { wish: false, play: false }
+        const gameData = { 
+            ...game, 
+            rating: rating, 
+            ageRatings: ageRatings, 
+            genres: genres,
+            companyLabel: companyLabel,
+            companyName: companyName,
+            screenshots: screenshots,
+            title: game.name, 
+            src: src, 
+            ...gamePrice.prices, 
+            priceCategory: "" 
+        }
 
         delete gameData.name
         delete gameData.cover
@@ -352,31 +417,60 @@ class App extends Component {
 
     handleWelcomeClick = async () => {
         try {
-            const ratedGames = [],
-                  notRatedGames = [],
-                  body = "fields genres.name, name, total_rating, rating, aggregated_rating, age_ratings.rating, cover.image_id, first_release_date, involved_companies.developer, involved_companies.company.name, screenshots.image_id, slug, summary, websites.category, websites.url; limit 88; where platforms = (8) & genres != (4,10,16,34) & themes = (19,21) & themes != (35,39) & keywords != (5340) & player_perspectives != (4,5) & franchises != (463,824) & id != (3837,2862,6200,5143,2861,210296,43614,11286,5868,43262,43264,20829,1159,43301,253324,85965,172551,91643,43633,43210,49405,132163,136,260797,77219,127959,20640,37045,144966,203260,13901,24096,64108,72157,73012); sort total_rating desc;",
-                  get = await this.iGDB.getToken(),
-                  games = await this.iGDB.getGames(get.access_token, body)
+            const localGameData = JSON.parse(window.localStorage.getItem("PS2_SURVIVAL_HORROR_GAME_DATA"))
 
-            games.forEach(game => {
-                const gameFiltered = this.filterGame(game)
-                if (gameFiltered.rating === "N/A") {
-                    notRatedGames.push(gameFiltered)
-                } else {
-                    ratedGames.push(gameFiltered)
-                }
-            })
+            if ((localGameData === null || localGameData.length < 1)) {
+                const ratedGames = [],
+                    notRatedGames = [],
+                    body = "fields genres.name, name, total_rating, rating, aggregated_rating, age_ratings.rating, cover.image_id, first_release_date, involved_companies.developer, involved_companies.company.name, screenshots.image_id, slug, summary, websites.category, websites.url; limit 88; where platforms = (8) & genres != (4,10,16,34) & themes = (19,21) & themes != (35,39) & keywords != (5340) & player_perspectives != (4,5) & franchises != (463,824) & id != (3837,2862,6200,5143,2861,210296,43614,11286,5868,43262,43264,20829,1159,43301,253324,85965,172551,91643,43633,43210,49405,132163,136,260797,77219,127959,20640,37045,144966,203260,13901,24096,64108,72157,73012); sort total_rating desc;",
+                    get = await this.iGDB.getToken(),
+                    games = await this.iGDB.getGames(get.access_token, body)
 
-            const allGames = [...ratedGames, ...notRatedGames]
-            const initialData = allGames.find(item => item.slug === "silent-hill-2")
+                games.forEach(game => {
+                    const gameFiltered = this.filterGame(game)
+                    if (gameFiltered.rating === "N/A") {
+                        notRatedGames.push(gameFiltered)
+                    } else {
+                        ratedGames.push(gameFiltered)
+                    }
+                })
 
-            this.setState({ data: allGames, apiDataLoaded: true, infoData: initialData })
+                const allGames = [...ratedGames, ...notRatedGames]
+                /* const initialData = allGames.find(item => item.slug === "silent-hill-2") */
+
+                this.setState({ 
+                    data: allGames, 
+                    apiDataLoaded: true, 
+                    infoData: allGames[0] 
+                })
+            } else {
+                const localPlayCount = JSON.parse(window.localStorage.getItem("PS2_SURVIVAL_HORROR_PLAY_COUNT")),
+                      localPlayPercent = JSON.parse(window.localStorage.getItem("PS2_SURVIVAL_HORROR_PLAY_PROGRESS_COUNT")),
+                      localPlayProgressbar = JSON.parse(window.localStorage.getItem("PS2_SURVIVAL_HORROR_PLAY_PROGRESSBAR_STYLE")),
+                      localWishCount = JSON.parse(window.localStorage.getItem("PS2_SURVIVAL_HORROR_WISH_COUNT")),
+                      localWishPercent = JSON.parse(window.localStorage.getItem("PS2_SURVIVAL_HORROR_WISH_PROGRESS_COUNT")),
+                      localWishProgressbar = JSON.parse(window.localStorage.getItem("PS2_SURVIVAL_HORROR_WISH_PROGRESSBAR_STYLE"))
+
+                this.setState({ 
+                    apiDataLoaded: true,
+                    data: localGameData, 
+                    infoData: localGameData[0],
+                    playCount: localPlayCount, 
+                    progressPlayCount: localPlayPercent, 
+                    progressbarPlayStyle: localPlayProgressbar,
+                    wishCount: localWishCount, 
+                    progressWishCount: localWishPercent, 
+                    progressbarWishStyle: localWishProgressbar 
+                })
+            }
+
             this.props.onStateChange("transitionStart")
-
             const setTimeoutPromise = () => new Promise(() => {
                 setTimeout(() => {
                     this.toggleFilter("all")
                     this.props.onStateChange("apiLoaded")
+                    this.setLocalGameData()
+                    this.setLocalProgressData()
                 }, 2500)
             })
             await setTimeoutPromise()
@@ -385,6 +479,28 @@ class App extends Component {
             console.error("Error fetching data from the API:", error)
         }
     }  
+
+    setLocalGameData = (fn) => {
+        setTimeout(() => {
+            const {data} = this.state
+
+            window.localStorage.setItem("PS2_SURVIVAL_HORROR_GAME_DATA", JSON.stringify(data))
+        }, 125)
+    }
+
+    setLocalProgressData = (fn) => {
+        setTimeout(() => {
+            const {playCount, progressPlayCount, progressbarPlayStyle, wishCount, progressWishCount, progressbarWishStyle} = this.state
+
+            window.localStorage.setItem("PS2_SURVIVAL_HORROR_PLAY_COUNT", JSON.stringify(playCount))
+            window.localStorage.setItem("PS2_SURVIVAL_HORROR_PLAY_PROGRESS_COUNT", JSON.stringify(progressPlayCount))
+            window.localStorage.setItem("PS2_SURVIVAL_HORROR_PLAY_PROGRESSBAR_STYLE", JSON.stringify(progressbarPlayStyle))
+
+            window.localStorage.setItem("PS2_SURVIVAL_HORROR_WISH_COUNT", JSON.stringify(wishCount))
+            window.localStorage.setItem("PS2_SURVIVAL_HORROR_WISH_PROGRESS_COUNT", JSON.stringify(progressWishCount))
+            window.localStorage.setItem("PS2_SURVIVAL_HORROR_WISH_PROGRESSBAR_STYLE", JSON.stringify(progressbarWishStyle))
+        }, 125)
+    }
 
     addLandscapeOverflow = () => document.body.classList.add('body--overflow')
     removeLandscapeOverflow = () => document.body.classList.remove('body--overflow')
@@ -450,7 +566,6 @@ class App extends Component {
                   error = "Enter a game title. Title should be at least 3 characters."
 
             if (radioValue === "") {
-                console.log("radioValue is empty")
                 this.setState({ addFormMessage: radioError, addFormClass: "add-message" })
                 this.resetAddFormClass("", error)
                 return
@@ -464,36 +579,37 @@ class App extends Component {
                   success = "New game successfully added. You can now manage your collection."
 
             const duplicate = this.state.data.some(item => item.title.toLowerCase() === gameFiltered.title.toLowerCase())
-
-            console.log(game)
-            console.log(gameFiltered)
-            console.log("radio = " + radioValue)
-            console.log("duplicate = " + duplicate)
             
             if (duplicate) {
-                console.log("duplicate")
                 this.setState({ addFormMessage: titleError, addFormClass: "add-message" })
                 this.resetAddFormClass("", error)
             } else {
-                console.log("radioValue is not empty && not duplicate")
                 this.setState(prevState => {
                     const newData = [gameFiltered, ...prevState.data],
-                          newTotalCount = newData.length,
-                          newProgressCount = Math.round(this.state.playCount / newTotalCount * 100) + "%",
-                          newProgressBarStyle = {width: newProgressCount, borderRadius: newProgressCount === "100%" ? "4px" : "4px 0 0 4px"}
-
-                    return { data: newData, 
-                             progressCount: newProgressCount, 
-                             totalCount: newTotalCount, 
-                             addFormMessage: success, 
-                             addFormClass: "add-message success", 
-                             addedTitle: "",
-                             progressBarStyle: newProgressBarStyle,
-                             searchData: [],
-                             searchDataLoaded: false, 
-                             searchRadioValue: "" }
+                          newPlayCount = newData.filter(item => item.play).length,
+                          newWishCount = newData.filter(item => item.wish).length,
+                          progress = this.countProgress(newData.length, [newPlayCount, newWishCount])
+        
+                    return { 
+                        data: newData, 
+                        playCount: newPlayCount, 
+                        progressPlayCount: progress.play.progressCount, 
+                        progressbarPlayStyle: progress.play.progressbarStyle,
+                        wishCount: newWishCount, 
+                        progressWishCount: progress.wish.progressCount, 
+                        progressbarWishStyle: progress.wish.progressbarStyle,
+                        totalCount: newData.length, 
+                        addFormMessage: success, 
+                        addFormClass: "add-message success", 
+                        addedTitle: "",
+                        searchData: [],
+                        searchDataLoaded: false, 
+                        searchRadioValue: "" 
+                    }
                 })  
                 this.resetAddFormClass("success", error)
+                this.setLocalGameData()
+                this.setLocalProgressData()
             }
         } catch (error) {
             this.setState({ addFormMessage: error, addFormClass: "add-message" })
