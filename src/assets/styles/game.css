@@ -286,6 +286,29 @@
     font-size: .5rem;
 }
 
+.game-price--value {
+    margin: 0;
+    font-family: var(--unbounded);
+}
+
+.btn--price.btn--value {
+    margin: auto 0;
+    padding: 4px 6px 5px;
+    font-family: var(--unbounded);
+}
+
+.game__icon--value {
+    margin: 0 3px 1px 0;
+}
+
+.usd--value {
+    margin: 0 2px 0 1px;
+}
+
+.usd--total {
+    top: 1px;
+}
+
 /* ––——– GAME —— MEDIA QUERIES ——–––––––––––––———————————————————————————————— */
 
 @media screen and (min-width: 1365px) {
@@ -338,6 +361,10 @@
         padding: 0 2px 2px;
         font-size: .9375rem;
         min-width: 50px;
+    }
+
+    .game__icon {
+        margin-bottom: 3px;
     }
 
     .usd {

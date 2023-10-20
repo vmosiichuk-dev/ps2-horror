@@ -197,6 +197,27 @@
     width: 20px;
 }
 
+.nav__progress--value {
+    padding-bottom: 2px;
+}
+
+.nav__value-label {
+    margin: auto 0 auto -118px;
+    font-family: var(--didact-gothic);
+    padding-right: 4px;
+}
+
+.nav__total {
+    font-size: .875rem;
+    display: flex;
+    align-items: center;
+}
+
+.nav__total-label {
+    margin-right: 3px;
+    font-size: .875rem;
+}
+
 @media screen and (min-width: 809px) and (((orientation: portrait) or (hover: hover)) or ((orientation: landscape) and (min-width: 1079px))) {
     .nav {
         grid-template-columns: 370px minmax(30px, 1fr) minmax(210px, 342px);

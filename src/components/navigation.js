@@ -5,6 +5,9 @@ import ps from "../assets/img/ps-logo.svg"
 import search from "../assets/img/search.png"
 import del from "../assets/img/del.png"
 import menuImg from "../assets/img/plus.svg"
+import looseIcon from "../assets/img/loose.png"
+import cibIcon from "../assets/img/cib.png"
+import newgIcon from "../assets/img/newg.png"
 import "../assets/styles/navigation.css"
 
 class Navigation extends Component {
@@ -39,7 +42,71 @@ class Navigation extends Component {
         }
     }
 
-    renderProgress = (data, count, progressCount, progressbarStyle, label) => {
+    getCollectionValue = (data) => {
+        const dataLoose = data.filter(item => item.priceCategory === "loose"),
+              dataCib = data.filter(item => item.priceCategory === "cib"),
+              dataNewg = data.filter(item => item.priceCategory === "newg")
+
+        console.log(dataLoose)
+        console.log(dataCib)
+        console.log(dataNewg)
+
+        let looseSum = 0, 
+            cibSum = 0, 
+            newgSum = 0
+
+        dataLoose.forEach(item => { console.log(Number.isInteger(item.loose)); if (Number.isInteger(item.loose)) looseSum += item.loose })
+        dataCib.forEach(item => { console.log(Number.isInteger(item.cib)); if (Number.isInteger(item.cib)) cibSum += item.cib })
+        dataNewg.forEach(item => { console.log(Number.isInteger(item.newg)); if (Number.isInteger(item.newg)) newgSum += item.newg })
+
+        return {
+            loose: looseSum,
+            cib: cibSum,
+            newg: newgSum
+        }
+    }
+
+    renderProgress = (activeFilter, data, count, progressCount, progressbarStyle, label) => {
+        if (activeFilter === "wish") {
+            const value = this.getCollectionValue(data)
+            console.log(value)
+            return (
+                <section className="nav__progress nav__progress--value" aria-label="Gaming progress information">
+                    <div className="game-price game-price--value">
+                        <button type="button" className="btn btn--price btn--loose btn--value">
+                            <img className="game__icon game__icon--loose game__icon--value" src={looseIcon} alt="Loose price" />
+                            <div>
+                                <span className="usd usd--value">$</span>
+                                <span>{value.loose}</span>
+                            </div>
+                        </button>
+                        <button type="button" className="btn btn--price btn--cib btn--value">
+                            <img className="game__icon game__icon--cib game__icon--value" src={cibIcon} alt="CIB price" />
+                            <div>
+                                <span className="usd usd--value">$</span>
+                                <span>{value.cib}</span>
+                            </div>
+                        </button>
+                        <button type="button" className="btn btn--price btn--newg btn--value">
+                            <img className="game__icon game__icon--newg game__icon--value" src={newgIcon} alt="New price" />
+                            <div>
+                                <span className="usd usd--value">$</span>
+                                <span>{value.newg}</span>
+                            </div>
+                        </button>
+                        <div className="nav__total">
+                            <p className="nav__total-label">Total: </p>
+                            <span className="usd usd--total">$</span>
+                            <span>{value.loose + value.cib + value.newg}</span>
+                        </div>
+                    </div>
+                    {/* <p className="nav__progress-count">Loose: <span>{value.loose}</span></p>
+                    <p className="nav__progress-count">CIB: <span>{value.cib}</span></p>
+                    <p className="nav__progress-count">New: <span>{value.newg}</span></p>
+                    <p className="nav__progress-count">Total: <span>{value.loose + value.cib + value.newg}</span></p> */}
+                </section>
+            )
+        }
         return (
             <section className="nav__progress" aria-label="Gaming progress information">
                 <p className="nav__progress-count"><span className="a11y">{"Games in " + label.toLowerCase() + ":"}</span><span>{count}</span> / <span className="a11y">Total games:</span><span>{data.length}</span></p>
@@ -115,7 +182,7 @@ class Navigation extends Component {
                     <h1 className="nav__title"><span className="a11y">PS2 Game Library — </span>Survival Horror Classics</h1>
                     {navControls("mobile")}
                 </div>
-                {this.renderProgress(data, count, progressCount, progressbarStyle, label)}
+                {this.renderProgress(activeFilter, data, count, progressCount, progressbarStyle, label)}
                 <section className="nav__filters" aria-label="Filter controls" aria-describedby="nav__filters-description">
                     <span id="nav__filters-description" className="a11y">Use filters to show games previously marked as played or the ones added to your collection. Combine filters and search to look for games under specific filter option.</span> 
                     {navControls("desktop")}
