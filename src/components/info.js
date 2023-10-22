@@ -250,81 +250,119 @@ class Info extends Component {
 
         switch (title) {
             case "Evil Twin: Cyprien's Chronicles" : {
-                newSummary = "The game was originally intended to be released in late 1999 under the title of 'Evil Twin' but was later delayed due to financial reasons. The player takes control of a young orphan named Cyprien, who ventures through a nightmarish world and can transform into a superhero version of himself named Supercyp during his journey to Loren Darith to free his teddy bear, Lenny."
-                break }
+                newSummary = "The game was originally intended to be released in late 1999 under the title of 'Evil Twin' but was later delayed due to financial reasons. The player takes control of a young orphan named Cyprien, who ventures through a nightmarish world and can transform into a superhero version of himself named Supercyp during his journey to Loren Darith to free his teddy bear, Lenny."; break 
+            }
             case "Phase Paradox" : {
                 newGenres = ["Adventure"]
-                newSummary = "Phase Paradox is an NTSC-J exclusive horror adventure set in the same universe as Philosoma, a PlayStation shoot-em-up. The Gallant, a spacecraft carrier was heavily damaged after the explosion of Planet 220. 20% of the crew is either dead or injured by the impact. Some of the survivors are going crazy. But even worst, unknown creatures begin to roam the ship."
-                break } 
+                newSummary = "Phase Paradox is an NTSC-J exclusive horror adventure set in the same universe as Philosoma, a PlayStation shoot-em-up. The Gallant, a spacecraft carrier was heavily damaged after the explosion of Planet 220. 20% of the crew is either dead or injured by the impact. Some of the survivors are going crazy. But even worst, unknown creatures begin to roam the ship."; break 
+            } 
             case "Mystic Nights" : {
-                newSummary = "A South-Korean exclusive horror with Resident Evil gameplay style. You are called to investigate a secret government facility that was suddenly abandoned. On the way, you discover that it has been overtaken by numerous nightmarish monsters and vampires. In multi-player, you need to escape in a limited time, while one of the players takes the role of a renegade."
-                break } 
+                newSummary = "A South-Korean exclusive horror with Resident Evil gameplay style. You are called to investigate a secret government facility that was suddenly abandoned. On the way, you discover that it has been overtaken by numerous nightmarish monsters and vampires. In multi-player, you need to escape in a limited time, while one of the players takes the role of a renegade."; break 
+            } 
             case "Vampire Night" : {
-                newSummary = "A light gun game first released for arcades and later ported to PS2 in 2001. The gameplay itself utilizes the engine that is used in The House of the Dead series. A struggle between light and dark, from three centuries back, is about to ensue. The parties involved are Michel and Albert – the two vampire hunters representing light, and the vampires representing dark."
-                break }  
+                newSummary = "A light gun game first released for arcades and later ported to PS2 in 2001. The gameplay itself utilizes the engine that is used in The House of the Dead series. A struggle between light and dark, from three centuries back, is about to ensue. The parties involved are Michel and Albert – the two vampire hunters representing light, and the vampires representing dark."; break 
+            }  
             case "Cold Fear" : {
-                newSummary = "Cold Fear is a first survival horror published by Ubisoft and developed by Darkworks – creators of Alone in the Dark: The New Nightmare. The game tells the story of Tom Hansen, a member of the United States Coast Guard, who comes to the aid of a Russian whaler and finds a mysterious virus has broken out and turned the crew into zombie like creatures."
-                break }
+                newSummary = "Cold Fear is a first survival horror published by Ubisoft and developed by Darkworks – creators of Alone in the Dark: The New Nightmare. The game tells the story of Tom Hansen, a member of the United States Coast Guard, who comes to the aid of a Russian whaler and finds a mysterious virus has broken out and turned the crew into zombie like creatures."; break 
+            }
             case "BloodRayne" : {
-                newSummary = "BloodRayne is an action-adventure hack and slash video game. The game has spawned a franchise with the addition of sequels, films, and self-contained comic books. The game begins in 1933, and consists of three acts. The plot revolves around Rayne – a dhampir looking for her father. She is working for the Brimstone Society and kills any vampire that crosses her path."
-                break }
+                newSummary = "BloodRayne is an action-adventure hack and slash video game. The game has spawned a franchise with the addition of sequels, films, and self-contained comic books. The game begins in 1933, and consists of three acts. The plot revolves around Rayne – a dhampir looking for her father. She is working for the Brimstone Society and kills any vampire that crosses her path."; break 
+            }
             case "Trapt": {
-                screenshot = trapt; break }
+                screenshot = trapt; break 
+            }
             case "Kuon": {
-                screenshot = kuon; break }
+                screenshot = kuon; break 
+            }
             case "Extermination": {
                 screenshot = extermination
-                newSummary = "Coming out early in the system's life cycle, the title was used as a showcase at trade shows before its release. It is considered the first survival horror game on the PS2. The game generated hype amongst critics, but received mostly average reviews. There are significant differences between PAL and NTSC U/C versions including a redesign of the main protagonist and entirely rerecorded dialogue."
-                break }
+                newSummary = "Coming out early in the system's life cycle, the title was used as a showcase at trade shows before its release. It is considered the first survival horror game on the PS2. The game generated hype amongst critics, but received mostly average reviews. There are significant differences between PAL and NTSC U/C versions including a redesign of the main protagonist and entirely rerecorded dialogue."; break 
+            }
             case "Berserk Millennium Empire Arc: Chapter of the Holy Demon War": {
-                screenshot = berserk; break }
+                screenshot = berserk; break 
+            }
             case "Silent Hill 2: Special 2 Disc Set": {
                 screenshot = silent2special
                 newWebsites = [
-                    {label: "Moby Games", url: "https://www.mobygames.com/game/138259/silent-hill-2-special-2-disc-set/"},
-                    {label: "Crimson Ceremony", url: "https://www.crimson-ceremony.net/lostreleases/item.php?id=shgame_sh2-ps2-eur1"}
-                ]; break }
+                    { 
+                        label: "Moby Games", 
+                        url: "https://www.mobygames.com/game/138259/silent-hill-2-special-2-disc-set/" 
+                    },
+                    { 
+                        label: "Crimson Ceremony", 
+                        url: "https://www.crimson-ceremony.net/lostreleases/item.php?id=shgame_sh2-ps2-eur1" 
+                    }
+                ]; break 
+            }
             case "Jaws Unleashed": {
-                screenshot = jaws; break }
+                screenshot = jaws; break 
+            }
             case "Turok: Evolution": {
-                screenshot = turok; break }
+                screenshot = turok; break 
+            }
             case "Galerians: Ash": {
-                screenshot = galerians; break }
+                screenshot = galerians; break 
+            }
             case "Simple 2000 Series Vol. 113: The Tairyou Jigoku": {
                 screenshot = tairyou
-                newSummary = "The game follows the story of a schoolgirl chasing down a very Alice In Wonderland-styled rabbit through various worlds, to take back the cellphone he stole from her. While you're running around you come across hoards of massive insects. The enemies never truly die, within a few seconds they are back up again and ready to attack! There are some additional endings and unlockables."
-                break }
+                newSummary = "The game follows the story of a schoolgirl chasing down a very Alice In Wonderland-styled rabbit through various worlds, to take back the cellphone he stole from her. While you're running around you come across hoards of massive insects. The enemies never truly die, within a few seconds they are back up again and ready to attack! There are some additional endings and unlockables."; break 
+            }
             case "Resident Evil 4": {
                 newWebsites = [
-                    {label: "Twitch", url: "https://www.twitch.tv/directory/category/resident-evil-4-2005"},
-                    {label: "Wikia", url: "https://residentevil.fandom.com/wiki/Resident_Evil_4_(2005)"},
-                    {label: "Wikipedia", url: "https://en.wikipedia.org/wiki/Resident_Evil_4"}
-                ]; break }
+                    {
+                        label: "Twitch", 
+                        url: "https://www.twitch.tv/directory/category/resident-evil-4-2005"
+                    },
+                    {
+                        label: "Wikia", 
+                        url: "https://residentevil.fandom.com/wiki/Resident_Evil_4_(2005)"
+                    },
+                    {
+                        label: "Wikipedia", 
+                        url: "https://en.wikipedia.org/wiki/Resident_Evil_4"
+                    }
+                ]; break 
+            }
             case "Resident Evil 4: Premium Edition": {
                 screenshot = resident4premium
                 newWebsites = [
-                    {label: "Twitch", url: "https://www.twitch.tv/directory/category/resident-evil-4-2005"},
-                    {label: "Wikia", url: "https://residentevil.fandom.com/wiki/Resident_Evil_4_(2005)"},
-                    {label: "Wikipedia", url: "https://en.wikipedia.org/wiki/Resident_Evil_4"}
-                ]; break }
+                    {
+                        label: "Twitch", 
+                        url: "https://www.twitch.tv/directory/category/resident-evil-4-2005"
+                    },
+                    {
+                        label: "Wikia", 
+                        url: "https://residentevil.fandom.com/wiki/Resident_Evil_4_(2005)"
+                    },
+                    {
+                        label: "Wikipedia", 
+                        url: "https://en.wikipedia.org/wiki/Resident_Evil_4"
+                    }
+                ]; break 
+            }
             case "Baroque": {
-                screenshot = baroque; break }
+                screenshot = baroque; break 
+            }
             case "King's Field IV": {
                 screenshot = kingsfield
-                newSummary = "The fourth game in the King's Field series (and third to be released in the west) and the last one released for home consoles. A demonic idol responsible for the destruction of an ancient race has re-emerged and threatens to destroy mankind. Your mission is to take on the role of a warrior who has to return the idol to the Ancient City to break its curse."
-                break }
+                newSummary = "The fourth game in the King's Field series (and third to be released in the west) and the last one released for home consoles. A demonic idol responsible for the destruction of an ancient race has re-emerged and threatens to destroy mankind. Your mission is to take on the role of a warrior who has to return the idol to the Ancient City to break its curse."; break 
+            }
             case "Aliens Versus Predator: Extinction": {
-                screenshot = aliens; break }
+                screenshot = aliens; break 
+            }
             case "Shadow Tower: Abyss": {
-                screenshot = abyss; break }
+                screenshot = abyss; break 
+            }
             case "Michigan: Report from Hell": {
-                screenshot = michigan; break }
+                screenshot = michigan; break 
+            }
             case "Resident Evil Survivor 2 Code: Veronica": {
-                screenshot = survivor2; break }
+                screenshot = survivor2; break 
+            }
             case "Hungry Ghosts": {
                 screenshot = hungryghosts
-                newSummary = "Developed by Japanese software house Deep Space (previously responsible for the survival horror game Extermination) and designed by their founder Tokuro Fujiwara (previously responsible for, of all things, the seminal Ghosts 'n Goblins). Hungry Ghosts is a first-person horror action experience with some very deep character 'creation'. In fact, it is an immersive simulation."
-                break }
+                newSummary = "Developed by Japanese software house Deep Space (previously responsible for the survival horror game Extermination) and designed by their founder Tokuro Fujiwara (previously responsible for, of all things, the seminal Ghosts 'n Goblins). Hungry Ghosts is a first-person horror action experience with some very deep character 'creation'. In fact, it is an immersive simulation."; break 
+            }
             default: break
         }
 

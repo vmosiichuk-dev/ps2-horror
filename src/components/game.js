@@ -1,13 +1,12 @@
 import React, { Component } from "react"
+import GamePrice from "./game-price"
+import "../assets/styles/game.css"
+
 import game from "../assets/img/game.png"
 import star from "../assets/img/star.png"
 import info from "../assets/img/info.png"
 import question from "../assets/img/question.png"
 import overlay from "../assets/img/overlay.png"
-import looseIcon from "../assets/img/loose.png"
-import cibIcon from "../assets/img/cib.png"
-import newgIcon from "../assets/img/newg.png"
-import "../assets/styles/game.css"
 
 class Game extends Component {
     constructor(props) {
@@ -60,14 +59,8 @@ class Game extends Component {
         const { delSrc, activeClass, itemButtonsStyle, confirmDeleteAria } = this.state
 
         let gameClass = "game",
-            btnLooseClass = "btn btn--price",
-            btnCibClass = "btn btn--price",
-            btnNewgClass = "btn btn--price",
-            iconLooseClass = "game__icon",
-            iconCibClass = "game__icon",
-            iconNewgClass = "game__icon",
-            statusContainerClass = "game__status-container",
-            deleteAlt = "Delete game"
+            deleteAlt = "Delete game",
+            statusContainerClass = "game__status-container"
 
         if (wish) gameClass += " --wish"
         if (play) gameClass += " --play"
@@ -75,24 +68,9 @@ class Game extends Component {
         if (!confirmDeleteAria) statusContainerClass += " is-active"
 
         switch (priceCategory) {
-            case "loose": { 
-                gameClass += " game--loose"
-                btnLooseClass += " btn--loose"
-                iconLooseClass += " game__icon--loose"
-                break
-            }
-            case "cib": { 
-                gameClass += " game--cib"
-                btnCibClass += " btn--cib"
-                iconCibClass += " game__icon--cib"
-                break 
-            }
-            case "newg": { 
-                gameClass += " game--newg"
-                btnNewgClass += " btn--newg"
-                iconNewgClass += " game__icon--newg"
-                break 
-            }
+            case "loose": gameClass += " game--loose"; break
+            case "cib": gameClass += " game--cib"; break 
+            case "newg": gameClass += " game--newg"; break 
             default: break
         }
 
@@ -119,34 +97,19 @@ class Game extends Component {
                     </button>
                     <p className={"delete-p" + activeClass} aria-hidden={confirmDeleteAria}>Are you sure?<br/>Click again to delete.</p>
                 </div>
+                <GamePrice 
+                    nav={false} 
+                    onPriceCategoryChange={onPriceCategoryChange} 
+                    priceCategory={priceCategory} 
+                    loose={loose} 
+                    cib={cib} 
+                    newg={newg} 
+                />{/* 
                 <h2 className="game-data">
                     <span className="game-name">
                         {title}
                     </span>
-                    <div className="game-price">
-                        <button type="button" className={btnLooseClass} onClick={() => onPriceCategoryChange("loose")}>
-                            <img className={iconLooseClass} src={looseIcon} alt="Loose price" />
-                            <div>
-                                {loose !== "n/a" ? <span className="usd">$</span> : null}
-                                <span>{loose}</span>
-                            </div>
-                        </button>
-                        <button type="button" className={btnCibClass} onClick={() => onPriceCategoryChange("cib") }>
-                            <img className={iconCibClass} src={cibIcon} alt="CIB price" />
-                            <div>
-                                {cib !== "n/a" ? <span className="usd">$</span> : null}
-                                <span>{cib}</span>
-                            </div>
-                        </button>
-                        <button type="button" className={btnNewgClass} onClick={() => onPriceCategoryChange("newg") }>
-                            <img className={iconNewgClass} src={newgIcon} alt="New price" />
-                            <div>
-                                {newg !== "n/a" ? <span className="usd">$</span> : null}
-                                <span>{newg}</span>
-                            </div>
-                        </button>
-                    </div>
-                </h2>
+                </h2> */}
             </li>
         )
     }
