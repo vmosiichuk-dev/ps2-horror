@@ -3,7 +3,6 @@ import overlay from "../assets/img/overlay.png"
 import menuImg from "../assets/img/plus.svg"
 import "../assets/styles/info.css"
 
-// Age Rating Images
 import ceroA from "../assets/img/ratings/ceroA.svg"
 import ceroB from "../assets/img/ratings/ceroB.svg"
 import ceroC from "../assets/img/ratings/ceroC.svg"
@@ -25,7 +24,6 @@ import usk12 from "../assets/img/ratings/usk12.svg"
 import grac18 from "../assets/img/ratings/grac18.svg"
 import jpW from "../assets/img/ratings/jpW.webp"
 
-// Alternative Screenshots
 import abyss from "../assets/img/screenshots/abyss.webp"
 import aliens from "../assets/img/screenshots/aliens.webp"
 import baroque from "../assets/img/screenshots/baroque.webp"
@@ -81,9 +79,7 @@ class Info extends Component {
     }
 
     static getDerivedStateFromProps(props, state) {
-        const { title, src, rating, genres, summary, first_release_date, 
-            companyLabel, companyName, screenshots, websites, ageRatings
-        } = props.infoData
+        const { title, src, rating, genres, summary, first_release_date, companyLabel, companyName, screenshots, websites, ageRatings } = props.infoData
 
         let ageRatingJp = "",
             newCompanyLabel = "",
@@ -597,7 +593,7 @@ class Info extends Component {
         const {openedInfo, onInfoClose} = this.props  
 
         let infoClass = "info",
-            btnCloseClass = "btn btn--close",
+            btnCloseClass = "btn info__close-btn",
             infoAgeRatingClass = "info__age-container",
             infoTitleWrapperClass = "info__title-wrapper",
             infoContainerClass = "info__container",
@@ -619,12 +615,12 @@ class Info extends Component {
                     <img className="btn__img is-active" src={menuImg} alt="Close game information"/>
                 </button>
                 <div className="info__screenshot">   
-                    <img className="screenshot__img" src={screenshot} alt=""/>
-                    <div className="screenshot__bg"></div>
+                    <img className="info__screenshot-img" src={screenshot} alt=""/>
+                    <div className="info__screenshot-bg"></div>
                 </div>
                 <div className="info__tablet-bg"></div>
                 <div className={infoContainerClass}>   
-                    <div className="game _cover">
+                    <div className="game info__game-cover">
                         <img className="game__cover-img" src={src} alt={title + " — PS2 game cover"} />
                         <img className="game__cover-overlay" src={overlay} alt="" />
                     </div>
@@ -633,8 +629,8 @@ class Info extends Component {
                         {releaseDate !== "Invalid Date" 
                           ? <div className="info__subtitle-wrapper">
                                 <h3 className="info__subtitle">{releaseDate} ({yearsPast} years ago)</h3>
-                                <div className="btn btn--rating is-active">{rating}</div>
-                                <p className="btn__label">Rating</p>
+                                <div className="btn info__rating-btn is-active">{rating}</div>
+                                <p className="info__rating-label">Rating</p>
                             </div>
                           :  <div className="info__subtitle-wrapper">
                                 <h3 className="info__subtitle">Cancelled / Never released</h3>

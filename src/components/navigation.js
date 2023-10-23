@@ -10,9 +10,12 @@ import del from "../assets/img/del.png"
 import menuImg from "../assets/img/plus.svg"
 
 class Navigation extends Component {
-    state = {
-        searchQuery: "",
-        searchIconSrc: search
+    constructor(props) {
+        super(props)
+        this.state = {
+            searchQuery: "",
+            searchIconSrc: search
+        }
     }
 
     onSearchUpdate = (e) => {
@@ -46,8 +49,8 @@ class Navigation extends Component {
                     className={aboutBtnClass} 
                     onClick={() => onAsideChange("aboutIsActive")} 
                     tabIndex={0}>
-                    <span className="btn-about__span btn-about__span--one"></span>
-                    <span className="btn-about__span btn-about__span--two"></span>
+                    <span className="nav__about-span nav__about-span--one"></span>
+                    <span className="nav__about-span nav__about-span--two"></span>
                 </button>
                 <button 
                     type="button" 
@@ -86,11 +89,12 @@ class Navigation extends Component {
             searchLabel = "Search",
             addGameMenuAlt = "Open add game form",
             addGameImgClass = "btn__img",
-            addGameBtnClass = "btn btn--menu",
-            aboutBtnClass = "btn btn--about",
-            btnFilterAllClass = "btn btn--filter",
-            btnFilterWishClass = "btn btn--filter",
-            btnFilterPlayedClass = "btn btn--filter btn--played",
+            addGameBtnClass = "btn nav__menu-btn",
+            aboutBtnClass = "btn nav__about-btn",
+            btnFilterAllClass = "btn nav__filter-btn nav__filter-btn--all",
+            btnFilterCollClass = "btn nav__filter-btn",
+            btnFilterWishClass = "btn nav__filter-btn",
+            btnFilterPlayedClass = "btn nav__filter-btn",
             navProgressClass = "nav__progress"
 
         if (addGameIsActive) { 
@@ -131,6 +135,11 @@ class Navigation extends Component {
                 btnFilterAllClass += " is-active"
                 break
             }
+            case "coll": {
+                btnFilterCollClass += " is-active"
+                navProgressClass += " nav__progress--value"
+                break
+            }
             default: break
         }
 
@@ -152,7 +161,9 @@ class Navigation extends Component {
                     )}
                 </div>
                 <section className={navProgressClass} aria-label="Gaming progress information">
-                    { activeFilter === "wish" ? <GamePrice data={data} nav={true} /> : (
+                    { (activeFilter === "coll" || activeFilter === "wish") 
+                        ? <GamePrice data={data} nav={true} activeFilter={activeFilter} /> 
+                        : (
                         <>
                             <p className="nav__progress-count">
                                 <span className="a11y">
@@ -192,7 +203,7 @@ class Navigation extends Component {
                         tabIndex={tabIndex} 
                         className={btnFilterAllClass} 
                         onClick={() => onFilterChange("all")}>
-                        All games
+                        All
                     </button>
                     <button 
                         type="button" 
@@ -208,7 +219,14 @@ class Navigation extends Component {
                         className={btnFilterWishClass} 
                         onClick={() => onFilterChange("wish")}>
                         <img className="nav__filter-icon" src={star} alt="" />
-                        Collected
+                        Wishlist
+                    </button>
+                    <button 
+                        type="button" 
+                        tabIndex={tabIndex} 
+                        className={btnFilterCollClass} 
+                        onClick={() => onFilterChange("coll")}>
+                        Collection
                     </button>
                 </section>
                 <section 

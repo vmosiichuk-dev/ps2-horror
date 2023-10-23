@@ -1,11 +1,10 @@
-/* ===== GAME ================================================================= */
-
 .game {
     box-shadow: 3px 3px 15px rgba(0,0,0,.4);
     height: 181px;
     list-style: none;
     margin: 0;
-    max-width: 130px;
+    max-width: 126px;
+    min-width: 126px;
     position: relative;
     border-radius: 6px;
     border: 2px solid;
@@ -22,10 +21,6 @@
 
 .game--newg {
     border-color: var(--gold);
-}
-
-.game:nth-child(2n) {
-    /* box-shadow: -3px 3px 15px rgba(0,0,0,.4); */
 }
 
 .game:last-child {
@@ -110,19 +105,6 @@
     grid-column: 1;
     grid-row: 8;
 }
-
-/* .game-data {
-    justify-content: space-between;
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    font-weight: 400;
-    z-index: 10;
-    font-size: .9375rem;
-    margin: 0;
-    position: relative;
-    bottom: 0;
-} */
 
 .game-rating {
     border: none;
@@ -211,15 +193,6 @@
     z-index: 40;
 }
 
-/* .game-name {
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-    padding: 5px 0;
-} */
-
-/* ––——– GAME —— MEDIA QUERIES ——–––––––––––––———————————————————————————————— */
-
 @media screen and (min-width: 1365px) {
     .game {
         box-shadow: 5px 5px 15px rgba(0,0,0,.4);
@@ -235,10 +208,6 @@
     .game:nth-child(2n) {
         box-shadow: -5px 5px 15px rgba(0,0,0,.4);
     }
-
-    /* .game-data {
-        font-size: 1rem;
-    } */
     
     .btn-sm.btn-info,
     .btn-sm.btn-delete {

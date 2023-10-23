@@ -1,13 +1,14 @@
 import { Component } from "react"
-import AddGame from "./add-game"
-import About from "./about"
+import IGDB from "../services/IGDB"
 import Info from "./info"
 import Navigation from "./navigation"
+import About from "./about"
+import AddGame from "./add-game"
 import GameList from "./game-list"
+import "../assets/styles/app.css"
+
 import del from "../assets/img/del.png"
 import noCover from "../assets/img/no-cover.webp" 
-import "../assets/styles/app.css"
-import IGDB from "../services/IGDB"
 
 class App extends Component {
     constructor(props) {
@@ -57,7 +58,7 @@ class App extends Component {
         }
     }
 
-// –––––––––––––––––––––––––––––––– <Info /> functions ––––––––––––––––––––––––––––––––––
+// –––––––––––––––––––––––––––– <Info /> functions –––––––––––––––––––––––––––––––––––
 
     openInfo = (slug) => this.setState(prevState => {
         const newData = prevState.data.find(item => item.slug === slug)
@@ -74,9 +75,14 @@ class App extends Component {
     
     closeTutorial = () => this.setState({ openedInfo: true })
 
-// ––––––––––––––––––––––––––––– <Navigation /> functions ––––––––––––––––––––––––––––––
+// ––––––––––––––––––––––––– <Navigation /> functions ––––––––––––––––––––––––––––––––
 
     updateSearch = (searchQuery) => { this.setState({searchQuery}) }
+
+    searchGame = (data, searchQuery) => {
+        if (searchQuery.length === 0) { return data }
+        return data.filter(item => item.title.toLowerCase().includes(searchQuery.toLowerCase()))
+    }
 
     toggleFilter = (filterType) => { this.setState({ activeFilter: filterType }) }
 
@@ -102,7 +108,114 @@ class App extends Component {
         }
     }
 
-// ––––––––––––––––––––––––––––––––– <GameList /> functions –––––––––––––––––––––––––––––––––
+// –––––––––––––––––––––––––––– <AddGame /> functions ––––––––––––––––––––––––––––––––
+    
+    handleTitleChange = (e) => { this.setState({ addedTitle: e.target.value }) }
+
+    resetAddFormClass = (str, error) => {
+        setTimeout(() => {
+            this.setState({ addFormClass: `add-message ${str} invisible` })
+            this.resetAddFormMessage(error)
+        }, 5000)
+    }
+
+    resetAddFormMessage = (error) => {
+        setTimeout(() => {
+            this.setState({  addFormMessage: error })
+        }, 750)
+    }
+
+    handleSearchRadioChange = (e) => this.setState({searchRadioValue: e.target.value})
+
+    handleAddGameSearch = async () => {
+        try {
+            const title = this.state.addedTitle,
+                    body = `search "${title}"; fields id,name; where platforms = (8); limit 299;`,
+                    get = await this.iGDB.getToken(),
+                    games = await this.iGDB.getGames(get.access_token, body),
+                    error = "Enter a game title. Title should be at least 3 characters.",
+                    errorAPI = `No PS2 games found with the title '${title}'. Check the spelling or try another title.`
+                    
+            if (games.length < 1 && title.length >= 3) {
+                this.setState({ searchData: [], searchDataLoaded: false, addedTitle: "", addFormMessage: errorAPI, addFormClass: "add-message" })
+                this.resetAddFormClass("", errorAPI)
+            } else if (title !== "" && title.length >= 3) {
+                this.setState({ searchData: games, searchDataLoaded: true, addedTitle: "" })
+            } else {
+                this.setState({ addFormMessage: error, addFormClass: "add-message" })
+                this.resetAddFormClass("", error)
+            }
+        } catch (error) {
+            this.setState({ searchData: [], searchDataLoaded: false, addedTitle: "", addFormMessage: error, addFormClass: "add-message" })
+            this.resetAddFormClass("", error)
+            console.error("Error fetching data from the API:", error)
+        }
+    }  
+
+    handleAddGameSubmit = async (e) => {
+        e.preventDefault()
+        try {
+            const radioValue = this.state.searchRadioValue,
+                    radioError = "To add a game to the library, you must first select it from the list.",
+                    error = "Enter a game title. Title should be at least 3 characters."
+
+            if (radioValue === "") {
+                this.setState({ addFormMessage: radioError, addFormClass: "add-message" })
+                this.resetAddFormClass("", error)
+                return
+            }
+
+            const titleError = "This game already exists in your library. Please select a unique game."
+            const success = "New game successfully added. You can now manage your collection."
+
+            const body = `fields genres.name, name, total_rating, rating, aggregated_rating, age_ratings.rating, cover.image_id, first_release_date, involved_companies.developer, involved_companies.company.name, screenshots.image_id, slug, summary, websites.category, websites.url; where id = ${radioValue};`
+
+            const get = await this.iGDB.getToken()
+            const game = await this.iGDB.getGames(get.access_token, body)
+            const gameFiltered = this.filterGame(game[0])
+                    
+
+            const duplicate = this.state.data.some(item => item.title.toLowerCase() === gameFiltered.title.toLowerCase())
+            
+            if (duplicate) {
+                this.setState({ addFormMessage: titleError, addFormClass: "add-message" })
+                this.resetAddFormClass("", error)
+            } else {
+                this.setState(prevState => {
+                    const newData = [gameFiltered, ...prevState.data],
+                            newPlayCount = newData.filter(item => item.play).length,
+                            newWishCount = newData.filter(item => item.wish).length,
+                            progress = this.countProgress(newData.length, [newPlayCount, newWishCount])
+        
+                    return { 
+                        data: newData, 
+                        playCount: newPlayCount, 
+                        progressPlayCount: progress.play.progressCount, 
+                        progressbarPlayStyle: progress.play.progressbarStyle,
+                        wishCount: newWishCount, 
+                        progressWishCount: progress.wish.progressCount, 
+                        progressbarWishStyle: progress.wish.progressbarStyle,
+                        totalCount: newData.length, 
+                        addFormMessage: success, 
+                        addFormClass: "add-message success", 
+                        addedTitle: "",
+                        searchData: [],
+                        searchDataLoaded: false, 
+                        searchRadioValue: "" 
+                    }
+                })  
+                this.resetAddFormClass("success", error)
+                this.setLocalGameData()
+                this.setLocalProgressData()
+            }
+        } catch (error) {
+            this.setState({ addFormMessage: error, addFormClass: "add-message" })
+            this.resetAddFormClass("", error)
+            console.error("Error fetching data from the API:", error)
+        }
+    } 
+
+// ––––––––––––––––––––––––––––– <GameList /> functions –––––––––––––––––––––––––––––
 
     markState = (slug, state) => {
         this.setState(prevState => {
@@ -143,9 +256,8 @@ class App extends Component {
         let countsResult = {}
 
         counts.forEach((count, i) => {
-            const state = i === 0 ? "play" : "wish",
-                  progressCount = Math.round(count / totalCount * 100) + "%"
-    
+            const state = i === 0 ? "play" : "wish"
+            const progressCount = Math.round(count / totalCount * 100) + "%"
             const result = {
                 [state]: {
                     progressCount: progressCount, 
@@ -163,16 +275,26 @@ class App extends Component {
     }   
 
     handlePriceCategoryChange = (slug, category) => {
+        const { activeFilter } = this.state
+
         this.setState(prevState => {
             const game = prevState.data.find(item => {
                 return item.slug === slug
             })
-
+             
             const newData = prevState.data.map(item => {
-                if (item.slug === slug && game.priceCategory === category) { 
-                    return { ...item, priceCategory: "" } 
+                let gamePrice = game.priceCategory,
+                    price = "priceCategory"
+
+                if (activeFilter === "wish") {
+                    gamePrice = game.wishPriceCategory
+                    price = "wishPriceCategory"
+                }
+
+                if (item.slug === slug && gamePrice === category) { 
+                    return { ...item, [price]: "" } 
                 } else if (item.slug === slug) { 
-                    return { ...item, priceCategory: category } 
+                    return { ...item, [price]: category } 
                 } else {
                     return item
                 }
@@ -206,15 +328,13 @@ class App extends Component {
         this.setLocalProgressData()
     }
 
-// ––––––––––––––––––––––––––––––––– <App /> functions ––––––––––––––––––––––––––––––––––
-
-    searchGame = (data, searchQuery) => {
-        if (searchQuery.length === 0) { return data }
-        return data.filter(item => item.title.toLowerCase().includes(searchQuery.toLowerCase()))
-    }
+// ––––––––––––––––––––––––––––– <App /> functions –––––––––––––––––––––––––––––––––––
 
     getMainError = (filteredData) => {
         const { playCount, wishCount, activeFilter } = this.state
+        // Add data.filter => priceCategory
+        // and use instead of count for error
+        // + change text
 
         if (filteredData.length === 0) {
             if (activeFilter === "play" && playCount === 0) {
@@ -225,6 +345,13 @@ class App extends Component {
                     </p>
                 )
             } else if (activeFilter === "wish" && wishCount === 0) {
+                return (
+                    <p className="main__error is-active" role="status">
+                    There are no games in your collection yet.<br />
+                    To add a game to the collection, hover or click on a game card and press a star button.
+                    </p>
+                )
+            } else if (activeFilter === "coll" && wishCount === 0) {
                 return (
                     <p className="main__error is-active" role="status">
                     There are no games in your collection yet.<br />
@@ -339,7 +466,8 @@ class App extends Component {
             genres = [],
             screenshots = [],
             companyLabel = "",
-            companyName = ""
+            companyName = "",
+            src = ""
 
         if (game.total_rating) {
             rating = Math.round(game.total_rating)
@@ -384,14 +512,12 @@ class App extends Component {
         delete game.genres
         delete game.involved_companies
         delete game.screenshots
-        
+                
         let gamePrice = this.gamePrices.find(item => item.title === game.name)
         if (gamePrice === undefined) gamePrice = {prices: { loose: "n/a", cib: "n/a", newg: "n/a" }}
 
-        let src = ""
-        game.cover !== undefined 
-            ? src = "https://images.igdb.com/igdb/image/upload/t_cover_big/" + game.cover.image_id + ".jpg" 
-            : src = noCover
+        game.cover !== undefined ? src = "https://images.igdb.com/igdb/image/upload/t_cover_big/" + game.cover.image_id + ".jpg" : src = noCover
+
         const filters = { wish: false, play: false }
         const gameData = { 
             ...game, 
@@ -403,8 +529,9 @@ class App extends Component {
             screenshots: screenshots,
             title: game.name, 
             src: src, 
-            ...gamePrice.prices, 
-            priceCategory: "" 
+            wishPriceCategory: "",
+            priceCategory: "",
+            ...gamePrice.prices
         }
 
         delete gameData.name
@@ -436,7 +563,6 @@ class App extends Component {
                 })
 
                 const allGames = [...ratedGames, ...notRatedGames]
-                /* const initialData = allGames.find(item => item.slug === "silent-hill-2") */
 
                 this.setState({ 
                     data: allGames, 
@@ -444,12 +570,17 @@ class App extends Component {
                     infoData: allGames[0] 
                 })
             } else {
-                const localPlayCount = JSON.parse(window.localStorage.getItem("PS2_SURVIVAL_HORROR_PLAY_COUNT")),
-                      localPlayPercent = JSON.parse(window.localStorage.getItem("PS2_SURVIVAL_HORROR_PLAY_PROGRESS_COUNT")),
-                      localPlayProgressbar = JSON.parse(window.localStorage.getItem("PS2_SURVIVAL_HORROR_PLAY_PROGRESSBAR_STYLE")),
-                      localWishCount = JSON.parse(window.localStorage.getItem("PS2_SURVIVAL_HORROR_WISH_COUNT")),
-                      localWishPercent = JSON.parse(window.localStorage.getItem("PS2_SURVIVAL_HORROR_WISH_PROGRESS_COUNT")),
-                      localWishProgressbar = JSON.parse(window.localStorage.getItem("PS2_SURVIVAL_HORROR_WISH_PROGRESSBAR_STYLE"))
+                const localPlayCount = JSON.parse(window.localStorage.getItem("PS2_SURVIVAL_HORROR_PLAY_COUNT"))
+
+                const localPlayPercent = JSON.parse(window.localStorage.getItem("PS2_SURVIVAL_HORROR_PLAY_PROGRESS_COUNT"))
+
+                const localPlayProgressbar = JSON.parse(window.localStorage.getItem("PS2_SURVIVAL_HORROR_PLAY_PROGRESSBAR_STYLE"))
+
+                const localWishCount = JSON.parse(window.localStorage.getItem("PS2_SURVIVAL_HORROR_WISH_COUNT"))
+
+                const localWishPercent = JSON.parse(window.localStorage.getItem("PS2_SURVIVAL_HORROR_WISH_PROGRESS_COUNT"))
+
+                const localWishProgressbar = JSON.parse(window.localStorage.getItem("PS2_SURVIVAL_HORROR_WISH_PROGRESSBAR_STYLE"))
 
                 this.setState({ 
                     apiDataLoaded: true,
@@ -465,6 +596,7 @@ class App extends Component {
             }
 
             this.props.onStateChange("transitionStart")
+
             const setTimeoutPromise = () => new Promise(() => {
                 setTimeout(() => {
                     this.toggleFilter("all")
@@ -473,6 +605,7 @@ class App extends Component {
                     this.setLocalProgressData()
                 }, 2500)
             })
+
             await setTimeoutPromise()
         } catch (error) {
             this.props.onError()
@@ -480,7 +613,7 @@ class App extends Component {
         }
     }  
 
-    setLocalGameData = (fn) => {
+    setLocalGameData = () => {
         setTimeout(() => {
             const {data} = this.state
 
@@ -488,7 +621,7 @@ class App extends Component {
         }, 125)
     }
 
-    setLocalProgressData = (fn) => {
+    setLocalProgressData = () => {
         setTimeout(() => {
             const {playCount, progressPlayCount, progressbarPlayStyle, wishCount, progressWishCount, progressbarWishStyle} = this.state
 
@@ -503,6 +636,7 @@ class App extends Component {
     }
 
     addLandscapeOverflow = () => document.body.classList.add('body--overflow')
+
     removeLandscapeOverflow = () => document.body.classList.remove('body--overflow')
 
     componentDidUpdate() {
@@ -513,144 +647,46 @@ class App extends Component {
         if (!apiDataLoaded || !openedInfo) this.addLandscapeOverflow()
         if (apiDataLoaded && openedInfo) this.removeLandscapeOverflow()
     }
-
-// –––––––––––––––––––––––––––––––– <AddGame /> functions ––––––––––––––––––––––––––––––––––
     
-    handleTitleChange = (e) => { this.setState({ addedTitle: e.target.value }) }
-
-    resetAddFormClass = (str, error) => {
-        setTimeout(() => {
-            this.setState({ addFormClass: `add-message ${str} invisible` })
-            this.resetAddFormMessage(error)
-        }, 5000)
-    }
-
-    resetAddFormMessage = (error) => {
-        setTimeout(() => {
-            this.setState({  addFormMessage: error })
-        }, 750)
-    }
-
-    handleSearchRadioChange = (e) => this.setState({searchRadioValue: e.target.value})
-
-    handleAddGameSearch = async () => {
-        try {
-            const title = this.state.addedTitle,
-                  body = `search "${title}"; fields id,name; where platforms = (8); limit 299;`,
-                  get = await this.iGDB.getToken(),
-                  games = await this.iGDB.getGames(get.access_token, body),
-                  error = "Enter a game title. Title should be at least 3 characters.",
-                  errorAPI = `No PS2 games found with the title '${title}'. Check the spelling or try another title.`
-                  
-            if (games.length < 1 && title.length >= 3) {
-                this.setState({ searchData: [], searchDataLoaded: false, addedTitle: "", addFormMessage: errorAPI, addFormClass: "add-message" })
-                this.resetAddFormClass("", errorAPI)
-            } else if (title !== "" && title.length >= 3) {
-                this.setState({ searchData: games, searchDataLoaded: true, addedTitle: "" })
-            } else {
-                this.setState({ addFormMessage: error, addFormClass: "add-message" })
-                this.resetAddFormClass("", error)
-            }
-        } catch (error) {
-            this.setState({ searchData: [], searchDataLoaded: false, addedTitle: "", addFormMessage: error, addFormClass: "add-message" })
-            this.resetAddFormClass("", error)
-            console.error("Error fetching data from the API:", error)
-        }
-    }  
-
-    handleAddGameSubmit = async (e) => {
-        e.preventDefault()
-        try {
-            const radioValue = this.state.searchRadioValue,
-                  radioError = "To add a game to the library, you must first select it from the list.",
-                  error = "Enter a game title. Title should be at least 3 characters."
-
-            if (radioValue === "") {
-                this.setState({ addFormMessage: radioError, addFormClass: "add-message" })
-                this.resetAddFormClass("", error)
-                return
-            }
-
-            const body = `fields genres.name, name, total_rating, rating, aggregated_rating, age_ratings.rating, cover.image_id, first_release_date, involved_companies.developer, involved_companies.company.name, screenshots.image_id, slug, summary, websites.category, websites.url; where id = ${radioValue};`,
-                  get = await this.iGDB.getToken(),
-                  game = await this.iGDB.getGames(get.access_token, body),
-                  gameFiltered = this.filterGame(game[0]),
-                  titleError = "This game already exists in your library. Please select a unique game.",
-                  success = "New game successfully added. You can now manage your collection."
-
-            const duplicate = this.state.data.some(item => item.title.toLowerCase() === gameFiltered.title.toLowerCase())
-            
-            if (duplicate) {
-                this.setState({ addFormMessage: titleError, addFormClass: "add-message" })
-                this.resetAddFormClass("", error)
-            } else {
-                this.setState(prevState => {
-                    const newData = [gameFiltered, ...prevState.data],
-                          newPlayCount = newData.filter(item => item.play).length,
-                          newWishCount = newData.filter(item => item.wish).length,
-                          progress = this.countProgress(newData.length, [newPlayCount, newWishCount])
-        
-                    return { 
-                        data: newData, 
-                        playCount: newPlayCount, 
-                        progressPlayCount: progress.play.progressCount, 
-                        progressbarPlayStyle: progress.play.progressbarStyle,
-                        wishCount: newWishCount, 
-                        progressWishCount: progress.wish.progressCount, 
-                        progressbarWishStyle: progress.wish.progressbarStyle,
-                        totalCount: newData.length, 
-                        addFormMessage: success, 
-                        addFormClass: "add-message success", 
-                        addedTitle: "",
-                        searchData: [],
-                        searchDataLoaded: false, 
-                        searchRadioValue: "" 
-                    }
-                })  
-                this.resetAddFormClass("success", error)
-                this.setLocalGameData()
-                this.setLocalProgressData()
-            }
-        } catch (error) {
-            this.setState({ addFormMessage: error, addFormClass: "add-message" })
-            this.resetAddFormClass("", error)
-            console.error("Error fetching data from the API:", error)
-        }
-    } 
-
-    
-// –––––––––––––––––––––––––––––––––—— END functions ––––––––––––––––––––––––––––––––––——
+// –––––––––––––––––––––––––––––—— END functions ––––––––––––––––––––––––––––––——–––––
 
     render() {
         const { data,
-                infoData, 
-                openedInfo,
-                searchQuery,
-                addedTitle, 
-                playCount, 
-                progressPlayCount,
-                progressbarPlayStyle,
-                wishCount, 
-                progressWishCount,
-                progressbarWishStyle,
-                addFormClass,
-                addFormMessage,
-                addGameIsActive,
-                aboutIsActive,
-                delSrc,
-                activeFilter,
-                searchData,
-                searchDataLoaded } = this.state
+            infoData, 
+            openedInfo,
+            searchQuery,
+            addedTitle, 
+            playCount, 
+            progressPlayCount,
+            progressbarPlayStyle,
+            wishCount, 
+            progressWishCount,
+            progressbarWishStyle,
+            addFormClass,
+            addFormMessage,
+            addGameIsActive,
+            aboutIsActive,
+            delSrc,
+            activeFilter,
+            searchData,
+            searchDataLoaded 
+        } = this.state
 
         const renderData = this.searchGame(data, searchQuery)
+
         const filteredData = renderData.filter(item => {
+            console.log(activeFilter + item.priceCategory)
+
             if (activeFilter === "play" && !item.play) {
                 return false
             } else if (activeFilter === "wish" && !item.wish) {
                 return false
+            } else if (activeFilter === "coll" && item.priceCategory === "") {
+                return false
             }
             return true
         })
+
         const mainError = this.getMainError(filteredData)
 
         let appClass = "app"
@@ -697,6 +733,7 @@ class App extends Component {
                 <main className="main"> 
                     {mainError}  
                     <GameList 
+                        activeFilter={activeFilter}
                         filteredData={filteredData} 
                         delSrc={delSrc}
                         onDelete={this.deleteItem} 

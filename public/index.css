@@ -1,5 +1,3 @@
-/* ===== INDEX ==================================================================== */
-
 @import url("https://fonts.googleapis.com/css?family=Unbounded|Didact+Gothic:wght@400;600&subset=latin,latin-ext");
 
 body {
@@ -43,7 +41,7 @@ button {
     color: var(--accent);
     border-radius: 4px;
     border: 1px solid #c1bcda70;
-    padding: 3px 8px 4px 8px;
+    padding: 3px 8px 4px;
     margin: 6px 0;
 	background-color: #1f182b96;
     transition: box-shadow .1s cubic-bezier(.46,.03,.52,.96), border-color .1s cubic-bezier(.46,.03,.52,.96);
@@ -138,8 +136,6 @@ button {
 	grid-row: 1;
 	display: grid;
 	animation: 4s scale-up--fade-in cubic-bezier(.46,.03,.52,.96) forwards;
-	
-	min-width: max-content;
 }
 
 @keyframes scale-up--fade-in {

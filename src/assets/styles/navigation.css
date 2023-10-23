@@ -86,22 +86,22 @@
     gap: 5px;
 }
 
-.btn--menu {
+.nav__menu-btn {
     z-index: 50;
-    margin: 6px 6px 6px 0;
-}
-
-.btn--about {
-    width: 30px;
-    height: 30px;
-    position: relative;
-    margin: 0 auto;
-    z-index: 50;
-    margin: 6px 6px 6px 0;
+    margin-block: 6px;
     min-width: 30px;
 }
 
-.btn-about__span {
+.nav__about-btn {
+    width: 30px;
+    height: 30px;
+    position: relative;
+    z-index: 50;
+    margin-block: 6px;
+    min-width: 30px;
+}
+
+.nav__about-span {
 	content: "";
 	background: white;
 	position: absolute;
@@ -112,44 +112,43 @@
 	transition: all 1.125s cubic-bezier(.46,.03,.52,.96);  
 }
 
-.btn-about__span--one {
+.nav__about-span--one {
 	top: 8px;
 	height: 2px;
 }
 
-.btn-about__span--two {
+.nav__about-span--two {
 	top : 13px;
 	height: 7px;
 }
 
-.btn--about.is-active .btn-about__span--one,
-.btn--about.is-active .btn-about__span--two {
+.nav__about-btn.is-active .nav__about-span--one,
+.nav__about-btn.is-active .nav__about-span--two {
 	top: 14px;
 	height: 12px;
 }
 
-.btn--about.is-active .btn-about__span--one {
+.nav__about-btn.is-active .nav__about-span--one {
 	transform: translate(-50%, -50%) rotate(225deg);
 }
 
-.btn--about.is-active .btn-about__span--two {
+.nav__about-btn.is-active .nav__about-span--two {
 	transform: translate(-50%, -50%) rotate(-225deg);
 }
 
-.nav__controls-mobile .btn--menu, 
-.nav__controls-mobile .btn--about {
+.nav__controls-mobile .nav__menu-btn, 
+.nav__controls-mobile .nav__about-btn {
     margin: 0;
     transition: transform 1.125s ease, .825s opacity .3s ease;
 }
 
-.btn--filter {  
+.nav__filter-btn {  
     font-size: .875rem;
-    min-width: 98px;
+    min-width: 88px;
 }
 
-.btn--played {
-    margin-left: 12px;
-    margin-right: 12px;
+.nav__filter-btn.nav__filter-btn--all {
+    min-width: auto;
 }
 
 .nav__filter-icon {
@@ -184,8 +183,7 @@
 }
 
 .nav__search-label {
-    margin-left: 10px;
-    margin-right: 8px;
+    margin-inline: 10px 8px;
     font-size: .875rem;
     min-width: 60px;
     text-align: center;
@@ -203,7 +201,8 @@
 }
 
 .nav__value-label {
-    margin: auto 0 auto -118px;
+    margin-block: auto;
+    margin-inline: -118px 0;
     font-family: var(--didact-gothic);
     padding-right: 4px;
 }
@@ -220,9 +219,9 @@
         grid-column: 3;
     }
 
-    .btn--filter {
+    .nav__filter-btn {
         font-size: 1rem;
-        min-width: 105px;
+        min-width: 100px;
     }
 
     .nav__search {
@@ -263,22 +262,19 @@
 
     .nav__controls-desktop {
         display: flex;
+        justify-content: space-between;
+        gap: 0 12px;
     }
 
     .nav__controls-mobile {
         display: none;
-    }
-
-    .btn--menu,
-    .btn--about {
-        margin: 6px 12px 6px 0;
-        min-width: 30px;
     }
 }
 
 @media screen and (min-width: 1365px) {
     .nav {
         margin: auto 42px 3px;
+        grid-template-columns: 430px minmax(30px, 1fr) minmax(210px, 342px);
     }
 
     .nav__title {
@@ -296,6 +292,14 @@
     .progress-bar__label--played {
         width: 113px;
     }
+    
+    .nav__filters {
+        gap: 0 12px;
+    }
+
+    .nav__filter-btn {  
+        min-width: 88px;
+    }
 }
 
 @media screen and (max-width: 809px) {
@@ -306,9 +310,9 @@
 
 @media screen and (orientation: landscape) and (hover: none) and (max-width: 1079px) {
     .nav {
-        grid-template-columns: minmax(210px, 370px) minmax(22px, 1fr) minmax(320px, 334px);
+        grid-template-columns: minmax(210px, 370px) minmax(22px, 1fr) minmax(320px, 320px);
         grid-template-rows: repeat(2, 42px);
-        margin: auto 25px 3px;
+        margin: auto 25px 0;
     }
 
     .nav__title-wrapper,
@@ -329,21 +333,26 @@
     .nav__search {
         grid-row: 2;
     }
+    @media (min-width: 843px) {
+        .nav {
+            grid-template-columns: minmax(210px, 370px) minmax(22px, 1fr) minmax(320px, 370px);
+        }
+    }
 }
 
 @media screen and (max-width: 1279px) {
-    .btn--menu.is-inactive, 
-    .btn--about.is-inactive {
+    .nav__menu-btn.is-inactive, 
+    .nav__about-btn.is-inactive {
         opacity: 0;
     }
 
-    .btn--about.is-active,
-    .btn--about.is-inactive {
+    .nav__about-btn.is-active,
+    .nav__about-btn.is-inactive {
         transform: translateX(35px);
     }
 
-    .btn--menu.is-active, 
-    .btn--about.is-active {
+    .nav__menu-btn.is-active, 
+    .nav__about-btn.is-active {
         z-index: 70;
         background: var(--dark);
     }

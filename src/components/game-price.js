@@ -3,12 +3,25 @@ import cibIcon from "../assets/img/cib.png"
 import newgIcon from "../assets/img/newg.png"
 import "../assets/styles/game-price.css"
 
-function getCollectionValue(data) {
-    const dataLoose = data.filter(item => item.priceCategory === "loose")
-    const dataCib = data.filter(item => item.priceCategory === "cib")
-    const dataNewg = data.filter(item => item.priceCategory === "newg")
+function getCollectionValue(data, activeFilter) {
+    let looseSum = 0, cibSum = 0, newgSum = 0,
+        dataLoose, dataCib, dataNewg
 
-    let looseSum = 0, cibSum = 0, newgSum = 0
+    if (activeFilter === "wish") {
+        dataLoose = data.filter(
+            item => (item.wish && item.wishPriceCategory === "loose")
+        )
+        dataCib = data.filter(
+            item => (item.wish && item.wishPriceCategory === "cib")
+        )
+        dataNewg = data.filter(
+            item => (item.wish && item.wishPriceCategory === "newg")
+        )
+    } else {
+        dataLoose = data.filter(item => item.priceCategory === "loose")
+        dataCib = data.filter(item => item.priceCategory === "cib")
+        dataNewg = data.filter(item => item.priceCategory === "newg")
+    }
 
     dataLoose.forEach(item => { 
         if (Number.isInteger(item.loose)) looseSum += item.loose 
@@ -27,46 +40,67 @@ function getCollectionValue(data) {
     }
 }
 
-function GamePrice({ data, nav, onPriceCategoryChange, priceCategory, loose, cib, newg }) {
+function GamePrice({ data, nav, activeFilter, onPriceCategoryChange, priceCategory, wishPriceCategory, loose, cib, newg }) {
     let value,
         gamePriceClass = "game-price", 
-        btnLooseClass = "btn btn--price",
-        btnCibClass = "btn btn--price",
-        btnNewgClass = "btn btn--price",
-        iconLooseClass = "game__icon",
-        iconCibClass = "game__icon",
-        iconNewgClass = "game__icon",
-        usdClass = "usd"
+        btnLooseClass = "btn game-price__btn",
+        btnCibClass = "btn game-price__btn",
+        btnNewgClass = "btn game-price__btn",
+        iconLooseClass = "game-price__icon",
+        iconCibClass = "game-price__icon",
+        iconNewgClass = "game-price__icon",
+        usdClass = "game-price__usd"
 
     switch (priceCategory) {
         case "loose": {
-            btnLooseClass += " btn--loose"
-            iconLooseClass += " game__icon--loose"
+            btnLooseClass += " game-price__btn--loose"
+            iconLooseClass += " game-price__icon--loose"
             break
         } 
         case "cib": {
-            btnCibClass += " btn--cib"
-            iconCibClass += " game__icon--cib"
+            btnCibClass += " game-price__btn--cib"
+            iconCibClass += " game-price__icon--cib"
             break
         }
         case "newg": {
-            btnNewgClass += " btn--newg"
-            iconNewgClass += " game__icon--newg"
+            btnNewgClass += " game-price__btn--newg"
+            iconNewgClass += " game-price__icon--newg"
             break
         }
         default: break
     }
 
+    if (activeFilter === "wish") {
+        switch (wishPriceCategory) {
+            case "loose": {
+                btnLooseClass += " game-price__btn--loose"
+                iconLooseClass += " game-price__icon--loose"
+                break
+            } 
+            case "cib": {
+                btnCibClass += " game-price__btn--cib"
+                iconCibClass += " game-price__icon--cib"
+                break
+            }
+            case "newg": {
+                btnNewgClass += " game-price__btn--newg"
+                iconNewgClass += " game-price__icon--newg"
+                break
+            }
+            default: break
+        }
+    }
+
     if (nav) {
-        value = getCollectionValue(data)
+        value = getCollectionValue(data, activeFilter)
         gamePriceClass += " game-price--value"
-        btnLooseClass += " btn--loose btn--value"
-        btnCibClass += " btn--cib btn--value"
-        btnNewgClass += " btn--newg btn--value"  
-        iconLooseClass += " game__icon--loose game__icon--value"
-        iconCibClass += " game__icon--cib game__icon--value"
-        iconNewgClass += " game__icon--newg game__icon--value"
-        usdClass += " usd--value"
+        btnLooseClass += " game-price__btn--loose game-price__btn--value"
+        btnCibClass += " game-price__btn--cib game-price__btn--value"
+        btnNewgClass += " game-price__btn--newg game-price__btn--value"  
+        iconLooseClass += " game-price__icon--loose game-price__icon--value"
+        iconCibClass += " game-price__icon--cib game-price__icon--value"
+        iconNewgClass += " game-price__icon--newg game-price__icon--value"
+        usdClass += " game-price__usd--value"
     }
 
     return (
@@ -84,7 +118,7 @@ function GamePrice({ data, nav, onPriceCategoryChange, priceCategory, loose, cib
                 className={btnCibClass} 
                 onClick={!nav ? () => onPriceCategoryChange("cib") : undefined}>
                 <img className={iconCibClass} src={cibIcon} alt="CIB price" />
-                {nav || loose !== "n/a" ? <span className={usdClass}>$</span> : null}
+                {nav || cib !== "n/a" ? <span className={usdClass}>$</span> : null}
                 <span>{nav ? value.cib : cib}</span>
             </button>
             <button 
@@ -92,13 +126,13 @@ function GamePrice({ data, nav, onPriceCategoryChange, priceCategory, loose, cib
                 className={btnNewgClass} 
                 onClick={!nav ? () => onPriceCategoryChange("newg") : undefined}>
                 <img className={iconNewgClass} src={newgIcon} alt="New price" />
-                {nav || loose !== "n/a" ? <span className={usdClass}>$</span> : null}
+                {nav || newg !== "n/a" ? <span className={usdClass}>$</span> : null}
                 <span>{nav ? value.newg : newg}</span>
             </button>
             {!nav ? null : (
                 <div className="game-price__total">
                     <p className="game-price__total-label">Total: </p>
-                    <span className="usd usd--value">$</span>
+                    <span className="game-price__usd game-price__usd--value">$</span>
                     <span>{value.loose + value.cib + value.newg}</span>
                 </div>
             )}

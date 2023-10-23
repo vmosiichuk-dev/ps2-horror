@@ -55,7 +55,7 @@ class Game extends Component {
     }
 
     render() {
-        const { slug, title, src, wish, play, loose, cib, newg, onMarkState, onOpenInfo, onPriceCategoryChange, priceCategory } = this.props
+        const { slug, title, src, wish, play, loose, cib, newg, onMarkState, onOpenInfo, onPriceCategoryChange, priceCategory, wishPriceCategory, activeFilter } = this.props
         const { delSrc, activeClass, itemButtonsStyle, confirmDeleteAria } = this.state
 
         let gameClass = "game",
@@ -72,6 +72,15 @@ class Game extends Component {
             case "cib": gameClass += " game--cib"; break 
             case "newg": gameClass += " game--newg"; break 
             default: break
+        }
+
+        if (activeFilter === "wish") {
+            switch (wishPriceCategory) {
+                case "loose": gameClass += " game--loose"; break
+                case "cib": gameClass += " game--cib"; break 
+                case "newg": gameClass += " game--newg"; break 
+                default: break
+            }
         }
 
         return (
@@ -99,8 +108,10 @@ class Game extends Component {
                 </div>
                 <GamePrice 
                     nav={false} 
+                    activeFilter={activeFilter}
                     onPriceCategoryChange={onPriceCategoryChange} 
                     priceCategory={priceCategory} 
+                    wishPriceCategory={wishPriceCategory} 
                     loose={loose} 
                     cib={cib} 
                     newg={newg} 
