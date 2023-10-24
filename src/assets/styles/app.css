@@ -21,9 +21,12 @@
     display: none;
     color: var(--accent);
     line-height: 1.5rem;
-    min-width: 290px;
+    /* min-width: 290px; */
     text-align: center;
     font-size: 1rem;
+    min-width: 320px;
+    max-width: 420px;
+    margin: 3dvh auto 0;
 }
 
 .main__error.is-active {

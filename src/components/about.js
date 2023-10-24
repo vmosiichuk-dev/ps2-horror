@@ -16,25 +16,37 @@ class About extends Component {
 
     componentDidMount() { 
         this.aboutRef.current.addEventListener("keydown", this.handleKeydown)
+        this.props.aboutBtnRef.current.addEventListener("keydown", this.handleKeydown)
     }
     
     componentWillUnmount() { 
         this.aboutRef.current.removeEventListener("keydown", this.handleKeydown)
+        this.props.aboutBtnRef.current.removeEventListener("keydown", this.handleKeydown)
     }
 
     handleKeydown = (e) => {
         if (this.props.aboutIsActive) {
-            const focusableElements = [document.querySelector(".btn--about"), ...this.aboutRef.current.querySelectorAll("a")],
-                  firstElement = focusableElements[0],
-                  lastElement = focusableElements[1]
+            const focusableElements = [this.props.aboutBtnRef.current, ...this.aboutRef.current.querySelectorAll(".about__link")]
+            
+            const firstElement = focusableElements[0]
+            const secondElement = focusableElements[1]
+            const lastElement = focusableElements[focusableElements.length - 1]
 
             if (e.key === "Tab") {
                 if (e.shiftKey && document.activeElement === firstElement) {
                     e.preventDefault()
-                    lastElement.focus()
+                    lastElement.focus()          
+                }
+                if (!e.shiftKey && document.activeElement === firstElement) {
+                    e.preventDefault()
+                    secondElement.focus()                 
+                }
+                if (e.shiftKey && document.activeElement === secondElement) {
+                    e.preventDefault()
+                    firstElement.focus()       
                 } else if (!e.shiftKey && document.activeElement === lastElement) {
                     e.preventDefault()
-                    firstElement.focus()
+                    firstElement.focus()       
                 }
             }
         }
@@ -47,22 +59,23 @@ class About extends Component {
         if (aboutIsActive) aboutClass += " is-active"
 
         return (
-            <aside className={aboutClass} tabIndex={-1} ref={this.aboutRef}>
+            <aside className={aboutClass} ref={this.aboutRef}>
                 <div className="about__wrapper">
                     <article aria-labelledby="about__title">
                         <h2 id="about__title" className="about__title about__title--mt">About the App</h2>
-                        <p className="about__p"><b>Welcome to our PS2 Collection App!</b><br/>This app empowers you to curate and explore your PS2 horror collection, discover new titles, and plan your collector's journey. Experience the captivating world of survival horror on the PS2, where storytelling, audiovisual design, and emotional engagement converge to create unforgettable experiences. As you embark on your collector's adventure, keep in mind that the love of collecting goes beyond the monetary value of each game. It's about cherishing the memories, experiences, and stories that these games hold.</p>
+                        <p className="about__welcome"><b className="about__bold">Welcome to our PS2 Collection App!</b></p>
+                        <p className="about__p">This app empowers you to curate and explore your PS2 horror collection, discover new titles, and plan your collector's journey. Experience the captivating world of survival horror on the PS2, where storytelling, audiovisual design, and emotional engagement converge to create unforgettable experiences. As you embark on your collector's adventure, keep in mind that the love of collecting goes beyond the monetary value of each game. It's about cherishing the memories, experiences, and stories that these games hold.</p>
                     </article>
                     <article aria-labelledby="about__controls">
                         <h2 id="about__controls" className="about__title">Controls &amp; Tips</h2>
-                        <h3 className="about__subtitle">Action buttons:</h3>
+                        <h3 className="about__subtitle">Game buttons:</h3>
                         <div className="about__control">
                             <img src={star} width="17" height="17" alt=""/>
-                            <p className="about__p">Add a game to your collection and track your progress by selecting either <b>'All games'</b> or the&nbsp;<b>'Collected'</b>&nbsp;filter.</p>
+                            <p className="about__p">Add a game to your wishlist and plan future expenses by selecting the&nbsp;<b className="about__bold">'Wishlist'</b>&nbsp;filter.</p>
                         </div>
                         <div className="about__control">
                             <img src={game} width="17" height="17" alt=""/>
-                            <p className="about__p">Add a game to your list of played games and monitor your progress via the <b>'Played'</b> filter.</p>
+                            <p className="about__p">Add a game to your list of played games and monitor your progress via the <b className="about__bold">'Played'</b> filter.</p>
                         </div>
                         <div className="about__control">
                             <img src={info} width="17" height="17" alt=""/>
@@ -73,6 +86,9 @@ class About extends Component {
                             <p className="about__p">Delete a game from the library entirely.<br/>Click a second time to confirm your choice.</p>
                         </div>
                         <h3 className="about__subtitle">Price buttons:</h3>
+                        <p className="about__p">Add a game to your collection by selecting one of the price options you own and use the <b className="about__bold">'Collection'</b> filter to show the games you've added.</p>
+                        <p className="about__p">Want to add a higher price option of the game you own to the wishlist or choose specific price options for specific games? <b className="about__bold">We've got you covered!</b></p>
+                        <p className="about__p">Under <b className="about__bold">'Wishlist'</b> filter, changes are only made to the game's desired price option, so that you can easily plan out your collection and do not confuse the game's status when browsing games under <b className="about__bold">'All'</b> filter.</p>
                         <div className="about__control">
                             <img className="about__icon-loose" src={looseIcon} width="17" height="17" alt=""/>
                             <p className="about__p">Loose: A disc itself (does not include the game's original casing or manual).</p>

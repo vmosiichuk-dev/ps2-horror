@@ -1,4 +1,4 @@
-import { Component } from "react"
+import React, { Component } from "react"
 import IGDB from "../services/IGDB"
 import Info from "./info"
 import Navigation from "./navigation"
@@ -13,9 +13,11 @@ import noCover from "../assets/img/no-cover.webp"
 class App extends Component {
     constructor(props) {
         super(props)
+        this.aboutBtnRef = React.createRef()
+        this.addBtnRef = React.createRef()
         this.state = {
             activeFilter: "all",
-            addFormClass: "add-message invisible",
+            addFormClass: "add-game__form-message is-inactive",
             addFormMessage: "Enter a game title. Title should be at least 4 characters.",
             addGameIsActive: false,
             aboutIsActive: false,
@@ -114,7 +116,7 @@ class App extends Component {
 
     resetAddFormClass = (str, error) => {
         setTimeout(() => {
-            this.setState({ addFormClass: `add-message ${str} invisible` })
+            this.setState({ addFormClass: `add-game__form-message ${str} is-inactive` })
             this.resetAddFormMessage(error)
         }, 5000)
     }
@@ -137,16 +139,16 @@ class App extends Component {
                     errorAPI = `No PS2 games found with the title '${title}'. Check the spelling or try another title.`
                     
             if (games.length < 1 && title.length >= 3) {
-                this.setState({ searchData: [], searchDataLoaded: false, addedTitle: "", addFormMessage: errorAPI, addFormClass: "add-message" })
+                this.setState({ searchData: [], searchDataLoaded: false, addedTitle: "", addFormMessage: errorAPI, addFormClass: "add-game__form-message" })
                 this.resetAddFormClass("", errorAPI)
             } else if (title !== "" && title.length >= 3) {
                 this.setState({ searchData: games, searchDataLoaded: true, addedTitle: "" })
             } else {
-                this.setState({ addFormMessage: error, addFormClass: "add-message" })
+                this.setState({ addFormMessage: error, addFormClass: "add-game__form-message" })
                 this.resetAddFormClass("", error)
             }
         } catch (error) {
-            this.setState({ searchData: [], searchDataLoaded: false, addedTitle: "", addFormMessage: error, addFormClass: "add-message" })
+            this.setState({ searchData: [], searchDataLoaded: false, addedTitle: "", addFormMessage: error, addFormClass: "add-game__form-message" })
             this.resetAddFormClass("", error)
             console.error("Error fetching data from the API:", error)
         }
@@ -160,7 +162,7 @@ class App extends Component {
                     error = "Enter a game title. Title should be at least 3 characters."
 
             if (radioValue === "") {
-                this.setState({ addFormMessage: radioError, addFormClass: "add-message" })
+                this.setState({ addFormMessage: radioError, addFormClass: "add-game__form-message" })
                 this.resetAddFormClass("", error)
                 return
             }
@@ -178,7 +180,7 @@ class App extends Component {
             const duplicate = this.state.data.some(item => item.title.toLowerCase() === gameFiltered.title.toLowerCase())
             
             if (duplicate) {
-                this.setState({ addFormMessage: titleError, addFormClass: "add-message" })
+                this.setState({ addFormMessage: titleError, addFormClass: "add-game__form-message" })
                 this.resetAddFormClass("", error)
             } else {
                 this.setState(prevState => {
@@ -197,19 +199,19 @@ class App extends Component {
                         progressbarWishStyle: progress.wish.progressbarStyle,
                         totalCount: newData.length, 
                         addFormMessage: success, 
-                        addFormClass: "add-message success", 
+                        addFormClass: "add-game__form-message add-game__form-message--success", 
                         addedTitle: "",
                         searchData: [],
                         searchDataLoaded: false, 
                         searchRadioValue: "" 
                     }
                 })  
-                this.resetAddFormClass("success", error)
+                this.resetAddFormClass("add-game__form-message--success", error)
                 this.setLocalGameData()
                 this.setLocalProgressData()
             }
         } catch (error) {
-            this.setState({ addFormMessage: error, addFormClass: "add-message" })
+            this.setState({ addFormMessage: error, addFormClass: "add-game__form-message" })
             this.resetAddFormClass("", error)
             console.error("Error fetching data from the API:", error)
         }
@@ -308,13 +310,17 @@ class App extends Component {
 
     deleteItem = (slug) => {   
         this.setState(prevState => {
-            const newData = prevState.data.filter(item => item.slug !== slug),
-                  newPlayCount = newData.filter(item => item.play).length,
-                  newWishCount = newData.filter(item => item.wish).length,
-                  progress = this.countProgress(newData.length, [newPlayCount, newWishCount])
+            const newData = prevState.data.filter(item => item.slug !== slug)
+            const newPlayCount = newData.filter(item => item.play).length
+            const newWishCount = newData.filter(item => item.wish).length
+            const progress = this.countProgress(newData.length, [newPlayCount, newWishCount])
+
+            let newInfoData = prevState.infoData
+            if (prevState.data[0].slug === slug) newInfoData = newData[0]
 
             return { 
                 data: newData, 
+                infoData: newInfoData,
                 playCount: newPlayCount, 
                 progressPlayCount: progress.play.progressCount, 
                 progressbarPlayStyle: progress.play.progressbarStyle,
@@ -332,6 +338,7 @@ class App extends Component {
 
     getMainError = (filteredData) => {
         const { playCount, wishCount, activeFilter } = this.state
+        const collection = filteredData.filter(item => item.priceCategory !== "")
         // Add data.filter => priceCategory
         // and use instead of count for error
         // + change text
@@ -347,15 +354,15 @@ class App extends Component {
             } else if (activeFilter === "wish" && wishCount === 0) {
                 return (
                     <p className="main__error is-active" role="status">
-                    There are no games in your collection yet.<br />
+                    There are no games in your wishlist yet.<br />
                     To add a game to the collection, hover or click on a game card and press a star button.
                     </p>
                 )
-            } else if (activeFilter === "coll" && wishCount === 0) {
+            } else if (activeFilter === "coll" && collection.length === 0) {
                 return (
                     <p className="main__error is-active" role="status">
                     There are no games in your collection yet.<br />
-                    To add a game to the collection, hover or click on a game card and press a star button.
+                    To add a game to the collection, click one of three buttons for price option to choose the one you own.
                     </p>
                 )
             }
@@ -639,6 +646,17 @@ class App extends Component {
 
     removeLandscapeOverflow = () => document.body.classList.remove('body--overflow')
 
+    /* onInnerWidthIsDesktop = () => {
+        if (window.innerWidth > 1279) {
+            this.setState({ openedInfo: true })
+        }
+    }
+
+    componentDidMount() {
+        this.onInnerWidthIsDesktop()
+        window.addEventListener("resize", this.onInnerWidthIsDesktop)
+    } */
+
     componentDidUpdate() {
         const {welcomeClick} = this.props
         const {apiDataLoaded, openedInfo} = this.state
@@ -647,6 +665,10 @@ class App extends Component {
         if (!apiDataLoaded || !openedInfo) this.addLandscapeOverflow()
         if (apiDataLoaded && openedInfo) this.removeLandscapeOverflow()
     }
+    
+    /* componentWillUnmount() {
+        window.removeEventListener("resize", this.onInnerWidthIsDesktop)
+    } */
     
 // –––––––––––––––––––––––––––––—— END functions ––––––––––––––––––––––––––––––——–––––
 
@@ -675,8 +697,6 @@ class App extends Component {
         const renderData = this.searchGame(data, searchQuery)
 
         const filteredData = renderData.filter(item => {
-            console.log(activeFilter + item.priceCategory)
-
             if (activeFilter === "play" && !item.play) {
                 return false
             } else if (activeFilter === "wish" && !item.wish) {
@@ -694,11 +714,6 @@ class App extends Component {
 
         return (
             <div className={appClass}>  
-                <Info 
-                    infoData={infoData} 
-                    openedInfo={openedInfo}
-                    onInfoClose={this.closeInfo} 
-                />
                 <Navigation  
                     data={data} 
                     filteredData={filteredData} 
@@ -714,21 +729,8 @@ class App extends Component {
                     onSearchUpdate={this.updateSearch} 
                     onFilterChange={this.toggleFilter}
                     onAsideChange={this.updateAside}
-                />
-                <About 
-                    aboutIsActive={aboutIsActive}
-                />
-                <AddGame 
-                    addedTitle={addedTitle} 
-                    addFormClass={addFormClass}
-                    addFormMessage={addFormMessage}
-                    addGameIsActive={addGameIsActive}
-                    searchData={searchData}
-                    searchDataLoaded={searchDataLoaded}
-                    onTitleChange={this.handleTitleChange} 
-                    onSearchRadioChange={this.handleSearchRadioChange}
-                    onAddGameSearch={this.handleAddGameSearch} 
-                    onAddGameSubmit={this.handleAddGameSubmit} 
+                    aboutBtnRef={this.aboutBtnRef}
+                    addBtnRef={this.addBtnRef}
                 />
                 <main className="main"> 
                     {mainError}  
@@ -742,6 +744,30 @@ class App extends Component {
                         onPriceCategoryChange={this.handlePriceCategoryChange}
                     />
                 </main>
+                <Info 
+                    infoData={infoData} 
+                    openedInfo={openedInfo}
+                    onInfoClose={this.closeInfo} 
+                />
+                <About 
+                    aboutIsActive={aboutIsActive}
+                    aboutBtnRef={this.aboutBtnRef}
+                    addBtnRef={this.addBtnRef}
+                />
+                <AddGame 
+                    addedTitle={addedTitle} 
+                    addFormClass={addFormClass}
+                    addFormMessage={addFormMessage}
+                    addGameIsActive={addGameIsActive}
+                    searchData={searchData}
+                    searchDataLoaded={searchDataLoaded}
+                    onTitleChange={this.handleTitleChange} 
+                    onSearchRadioChange={this.handleSearchRadioChange}
+                    onAddGameSearch={this.handleAddGameSearch} 
+                    onAddGameSubmit={this.handleAddGameSubmit} 
+                    aboutBtnRef={this.aboutBtnRef}
+                    addBtnRef={this.addBtnRef}
+                />
             </div>
         )
     }

@@ -8,6 +8,16 @@
     grid-column: 1;
 }
 
+.nav__logo {
+    cursor: pointer;
+    transform: rotate(-.1deg);
+    transition: transform 1.125s ease;
+}
+
+.nav__logo.has-rotated {
+	transform: rotate(-90deg);
+}
+
 .nav__title,
 .nav__search-label,
 .nav__progress-count,
@@ -74,6 +84,7 @@
 .nav__filters {
     display: flex;
     justify-content: space-between;
+    gap: 0 12px;
 }
 
 .nav__controls-desktop {
@@ -99,6 +110,18 @@
     z-index: 50;
     margin-block: 6px;
     min-width: 30px;
+}
+
+.btn__img {
+    width: 12px;
+    height: 12px;
+	margin-top: 4px;
+    transition: transform 1.125s cubic-bezier(.46,.03,.52,.96);
+    filter: invert(100%) sepia(1%) saturate(7482%) hue-rotate(296deg) brightness(109%) contrast(100%);
+}
+
+.btn__img.is-active {
+    transform: rotateZ(225deg);
 }
 
 .nav__about-span {
@@ -173,6 +196,7 @@
     width: 100%;
     padding: 0px 12px;
     line-height: 28px;
+    margin-inline: 0 3px;
 }
 
 .nav__search-btn {
@@ -180,19 +204,28 @@
     padding: 0;
     background: transparent;
     display: flex;
+    height: 30px;
+    border-radius: 4px;
 }
 
 .nav__search-label {
-    margin-inline: 10px 8px;
+    margin-inline: 5px 8px;
+    margin-block: auto;
     font-size: .875rem;
     min-width: 60px;
     text-align: center;
     color: var(--accent);
+    cursor: pointer;
+}
+
+.nav__search-label--z {
+    z-index: -10;
 }
 
 .nav__search-icon {
     display: block;
     width: 20px;
+    margin-block: auto;
 }
 
 .nav__progress.nav__progress--value {
@@ -221,7 +254,7 @@
 
     .nav__filter-btn {
         font-size: 1rem;
-        min-width: 100px;
+        /* min-width: 100px; */
     }
 
     .nav__search {
@@ -230,7 +263,13 @@
 
     .nav__search-input {
         text-align: right;
-        font-size: 1.125rem;
+        font-size: 1rem;
+    }
+
+    @media (min-width: 1279px) {
+        .nav {
+            grid-template-columns: 420px minmax(16px, 1fr) minmax(210px, 342px);
+        }
     }
 }
 
@@ -274,7 +313,7 @@
 @media screen and (min-width: 1365px) {
     .nav {
         margin: auto 42px 3px;
-        grid-template-columns: 430px minmax(30px, 1fr) minmax(210px, 342px);
+        /* grid-template-columns: 430px minmax(30px, 1fr) minmax(210px, 342px); */
     }
 
     .nav__title {
@@ -292,14 +331,10 @@
     .progress-bar__label--played {
         width: 113px;
     }
-    
-    .nav__filters {
-        gap: 0 12px;
-    }
 
-    .nav__filter-btn {  
+    /* .nav__filter-btn {  
         min-width: 88px;
-    }
+    } */
 }
 
 @media screen and (max-width: 809px) {

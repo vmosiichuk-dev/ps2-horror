@@ -51,27 +51,27 @@ function GamePrice({ data, nav, activeFilter, onPriceCategoryChange, priceCatego
         iconNewgClass = "game-price__icon",
         usdClass = "game-price__usd"
 
-    switch (priceCategory) {
-        case "loose": {
-            btnLooseClass += " game-price__btn--loose"
-            iconLooseClass += " game-price__icon--loose"
-            break
-        } 
-        case "cib": {
-            btnCibClass += " game-price__btn--cib"
-            iconCibClass += " game-price__icon--cib"
-            break
-        }
-        case "newg": {
-            btnNewgClass += " game-price__btn--newg"
-            iconNewgClass += " game-price__icon--newg"
-            break
-        }
-        default: break
-    }
-
     if (activeFilter === "wish") {
         switch (wishPriceCategory) {
+            case "loose": {
+                btnLooseClass += " game-price__btn--loose"
+                iconLooseClass += " game-price__icon--loose"
+                break
+            } 
+            case "cib": {
+                btnCibClass += " game-price__btn--cib"
+                iconCibClass += " game-price__icon--cib"
+                break
+            }
+            case "newg": {
+                btnNewgClass += " game-price__btn--newg"
+                iconNewgClass += " game-price__icon--newg"
+                break
+            }
+            default: break
+        }
+    } else {
+        switch (priceCategory) {
             case "loose": {
                 btnLooseClass += " game-price__btn--loose"
                 iconLooseClass += " game-price__icon--loose"

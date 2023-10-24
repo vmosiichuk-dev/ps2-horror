@@ -21,6 +21,10 @@
     font-family: var(--unbounded);
 }
 
+.game-price__btn:nth-child(1):hover {
+    border-color: var(--bronze);
+}
+
 .game-price__btn.game-price__btn--loose {
     color: var(--bronze);
     border-color: var(--bronze);
@@ -28,11 +32,19 @@
     z-index: 10;
 }
 
+.game-price__btn:nth-child(2):hover {
+    border-color: var(--silver);
+}
+
 .game-price__btn.game-price__btn--cib {
     color: var(--silver);
     border-color: var(--silver);
     background-color: #002939;
     z-index: 10;
+}
+
+.game-price__btn:nth-child(3):hover {
+    border-color: var(--gold);
 }
 
 .game-price__btn.game-price__btn--newg {

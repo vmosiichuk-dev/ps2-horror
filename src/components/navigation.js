@@ -13,9 +13,15 @@ class Navigation extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            logoRotated: false,
             searchQuery: "",
             searchIconSrc: search
         }
+    }
+    
+    rotateLogo = () => {
+        const {logoRotated} = this.state
+        this.setState({logoRotated: !logoRotated})
     }
 
     onSearchUpdate = (e) => {
@@ -34,7 +40,7 @@ class Navigation extends Component {
         }
     }
 
-    onDeleteClick = () => {
+    onDeleteClick = (e) => {
         if (this.state.searchIconSrc === del) {
             this.setState({ searchQuery: "", searchIconSrc: search })
             this.props.onSearchUpdate("")
@@ -48,7 +54,8 @@ class Navigation extends Component {
                     type="button" 
                     className={aboutBtnClass} 
                     onClick={() => onAsideChange("aboutIsActive")} 
-                    tabIndex={0}>
+                    tabIndex={0}
+                    ref={this.props.aboutBtnRef}>
                     <span className="nav__about-span nav__about-span--one"></span>
                     <span className="nav__about-span nav__about-span--two"></span>
                 </button>
@@ -56,7 +63,8 @@ class Navigation extends Component {
                     type="button" 
                     className={addGameBtnClass} 
                     onClick={() => onAsideChange("addGameIsActive")} 
-                    tabIndex={0}>
+                    tabIndex={0}
+                    ref={this.props.addBtnRef}>
                     <img className={addGameImgClass} src={menuImg} alt={addGameMenuAlt}/>
                 </button>
             </div>
@@ -64,7 +72,7 @@ class Navigation extends Component {
     }
 
     render() {
-        const { searchQuery, searchIconSrc } = this.state
+        const { logoRotated, searchQuery, searchIconSrc } = this.state
         const { data, 
             activeFilter, 
             onFilterChange, 
@@ -95,7 +103,11 @@ class Navigation extends Component {
             btnFilterCollClass = "btn nav__filter-btn",
             btnFilterWishClass = "btn nav__filter-btn",
             btnFilterPlayedClass = "btn nav__filter-btn",
-            navProgressClass = "nav__progress"
+            navProgressClass = "nav__progress",
+            searchLabelClass = "nav__search-label",
+            logoClass = "nav__logo"
+
+        if (logoRotated) logoClass += " has-rotated"
 
         if (addGameIsActive) { 
             addGameMenuAlt = "Close add game form"
@@ -115,6 +127,7 @@ class Navigation extends Component {
             searchAlt = "Clear search input"
             searchAria = false
             searchLabel = "Clear" 
+            searchLabelClass += " nav__search-label--z"
         }
 
         switch (activeFilter) {
@@ -146,9 +159,9 @@ class Navigation extends Component {
         return (
             <nav className="nav">
                 <div className="nav__title-wrapper">
-                    <img src={ps} width="30px" alt=""/>
+                    <img className={logoClass} src={ps} width="30px" alt="" onClick={this.rotateLogo}/>
                     <h1 className="nav__title">
-                        <span className="a11y">PS2 Game Library — </span>
+                        <span className="a11y">PS2 Collection App — </span>
                         Survival Horror Classics
                     </h1>
                     {this.renderNavControls(
@@ -251,7 +264,7 @@ class Navigation extends Component {
                         aria-hidden={searchAria} 
                         className="nav__search-btn" 
                         onClick={this.onDeleteClick}>
-                        <label htmlFor="nav__search-input" className="nav__search-label">{searchLabel}</label>
+                        <label htmlFor="nav__search-input" className={searchLabelClass}>{searchLabel}</label>
                         <img className="nav__search-icon" alt={searchAlt} src={searchIconSrc} />
                     </button>
                 </section>

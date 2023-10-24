@@ -593,15 +593,15 @@ class Info extends Component {
         const {openedInfo, onInfoClose} = this.props  
 
         let infoClass = "info",
-            btnCloseClass = "btn info__close-btn",
             infoAgeRatingClass = "info__age-container",
             infoTitleWrapperClass = "info__title-wrapper",
             infoContainerClass = "info__container",
-            ps2LifeCycle = "middle"
+            ps2LifeCycle = "middle",
+            tabIndex = -1
 
         if (openedInfo) { 
             infoClass += " is-active"
-            btnCloseClass += " is-active"
+            tabIndex = 0
         }
         if (ageRatingJp) infoAgeRatingClass += " has-jp"
         if (ageRatings.length < 1) infoTitleWrapperClass += " has-space"
@@ -610,8 +610,8 @@ class Info extends Component {
         if (+releaseDate.slice(-4) >= 2009) ps2LifeCycle = "late"
 
         return (
-            <section className={infoClass} aria-label="Game information">
-                <button className={btnCloseClass} type="button" onClick={onInfoClose} tabIndex={0}>
+            <section className={infoClass} aria-label="Game information" tabIndex={tabIndex}>
+                <button className="btn info__close-btn" type="button" onClick={onInfoClose} tabIndex={0}>
                     <img className="btn__img is-active" src={menuImg} alt="Close game information"/>
                 </button>
                 <div className="info__screenshot">   
@@ -629,7 +629,7 @@ class Info extends Component {
                         {releaseDate !== "Invalid Date" 
                           ? <div className="info__subtitle-wrapper">
                                 <h3 className="info__subtitle">{releaseDate} ({yearsPast} years ago)</h3>
-                                <div className="btn info__rating-btn is-active">{rating}</div>
+                                <div className="btn info__rating-btn">{rating}</div>
                                 <p className="info__rating-label">Rating</p>
                             </div>
                           :  <div className="info__subtitle-wrapper">

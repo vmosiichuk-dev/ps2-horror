@@ -33,8 +33,21 @@
 	margin-top: 0;
 }
 
+.about__welcome {
+	text-align: center;
+	margin: -25px 0 5px;
+}
+
 .about__p {
 	margin: 0;
+}
+
+.about__p + .about__p {
+	margin-top: .5rem;
+}
+
+.about__bold {
+	color: var(--gold);
 }
 
 .about__control {

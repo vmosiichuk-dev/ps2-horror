@@ -344,7 +344,7 @@
 		transition: .5s opacity cubic-bezier(.46,.03,.52,.96);
 	}
 
-	.info__close-btn.is-active {
+	.info__close-btn {
 		opacity: 1;
 		transition: .5s opacity .625s cubic-bezier(.46,.03,.52,.96);
 	}

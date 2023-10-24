@@ -68,22 +68,23 @@
 }
 
 .btn-sm {
-    width: 26px;
-    height: 26px;
+    width: 28px;
+    height: 28px;
     border: none;
     position:relative;
     justify-self: center;
     background-color: transparent;
+    border-radius: 9999px;
 }
 
 .btn-sm.btn-wish,
 .btn-sm.btn-play {
-    margin-right: -26px;
+    margin-right: -28px;
 }
 
 .btn-sm.btn-info,
 .btn-sm.btn-delete {
-    margin-left: -26px;
+    margin-left: -28px;
 }
 
 .btn-sm.btn-wish {
@@ -183,7 +184,7 @@
 
 .game__status-container {
     position: absolute;
-    top: 11px;
+    top: 10px;
     right: -17px;
     z-index: 10;
     display: grid;
@@ -215,7 +216,7 @@
     }
 
     .game__status-container {
-        top: 17px;
+        top: 16px;
     }
 
     .game-buttons {

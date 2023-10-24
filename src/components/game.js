@@ -74,15 +74,6 @@ class Game extends Component {
             default: break
         }
 
-        if (activeFilter === "wish") {
-            switch (wishPriceCategory) {
-                case "loose": gameClass += " game--loose"; break
-                case "cib": gameClass += " game--cib"; break 
-                case "newg": gameClass += " game--newg"; break 
-                default: break
-            }
-        }
-
         return (
             <li className={gameClass} id={slug}>
                 <div className={statusContainerClass}>
@@ -115,12 +106,7 @@ class Game extends Component {
                     loose={loose} 
                     cib={cib} 
                     newg={newg} 
-                />{/* 
-                <h2 className="game-data">
-                    <span className="game-name">
-                        {title}
-                    </span>
-                </h2> */}
+                />
             </li>
         )
     }

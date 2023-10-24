@@ -10,29 +10,49 @@ class AddGame extends Component {
 
     componentDidMount() { 
         this.addGameRef.current.addEventListener("keydown", this.handleAddGameKeydown)
+        this.props.addBtnRef.current.addEventListener("keydown", this.handleAddGameKeydown)
         this.searchRef.current.addEventListener("keydown", this.handleSearchKeydown)
     }
     
     componentWillUnmount() { 
         this.addGameRef.current.removeEventListener("keydown", this.handleAddGameKeydown)
+        this.props.addBtnRef.current.addEventListener("keydown", this.handleAddGameKeydown)
         this.searchRef.current.removeEventListener("keydown", this.handleSearchKeydown)
     }
 
     handleAddGameKeydown = (e) => {
         if (this.props.addGameIsActive) {
-            const focusableElements = [document.querySelector(".btn-menu"), ...this.addGameRef.current.querySelectorAll("input, button")],
-                  firstElement = focusableElements[0],
-                  secondElement = focusableElements[1],
-                  lastElement = focusableElements[focusableElements.length - 1]
+            const focusableElements = [this.props.addBtnRef.current, ...this.addGameRef.current.querySelectorAll("input, button")]
+            
+            const firstElement = focusableElements[0]
+            const secondElement = focusableElements[1]
+            const lastElement = focusableElements[focusableElements.length - 1]
+
+            console.log(focusableElements)
 
             if (e.key === "Tab") {
+                if (e.shiftKey && document.activeElement === firstElement) {
+                    e.preventDefault()
+                    lastElement.focus()          
+                }
+                if (!e.shiftKey && document.activeElement === firstElement) {
+                    e.preventDefault()
+                    secondElement.focus()                 
+                }
                 if (e.shiftKey && document.activeElement === secondElement) {
                     e.preventDefault()
-                    firstElement.focus()
+                    firstElement.focus()       
                 } else if (!e.shiftKey && document.activeElement === lastElement) {
                     e.preventDefault()
-                    firstElement.focus()
+                    firstElement.focus()       
                 }
+            }
+
+            if (e.key === "Enter" && document.activeElement.type === "radio") {
+                console.log(document.activeElement)
+                e.preventDefault()
+                document.activeElement.checked = !document.activeElement.checked
+                this.props.onSearchRadioChange(e)
             }
         }
     }
@@ -46,10 +66,10 @@ class AddGame extends Component {
 
     renderSearchData = (searchData) => {
         return (
-            <div className="searchdata">
-                <div className="searchdata-border --t-solid"></div>
+            <div className="add-game__output">
+                <div className="add-game__output-border add-game__output-border--t-solid"></div>
                 {this.renderSearchDataElements(searchData)}
-                <div className="searchdata-border --b-solid"></div>
+                <div className="add-game__output-border add-game__output-border--b-solid"></div>
             </div>
         )
     }
@@ -57,8 +77,8 @@ class AddGame extends Component {
     renderSearchDataElements = (searchData) => {
         return searchData.map(item => {    
             return (
-                <div className="searchdata-radio-wrapper" key={item.id}>
-                    <input type="radio" className="searchdata-radio" id={item.id} name="searchdata-radio" value={item.id} />
+                <div className="add-game__output-option" key={item.id}>
+                    <input type="radio" className="add-game__output-radio" id={item.id} name="add-game__output-radio" value={item.id} defaultChecked={false} />
                     <label htmlFor={item.id}>{item.name}</label>
                 </div>
             )
@@ -68,35 +88,74 @@ class AddGame extends Component {
     render() {
         const { addedTitle, addFormClass, addFormMessage, onTitleChange, addGameIsActive, onAddGameSearch, searchData, searchDataLoaded, onAddGameSubmit, onSearchRadioChange } = this.props 
 
-        let formClass = "add-form-wrapper",
+        let addGameClass = "add-game",
             tabIndex = -1,
             ariaHidden = true
     
         if (addGameIsActive) { 
-            formClass += " is-active" 
+            addGameClass += " is-active" 
             tabIndex = 0
             ariaHidden = false
         }
 
         return (
-            <aside className={formClass} tabIndex={-1} ref={this.addGameRef}>  
-                <div className="add-item" aria-hidden={ariaHidden}>
-                    <h2 className="addgame-title">Search and Add PS2 games to your library</h2>
-                    <p className="a11y" id="add-game-description">To add a game to the library you first need to search PS2 games by providing a title. Title should be at least 4 characters long. Submit your search query by pressing the button next to an input field. You will get all PS2 games containing the search query, from which you may choose one option to add to the library. If title is not already in the library it will be successfully added to the list. Remember, that added games will not have price information, as well as, additional information for the game may also be incomplete in the database.</p>
-                    <form className="add-form" onSubmit={onAddGameSubmit} aria-label="Add game form" aria-describedby="add-game-description">
-                        <section className="form-searchinput" aria-label="Seacrh input" ref={this.searchRef}>
-                            <label htmlFor="add-game-title" className="add-title--label">Game title (at least 4 characters)</label>
-                            <input type="text" placeholder="Enter title" name="title" id="add-game-title" onChange={onTitleChange} value={addedTitle} tabIndex={tabIndex} autoComplete="off"/>
-                            <button type="button" className="btn btn-add-search" onClick={onAddGameSearch} tabIndex={tabIndex}><span className="search-symbol">&#9740;</span></button>
+            <aside 
+                className={addGameClass} 
+                ref={this.addGameRef} 
+                tabIndex={-1} >  
+                <div className="add-game__wrapper" aria-hidden={ariaHidden} >
+                    <h2 className="add-game__title">Search and Add PS2 games to your library</h2>
+                    <p className="a11y" id="add-game__description">To add a game to the library you first need to search PS2 games by providing a title. Title should be at least 3 characters long. Submit your search query by pressing enter or the button next to an input field. You will get all PS2 games with the title matching the search query, from which you may choose one option to add to the library. If the title is already in the library you will be prompted to choose a unique title to avoid duplication. Remember, that added games will not have price information. Also, additional information for newly added games is limited to the completeness of such information in the database.</p>
+                    <form 
+                        className="add-game__form" 
+                        onSubmit={onAddGameSubmit} 
+                        aria-label="Add game form" aria-describedby="add-game__description" >
+                        <section 
+                            className="add-game__search" 
+                            aria-label="Search input" 
+                            ref={this.searchRef} >
+                            <label 
+                                className="add-game__search-label" htmlFor="add-game__search-input" >
+                                Game title (at least 4 characters)
+                            </label>
+                            <input 
+                                type="text" 
+                                className="add-game__search-input" 
+                                id="add-game__search-input" 
+                                name="title" 
+                                autoComplete="off"
+                                placeholder="Enter title" 
+                                onChange={onTitleChange} 
+                                value={addedTitle} 
+                                tabIndex={tabIndex} 
+                            />
+                            <button 
+                                type="button" 
+                                className="btn add-game__search-btn" 
+                                onClick={onAddGameSearch} 
+                                tabIndex={tabIndex} >
+                                <span className="add-game__search-icon">&#9740;</span>
+                            </button>
                         </section>
                         <p className={addFormClass} role="status">{addFormMessage}</p> 
-                        <section className="searchdata-container" aria-label="Seacrh results group" onChange={onSearchRadioChange}>
-                            <div className="searchdata-border --t-dashed"></div>
-                            {searchData.length < 1 ? null : this.renderSearchData(searchData)}
-                            <div className="searchdata-border --b-dashed"></div>
+                        <section 
+                            className="add-game__output-container" 
+                            aria-label="Search results group" 
+                            onChange={onSearchRadioChange} >
+                            <div className="add-game__output-border add-game__output-border--t-dashed"></div>
+                            {searchData.length < 1 
+                                ? null 
+                                : this.renderSearchData(searchData)
+                            }
+                            <div className="add-game__output-border add-game__output-border--b-dashed"></div>
                         </section>
                         {searchDataLoaded 
-                            ? <button type="submit" className="btn btn-add-submit" tabIndex={tabIndex}>Submit</button>
+                            ? <button 
+                                type="submit" 
+                                className="btn add-game__submit-btn" 
+                                tabIndex={tabIndex} >
+                                Submit
+                              </button>
                             : null
                         }
                     </form>
