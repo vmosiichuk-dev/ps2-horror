@@ -41,7 +41,8 @@
 	height: 51dvh;
 	position: absolute;
 	top: -1px;
-	left: -10%;
+	/* left: -10%; */
+	left: - 1rem;
 	z-index: -10;
 	filter: contrast(85%) brightness(85%) saturate(75%) sepia(25%) blur(1px);
 }

@@ -4,6 +4,7 @@
     height: 100dvh;
     margin: 0;
     opacity: 0;
+    max-width: 100dvw;
 }
 
 .app.has-faded-in {

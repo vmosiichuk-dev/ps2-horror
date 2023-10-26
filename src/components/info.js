@@ -46,7 +46,6 @@ import michigan from "../assets/img/screenshots/michigan.webp"
 import ps2collage from "../assets/img/screenshots/ps2collage.webp"
 import resident4premium from "../assets/img/screenshots/resident4premium.webp"
 import rlh from "../assets/img/screenshots/rlh.webp"
-import shadowman from "../assets/img/screenshots/shadowman.webp"
 import silentcollection from "../assets/img/screenshots/silentcollection.webp"
 import silent2special from "../assets/img/screenshots/silent2special.webp"
 import survivor2 from "../assets/img/screenshots/survivor2.webp"
@@ -84,7 +83,7 @@ class Info extends Component {
         let ageRatingJp = "",
             newCompanyLabel = "",
             newCompanyName = "",
-            screenshot = "",
+            newScreenshot = "",
             newSummary = summary,
             newGenres = [],
             newWebsites = []
@@ -146,7 +145,8 @@ class Info extends Component {
             title === "Vampire Night",
             title === "Phase Paradox",
             title === "Evil Twin: Cyprien's Chronicles",
-            title === "Shadow Tower: Abyss"
+            title === "Shadow Tower: Abyss",
+            title === "The Thing"
         ]
         const secondGroup = [
             title === "Resident Evil 4",
@@ -182,7 +182,6 @@ class Info extends Component {
             title === "Area 51",
             title === "Alone in the Dark: The New Nightmare",
             title === "Blood Omen 2: Legacy of Kain",
-            title === "The Thing",
             title === "ObsCure: The Aftermath"
         ]
 
@@ -192,93 +191,124 @@ class Info extends Component {
         if (thirdGroup.includes(true))  i = 3
         if (fourthGroup.includes(true)) i = 4
 
-        if (screenshots === undefined) {
+        if (screenshots.length === 0) {
             switch (title) {
-                case "Shadow Man: 2econd Coming": {
-                    screenshot = shadowman; break }
-                case "Van Helsing": {
-                    screenshot = vanhelsing; break }
-                case "Zombie Hunters": {
-                    screenshot = zombiehunters; break }
+                case "Daemon Summoner": {
+                    newScreenshot = daemon
+                    break
+                }
+                case "Evil Dead: Regeneration": {
+                    newScreenshot = evildeadr
+                    break
+                } 
+                case "Gantz: The Game": {
+                    newScreenshot = gantz
+                    newSummary = "Gantz: The Game is an immersive adaptation of the popular manga and anime series. Fight surreal and deadly battle against menacing alien creatures, strategize and adapt to survive increasingly challenging encounters and unlock the mysteries surrounding character's predicament. The game boasts stunning visuals that capture the essence of the source material."
+                    newCompanyLabel = "Developer"
+                    newCompanyName = "KCEJ East"
+                    break 
+                }
+                case "Ghosthunter": {
+                    newScreenshot = ghosthunter
+                    break
+                }
                 case "Ghost Vibration": {
                     newCompanyLabel = "Developer"
                     newCompanyName = "Artoon Co., Ltd."
                     newGenres = ["Action"]
-                    screenshot = ghostvibration; break }
+                    newScreenshot = ghostvibration; break 
+                }
+                case "Lifeline": {
+                    newScreenshot = lifeline
+                    break
+                }
+                case "Run Like Hell: Hunt or Be Hunted": {
+                    newScreenshot = rlh
+                    break
+                }
+                case "The Fear": {
+                    newScreenshot = fear
+                    newSummary = "The Fear is an interactive movie featuring live actors. You can move from first-person perspective, each movement being shown as a full-motion video, as well as, solve puzzles and play out action sequences. The story tells about a group of filmmakers shooting a horror film. Guided by the 'Camera Man', they explore a mansion with the troubled past and learn its history."
+                    break 
+                }
+                case "The Haunted Mansion": {
+                    newScreenshot = haunted
+                    newSummary = "The Haunted Mansion is an action-adventure video game released in 2003 from North America and 2004 in Europe and Japan by High Voltage Software. The game is based on the Disney ride of the same name, rather than the eponymous film, which was released shortly after the game.[2][3][4] However, some elements and set designs from the film are incorporated into the game."
+                    break 
+                }
                 case "The Silent Hill Collection": {
-                    screenshot = silentcollection
+                    newScreenshot = silentcollection
                     newGenres = ["Puzzle", "Adventure"]
                     newWebsites = [
                         {label: "Moby Games", url: "https://www.mobygames.com/game/22234/the-silent-hill-collection/"},
                         {label: "Crimson Ceremony", url: "https://www.crimson-ceremony.net/lostreleases/item.php?id=shgame_shbox-eur-collection"}
-                    ]; break }
-                case "Daemon Summoner": {
-                    screenshot = daemon; break }
-                case "Gantz: The Game": {
-                    screenshot = gantz
-                    newSummary = "Gantz: The Game is an immersive adaptation of the popular manga and anime series. Fight surreal and deadly battle against menacing alien creatures, strategize and adapt to survive increasingly challenging encounters and unlock the mysteries surrounding character's predicament. The game boasts stunning visuals that capture the essence of the source material."
-                    newCompanyLabel = "Developer"
-                    newCompanyName = "KCEJ East"
-                    break }
-                case "Lifeline": {
-                    screenshot = lifeline; break }
-                case "The Fear": {
-                    screenshot = fear
-                    newSummary = "The Fear is an interactive movie featuring live actors. You can move from first-person perspective, each movement being shown as a full-motion video, as well as, solve puzzles and play out action sequences. The story tells about a group of filmmakers shooting a horror film. Guided by the 'Camera Man', they explore a mansion with the troubled past and learn its history."
-                    break }
-                case "Run Like Hell: Hunt or Be Hunted": {
-                    screenshot = rlh; break }
-                case "The Haunted Mansion": {
-                    screenshot = haunted
-                    newSummary = "The Haunted Mansion is an action-adventure video game released in 2003 from North America and 2004 in Europe and Japan by High Voltage Software. The game is based on the Disney ride of the same name, rather than the eponymous film, which was released shortly after the game.[2][3][4] However, some elements and set designs from the film are incorporated into the game."
-                    break }
-                case "Ghosthunter": {
-                    screenshot = ghosthunter; break }
-                case "Evil Dead: Regeneration": {
-                    screenshot = evildeadr; break }
+                    ]
+                    break 
+                }
+                case "Van Helsing": {
+                    newScreenshot = vanhelsing
+                    break
+                }
+                case "Zombie Hunters": {
+                    newScreenshot = zombiehunters
+                    break
+                }
                 case "Zombie Hunters 2": {
-                    screenshot = zombiehunters2; break }
-                default: { screenshot = ps2collage; break }
+                    newScreenshot = zombiehunters2
+                    break
+                }
+                default: {
+                    newScreenshot = ps2collage
+                    break
+                }
             }
-        } else if (screenshots.length > 0 || screenshots[i] !== undefined) {
-            screenshot = "https://images.igdb.com/igdb/image/upload/t_screenshot_big/" + screenshots[i] + ".jpg"
-        }
+        } else if (screenshots[i] !== undefined) newScreenshot = screenshots[i]
 
         switch (title) {
             case "Evil Twin: Cyprien's Chronicles" : {
-                newSummary = "The game was originally intended to be released in late 1999 under the title of 'Evil Twin' but was later delayed due to financial reasons. The player takes control of a young orphan named Cyprien, who ventures through a nightmarish world and can transform into a superhero version of himself named Supercyp during his journey to Loren Darith to free his teddy bear, Lenny."; break 
+                newSummary = "The game was originally intended to be released in late 1999 under the title of 'Evil Twin' but was later delayed due to financial reasons. The player takes control of a young orphan named Cyprien, who ventures through a nightmarish world and can transform into a superhero version of himself named Supercyp during his journey to Loren Darith to free his teddy bear, Lenny."
+                break 
             }
             case "Phase Paradox" : {
                 newGenres = ["Adventure"]
-                newSummary = "Phase Paradox is an NTSC-J exclusive horror adventure set in the same universe as Philosoma, a PlayStation shoot-em-up. The Gallant, a spacecraft carrier was heavily damaged after the explosion of Planet 220. 20% of the crew is either dead or injured by the impact. Some of the survivors are going crazy. But even worst, unknown creatures begin to roam the ship."; break 
+                newSummary = "Phase Paradox is an NTSC-J exclusive horror adventure set in the same universe as Philosoma, a PlayStation shoot-em-up. The Gallant, a spacecraft carrier was heavily damaged after the explosion of Planet 220. 20% of the crew is either dead or injured by the impact. Some of the survivors are going crazy. But even worst, unknown creatures begin to roam the ship."
+                break 
             } 
             case "Mystic Nights" : {
-                newSummary = "A South-Korean exclusive horror with Resident Evil gameplay style. You are called to investigate a secret government facility that was suddenly abandoned. On the way, you discover that it has been overtaken by numerous nightmarish monsters and vampires. In multi-player, you need to escape in a limited time, while one of the players takes the role of a renegade."; break 
+                newSummary = "A South-Korean exclusive horror with Resident Evil gameplay style. You are called to investigate a secret government facility that was suddenly abandoned. On the way, you discover that it has been overtaken by numerous nightmarish monsters and vampires. In multi-player, you need to escape in a limited time, while one of the players takes the role of a renegade."
+                break 
             } 
             case "Vampire Night" : {
-                newSummary = "A light gun game first released for arcades and later ported to PS2 in 2001. The gameplay itself utilizes the engine that is used in The House of the Dead series. A struggle between light and dark, from three centuries back, is about to ensue. The parties involved are Michel and Albert – the two vampire hunters representing light, and the vampires representing dark."; break 
+                newSummary = "A light gun game first released for arcades and later ported to PS2 in 2001. The gameplay itself utilizes the engine that is used in The House of the Dead series. A struggle between light and dark, from three centuries back, is about to ensue. The parties involved are Michel and Albert – the two vampire hunters representing light, and the vampires representing dark."
+                break 
             }  
             case "Cold Fear" : {
-                newSummary = "Cold Fear is a first survival horror published by Ubisoft and developed by Darkworks – creators of Alone in the Dark: The New Nightmare. The game tells the story of Tom Hansen, a member of the United States Coast Guard, who comes to the aid of a Russian whaler and finds a mysterious virus has broken out and turned the crew into zombie like creatures."; break 
+                newSummary = "Cold Fear is a first survival horror published by Ubisoft and developed by Darkworks – creators of Alone in the Dark: The New Nightmare. The game tells the story of Tom Hansen, a member of the United States Coast Guard, who comes to the aid of a Russian whaler and finds a mysterious virus has broken out and turned the crew into zombie like creatures."
+                break 
             }
             case "BloodRayne" : {
-                newSummary = "BloodRayne is an action-adventure hack and slash video game. The game has spawned a franchise with the addition of sequels, films, and self-contained comic books. The game begins in 1933, and consists of three acts. The plot revolves around Rayne – a dhampir looking for her father. She is working for the Brimstone Society and kills any vampire that crosses her path."; break 
+                newSummary = "BloodRayne is an action-adventure hack and slash video game. The game has spawned a franchise with the addition of sequels, films, and self-contained comic books. The game begins in 1933, and consists of three acts. The plot revolves around Rayne – a dhampir looking for her father. She is working for the Brimstone Society and kills any vampire that crosses her path."
+                break 
             }
             case "Trapt": {
-                screenshot = trapt; break 
+                newScreenshot = trapt
+                break 
             }
             case "Kuon": {
-                screenshot = kuon; break 
+                newScreenshot = kuon
+                break 
             }
             case "Extermination": {
-                screenshot = extermination
-                newSummary = "Coming out early in the system's life cycle, the title was used as a showcase at trade shows before its release. It is considered the first survival horror game on the PS2. The game generated hype amongst critics, but received mostly average reviews. There are significant differences between PAL and NTSC U/C versions including a redesign of the main protagonist and entirely rerecorded dialogue."; break 
+                newScreenshot = extermination
+                newSummary = "Coming out early in the system's life cycle, the title was used as a showcase at trade shows before its release. It is considered the first survival horror game on the PS2. The game generated hype amongst critics, but received mostly average reviews. There are significant differences between PAL and NTSC U/C versions including a redesign of the main protagonist and entirely rerecorded dialogue."
+                break 
             }
             case "Berserk Millennium Empire Arc: Chapter of the Holy Demon War": {
-                screenshot = berserk; break 
+                newScreenshot = berserk
+                break 
             }
             case "Silent Hill 2: Special 2 Disc Set": {
-                screenshot = silent2special
+                newScreenshot = silent2special
                 newWebsites = [
                     { 
                         label: "Moby Games", 
@@ -288,20 +318,25 @@ class Info extends Component {
                         label: "Crimson Ceremony", 
                         url: "https://www.crimson-ceremony.net/lostreleases/item.php?id=shgame_sh2-ps2-eur1" 
                     }
-                ]; break 
+                ]
+                break 
             }
             case "Jaws Unleashed": {
-                screenshot = jaws; break 
+                newScreenshot = jaws
+                break 
             }
             case "Turok: Evolution": {
-                screenshot = turok; break 
+                newScreenshot = turok
+                break 
             }
             case "Galerians: Ash": {
-                screenshot = galerians; break 
+                newScreenshot = galerians
+                break 
             }
             case "Simple 2000 Series Vol. 113: The Tairyou Jigoku": {
-                screenshot = tairyou
-                newSummary = "The game follows the story of a schoolgirl chasing down a very Alice In Wonderland-styled rabbit through various worlds, to take back the cellphone he stole from her. While you're running around you come across hoards of massive insects. The enemies never truly die, within a few seconds they are back up again and ready to attack! There are some additional endings and unlockables."; break 
+                newScreenshot = tairyou
+                newSummary = "The game follows the story of a schoolgirl chasing down a very Alice In Wonderland-styled rabbit through various worlds, to take back the cellphone he stole from her. While you're running around you come across hoards of massive insects. The enemies never truly die, within a few seconds they are back up again and ready to attack! There are some additional endings and unlockables."
+                break 
             }
             case "Resident Evil 4": {
                 newWebsites = [
@@ -317,10 +352,11 @@ class Info extends Component {
                         label: "Wikipedia", 
                         url: "https://en.wikipedia.org/wiki/Resident_Evil_4"
                     }
-                ]; break 
+                ]
+                break 
             }
             case "Resident Evil 4: Premium Edition": {
-                screenshot = resident4premium
+                newScreenshot = resident4premium
                 newWebsites = [
                     {
                         label: "Twitch", 
@@ -334,30 +370,38 @@ class Info extends Component {
                         label: "Wikipedia", 
                         url: "https://en.wikipedia.org/wiki/Resident_Evil_4"
                     }
-                ]; break 
+                ]
+                break 
             }
             case "Baroque": {
-                screenshot = baroque; break 
+                newScreenshot = baroque
+                break 
             }
             case "King's Field IV": {
-                screenshot = kingsfield
-                newSummary = "The fourth game in the King's Field series (and third to be released in the west) and the last one released for home consoles. A demonic idol responsible for the destruction of an ancient race has re-emerged and threatens to destroy mankind. Your mission is to take on the role of a warrior who has to return the idol to the Ancient City to break its curse."; break 
+                newScreenshot = kingsfield
+                newSummary = "The fourth game in the King's Field series (and third to be released in the west) and the last one released for home consoles. A demonic idol responsible for the destruction of an ancient race has re-emerged and threatens to destroy mankind. Your mission is to take on the role of a warrior who has to return the idol to the Ancient City to break its curse."
+                break 
             }
             case "Aliens Versus Predator: Extinction": {
-                screenshot = aliens; break 
+                newScreenshot = aliens
+                break 
             }
             case "Shadow Tower: Abyss": {
-                screenshot = abyss; break 
+                newScreenshot = abyss
+                break 
             }
             case "Michigan: Report from Hell": {
-                screenshot = michigan; break 
+                newScreenshot = michigan
+                break 
             }
             case "Resident Evil Survivor 2 Code: Veronica": {
-                screenshot = survivor2; break 
+                newScreenshot = survivor2
+                break 
             }
             case "Hungry Ghosts": {
-                screenshot = hungryghosts
-                newSummary = "Developed by Japanese software house Deep Space (previously responsible for the survival horror game Extermination) and designed by their founder Tokuro Fujiwara (previously responsible for, of all things, the seminal Ghosts 'n Goblins). Hungry Ghosts is a first-person horror action experience with some very deep character 'creation'. In fact, it is an immersive simulation."; break 
+                newScreenshot = hungryghosts
+                newSummary = "Developed by Japanese software house Deep Space (previously responsible for the survival horror game Extermination) and designed by their founder Tokuro Fujiwara (previously responsible for, of all things, the seminal Ghosts 'n Goblins). Hungry Ghosts is a first-person horror action experience with some very deep character 'creation'. In fact, it is an immersive simulation."
+                break 
             }
             default: break
         }
@@ -545,7 +589,7 @@ class Info extends Component {
                 genres: newGenres,
                 companyLabel: newCompanyLabel,
                 companyName: newCompanyName,
-                screenshot: screenshot,
+                screenshot: newScreenshot,
                 summary: newSummary,
                 websites: newWebsites,
                 ageRatings: ageRatingsImg,

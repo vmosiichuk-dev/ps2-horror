@@ -468,12 +468,14 @@ class App extends Component {
     ]
 
     filterGame = (game) => {
-        let rating = "N/A",
+        let genres = [],
+            websites = [],
             ageRatings = [],
-            genres = [],
             screenshots = [],
             companyLabel = "",
             companyName = "",
+            rating = "N/A",
+            title = "",
             src = ""
 
         if (game.total_rating) {
@@ -508,9 +510,23 @@ class App extends Component {
             }
         }
 
-        if (game.screenshots !== undefined) {
-            game.screenshots.forEach(item => screenshots.push(item.image_id))
+        if (game.websites !== undefined) {
+            game.websites.forEach(item => {
+                delete item.id
+                websites.push(item)
+            })
         }
+
+        if (game.screenshots !== undefined) {
+            const screenshotsSliced = game.screenshots.slice(0, 5)
+            screenshotsSliced.forEach(item => screenshots.push("https://images.igdb.com/igdb/image/upload/t_screenshot_big/" + item.image_id + ".jpg"))
+        }
+
+        title = game.name
+        let gamePrice = this.gamePrices.find(item => item.title === title)
+        if (gamePrice === undefined) gamePrice = {prices: { loose: "n/a", cib: "n/a", newg: "n/a" }}
+
+        game.cover !== undefined ? src = "https://images.igdb.com/igdb/image/upload/t_cover_big/" + game.cover.image_id + ".jpg" : src = noCover
 
         delete game.total_rating
         delete game.rating
@@ -519,30 +535,26 @@ class App extends Component {
         delete game.genres
         delete game.involved_companies
         delete game.screenshots
-                
-        let gamePrice = this.gamePrices.find(item => item.title === game.name)
-        if (gamePrice === undefined) gamePrice = {prices: { loose: "n/a", cib: "n/a", newg: "n/a" }}
-
-        game.cover !== undefined ? src = "https://images.igdb.com/igdb/image/upload/t_cover_big/" + game.cover.image_id + ".jpg" : src = noCover
+        delete game.websites
+        delete game.name
+        delete game.cover                
 
         const filters = { wish: false, play: false }
         const gameData = { 
-            ...game, 
+            title: title, 
             rating: rating, 
             ageRatings: ageRatings, 
             genres: genres,
             companyLabel: companyLabel,
             companyName: companyName,
             screenshots: screenshots,
-            title: game.name, 
+            websites: websites,
             src: src, 
+            ...game, 
             wishPriceCategory: "",
             priceCategory: "",
             ...gamePrice.prices
         }
-
-        delete gameData.name
-        delete gameData.cover
 
         return Object.assign(filters, gameData)
     }
