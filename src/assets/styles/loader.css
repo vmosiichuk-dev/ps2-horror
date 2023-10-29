@@ -43,7 +43,7 @@
 
 @media screen and (orientation: landscape) and (hover: none) {
 	.loader__gif {
-		max-width: 38dvw;
+		max-width: 32dvw;
 		top: .5rem;
 	}
 
@@ -61,10 +61,6 @@
 	}
 
 	@media (orientation: landscape) and (hover: none) {
-		.loader__gif {
-			max-width: 32dvw;
-		}
-
 		.loader__error {
 			max-width: 220px;
 		}

@@ -55,8 +55,9 @@
 }
 
 .game-price__icon {
-    width: 13px;
-    height: 13px;
+    width: 10px;
+    height: 10px;
+    margin-bottom: 1px;
     filter: var(--filter-fallback);
 }
 
@@ -122,6 +123,13 @@
     }
 }
 
+@media screen and (min-width: 1280px) {
+    .game-price__icon {
+        width: 13px;
+        height: 13px;
+    }
+}
+
 @media screen and (min-width: 1365px) {
     .game-price__usd {
         font-size: .5625rem;
@@ -139,10 +147,6 @@
     .game-price__btn.game-price__btn--value {
         font-size: .6875rem;
         padding: 7px 6px;
-    }
-
-    .game-price__icon {
-        margin-bottom: 1px;
     }
 
     .game-price__total {

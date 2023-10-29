@@ -46,7 +46,6 @@
 .add-game__search-input {
 	color: var(--accent);
 	background: transparent;
-	font-size: 1rem;
 	border: 1px solid #867fa6b5;
 	padding: 4px 12px;
 	text-align: center;
@@ -115,6 +114,7 @@
  	overflow-y: scroll;
 	padding-top: .5rem;
 	position: relative;
+	overscroll-behavior: none;
 }
 
 .add-game__output-border--t-solid {
@@ -185,8 +185,18 @@
 		width: 100dvw;
 		left: -100dvw;
 		border: none;
+		height: 200dvh;
+		display: grid;
+		grid-template-rows: repeat(2, 1fr);
+		overscroll-behavior: none;
+		min-height: 720px;
 	}
-
+/* 
+	.add-game__wrapper {
+		min-height: 360px;
+		margin-top: 20px;
+	}
+ */
 	.add-game__title {
 		font-size: 1.1875rem;
 		margin-bottom: .375rem;
@@ -197,7 +207,15 @@
 	}
 
 	.add-game__output {
-		max-height: 32dvh;
+		max-height: 7.25rem;
+	}
+
+	#add-game__description {
+		order: 1;
+		width: 79dvw;
+		position: static;
+		line-height: 1.625rem;
+		margin-bottom: 3.5rem;
 	}
 
 	@media (min-width: 809px) {

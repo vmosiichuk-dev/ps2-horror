@@ -51,9 +51,9 @@ class App extends Component {
                 width: "0%",
                 borderRadius: "4px 0 0 4px"
             },
-            wishCount: 0,
-            progressWishCount: "0%",
-            progressbarWishStyle: {
+            collCount: 0,
+            progressCollCount: "0%",
+            progressbarCollStyle: {
                 width: "0%",
                 borderRadius: "4px 0 0 4px"
             },
@@ -186,17 +186,17 @@ class App extends Component {
                 this.setState(prevState => {
                     const newData = [gameFiltered, ...prevState.data],
                             newPlayCount = newData.filter(item => item.play).length,
-                            newWishCount = newData.filter(item => item.wish).length,
-                            progress = this.countProgress(newData.length, [newPlayCount, newWishCount])
+                            newCollCount = newData.filter(item => item.priceCategory !== "").length,
+                            progress = this.countProgress(newData.length, [newPlayCount, newCollCount])
         
                     return { 
                         data: newData, 
                         playCount: newPlayCount, 
                         progressPlayCount: progress.play.progressCount, 
                         progressbarPlayStyle: progress.play.progressbarStyle,
-                        wishCount: newWishCount, 
-                        progressWishCount: progress.wish.progressCount, 
-                        progressbarWishStyle: progress.wish.progressbarStyle,
+                        collCount: newCollCount, 
+                        progressCollCount: progress.coll.progressCount, 
+                        progressbarCollStyle: progress.coll.progressbarStyle,
                         totalCount: newData.length, 
                         addFormMessage: success, 
                         addFormClass: "add-game__form-message add-game__form-message--success", 
@@ -230,23 +230,13 @@ class App extends Component {
             })
 
             const newPlayCount = newData.filter(item => item.play).length,
-                  newWishCount = newData.filter(item => item.wish).length,
-                  progress = this.countProgress(newData.length, [newPlayCount, newWishCount])
+                  progress = this.countProgress(newData.length, [newPlayCount])
 
-            if (state === "play") {
-                return { 
-                    data: newData, 
-                    playCount: newPlayCount, 
-                    progressPlayCount: progress.play.progressCount, 
-                    progressbarPlayStyle: progress.play.progressbarStyle
-                }
-            } else {
-                return { 
-                    data: newData, 
-                    wishCount: newWishCount, 
-                    progressWishCount: progress.wish.progressCount, 
-                    progressbarWishStyle: progress.wish.progressbarStyle
-                }
+            return { 
+                data: newData, 
+                playCount: newPlayCount, 
+                progressPlayCount: progress.play.progressCount, 
+                progressbarPlayStyle: progress.play.progressbarStyle
             }
         })  
 
@@ -258,7 +248,7 @@ class App extends Component {
         let countsResult = {}
 
         counts.forEach((count, i) => {
-            const state = i === 0 ? "play" : "wish"
+            const state = i === 0 ? "play" : "coll"
             const progressCount = Math.round(count / totalCount * 100) + "%"
             const result = {
                 [state]: {
@@ -302,18 +292,30 @@ class App extends Component {
                 }
             })
 
-            return { data: newData }
+            const newCollCount = newData.filter(item => item.priceCategory !== "").length,
+                  progress = this.countProgress(newData.length, [1, newCollCount])
+
+            console.log(newCollCount)
+            console.log(progress)
+
+            return { 
+                data: newData,
+                collCount: newCollCount, 
+                progressCollCount: progress.coll.progressCount, 
+                progressbarCollStyle: progress.coll.progressbarStyle 
+            }
         })  
 
         this.setLocalGameData()
+        this.setLocalProgressData()
     }
 
     deleteItem = (slug) => {   
         this.setState(prevState => {
             const newData = prevState.data.filter(item => item.slug !== slug)
             const newPlayCount = newData.filter(item => item.play).length
-            const newWishCount = newData.filter(item => item.wish).length
-            const progress = this.countProgress(newData.length, [newPlayCount, newWishCount])
+            const newCollCount = newData.filter(item => item.priceCategory !== "").length
+            const progress = this.countProgress(newData.length, [newPlayCount, newCollCount])
 
             let newInfoData = prevState.infoData
             if (prevState.data[0].slug === slug) newInfoData = newData[0]
@@ -324,9 +326,9 @@ class App extends Component {
                 playCount: newPlayCount, 
                 progressPlayCount: progress.play.progressCount, 
                 progressbarPlayStyle: progress.play.progressbarStyle,
-                wishCount: newWishCount, 
-                progressWishCount: progress.wish.progressCount, 
-                progressbarWishStyle: progress.wish.progressbarStyle
+                collCount: newCollCount, 
+                progressCollCount: progress.coll.progressCount, 
+                progressbarCollStyle: progress.coll.progressbarStyle
             }
         })  
 
@@ -337,7 +339,7 @@ class App extends Component {
 // ––––––––––––––––––––––––––––– <App /> functions –––––––––––––––––––––––––––––––––––
 
     getMainError = (filteredData) => {
-        const { playCount, wishCount, activeFilter } = this.state
+        const { playCount, collCount, activeFilter } = this.state
         const collection = filteredData.filter(item => item.priceCategory !== "")
         // Add data.filter => priceCategory
         // and use instead of count for error
@@ -351,7 +353,7 @@ class App extends Component {
                     To mark a game as played, hover or click on a game card and press a controller button.
                     </p>
                 )
-            } else if (activeFilter === "wish" && wishCount === 0) {
+            } else if (activeFilter === "wish" && collCount === 0) {
                 return (
                     <p className="main__error is-active" role="status">
                     There are no games in your wishlist yet.<br />
@@ -595,7 +597,7 @@ class App extends Component {
 
                 const localPlayProgressbar = JSON.parse(window.localStorage.getItem("PS2_SURVIVAL_HORROR_PLAY_PROGRESSBAR_STYLE"))
 
-                const localWishCount = JSON.parse(window.localStorage.getItem("PS2_SURVIVAL_HORROR_WISH_COUNT"))
+                const localCollCount = JSON.parse(window.localStorage.getItem("PS2_SURVIVAL_HORROR_WISH_COUNT"))
 
                 const localWishPercent = JSON.parse(window.localStorage.getItem("PS2_SURVIVAL_HORROR_WISH_PROGRESS_COUNT"))
 
@@ -608,9 +610,9 @@ class App extends Component {
                     playCount: localPlayCount, 
                     progressPlayCount: localPlayPercent, 
                     progressbarPlayStyle: localPlayProgressbar,
-                    wishCount: localWishCount, 
-                    progressWishCount: localWishPercent, 
-                    progressbarWishStyle: localWishProgressbar 
+                    collCount: localCollCount, 
+                    progressCollCount: localWishPercent, 
+                    progressbarCollStyle: localWishProgressbar 
                 })
             }
 
@@ -642,46 +644,25 @@ class App extends Component {
 
     setLocalProgressData = () => {
         setTimeout(() => {
-            const {playCount, progressPlayCount, progressbarPlayStyle, wishCount, progressWishCount, progressbarWishStyle} = this.state
+            const {playCount, progressPlayCount, progressbarPlayStyle, collCount, progressCollCount, progressbarCollStyle} = this.state
 
             window.localStorage.setItem("PS2_SURVIVAL_HORROR_PLAY_COUNT", JSON.stringify(playCount))
             window.localStorage.setItem("PS2_SURVIVAL_HORROR_PLAY_PROGRESS_COUNT", JSON.stringify(progressPlayCount))
             window.localStorage.setItem("PS2_SURVIVAL_HORROR_PLAY_PROGRESSBAR_STYLE", JSON.stringify(progressbarPlayStyle))
 
-            window.localStorage.setItem("PS2_SURVIVAL_HORROR_WISH_COUNT", JSON.stringify(wishCount))
-            window.localStorage.setItem("PS2_SURVIVAL_HORROR_WISH_PROGRESS_COUNT", JSON.stringify(progressWishCount))
-            window.localStorage.setItem("PS2_SURVIVAL_HORROR_WISH_PROGRESSBAR_STYLE", JSON.stringify(progressbarWishStyle))
+            window.localStorage.setItem("PS2_SURVIVAL_HORROR_WISH_COUNT", JSON.stringify(collCount))
+            window.localStorage.setItem("PS2_SURVIVAL_HORROR_WISH_PROGRESS_COUNT", JSON.stringify(progressCollCount))
+            window.localStorage.setItem("PS2_SURVIVAL_HORROR_WISH_PROGRESSBAR_STYLE", JSON.stringify(progressbarCollStyle))
         }, 125)
     }
 
-    addLandscapeOverflow = () => document.body.classList.add('body--overflow')
-
-    removeLandscapeOverflow = () => document.body.classList.remove('body--overflow')
-
-    /* onInnerWidthIsDesktop = () => {
-        if (window.innerWidth > 1279) {
-            this.setState({ openedInfo: true })
-        }
-    }
-
-    componentDidMount() {
-        this.onInnerWidthIsDesktop()
-        window.addEventListener("resize", this.onInnerWidthIsDesktop)
-    } */
-
     componentDidUpdate() {
-        const {welcomeClick} = this.props
-        const {apiDataLoaded, openedInfo} = this.state
+        const { welcomeClick } = this.props
+        const { apiDataLoaded } = this.state
 
         if (welcomeClick && !apiDataLoaded) this.handleWelcomeClick()
-        if (!apiDataLoaded || !openedInfo) this.addLandscapeOverflow()
-        if (apiDataLoaded && openedInfo) this.removeLandscapeOverflow()
     }
-    
-    /* componentWillUnmount() {
-        window.removeEventListener("resize", this.onInnerWidthIsDesktop)
-    } */
-    
+
 // –––––––––––––––––––––––––––––—— END functions ––––––––––––––––––––––––––––––——–––––
 
     render() {
@@ -693,9 +674,9 @@ class App extends Component {
             playCount, 
             progressPlayCount,
             progressbarPlayStyle,
-            wishCount, 
-            progressWishCount,
-            progressbarWishStyle,
+            collCount, 
+            progressCollCount,
+            progressbarCollStyle,
             addFormClass,
             addFormMessage,
             addGameIsActive,
@@ -703,7 +684,8 @@ class App extends Component {
             delSrc,
             activeFilter,
             searchData,
-            searchDataLoaded 
+            searchDataLoaded,
+            apiDataLoaded 
         } = this.state
 
         const renderData = this.searchGame(data, searchQuery)
@@ -732,9 +714,9 @@ class App extends Component {
                     playCount={playCount}
                     progressPlayCount={progressPlayCount}
                     progressbarPlayStyle={progressbarPlayStyle}
-                    wishCount={wishCount}
-                    progressWishCount={progressWishCount}
-                    progressbarWishStyle={progressbarWishStyle}
+                    collCount={collCount}
+                    progressCollCount={progressCollCount}
+                    progressbarCollStyle={progressbarCollStyle}
                     addGameIsActive={addGameIsActive}
                     aboutIsActive={aboutIsActive}
                     activeFilter={activeFilter}

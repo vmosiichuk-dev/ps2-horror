@@ -1,4 +1,4 @@
-import { Component } from "react"
+import React, { Component } from "react"
 import overlay from "../assets/img/overlay.png"
 import menuImg from "../assets/img/plus.svg"
 import "../assets/styles/info.css"
@@ -59,6 +59,7 @@ import zombiehunters2 from "../assets/img/screenshots/zombiehunters2.webp"
 class Info extends Component {
     constructor(props) {
         super(props)
+        this.infoScreenshotRef = React.createRef()
         this.state = {
             wish: "",
             play: "",
@@ -640,12 +641,15 @@ class Info extends Component {
             infoAgeRatingClass = "info__age-container",
             infoTitleWrapperClass = "info__title-wrapper",
             infoContainerClass = "info__container",
+            btnCloseClass = "btn info__close-btn",
             ps2LifeCycle = "middle",
             tabIndex = -1
 
         if (openedInfo) { 
             infoClass += " is-active"
+            btnCloseClass += " info__close-btn--fixed"
             tabIndex = 0
+            this.infoScreenshotRef.current.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"})
         }
         if (ageRatingJp) infoAgeRatingClass += " has-jp"
         if (ageRatings.length < 1) infoTitleWrapperClass += " has-space"
@@ -655,10 +659,10 @@ class Info extends Component {
 
         return (
             <section className={infoClass} aria-label="Game information" tabIndex={tabIndex}>
-                <button className="btn info__close-btn" type="button" onClick={onInfoClose} tabIndex={0}>
+                <button className={btnCloseClass} type="button" onClick={onInfoClose} tabIndex={0}>
                     <img className="btn__img is-active" src={menuImg} alt="Close game information"/>
                 </button>
-                <div className="info__screenshot">   
+                <div className="info__screenshot" ref={this.infoScreenshotRef} >   
                     <img className="info__screenshot-img" src={screenshot} alt=""/>
                     <div className="info__screenshot-bg"></div>
                 </div>

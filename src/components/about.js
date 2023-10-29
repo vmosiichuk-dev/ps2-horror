@@ -56,7 +56,10 @@ class About extends Component {
         const {aboutIsActive} = this.props  
 
         let aboutClass = "about"
-        if (aboutIsActive) aboutClass += " is-active"
+        if (aboutIsActive) {
+            aboutClass += " is-active"
+            this.aboutRef.current.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"})
+        }
 
         return (
             <aside className={aboutClass} ref={this.aboutRef}>

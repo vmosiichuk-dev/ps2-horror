@@ -29,6 +29,10 @@ body, input, input::placeholder {
 	font-family: var(--didact-gothic);
 }
 
+input {
+	font-size: 1rem;
+}
+
 input::placeholder {
 	font-size: .875rem;
 }
@@ -50,14 +54,12 @@ button {
 }
   
 .btn:hover {
-    /* border-color: #9c94be; */
 	border-color: skyblue;
     box-shadow: 0px 0px 8px #c1bcda70;
     transition: box-shadow .1s cubic-bezier(.46,.03,.52,.96), border-color .1s cubic-bezier(.46,.03,.52,.96);
 }
 
 .btn.is-active {
-    /* border-color: #9c94be; */
 	border-color: skyblue;
     box-shadow: 0px 0px 4px #c1bcda70;
 }
@@ -281,10 +283,7 @@ button {
 @media screen and (orientation: landscape) and (hover: none) and (max-width: 1365px) {
 	body {
 		overflow: initial;
-	}
-
-	.body--overflow {
-		overflow: hidden;
+		background: #264550;
 	}
 
 	.welcome__title {
@@ -349,6 +348,6 @@ button {
 
 @media screen and (((max-width: 1279px) and (orientation: portrait)) or ((min-width: 1079px) and (orientation: landscape)) or (min-width: 1365px)) {
 	html {
-		overflow: hidden
+		overflow: hidden;
 	}
 }

@@ -1,27 +1,28 @@
 .game-list {
     display: grid;
     grid-gap: 70px 25px;
-    justify-content: space-between;
+    justify-content: space-evenly;
     grid-template-columns: repeat(auto-fill,130px);
-    min-width: calc(100dvw - 50px);
+    width: calc(100dvw - 50px);
     height: calc(100% - 15px);
     margin: 0;
     padding: 15px 15px 0;
     overflow-y: scroll;
     overflow-x: hidden;
     scrollbar-color: #5b718486 #6e6e6e86;
+    overscroll-behavior: none;
 }  
 
 @media screen and (min-width: 389px) and (max-width: 1279px) and ((orientation: portrait) or (hover: hover)) {
     .game-list {
         padding: 15px 24px 0;
-        min-width: calc(100dvw - 68px);
+        width: calc(100dvw - 68px);
     }
 
     @media (min-width: 427px) and (max-width: 809px) {
         .game-list {
             padding: 15px 36px 0;
-            min-width: calc(100dvw - 92px);
+            width: calc(100dvw - 92px);
         }
 
         .game-list.game-list--4_12 {
@@ -31,23 +32,10 @@
     }
 }
 
-@media screen and (orientation: landscape) and (hover: none) {
-    @media (max-width: 1079px) {
-        .game-list {
-            grid-gap: 0 60px;
-            grid-auto-flow: column;
-            overflow-y: hidden;
-            overflow-x: scroll;
-            padding: 0 25px;
-            height: 100%;
-        }
-    }
-
-    @media (min-width: 1079px) {
-        .game-list {
-            padding: 15px 24px 0;
-            min-width: calc(100dvw - 68px);
-        }
+@media screen and (orientation: landscape) and (hover: none) and (min-width: 1079px) {
+    .game-list {
+        padding: 15px 24px 0;
+        width: calc(100dvw - 68px);
     }
 }
 
@@ -60,7 +48,7 @@
 
 @media screen and (min-width: 1279px) {
     .game-list {
-        min-width: auto;
+        width: auto;
         height: calc(100% - 30px);
         padding: 30px 14px 0;
     }

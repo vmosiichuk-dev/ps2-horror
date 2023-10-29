@@ -82,15 +82,15 @@ class Navigation extends Component {
             playCount, 
             progressPlayCount, 
             progressbarPlayStyle, 
-            wishCount, 
-            progressWishCount, 
-            progressbarWishStyle 
+            collCount, 
+            progressCollCount, 
+            progressbarCollStyle 
         } = this.props
 
         let tabIndex = 0,
-            count = wishCount, 
-            progressCount = progressWishCount, 
-            progressbarStyle = progressbarWishStyle,
+            count = collCount, 
+            progressCount = progressCollCount, 
+            progressbarStyle = progressbarCollStyle,
             label = "Collection",
             searchAlt = "Search",
             searchAria = true,
@@ -105,7 +105,8 @@ class Navigation extends Component {
             btnFilterPlayedClass = "btn nav__filter-btn",
             navProgressClass = "nav__progress",
             searchLabelClass = "nav__search-label",
-            logoClass = "nav__logo"
+            logoClass = "nav__logo",
+            navClass = "nav"
 
         if (logoRotated) logoClass += " has-rotated"
 
@@ -122,6 +123,8 @@ class Navigation extends Component {
             addGameBtnClass += " is-inactive" 
             tabIndex = -1 
         }
+
+        if (!addGameIsActive && !aboutIsActive) navClass += " nav--sticky"
 
         if (searchIconSrc === del) { 
             searchAlt = "Clear search input"
@@ -157,12 +160,12 @@ class Navigation extends Component {
         }
 
         return (
-            <nav className="nav">
+            <nav className={navClass}>
                 <div className="nav__title-wrapper">
                     <img className={logoClass} src={ps} width="30px" alt="" onClick={this.rotateLogo}/>
                     <h1 className="nav__title">
                         <span className="a11y">PS2 Collection App — </span>
-                        Survival Horror Classics
+                        {window.innerWidth + "x" + window.innerHeight}
                     </h1>
                     {this.renderNavControls(
                         "mobile", 
