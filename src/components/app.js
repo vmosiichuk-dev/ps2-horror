@@ -13,6 +13,7 @@ import noCover from "../assets/img/no-cover.webp"
 class App extends Component {
     constructor(props) {
         super(props)
+        this.appRef = React.createRef()
         this.aboutBtnRef = React.createRef()
         this.addBtnRef = React.createRef()
         this.state = {
@@ -341,30 +342,27 @@ class App extends Component {
     getMainError = (filteredData) => {
         const { playCount, collCount, activeFilter } = this.state
         const collection = filteredData.filter(item => item.priceCategory !== "")
-        // Add data.filter => priceCategory
-        // and use instead of count for error
-        // + change text
 
         if (filteredData.length === 0) {
             if (activeFilter === "play" && playCount === 0) {
                 return (
                     <p className="main__error is-active" role="status">
                     There are no games marked as played yet.<br />
-                    To mark a game as played, hover or click on a game card and press a controller button.
+                    To mark a game as played, hover or press on a game card and press a controller button.
                     </p>
                 )
             } else if (activeFilter === "wish" && collCount === 0) {
                 return (
                     <p className="main__error is-active" role="status">
                     There are no games in your wishlist yet.<br />
-                    To add a game to the collection, hover or click on a game card and press a star button.
+                    To add a game to the collection, hover or press on a game card and press a star button.
                     </p>
                 )
             } else if (activeFilter === "coll" && collection.length === 0) {
                 return (
                     <p className="main__error is-active" role="status">
                     There are no games in your collection yet.<br />
-                    To add a game to the collection, click one of three buttons for price option to choose the one you own.
+                    To add a game to the collection, press one of three buttons for price option to choose the one you own.
                     </p>
                 )
             }
@@ -656,6 +654,13 @@ class App extends Component {
         }, 125)
     }
 
+    componentDidMount() {
+        const app = this.appRef.current
+        const infoShouldOpen = app.clientWidth > 1225 && app.clientHeight < 870
+
+        if (infoShouldOpen) this.setState({ openedInfo: infoShouldOpen })
+    }
+
     componentDidUpdate() {
         const { welcomeClick } = this.props
         const { apiDataLoaded } = this.state
@@ -684,8 +689,7 @@ class App extends Component {
             delSrc,
             activeFilter,
             searchData,
-            searchDataLoaded,
-            apiDataLoaded 
+            searchDataLoaded
         } = this.state
 
         const renderData = this.searchGame(data, searchQuery)
@@ -707,7 +711,7 @@ class App extends Component {
         if (this.props.transitionStart)  appClass += " has-faded-in"
 
         return (
-            <div className={appClass}>  
+            <div className={appClass} ref={this.appRef} >  
                 <Navigation  
                     data={data} 
                     filteredData={filteredData} 

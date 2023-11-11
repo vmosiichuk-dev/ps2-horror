@@ -108,7 +108,7 @@ class About extends Component {
                     <article aria-labelledby="about__prices">
                         <h2 id="about__prices" className="about__title">Game Prices</h2>
                         <h3 className="about__subtitle">Market Analysis</h3>
-                        <p className="about__p">To establish collection value categories, we conducted extensive research in October of 2023 by analyzing prices on the most popular gaming marketplace, eBay. We specifically utilized the "Buy It Now" filter on eBay to exclude auction listings and ensure that the chosen prices reflected readily available options.</p>
+                        <p className="about__p">To establish collection value categories, we conducted extensive research in October of 2023 by analyzing prices on the most popular gaming marketplace, eBay. We specifically utilized the 'Buy It Now' filter on eBay to exclude auction listings and ensure that the chosen prices reflected readily available options.</p>
                         <h3 className="about__subtitle">Price Criteria</h3>
                         <p className="about__p">Our analysis revealed that the NTSC U/C region (North America) had the most comprehensive coverage in terms of offers, demand, and pricing. For games with limited NTSC U/C availability, we occasionally used alternative region versions to fill in missing prices. It's important to acknowledge that NTSC J (Japan) and PAL (Europe) games have their own pricing dynamics, which can differ significantly from NTSC U/C.</p>
                         <h3 className="about__subtitle">Representational Nature of Prices</h3>

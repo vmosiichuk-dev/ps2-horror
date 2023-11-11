@@ -42,7 +42,8 @@ class AddGame extends Component {
                 if (e.shiftKey && document.activeElement === secondElement) {
                     e.preventDefault()
                     firstElement.focus()       
-                } else if (!e.shiftKey && document.activeElement === lastElement) {
+                } 
+                if (!e.shiftKey && document.activeElement === lastElement) {
                     e.preventDefault()
                     firstElement.focus()       
                 }

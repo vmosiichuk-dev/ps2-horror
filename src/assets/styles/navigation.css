@@ -54,17 +54,18 @@
 
 .nav__progress-bar {
     border-radius: 4px;
-    border: 1px solid #867fa6;
     height: 6px;
     position: relative;
     width: 100%;
     margin: 0 14px 4px;
+    border: 1px solid var(--btn-border);
+    background-color: var(--btn-bg);
 }
 
 .progress-bar__label {
     position: absolute;
     width: 114px;
-    top: -22px;
+    top: -23px;
     margin: 0 auto;
     left: 0;
     right: 0;
@@ -128,8 +129,8 @@
 	background: white;
 	position: absolute;
 	width: 2px;
-	left: 50%;
-	transform: translateX(-50%);
+	left: 14px;
+	transform: translateX(-1px);
 	border-radius: 3px;
 	transition: all 1.125s cubic-bezier(.46,.03,.52,.96);  
 }
@@ -140,7 +141,7 @@
 }
 
 .nav__about-span--two {
-	top : 13px;
+	top: 14px;
 	height: 7px;
 }
 
@@ -151,11 +152,11 @@
 }
 
 .nav__about-btn.is-active .nav__about-span--one {
-	transform: translate(-50%, -50%) rotate(225deg);
+    transform: translate(-1px, -6px) rotate(135deg);
 }
 
 .nav__about-btn.is-active .nav__about-span--two {
-	transform: translate(-50%, -50%) rotate(-225deg);
+	transform: translate(-1px, -6px) rotate(225deg);
 }
 
 .nav__controls-mobile .nav__menu-btn, 
@@ -189,13 +190,13 @@
 
 .nav__search-input {
     color: var(--accent);
-	background: #0f0b1596;
     border-radius: 4px;
-    border: 1px solid #c1bcda70;
     width: 100%;
     padding: 0px 12px;
     line-height: 28px;
     margin-inline: 0 3px;
+	border: 1px solid var(--btn-border);
+    background-color: var(--btn-active-bg);
 }
 
 .nav__search-btn {
@@ -264,14 +265,14 @@
         font-size: 1rem;
     }
 
-    @media (min-width: 1279px) {
+    @media (min-width: 1225px) {
         .nav {
             grid-template-columns: 420px minmax(16px, 1fr) minmax(210px, 342px);
         }
     }
 }
 
-@media screen and (min-width: 1279px) {
+@media screen and (min-width: 1225px) {
     .nav {
         grid-column: 2;
     }
@@ -306,9 +307,70 @@
     .nav__controls-mobile {
         display: none;
     }
+
+    @media (hover: hover) and (max-height: 720px) and (max-width: 1545px) {    
+        .nav__title,
+        .nav__progress {
+            font-size: .8125rem;
+        }
+
+        .nav__filter-btn {
+            font-size: .875rem;
+        }
+
+        .nav__about-btn, 
+        .nav__menu-btn {
+            width: 28px;
+            height: 28px;
+            margin-block: 7px;
+            min-width: 28px;
+            min-height: 28px;
+        }
+
+        .nav__about-span {
+            left: 13px;
+        }
+
+        .nav__about-span--one {
+            top: 7px;
+        }
+
+        .nav__about-span--two {
+            top: 13px;
+            height: 6px;
+        }
+
+        .nav__about-btn.is-active .nav__about-span--one, 
+        .nav__about-btn.is-active .nav__about-span--two {
+            height: 10px;
+        }
+
+        .nav__search-icon {
+            width: 16px;
+        }
+
+        .nav__search-input {
+            line-height: 26px;
+        }
+
+        .nav__search-btn {
+            height: 28px;
+        }
+
+        .nav__search-label,
+        .nav__search-icon {
+            padding-bottom: 3px;
+        }
+
+        .btn__img {
+            width: 10px;
+            height: 10px;
+            margin-top: 5px;
+        }
+    }
 }
 
-@media screen and (min-width: 1365px) {
+@media screen and ((min-height: 720px) or (min-width: 1545px)) {
     .nav {
         margin: auto 42px 3px;
     }
@@ -328,6 +390,12 @@
     .progress-bar__label--played {
         width: 113px;
     }
+
+    @media (min-width: 1625px) {
+        .nav {
+            margin: auto 42px;
+        }
+    }
 }
 
 @media screen and (max-width: 809px) {
@@ -343,7 +411,7 @@
         padding: 15px 25px 10px;
         position: absolute;
         top: 0;
-        background: #264550;
+        background: #2C5364;
     }
 
     .nav--sticky {
@@ -376,7 +444,7 @@
     }
 }
 
-@media screen and (max-width: 1279px) {
+@media screen and (max-width: 1225px) {
     .nav__menu-btn.is-inactive, 
     .nav__about-btn.is-inactive {
         opacity: 0;
@@ -390,6 +458,6 @@
     .nav__menu-btn.is-active, 
     .nav__about-btn.is-active {
         z-index: 70;
-        background: var(--dark);
+        background: var(--btn-active-bg);
     }
 }

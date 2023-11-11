@@ -1,6 +1,8 @@
 import React, { Component } from "react"
 import overlay from "../assets/img/overlay.png"
 import menuImg from "../assets/img/plus.svg"
+import upArrow from "../assets/img/up.svg"
+import downArrow from "../assets/img/down.svg"
 import "../assets/styles/info.css"
 
 import ceroA from "../assets/img/ratings/ceroA.svg"
@@ -60,6 +62,9 @@ class Info extends Component {
     constructor(props) {
         super(props)
         this.infoScreenshotRef = React.createRef()
+        this.infoScreenshotImgRef = React.createRef()
+        this.infoDescRef = React.createRef()
+        this.infoDescWrapperRef = React.createRef()
         this.state = {
             wish: "",
             play: "",
@@ -74,7 +79,8 @@ class Info extends Component {
             releaseDate: "",
             rating: "",
             title: "",
-            src: ""
+            src: "",
+            descriptionOverflows: true
         } 
     }
 
@@ -99,7 +105,7 @@ class Info extends Component {
         if (companyLabel !== undefined) newCompanyLabel = companyLabel
         if (companyName !== undefined) newCompanyName = companyName
 
-        if (websites !== undefined) {
+        if (websites.length > 0) {
             websites.forEach(website => {
                 const categoryGroup = [
                     website.category === 1,
@@ -125,9 +131,13 @@ class Info extends Component {
 
                     const newWebsite = Object.assign({label: label, url: url})
                     newWebsites.push(newWebsite)
+                } else {
+                    newWebsites = []
                 }
             })
-        } else {
+        }
+
+        if (newWebsites.length < 1) {
             const newWebsite = Object.assign({label: "Google", url: `https://www.google.com/search?q=${title.toLowerCase().replace(/ /g, '+')}+ps2`})
             newWebsites.push(newWebsite)
         }
@@ -633,8 +643,22 @@ class Info extends Component {
         )
     }
 
+    componentDidUpdate(prevProps, prevState) {
+        const infoDescWrapperCompStyle = getComputedStyle(this.infoDescWrapperRef.current)
+        const infoDescHeight = this.infoDescRef.current.scrollHeight
+        let infoDescWrapperHeight = this.infoDescWrapperRef.current.clientHeight
+
+        infoDescWrapperHeight -= parseFloat(infoDescWrapperCompStyle.paddingTop) + parseFloat(infoDescWrapperCompStyle.paddingBottom)
+
+        const descriptionOverflows = infoDescHeight > infoDescWrapperHeight
+
+        if (prevState.descriptionOverflows !== descriptionOverflows) {
+            this.setState({ descriptionOverflows: descriptionOverflows })
+        }
+    }
+
     render() {      
-        const {title, src, rating, genres, summary, companyLabel, companyName, screenshot, websites, ageRatings, releaseDate, yearsPast, ageRatingJp} = this.state
+        const {title, src, rating, genres, summary, companyLabel, companyName, screenshot, websites, ageRatings, releaseDate, yearsPast, ageRatingJp, descriptionOverflows} = this.state
         const {openedInfo, onInfoClose} = this.props  
 
         let infoClass = "info",
@@ -643,6 +667,9 @@ class Info extends Component {
             infoContainerClass = "info__container",
             btnCloseClass = "btn info__close-btn",
             ps2LifeCycle = "middle",
+            infoDescriptionClass = "info__description",
+            hintClass = "info__description-hint",
+            hintUpClass = "info__description-hint info__description-hint--up",
             tabIndex = -1
 
         if (openedInfo) { 
@@ -651,23 +678,35 @@ class Info extends Component {
             tabIndex = 0
             this.infoScreenshotRef.current.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"})
         }
+
         if (ageRatingJp) infoAgeRatingClass += " has-jp"
         if (ageRatings.length < 1) infoTitleWrapperClass += " has-space"
-        if (genres.length < 1 || companyName === "" || websites.length < 1) infoContainerClass += " has-space"
+
+        if (genres.length < 1 && companyName === "") {
+            infoContainerClass += " has-one-category"
+        } else if (genres.length < 1 || companyName === "") {
+            infoContainerClass += " has-two-categories"
+        }
+
         if (+releaseDate.slice(-4) <= 2004) ps2LifeCycle = "early"
         if (+releaseDate.slice(-4) >= 2009) ps2LifeCycle = "late"
 
+        if (!descriptionOverflows) infoDescriptionClass += " has-space"
+        if (openedInfo && descriptionOverflows) {
+            hintClass += " is-active"
+            hintUpClass += " is-active"
+        }
+        
         return (
             <section className={infoClass} aria-label="Game information" tabIndex={tabIndex}>
                 <button className={btnCloseClass} type="button" onClick={onInfoClose} tabIndex={0}>
                     <img className="btn__img is-active" src={menuImg} alt="Close game information"/>
                 </button>
-                <div className="info__screenshot" ref={this.infoScreenshotRef} >   
-                    <img className="info__screenshot-img" src={screenshot} alt=""/>
-                    <div className="info__screenshot-bg"></div>
-                </div>
-                <div className="info__tablet-bg"></div>
                 <div className={infoContainerClass}>   
+                    <div className="info__screenshot" ref={this.infoScreenshotRef} >   
+                        <img className="info__screenshot-img" src={screenshot} alt="" />
+                        <div className="info__screenshot-shadow"></div>
+                    </div>
                     <div className="game info__game-cover">
                         <img className="game__cover-img" src={src} alt={title + " — PS2 game cover"} />
                         <img className="game__cover-overlay" src={overlay} alt="" />
@@ -685,11 +724,11 @@ class Info extends Component {
                             </div>
                         }
                     </div>
-                    <div className="info__description-wrapper">
-                        {(summary !== "" && summary !== undefined)
-                        ? <p className="info__description">{summary}</p> 
+                    <div className="info__description-wrapper" ref={this.infoDescWrapperRef}>
+                        {(summary !== "" && summary !== undefined && summary.length > 86)
+                        ? <p className={infoDescriptionClass} ref={this.infoDescRef}>{summary}</p> 
                         : (
-                            <p className="info__description">
+                            <p className={infoDescriptionClass} ref={this.infoDescRef}>
                               {title} is a noteworthy addition to the PlayStation 2 library, offering a captivating and visually stunning
                               {genres.length > 0 ? ` ${genres[0].charAt(0).toLowerCase() + genres[0].substring(1)} experience` : " experience" }
                               {genres.length > 1 ? ` with ${genres[1].toLowerCase()} gameplay elements. ` : ". " }
@@ -702,6 +741,8 @@ class Info extends Component {
                             </p>
                           )
                         }
+                        <img className={hintUpClass} src={upArrow} alt="" />
+                        <img className={hintClass} src={downArrow} alt="" />
                     </div>
                     {companyName !== "" ? this.renderCategory(companyLabel, companyName) : null}
                     {genres.length > 0 ? this.renderCategory("Genres", genres) : null}                
