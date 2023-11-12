@@ -168,6 +168,7 @@
 	overscroll-behavior: none;
 	box-sizing: border-box;
 	position: relative;
+	scrollbar-color: #6c7f97 transparent;
 }
 
 .info__description::-webkit-scrollbar-track {
@@ -477,7 +478,7 @@
 		position: absolute;
 		bottom: 0;
 		background: transparent;
-		grid-template-rows: 39dvh 1.5fr repeat(5, auto) 1fr;
+		grid-template-rows: 37dvh 1.5fr repeat(5, auto);
 	}
 
 	.game.info__game-cover {
@@ -532,7 +533,6 @@
 	}
 
 	.info__description {
-		--lines: 9;
 		min-height: calc(23px * 5);
 	}
 

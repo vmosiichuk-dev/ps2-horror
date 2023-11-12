@@ -68,9 +68,9 @@ class AddGame extends Component {
     renderSearchData = (searchData) => {
         return (
             <div className="add-game__output">
-                <div className="add-game__output-border add-game__output-border--t-solid"></div>
+                <div className="add-game__output-border add-game__output-border--top add-game__output-border--solid"></div>
                 {this.renderSearchDataElements(searchData)}
-                <div className="add-game__output-border add-game__output-border--b-solid"></div>
+                <div className="add-game__output-border add-game__output-border--bottom add-game__output-border--solid"></div>
             </div>
         )
     }
@@ -144,12 +144,12 @@ class AddGame extends Component {
                             className="add-game__output-container" 
                             aria-label="Search results group" 
                             onChange={onSearchRadioChange} >
-                            <div className="add-game__output-border add-game__output-border--t-dashed"></div>
+                            <div className="add-game__output-border add-game__output-border--top add-game__output-border--dashed"></div>
                             {searchData.length < 1 
                                 ? null 
                                 : this.renderSearchData(searchData)
                             }
-                            <div className="add-game__output-border add-game__output-border--b-dashed"></div>
+                            <div className="add-game__output-border add-game__output-border--bottom add-game__output-border--dashed"></div>
                         </section>
                         {searchDataLoaded 
                             ? <button 

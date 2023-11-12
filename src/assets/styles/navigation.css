@@ -363,14 +363,14 @@
         }
 
         .btn__img {
-            width: 10px;
-            height: 10px;
+            width: 11px;
+            height: 11px;
             margin-top: 5px;
         }
     }
 }
 
-@media screen and ((min-height: 720px) or (min-width: 1545px)) {
+@media screen and (hover: hover) and ((min-height: 720px) or (min-width: 1545px)) {
     .nav {
         margin: auto 42px 3px;
     }
@@ -394,6 +394,12 @@
     @media (min-width: 1625px) {
         .nav {
             margin: auto 42px;
+        }
+
+        .btn__img {
+            width: 13px;
+            height: 13px;
+            margin-top: 5px;
         }
     }
 }

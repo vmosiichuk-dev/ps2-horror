@@ -81,3 +81,17 @@
 		}
 	}
 }
+
+@media (min-width: 1225px) and (hover: hover) and (max-width: 1545px) and (max-height: 720px) {
+	.loader__gif {
+		max-width: 18dvw;
+		top: 0;
+	}
+
+	.loader__error {
+		max-width: 340px;
+		font-size: .875rem;
+		bottom: 12%;
+		padding: 18px 24px 20px;
+	}
+}

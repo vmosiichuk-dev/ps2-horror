@@ -22,17 +22,17 @@ function GameList({ onDelete, onMarkState, onPriceCategoryChange, onOpenInfo, de
     const games = renderGames()
     let gameListClass = "game-list"
 
-    if (filteredData.length > 4 && filteredData.length <= 12) {
-        gameListClass += " game-list--4_12"
+    if (filteredData.length <= 8) {
+        gameListClass += " game-list--8"
     } 
-    if (filteredData.length > 6 && filteredData.length <= 30) {
-        gameListClass += " game-list--6_30"
+    if (filteredData.length <= 24) {
+        gameListClass += " game-list--24"
     } 
-    if (filteredData.length > 5 && filteredData.length <= 10) {
-        gameListClass += " game-list--5_10"
+    if (filteredData.length <= 10) {
+        gameListClass += " game-list--10"
     } 
-    if (filteredData.length > 4 && filteredData.length <= 8) {
-        gameListClass += " game-list--4_8"
+    if (filteredData.length <= 12) {
+        gameListClass += " game-list--12"
     } 
 
     return (

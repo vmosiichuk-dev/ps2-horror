@@ -165,7 +165,7 @@ class Navigation extends Component {
                     <img className={logoClass} src={ps} width="30px" alt="" onClick={this.rotateLogo}/>
                     <h1 className="nav__title">
                         <span className="a11y">PS2 Collection App — </span>
-                        {window.innerWidth + "x" + window.innerHeight}
+                        Survival Horror Classics
                     </h1>
                     {this.renderNavControls(
                         "mobile", 

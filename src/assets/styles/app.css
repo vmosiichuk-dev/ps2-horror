@@ -64,7 +64,7 @@
     }    
 }
 
-@media screen and ((min-height: 720px) or (min-width: 1545px)) {
+@media screen and (hover: hover) and ((min-height: 720px) or (min-width: 1545px)) {
     .app {
         grid-template-rows: 115px calc(100dvh - 115px);
     }

@@ -19,6 +19,7 @@
 	font-size: .875rem;
 	line-height: 1.275rem;
 	overflow-y: scroll;
+	scrollbar-color: #6c7f97 var(--btn-bg);
 }
 
 .about__title {

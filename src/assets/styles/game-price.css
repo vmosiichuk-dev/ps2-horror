@@ -137,7 +137,7 @@
     }    
 }
 
-@media screen and ((min-height: 870px) or (min-width: 1545px)) {
+@media screen and (hover: hover) and ((min-height: 870px) or (min-width: 1545px)) {
     .game-price__usd {
         font-size: .5625rem;
     } 
