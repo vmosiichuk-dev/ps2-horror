@@ -16,6 +16,8 @@ class App extends Component {
         this.appRef = React.createRef()
         this.aboutBtnRef = React.createRef()
         this.addBtnRef = React.createRef()
+        this.infoRef = React.createRef()
+        this.activeButtonRef = React.createRef()
         this.state = {
             activeFilter: "all",
             addFormClass: "add-game__form-message is-inactive",
@@ -63,16 +65,25 @@ class App extends Component {
 
 // –––––––––––––––––––––––––––– <Info /> functions –––––––––––––––––––––––––––––––––––
 
-    openInfo = (slug) => this.setState(prevState => {
-        const newData = prevState.data.find(item => item.slug === slug)
+    openInfo = (slug) => {
+        this.infoRef.current.focus()
 
-        return { 
-            infoData: newData, 
-            openedInfo: true, 
-            aboutIsActive: false, 
-            addGameIsActive: false 
-        }
-    })  
+        this.setState(prevState => {
+            const newData = prevState.data.find(item => item.slug === slug)
+
+            return { 
+                infoData: newData, 
+                openedInfo: true, 
+                aboutIsActive: false, 
+                addGameIsActive: false 
+            }
+        })  
+    }
+
+    getLastGameSlug = () => {
+        const lastGame = this.state.data[this.state.data.length - 1]
+        return lastGame ? lastGame.slug : null
+    }
 
     closeInfo = () => this.setState({ openedInfo: false })
     
@@ -295,9 +306,6 @@ class App extends Component {
 
             const newCollCount = newData.filter(item => item.priceCategory !== "").length,
                   progress = this.countProgress(newData.length, [1, newCollCount])
-
-            console.log(newCollCount)
-            console.log(progress)
 
             return { 
                 data: newData,
@@ -733,6 +741,8 @@ class App extends Component {
                 <main className="main"> 
                     {mainError}  
                     <GameList 
+                        infoRef={this.infoRef}
+                        activeButtonRef={this.activeButtonRef}
                         activeFilter={activeFilter}
                         filteredData={filteredData} 
                         delSrc={delSrc}
@@ -743,6 +753,9 @@ class App extends Component {
                     />
                 </main>
                 <Info 
+                    infoRef={this.infoRef}
+                    activeButtonRef={this.activeButtonRef}
+                    lastGameSlug={this.getLastGameSlug}
                     infoData={infoData} 
                     openedInfo={openedInfo}
                     onInfoClose={this.closeInfo} 

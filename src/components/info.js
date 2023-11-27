@@ -643,6 +643,16 @@ class Info extends Component {
         )
     }
 
+    handleTabBlur = (e) => {
+        const nextFocusable = e.relatedTarget
+        const isNextFocusableInInfoSection = this.props.infoRef.current && this.props.infoRef.current.contains(nextFocusable)
+        const lastGameSlug = this.props.lastGameSlug()
+
+        if (!isNextFocusableInInfoSection && this.props.activeButtonRef.current.id !== `${lastGameSlug}--toolbar-delete`) {
+            this.props.activeButtonRef.current.focus()
+        }
+    }
+
     componentDidUpdate(prevProps, prevState) {
         const infoDescWrapperCompStyle = getComputedStyle(this.infoDescWrapperRef.current)
         const infoDescHeight = this.infoDescRef.current.scrollHeight
@@ -659,7 +669,7 @@ class Info extends Component {
 
     render() {      
         const {title, src, rating, genres, summary, companyLabel, companyName, screenshot, websites, ageRatings, releaseDate, yearsPast, ageRatingJp, descriptionOverflows} = this.state
-        const {openedInfo, onInfoClose} = this.props  
+        const {openedInfo, onInfoClose, infoRef} = this.props  
 
         let infoClass = "info",
             infoAgeRatingClass = "info__age-container",
@@ -698,7 +708,7 @@ class Info extends Component {
         }
         
         return (
-            <section className={infoClass} aria-label="Game information" tabIndex={tabIndex}>
+            <section className={infoClass} aria-label="Game information" tabIndex={tabIndex} ref={infoRef} onBlur={this.handleTabBlur}>
                 <button className={btnCloseClass} type="button" onClick={onInfoClose} tabIndex={0}>
                     <img className="btn__img is-active" src={menuImg} alt="Close game information"/>
                 </button>

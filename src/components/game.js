@@ -11,6 +11,7 @@ import overlay from "../assets/img/overlay.png"
 class Game extends Component {
     constructor(props) {
         super(props)
+        this.infoButtonRef = React.createRef()
         this.state = {
             priceCategory: "",
             delSrc: props.delSrc,
@@ -35,7 +36,9 @@ class Game extends Component {
         }
     }
 
-    handleTabFocus = () => {
+    handleTabFocus = (e) => {
+        this.props.activeButtonRef.current = e.target
+
         this.setState(() => {
             const newItemButtonsStyle = { opacity: 1 }
             return { itemButtonsStyle: newItemButtonsStyle }
@@ -89,7 +92,7 @@ class Game extends Component {
                     <button type="button" id={slug + "--toolbar-play"} className="btn-sm btn-play" onClick={() => onMarkState("play")} data-toggle="play">
                         <img className="icon icon-played" src={game} alt="Mark as played" />
                     </button>
-                    <button type="button" id={slug + "--toolbar-info"} className="btn-sm btn-info" onClick={() => onOpenInfo(slug)}>
+                    <button type="button" id={slug + "--toolbar-info"} className="btn-sm btn-info" onClick={() => { onOpenInfo(slug) }} ref={this.infoButtonRef}>
                         <img className="icon icon-info" src={info} alt="Toggle game information" />
                     </button>
                     <button type="button" id={slug + "--toolbar-delete"} className="btn-sm btn-delete" onClick={this.handleDeleteClick}>

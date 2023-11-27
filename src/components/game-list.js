@@ -1,12 +1,14 @@
 import Game from "./game"
 import "../assets/styles/game-list.css"
 
-function GameList({ onDelete, onMarkState, onPriceCategoryChange, onOpenInfo, delSrc, filteredData, activeFilter }) {
+function GameList({ onDelete, onMarkState, onPriceCategoryChange, onOpenInfo, delSrc, filteredData, activeFilter, infoRef, activeButtonRef }) {
     const renderGames = () => {
         return filteredData.map(item => {    
             return (
                 <Game 
                     {...item} 
+                    infoRef={infoRef}
+                    activeButtonRef={activeButtonRef}
                     key={item.slug} 
                     delSrc={delSrc} 
                     activeFilter={activeFilter}
