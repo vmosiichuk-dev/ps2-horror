@@ -248,6 +248,11 @@
         margin: auto 36px 3px;
     }
 
+    .nav__filters {
+        grid-column: 1;
+        grid-row: 2;
+    }
+
     .nav__progress {    
         grid-column: 3;
     }
@@ -418,6 +423,7 @@
         position: absolute;
         top: 0;
         background: #2C5364;
+        width: calc(100% - 50px);
     }
 
     .nav--sticky {

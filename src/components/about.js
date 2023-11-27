@@ -26,7 +26,7 @@ class About extends Component {
 
     handleKeydown = (e) => {
         if (this.props.aboutIsActive) {
-            const focusableElements = [this.props.aboutBtnRef.current, ...this.aboutRef.current.querySelectorAll(".about__link")]
+            const focusableElements = [this.props.aboutBtnRef.current, ...this.aboutRef.current.querySelectorAll(".about__title"), ...this.aboutRef.current.querySelectorAll(".about__link")]
             
             const firstElement = focusableElements[0]
             const secondElement = focusableElements[1]
@@ -41,10 +41,7 @@ class About extends Component {
                     e.preventDefault()
                     secondElement.focus()                 
                 }
-                if (e.shiftKey && document.activeElement === secondElement) {
-                    e.preventDefault()
-                    firstElement.focus()       
-                } else if (!e.shiftKey && document.activeElement === lastElement) {
+                if (!e.shiftKey && document.activeElement === lastElement) {
                     e.preventDefault()
                     firstElement.focus()       
                 }
@@ -55,22 +52,25 @@ class About extends Component {
     render() {      
         const {aboutIsActive} = this.props  
 
-        let aboutClass = "about"
+        let aboutClass = "about",
+            tabIndex = -1
+
         if (aboutIsActive) {
             aboutClass += " is-active"
+            tabIndex = 0
             this.aboutRef.current.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"})
         }
 
         return (
-            <aside className={aboutClass} ref={this.aboutRef}>
-                <div className="about__wrapper">
+            <aside className={aboutClass} tabIndex={-1} ref={this.aboutRef}>
+                <div className="about__wrapper" tabIndex={tabIndex} >
                     <article aria-labelledby="about__title">
-                        <h2 id="about__title" className="about__title about__title--mt">About the App</h2>
+                        <h2 id="about__title" className="about__title about__title--mt" tabIndex={tabIndex} >About the App</h2>
                         <p className="about__welcome"><b className="about__bold">Welcome to our PS2 Collection App!</b></p>
                         <p className="about__p">This app empowers you to curate and explore your PS2 horror collection, discover new titles, and plan your collector's journey. Experience the captivating world of survival horror on the PS2, where storytelling, audiovisual design, and emotional engagement converge to create unforgettable experiences. As you embark on your collector's adventure, keep in mind that the love of collecting goes beyond the monetary value of each game. It's about cherishing the memories, experiences, and stories that these games hold.</p>
                     </article>
                     <article aria-labelledby="about__controls">
-                        <h2 id="about__controls" className="about__title">Controls &amp; Tips</h2>
+                        <h2 id="about__controls" className="about__title" tabIndex={tabIndex} >Controls &amp; Tips</h2>
                         <h3 className="about__subtitle">Game buttons:</h3>
                         <div className="about__control">
                             <img src={star} width="17" height="17" alt=""/>
@@ -106,7 +106,7 @@ class About extends Component {
                         </div>
                     </article>
                     <article aria-labelledby="about__prices">
-                        <h2 id="about__prices" className="about__title">Game Prices</h2>
+                        <h2 id="about__prices" className="about__title" tabIndex={tabIndex} >Game Prices</h2>
                         <h3 className="about__subtitle">Market Analysis</h3>
                         <p className="about__p">To establish collection value categories, we conducted extensive research in October of 2023 by analyzing prices on the most popular gaming marketplace, eBay. We specifically utilized the 'Buy It Now' filter on eBay to exclude auction listings and ensure that the chosen prices reflected readily available options.</p>
                         <h3 className="about__subtitle">Price Criteria</h3>
@@ -117,9 +117,9 @@ class About extends Component {
                     <footer className="about__footer">
                         <p className="about__p">Copyright 2023</p>
                         <div className="about__divider"></div>
-                        <a className="about__link" href="https://madebynomad.dev" target="_blank" rel="noopener noreferrer">madebynomad</a>
+                        <a className="about__link" href="https://madebynomad.dev" target="_blank" rel="noopener noreferrer" tabIndex={tabIndex}>madebynomad</a>
                         <div className="about__divider"></div>
-                        <a className="about__link" href="https://www.gnu.org/licenses/gpl-3.0.html#license-text" target="_blank" rel="noopener noreferrer">GNU GPLv3</a>
+                        <a className="about__link" href="https://www.gnu.org/licenses/gpl-3.0.html#license-text" target="_blank" rel="noopener noreferrer" tabIndex={tabIndex}>GNU GPLv3</a>
                     </footer>
                 </div>
             </aside>

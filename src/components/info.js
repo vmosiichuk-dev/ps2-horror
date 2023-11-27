@@ -648,7 +648,9 @@ class Info extends Component {
         const isNextFocusableInInfoSection = this.props.infoRef.current && this.props.infoRef.current.contains(nextFocusable)
         const lastGameSlug = this.props.lastGameSlug()
 
-        if (!isNextFocusableInInfoSection && this.props.activeButtonRef.current.id !== `${lastGameSlug}--toolbar-delete`) {
+        console.log(this.props.activeButtonRef.current)
+        console.log(!isNextFocusableInInfoSection && this.props.activeButtonRef.current !== null && this.props.activeButtonRef.current.id !== `${lastGameSlug}--toolbar-delete`)
+        if (!isNextFocusableInInfoSection && this.props.activeButtonRef.current !== null && this.props.activeButtonRef.current.id !== `${lastGameSlug}--toolbar-delete`) {
             this.props.activeButtonRef.current.focus()
         }
     }

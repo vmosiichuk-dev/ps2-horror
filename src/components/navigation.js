@@ -176,31 +176,6 @@ class Navigation extends Component {
                         addGameMenuAlt
                     )}
                 </div>
-                <section className={navProgressClass} aria-label="Gaming progress information">
-                    { (activeFilter === "coll" || activeFilter === "wish") 
-                        ? <GamePrice data={data} nav={true} activeFilter={activeFilter} /> 
-                        : (
-                        <>
-                            <p className="nav__progress-count">
-                                <span className="a11y">
-                                    {"Games in " + label.toLowerCase() + ": "}
-                                </span>
-                                <span>{count}</span>
-                                <span>&nbsp;/&nbsp;</span>
-                                <span className="a11y">Total games: </span>
-                                <span>{data.length}</span>
-                            </p>
-                            <div className="nav__progress-bar">
-                                <p className={"progress-bar__label progress-bar__label--" + label.toLowerCase()}>
-                                    {label + " progress"}
-                                </p>
-                                <div className="progress-bar" style={progressbarStyle}></div>
-                            </div>
-                            <span className="a11y">Percentage progress count:</span>
-                            <span className="nav__progress-percent">{progressCount}</span>
-                        </>
-                    )}
-                </section>
                 <section 
                     className="nav__filters" 
                     aria-label="Filter controls" 
@@ -244,6 +219,31 @@ class Navigation extends Component {
                         onClick={() => onFilterChange("coll")}>
                         Collection
                     </button>
+                </section>
+                <section className={navProgressClass} aria-label="Gaming progress information">
+                    { (activeFilter === "coll" || activeFilter === "wish") 
+                        ? <GamePrice data={data} nav={true} activeFilter={activeFilter} /> 
+                        : (
+                        <>
+                            <p className="nav__progress-count">
+                                <span className="a11y">
+                                    {"Games in " + label.toLowerCase() + ": "}
+                                </span>
+                                <span>{count}</span>
+                                <span>&nbsp;/&nbsp;</span>
+                                <span className="a11y">Total games: </span>
+                                <span>{data.length}</span>
+                            </p>
+                            <div className="nav__progress-bar">
+                                <p className={"progress-bar__label progress-bar__label--" + label.toLowerCase()}>
+                                    {label + " progress"}
+                                </p>
+                                <div className="progress-bar" style={progressbarStyle}></div>
+                            </div>
+                            <span className="a11y">Percentage progress count:</span>
+                            <span className="nav__progress-percent">{progressCount}</span>
+                        </>
+                    )}
                 </section>
                 <section 
                     className="nav__search" 

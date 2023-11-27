@@ -107,6 +107,12 @@
     grid-row: 8;
 }
 
+.btn-sm.btn-delete:active,
+.btn-sm.btn-delete:focus,
+.btn-sm.btn-delete:focus-visible {
+    z-index: 10;
+}
+
 .game-rating {
     border: none;
     width: 30px;
@@ -224,6 +230,12 @@
 
         .game-buttons {
             grid-template-rows: 1fr 26px 10px 26px 0 26px 10px 26px 1fr;
+        }
+    
+        .delete-p {
+            padding: 85px 0 0 20px;
+            height: calc(100% - 85px);
+            width: calc(100% - 20px);
         }
     }
 }

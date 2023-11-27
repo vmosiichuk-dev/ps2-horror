@@ -738,6 +738,14 @@ class App extends Component {
                     aboutBtnRef={this.aboutBtnRef}
                     addBtnRef={this.addBtnRef}
                 />
+                <Info 
+                    infoRef={this.infoRef}
+                    activeButtonRef={this.activeButtonRef}
+                    lastGameSlug={this.getLastGameSlug}
+                    infoData={infoData} 
+                    openedInfo={openedInfo}
+                    onInfoClose={this.closeInfo} 
+                />
                 <main className="main"> 
                     {mainError}  
                     <GameList 
@@ -752,14 +760,6 @@ class App extends Component {
                         onPriceCategoryChange={this.handlePriceCategoryChange}
                     />
                 </main>
-                <Info 
-                    infoRef={this.infoRef}
-                    activeButtonRef={this.activeButtonRef}
-                    lastGameSlug={this.getLastGameSlug}
-                    infoData={infoData} 
-                    openedInfo={openedInfo}
-                    onInfoClose={this.closeInfo} 
-                />
                 <About 
                     aboutIsActive={aboutIsActive}
                     aboutBtnRef={this.aboutBtnRef}

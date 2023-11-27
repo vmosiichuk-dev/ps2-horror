@@ -49,7 +49,8 @@ function GamePrice({ data, nav, activeFilter, onPriceCategoryChange, priceCatego
         iconLooseClass = "game-price__icon",
         iconCibClass = "game-price__icon",
         iconNewgClass = "game-price__icon",
-        usdClass = "game-price__usd"
+        usdClass = "game-price__usd",
+        tabIndex = 0
 
     if (activeFilter === "wish") {
         switch (wishPriceCategory) {
@@ -101,6 +102,7 @@ function GamePrice({ data, nav, activeFilter, onPriceCategoryChange, priceCatego
         iconCibClass += " game-price__icon--cib game-price__icon--value"
         iconNewgClass += " game-price__icon--newg game-price__icon--value"
         usdClass += " game-price__usd--value"
+        tabIndex = -1
     }
 
     return (
@@ -108,7 +110,8 @@ function GamePrice({ data, nav, activeFilter, onPriceCategoryChange, priceCatego
             <button 
                 type="button" 
                 className={btnLooseClass} 
-                onClick={!nav ? () => onPriceCategoryChange("loose") : undefined}>
+                onClick={!nav ? () => onPriceCategoryChange("loose") : undefined}
+                tabIndex={tabIndex} >
                 <img className={iconLooseClass} src={looseIcon} alt="Loose price" />
                 {nav || loose !== "n/a" ? <span className={usdClass}>$</span> : null}
                 <span>{nav ? value.loose : loose}</span>
@@ -116,7 +119,8 @@ function GamePrice({ data, nav, activeFilter, onPriceCategoryChange, priceCatego
             <button 
                 type="button" 
                 className={btnCibClass} 
-                onClick={!nav ? () => onPriceCategoryChange("cib") : undefined}>
+                onClick={!nav ? () => onPriceCategoryChange("cib") : undefined}
+                tabIndex={tabIndex} >
                 <img className={iconCibClass} src={cibIcon} alt="CIB price" />
                 {nav || cib !== "n/a" ? <span className={usdClass}>$</span> : null}
                 <span>{nav ? value.cib : cib}</span>
@@ -124,7 +128,8 @@ function GamePrice({ data, nav, activeFilter, onPriceCategoryChange, priceCatego
             <button 
                 type="button" 
                 className={btnNewgClass} 
-                onClick={!nav ? () => onPriceCategoryChange("newg") : undefined}>
+                onClick={!nav ? () => onPriceCategoryChange("newg") : undefined}
+                tabIndex={tabIndex} >
                 <img className={iconNewgClass} src={newgIcon} alt="New price" />
                 {nav || newg !== "n/a" ? <span className={usdClass}>$</span> : null}
                 <span>{nav ? value.newg : newg}</span>
