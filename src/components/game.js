@@ -78,22 +78,22 @@ class Game extends Component {
         }
 
         return (
-            <li className={gameClass} id={slug}>
+            <li className={gameClass} id={slug} >
                 <div className={statusContainerClass}>
-                    <img className="game__status --wish" src={star} alt="Added to Collection" />
+                    <img className="game__status --wish" src={star} alt="Added to Wishlist" />
                     <img className="game__status --play" src={game} alt="Marked as Played" />
                 </div>
                 <img className="game__cover-img" src={src} alt={title + " — PS2 game cover"} />
                 <img className="game__cover-overlay" src={overlay} alt="" />
-                <div className={"game-buttons" + activeClass} tabIndex={0} role="toolbar" aria-activedescendant={slug + "toolbar--wish"} onFocus={this.handleTabFocus} onBlur={this.handleTabBlur} onMouseOver={this.handleTabFocus} onMouseOut={this.handleTabBlur} style={itemButtonsStyle} >
+                <div className={"game-buttons" + activeClass} tabIndex={0} role="toolbar" aria-activedescendant={slug + "--toolbar-wish"} aria-label={"Control options for " + title + ":"} onFocus={this.handleTabFocus} onBlur={this.handleTabBlur} onMouseOver={this.handleTabFocus} onMouseOut={this.handleTabBlur} style={itemButtonsStyle} >
                     <button type="button" id={slug + "--toolbar-wish"} className="btn-sm btn-wish" onClick={() => onMarkState("wish")} data-toggle="wish">
-                        <img className="icon icon-wish" src={star} alt="Add to collection" />
+                        <img className="icon icon-wish" src={star} alt="Add to wishlist" />
                     </button>
                     <button type="button" id={slug + "--toolbar-play"} className="btn-sm btn-play" onClick={() => onMarkState("play")} data-toggle="play">
                         <img className="icon icon-played" src={game} alt="Mark as played" />
                     </button>
                     <button type="button" id={slug + "--toolbar-info"} className="btn-sm btn-info" onClick={() => { onOpenInfo(slug) }} ref={this.infoButtonRef}>
-                        <img className="icon icon-info" src={info} alt="Toggle game information" />
+                        <img className="icon icon-info" src={info} alt="Load game data" />
                     </button>
                     <button type="button" id={slug + "--toolbar-delete"} className="btn-sm btn-delete" onClick={this.handleDeleteClick}>
                         <img className="icon icon-delete" src={delSrc} alt={deleteAlt} />
@@ -102,6 +102,7 @@ class Game extends Component {
                 </div>
                 <GamePrice 
                     nav={false} 
+                    slug={slug}
                     activeFilter={activeFilter}
                     onPriceCategoryChange={onPriceCategoryChange} 
                     priceCategory={priceCategory} 

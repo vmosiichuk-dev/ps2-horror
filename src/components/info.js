@@ -622,12 +622,12 @@ class Info extends Component {
         }) 
     }
 
-    renderCategory = (title, state) => { 
+    renderCategory = (title, state, tabIndex) => { 
         const renderElements = () => {
             return state.map(item => {    
                 return (
                     title === "Links" 
-                    ? <a key={item.label} href={item.url} className="info__category-link" target="_blank" rel="noopener noreferrer">{item.label}</a> 
+                    ? <a key={item.label} href={item.url} className="info__category-link" target="_blank" rel="noopener noreferrer" tabIndex={tabIndex}>{item.label}</a> 
                     : <span key={item}>{item}</span>
                 )
             })
@@ -710,7 +710,7 @@ class Info extends Component {
         }
         
         return (
-            <section className={infoClass} aria-label="Game information" tabIndex={tabIndex} ref={infoRef} onBlur={this.handleTabBlur}>
+            <article className={infoClass} aria-label={`Game data for ${title}`} tabIndex={tabIndex} ref={infoRef} onBlur={this.handleTabBlur}>
                 <button className={btnCloseClass} type="button" onClick={onInfoClose} tabIndex={0}>
                     <img className="btn__img is-active" src={menuImg} alt="Close game information"/>
                 </button>
@@ -727,9 +727,9 @@ class Info extends Component {
                         <h2 className="info__title">{title}</h2>
                         {releaseDate !== "Invalid Date" 
                           ? <div className="info__subtitle-wrapper">
-                                <h3 className="info__subtitle">{releaseDate} ({yearsPast} years ago)</h3>
-                                <div className="btn info__rating-btn">{rating}</div>
-                                <p className="info__rating-label">Rating</p>
+                                <h3 className="info__subtitle"><span className="a11y">Release date: </span>{releaseDate} ({yearsPast} years ago)</h3>
+                                <div className="btn info__rating-btn"><span className="a11y">Game rating: </span>{rating}</div>
+                                <p className="info__rating-label" aria-hidden={true}>Rating</p>
                             </div>
                           :  <div className="info__subtitle-wrapper">
                                 <h3 className="info__subtitle">Cancelled / Never released</h3>
@@ -758,12 +758,12 @@ class Info extends Component {
                     </div>
                     {companyName !== "" ? this.renderCategory(companyLabel, companyName) : null}
                     {genres.length > 0 ? this.renderCategory("Genres", genres) : null}                
-                    {websites.length > 0 ? this.renderCategory("Links", websites) : null}
+                    {websites.length > 0 ? this.renderCategory("Links", websites, tabIndex) : null}
                     <div className={infoAgeRatingClass}>
                         {ageRatings.length > 0 ? this.renderAgeRatings(ageRatings) : null}
                     </div>
                 </div>
-            </section>
+            </article>
         )
     }
 }

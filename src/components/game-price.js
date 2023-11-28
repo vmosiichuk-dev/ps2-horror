@@ -40,7 +40,7 @@ function getCollectionValue(data, activeFilter) {
     }
 }
 
-function GamePrice({ data, nav, activeFilter, onPriceCategoryChange, priceCategory, wishPriceCategory, loose, cib, newg }) {
+function GamePrice({ data, nav, slug, activeFilter, onPriceCategoryChange, priceCategory, wishPriceCategory, loose, cib, newg }) {
     let value,
         gamePriceClass = "game-price", 
         btnLooseClass = "btn game-price__btn",
@@ -50,9 +50,12 @@ function GamePrice({ data, nav, activeFilter, onPriceCategoryChange, priceCatego
         iconCibClass = "game-price__icon",
         iconNewgClass = "game-price__icon",
         usdClass = "game-price__usd",
-        tabIndex = 0
+        tabIndex = 0,
+        toolbarLabel = "Value of games in your "
 
     if (activeFilter === "wish") {
+        toolbarLabel += "wishlist:"
+
         switch (wishPriceCategory) {
             case "loose": {
                 btnLooseClass += " game-price__btn--loose"
@@ -72,6 +75,8 @@ function GamePrice({ data, nav, activeFilter, onPriceCategoryChange, priceCatego
             default: break
         }
     } else {
+        toolbarLabel += "collection:"
+
         switch (priceCategory) {
             case "loose": {
                 btnLooseClass += " game-price__btn--loose"
@@ -103,37 +108,50 @@ function GamePrice({ data, nav, activeFilter, onPriceCategoryChange, priceCatego
         iconNewgClass += " game-price__icon--newg game-price__icon--value"
         usdClass += " game-price__usd--value"
         tabIndex = -1
+        slug = "nav"
+    } else {
+        activeFilter === "wish" ? 
+            toolbarLabel = "Choose a price category you would like to own to calculate a value of your wishlist:" : 
+            toolbarLabel = "Choose a price category you own to add a game to your collection:"
+    }
+
+    const PriceOption = nav ? "div" : "button"
+    const priceOptionContent = (iconClass, iconSrc, iconAlt, category, categoryKey) => {
+        return (
+        <>
+            <img className={iconClass} src={iconSrc} alt={iconAlt} />
+            {nav || category !== "n/a" ? <span className={usdClass}>$</span> : null}
+            <span>{nav ? value[categoryKey] : category}</span>
+        </>
+        )
     }
 
     return (
-        <div className={gamePriceClass}>
-            <button 
-                type="button" 
+        <div className={gamePriceClass} role={!nav ? "toolbar" : null} tabIndex={!nav ? 0 : -1} aria-activedescendant={!nav ? slug + "--toolbar-loose" : null} aria-label={toolbarLabel}>
+            <PriceOption
+                type={!nav ? "button" : null} 
                 className={btnLooseClass} 
+                id={slug + "--toolbar-loose"}
                 onClick={!nav ? () => onPriceCategoryChange("loose") : undefined}
                 tabIndex={tabIndex} >
-                <img className={iconLooseClass} src={looseIcon} alt="Loose price" />
-                {nav || loose !== "n/a" ? <span className={usdClass}>$</span> : null}
-                <span>{nav ? value.loose : loose}</span>
-            </button>
-            <button 
-                type="button" 
+                { priceOptionContent(iconLooseClass, looseIcon, "Loose price", loose, "loose") }
+            </PriceOption>
+            <PriceOption
+                type={nav ? "button" : null} 
                 className={btnCibClass} 
+                id={slug + "--toolbar-cib"}
                 onClick={!nav ? () => onPriceCategoryChange("cib") : undefined}
                 tabIndex={tabIndex} >
-                <img className={iconCibClass} src={cibIcon} alt="CIB price" />
-                {nav || cib !== "n/a" ? <span className={usdClass}>$</span> : null}
-                <span>{nav ? value.cib : cib}</span>
-            </button>
-            <button 
-                type="button" 
+                { priceOptionContent(iconCibClass, cibIcon, "CIB price", cib, "cib") }
+            </PriceOption>
+            <PriceOption
+                type={nav ? "button" : null} 
                 className={btnNewgClass} 
+                id={slug + "--toolbar-new"}
                 onClick={!nav ? () => onPriceCategoryChange("newg") : undefined}
                 tabIndex={tabIndex} >
-                <img className={iconNewgClass} src={newgIcon} alt="New price" />
-                {nav || newg !== "n/a" ? <span className={usdClass}>$</span> : null}
-                <span>{nav ? value.newg : newg}</span>
-            </button>
+                { priceOptionContent(iconNewgClass, newgIcon, "New price", newg, "newg") }
+            </PriceOption>
             {!nav ? null : (
                 <div className="game-price__total">
                     <p className="game-price__total-label">Total: </p>

@@ -5,6 +5,7 @@
     width: calc(100% + 20px);
     font-size: .9375rem;
     font-family: var(--unbounded);
+    border-radius: 4px;
 }
 
 .game-price__btn {

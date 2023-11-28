@@ -86,13 +86,11 @@ class AddGame extends Component {
         const { addedTitle, addFormClass, addFormMessage, onTitleChange, addGameIsActive, onAddGameSearch, searchData, searchDataLoaded, onAddGameSubmit, onSearchRadioChange } = this.props 
 
         let addGameClass = "add-game",
-            tabIndex = -1,
-            ariaHidden = true
+            tabIndex = -1
     
         if (addGameIsActive) { 
             addGameClass += " is-active" 
             tabIndex = 0
-            ariaHidden = false
             this.addGameRef.current.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"})
         }
 
@@ -102,7 +100,7 @@ class AddGame extends Component {
                 ref={this.addGameRef} 
                 tabIndex={-1} >  
                 <p className="a11y" id="add-game__description">To add a game to the library you first need to search PS2 games in the IGDB database by providing a title. Title should be at least 3 characters long.<br/><br/>Submit your search query by pressing the button next to an input field (or Enter on&nbsp;desktop). You will get all PS2 games with the title matching the search query, from which you may choose one option to add to the library. If the title is already in the library you will be prompted to choose a unique title to avoid duplication.<br/><br/>Remember, that added games will not have price information. Also, additional information for newly added games is limited to the completeness of such information in the database.</p>
-                <div className="add-game__wrapper" aria-hidden={ariaHidden} >
+                <div className="add-game__wrapper" >
                     <h2 className="add-game__title">Search and add PS2 games to your library</h2>
                     <form 
                         className="add-game__form" 

@@ -47,7 +47,7 @@ class Navigation extends Component {
         }
     }
 
-    renderNavControls = (mediaClass, onAsideChange, aboutBtnClass, addGameBtnClass, addGameImgClass, addGameMenuAlt ) => {
+    renderNavControls = (mediaClass, onAsideChange, aboutBtnClass, addGameBtnClass, addGameImgClass, aboutBtnTitle, addGameMenuAlt ) => {
         return (
             <div className={"nav__controls-" + mediaClass}>
                 <button 
@@ -55,7 +55,8 @@ class Navigation extends Component {
                     className={aboutBtnClass} 
                     onClick={() => onAsideChange("aboutIsActive")} 
                     tabIndex={0}
-                    ref={this.props.aboutBtnRef}>
+                    ref={this.props.aboutBtnRef}
+                    title={aboutBtnTitle} >
                     <span className="nav__about-span nav__about-span--one"></span>
                     <span className="nav__about-span nav__about-span--two"></span>
                 </button>
@@ -95,6 +96,7 @@ class Navigation extends Component {
             searchAlt = "Search",
             searchAria = true,
             searchLabel = "Search",
+            aboutBtnTitle = "Open about section",
             addGameMenuAlt = "Open add game form",
             addGameImgClass = "btn__img",
             addGameBtnClass = "btn nav__menu-btn",
@@ -119,6 +121,7 @@ class Navigation extends Component {
         }
         
         if (aboutIsActive) {
+            aboutBtnTitle = "Close about section"
             aboutBtnClass += " is-active"  
             addGameBtnClass += " is-inactive" 
             tabIndex = -1 
@@ -165,7 +168,7 @@ class Navigation extends Component {
                     <img className={logoClass} src={ps} width="30px" alt="" onClick={this.rotateLogo}/>
                     <h1 className="nav__title">
                         <span className="a11y">PS2 Collection App — </span>
-                        {window.innerWidth + "x" + window.innerHeight}
+                        Survival Horror Classics
                     </h1>
                     {this.renderNavControls(
                         "mobile", 
@@ -173,20 +176,22 @@ class Navigation extends Component {
                         aboutBtnClass, 
                         addGameBtnClass, 
                         addGameImgClass, 
+                        aboutBtnTitle,
                         addGameMenuAlt
                     )}
                 </div>
                 <section 
                     className="nav__filters" 
-                    aria-label="Filter controls" 
+                    aria-label="Filter and side bar controls" 
                     aria-describedby="nav__filters-description">
-                    <span id="nav__filters-description" className="a11y">Use filters to show games previously marked as played or the ones added to your collection. Combine filters and search to look for games under specific filter option.</span> 
+                    <span id="nav__filters-description" className="a11y">Use filters to show all games, games previously marked as played, the ones added to your collection or wishlist. Combine filters and search to look for games under specific filter option.</span> 
                     {this.renderNavControls(
                         "desktop", 
                         onAsideChange, 
                         aboutBtnClass, 
                         addGameBtnClass, 
                         addGameImgClass, 
+                        aboutBtnTitle,
                         addGameMenuAlt
                     )}
                     <button 
