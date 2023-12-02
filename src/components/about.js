@@ -73,19 +73,19 @@ class About extends Component {
                         <h2 id="about__controls" className="about__title" tabIndex={tabIndex} >Controls &amp; Tips</h2>
                         <h3 className="about__subtitle">Game buttons:</h3>
                         <div className="about__control">
-                            <img src={star} width="17" height="17" alt=""/>
+                            <img src={star} width="17" height="17" alt="Wishlist icon"/>
                             <p className="about__p">Add a game to your wishlist and plan future expenses by selecting the&nbsp;<b className="about__bold">'Wishlist'</b>&nbsp;filter.</p>
                         </div>
                         <div className="about__control">
-                            <img src={game} width="17" height="17" alt=""/>
+                            <img src={game} width="17" height="17" alt="Played icon"/>
                             <p className="about__p">Add a game to your list of played games and monitor your progress via the <b className="about__bold">'Played'</b> filter.</p>
                         </div>
                         <div className="about__control">
-                            <img src={info} width="17" height="17" alt=""/>
+                            <img src={info} width="17" height="17" alt="Info icon"/>
                             <p className="about__p">Load the sidebar with game details, such as title, release date, rating, summary, genres, developer/publisher, age ratings and links.</p>
                         </div>
                         <div className="about__control">
-                            <img src={del} width="17" height="17" alt=""/>
+                            <img src={del} width="17" height="17" alt="Delete icon"/>
                             <p className="about__p">Delete a game from the library entirely.<br/>Click a second time to confirm your choice.</p>
                         </div>
                         <h3 className="about__subtitle">Price buttons:</h3>
@@ -93,15 +93,15 @@ class About extends Component {
                         <p className="about__p">Want to add a higher price option of the game you own to the wishlist or choose specific price options for specific games? <b className="about__bold">We've got you covered!</b></p>
                         <p className="about__p">Under <b className="about__bold">'Wishlist'</b> filter, changes are only made to the game's desired price option, so that you can easily plan out your collection and do not confuse the game's status when browsing games under <b className="about__bold">'All'</b> filter.</p>
                         <div className="about__control">
-                            <img className="about__icon-loose" src={looseIcon} width="17" height="17" alt=""/>
+                            <img className="about__icon-loose" src={looseIcon} width="17" height="17" alt="Loose price option icon"/>
                             <p className="about__p">Loose: A disc itself (does not include the game's original casing or manual).</p>
                         </div>
                         <div className="about__control">
-                            <img className="about__icon-cib" src={cibIcon} width="17" height="17" alt=""/>
+                            <img className="about__icon-cib" src={cibIcon} width="17" height="17" alt="CIB price option icon"/>
                             <p className="about__p">CIB (complete in box): A used copy of the game with original casing and manual.</p>
                         </div>
                         <div className="about__control">
-                            <img className="about__icon-newg" src={newgIcon} width="17" height="17" alt=""/>
+                            <img className="about__icon-newg" src={newgIcon} width="17" height="17" alt="New price option icon"/>
                             <p className="about__p">New: Sealed and graded copies by WATA in perfect condition (if none available, a regular sealed copy with a hologram sticker).</p>
                         </div>
                     </article>

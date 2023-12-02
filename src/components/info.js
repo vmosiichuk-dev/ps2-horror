@@ -710,7 +710,7 @@ class Info extends Component {
         }
         
         return (
-            <article className={infoClass} aria-label={`Game data for ${title}`} tabIndex={tabIndex} ref={infoRef} onBlur={this.handleTabBlur}>
+            <article className={infoClass} aria-label={`Sidebar with game details. Selected game: ${title}`} tabIndex={tabIndex} ref={infoRef} onBlur={this.handleTabBlur}>
                 <button className={btnCloseClass} type="button" onClick={onInfoClose} tabIndex={0}>
                     <img className="btn__img is-active" src={menuImg} alt="Close game information"/>
                 </button>
@@ -720,7 +720,7 @@ class Info extends Component {
                         <div className="info__screenshot-shadow"></div>
                     </div>
                     <div className="game info__game-cover">
-                        <img className="game__cover-img" src={src} alt={title + " — PS2 game cover"} />
+                        <img className="game__cover-img" src={src} alt={"PS2 game cover for " + title} />
                         <img className="game__cover-overlay" src={overlay} alt="" />
                     </div>
                     <div className={infoTitleWrapperClass}>

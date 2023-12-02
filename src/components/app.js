@@ -129,7 +129,7 @@ class App extends Component {
     resetAddFormClass = (str, error) => {
         setTimeout(() => {
             this.setState({ addFormClass: `add-game__form-message ${str} is-inactive` })
-            this.resetAddFormMessage(error)
+            /* this.resetAddFormMessage(error) */
         }, 5000)
     }
 
@@ -147,7 +147,8 @@ class App extends Component {
                     body = `search "${title}"; fields id,name; where platforms = (8); limit 299;`,
                     get = await this.iGDB.getToken(),
                     games = await this.iGDB.getGames(get.access_token, body),
-                    error = "Enter a game title. Title should be at least 3 characters.",
+                    /* error = "Enter a game title. Title should be at least 3 characters.", */
+                    error = "Search a game by providing a title consisting of at least 3 characters.",
                     errorAPI = `No PS2 games found with the title '${title}'. Check the spelling or try another title.`
                     
             if (games.length < 1 && title.length >= 3) {

@@ -18,7 +18,7 @@ class Game extends Component {
             clickCount: 0,
             activeClass: "",
             confirmDeleteAria: true,
-            itemButtonsStyle: { opacity: 0 }
+            focusStyle: { opacity: 0 }
         }
     } 
 
@@ -40,15 +40,15 @@ class Game extends Component {
         this.props.activeButtonRef.current = e.target
 
         this.setState(() => {
-            const newItemButtonsStyle = { opacity: 1 }
-            return { itemButtonsStyle: newItemButtonsStyle }
+            const newfocusStyle = { opacity: 1 }
+            return { focusStyle: newfocusStyle }
         })  
     }
 
     handleTabBlur = () => {
         this.setState(() => {
-            const newItemButtonsStyle = { opacity: 0 }
-            return { itemButtonsStyle: newItemButtonsStyle }
+            const newfocusStyle = { opacity: 0 }
+            return { focusStyle: newfocusStyle }
         })  
     }
 
@@ -59,9 +59,10 @@ class Game extends Component {
 
     render() {
         const { slug, title, src, wish, play, loose, cib, newg, onMarkState, onOpenInfo, onPriceCategoryChange, priceCategory, wishPriceCategory, activeFilter } = this.props
-        const { delSrc, activeClass, itemButtonsStyle, confirmDeleteAria } = this.state
+        const { delSrc, activeClass, focusStyle, confirmDeleteAria } = this.state
 
         let gameClass = "game",
+            valueStatus = "",
             deleteAlt = "Delete game",
             statusContainerClass = "game__status-container"
 
@@ -71,26 +72,46 @@ class Game extends Component {
         if (!confirmDeleteAria) statusContainerClass += " is-active"
 
         switch (priceCategory) {
-            case "loose": gameClass += " game--loose"; break
-            case "cib": gameClass += " game--cib"; break 
-            case "newg": gameClass += " game--newg"; break 
+            case "loose": {
+                gameClass += " game--loose"
+                valueStatus = "Added to Collection: Loose copy"
+                break
+            }
+            case "cib": {
+                gameClass += " game--cib"
+                valueStatus = "Added to Collection: CIB copy"
+                break
+            } 
+            case "newg": {
+                gameClass += " game--newg"
+                valueStatus = "Added to Collection: New copy"
+                break
+            } 
             default: break
         }
 
         return (
-            <li className={gameClass} id={slug} >
-                <div className={statusContainerClass}>
-                    <img className="game__status --wish" src={star} alt="Added to Wishlist" />
-                    <img className="game__status --play" src={game} alt="Marked as Played" />
+            <li className={gameClass} id={slug}>
+                <div className="game__title-container" style={focusStyle}>
+                    <h2 className="game__title">{title}</h2>
                 </div>
-                <img className="game__cover-img" src={src} alt={title + " — PS2 game cover"} />
+                <img className="game__cover-img" src={src} alt={"PS2 game cover for " + title} />
                 <img className="game__cover-overlay" src={overlay} alt="" />
-                <div className={"game-buttons" + activeClass} tabIndex={0} role="toolbar" aria-activedescendant={slug + "--toolbar-wish"} aria-label={"Control options for " + title + ":"} onFocus={this.handleTabFocus} onBlur={this.handleTabBlur} onMouseOver={this.handleTabFocus} onMouseOut={this.handleTabBlur} style={itemButtonsStyle} >
+                <div className={statusContainerClass}>
+                    <img className="game__status --wish" src={star} alt="" />
+                    <img className="game__status --play" src={game} alt="" />
+                    <ul className="a11y" role="status" aria-label="Track the game's status:">
+                        { priceCategory !== "" ? <li>{valueStatus}</li> : null }
+                        { wish ? <li>Added to Wishlist</li> : null }
+                        { play ? <li>Marked as Played</li> : null }
+                    </ul>
+                </div>
+                <div className={"game-buttons" + activeClass} tabIndex={0} role="toolbar" aria-activedescendant={slug + "--toolbar-wish"} aria-label={"Control options for " + title + ":"} onFocus={this.handleTabFocus} onBlur={this.handleTabBlur} onMouseOver={this.handleTabFocus} onMouseOut={this.handleTabBlur} style={focusStyle} >
                     <button type="button" id={slug + "--toolbar-wish"} className="btn-sm btn-wish" onClick={() => onMarkState("wish")} data-toggle="wish">
-                        <img className="icon icon-wish" src={star} alt="Add to wishlist" />
+                        <img className="icon icon-wish" src={star} alt={wish ? "Remove from wishlist" : "Add to wishlist"} />
                     </button>
                     <button type="button" id={slug + "--toolbar-play"} className="btn-sm btn-play" onClick={() => onMarkState("play")} data-toggle="play">
-                        <img className="icon icon-played" src={game} alt="Mark as played" />
+                        <img className="icon icon-played" src={game} alt={play ? "Remove from played" : "Mark as played"} />
                     </button>
                     <button type="button" id={slug + "--toolbar-info"} className="btn-sm btn-info" onClick={() => { onOpenInfo(slug) }} ref={this.infoButtonRef}>
                         <img className="icon icon-info" src={info} alt="Load game data" />

@@ -116,10 +116,29 @@ function GamePrice({ data, nav, slug, activeFilter, onPriceCategoryChange, price
     }
 
     const PriceOption = nav ? "div" : "button"
-    const priceOptionContent = (iconClass, iconSrc, iconAlt, category, categoryKey) => {
+
+    const priceOptionContent = (iconClass, iconSrc, category, categoryKey, priceCategory) => {
+        let a11yText, categoryKeyTransformed = categoryKey
+        
+        if (categoryKeyTransformed === "newg") categoryKeyTransformed = categoryKeyTransformed.slice(0, -1)
+        if (categoryKeyTransformed === "cib") categoryKeyTransformed = categoryKeyTransformed.toUpperCase()
+        
+        if (priceCategory === categoryKey && !nav) {
+            a11yText = `Remove ${categoryKeyTransformed} copy from collection.`
+        } else {
+            a11yText = `Add ${categoryKeyTransformed} copy to collection.`
+        }
+
+        if (nav) a11yText = categoryKeyTransformed.charAt(0).toUpperCase() + categoryKeyTransformed.slice(1) + " copies:"
+
         return (
         <>
-            <img className={iconClass} src={iconSrc} alt={iconAlt} />
+            <img className={iconClass} src={iconSrc} alt="" />
+            {priceCategory === "loose" ? <span className="a11y">{a11yText}</span> : null}
+            {priceCategory === "cib" ? <span className="a11y">{a11yText}</span> : null}
+            {priceCategory === "newg" ? <span className="a11y">{a11yText}</span> : null}
+            {nav ? <p className="a11y">{a11yText}</p> : null}
+            {!nav ? <span className="a11y">Price: </span> : null}
             {nav || category !== "n/a" ? <span className={usdClass}>$</span> : null}
             <span>{nav ? value[categoryKey] : category}</span>
         </>
@@ -134,7 +153,7 @@ function GamePrice({ data, nav, slug, activeFilter, onPriceCategoryChange, price
                 id={slug + "--toolbar-loose"}
                 onClick={!nav ? () => onPriceCategoryChange("loose") : undefined}
                 tabIndex={tabIndex} >
-                { priceOptionContent(iconLooseClass, looseIcon, "Loose price", loose, "loose") }
+                { priceOptionContent(iconLooseClass, looseIcon, loose, "loose", priceCategory) }
             </PriceOption>
             <PriceOption
                 type={nav ? "button" : null} 
@@ -142,7 +161,7 @@ function GamePrice({ data, nav, slug, activeFilter, onPriceCategoryChange, price
                 id={slug + "--toolbar-cib"}
                 onClick={!nav ? () => onPriceCategoryChange("cib") : undefined}
                 tabIndex={tabIndex} >
-                { priceOptionContent(iconCibClass, cibIcon, "CIB price", cib, "cib") }
+                { priceOptionContent(iconCibClass, cibIcon, cib, "cib", priceCategory) }
             </PriceOption>
             <PriceOption
                 type={nav ? "button" : null} 
@@ -150,7 +169,7 @@ function GamePrice({ data, nav, slug, activeFilter, onPriceCategoryChange, price
                 id={slug + "--toolbar-new"}
                 onClick={!nav ? () => onPriceCategoryChange("newg") : undefined}
                 tabIndex={tabIndex} >
-                { priceOptionContent(iconNewgClass, newgIcon, "New price", newg, "newg") }
+                { priceOptionContent(iconNewgClass, newgIcon, newg, "newg", priceCategory) }
             </PriceOption>
             {!nav ? null : (
                 <div className="game-price__total">

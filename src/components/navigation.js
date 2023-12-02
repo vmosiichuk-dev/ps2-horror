@@ -49,7 +49,7 @@ class Navigation extends Component {
 
     renderNavControls = (mediaClass, onAsideChange, aboutBtnClass, addGameBtnClass, addGameImgClass, aboutBtnTitle, addGameMenuAlt ) => {
         return (
-            <div className={"nav__controls-" + mediaClass}>
+            <section className={"nav__controls-" + mediaClass} aria-label="Sidebar controls">
                 <button 
                     type="button" 
                     className={aboutBtnClass} 
@@ -68,7 +68,7 @@ class Navigation extends Component {
                     ref={this.props.addBtnRef}>
                     <img className={addGameImgClass} src={menuImg} alt={addGameMenuAlt}/>
                 </button>
-            </div>
+            </section>
         )
     }
 
@@ -106,6 +106,7 @@ class Navigation extends Component {
             btnFilterWishClass = "btn nav__filter-btn",
             btnFilterPlayedClass = "btn nav__filter-btn",
             navProgressClass = "nav__progress",
+            navProgressAlt = "",
             searchLabelClass = "nav__search-label",
             logoClass = "nav__logo",
             navClass = "nav"
@@ -143,20 +144,24 @@ class Navigation extends Component {
                 progressbarStyle = progressbarPlayStyle
                 label = "Played"
                 btnFilterPlayedClass += " is-active"
+                navProgressAlt = "Played progress"
                 break
             }
             case "wish": {
                 btnFilterWishClass += " is-active"
                 navProgressClass += " nav__progress--value"
+                navProgressAlt = "Wishlist value"
                 break
             }
             case "all": {
                 btnFilterAllClass += " is-active"
+                navProgressAlt = "Collection progress"
                 break
             }
             case "coll": {
                 btnFilterCollClass += " is-active"
                 navProgressClass += " nav__progress--value"
+                navProgressAlt = "Collection value"
                 break
             }
             default: break
@@ -182,9 +187,9 @@ class Navigation extends Component {
                 </div>
                 <section 
                     className="nav__filters" 
-                    aria-label="Filter and side bar controls" 
+                    role="toolbar"
+                    aria-label="Filter and sidebar controls" 
                     aria-describedby="nav__filters-description">
-                    <span id="nav__filters-description" className="a11y">Use filters to show all games, games previously marked as played, the ones added to your collection or wishlist. Combine filters and search to look for games under specific filter option.</span> 
                     {this.renderNavControls(
                         "desktop", 
                         onAsideChange, 
@@ -194,6 +199,7 @@ class Navigation extends Component {
                         aboutBtnTitle,
                         addGameMenuAlt
                     )}
+                    <p id="nav__filters-description" className="a11y">Use filters to show all games, games previously marked as played, the ones added to your collection or wishlist. Combine filters and search for games under specific filter option.</p> 
                     <button 
                         type="button" 
                         tabIndex={tabIndex} 
@@ -225,7 +231,7 @@ class Navigation extends Component {
                         Collection
                     </button>
                 </section>
-                <section className={navProgressClass} aria-label="Gaming progress information">
+                <section className={navProgressClass} role="status" aria-label={navProgressAlt}>
                     { (activeFilter === "coll" || activeFilter === "wish") 
                         ? <GamePrice data={data} nav={true} activeFilter={activeFilter} /> 
                         : (
