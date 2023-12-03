@@ -93,8 +93,6 @@ class Navigation extends Component {
             progressCount = progressCollCount, 
             progressbarStyle = progressbarCollStyle,
             label = "Collection",
-            searchAlt = "Search",
-            searchAria = true,
             searchLabel = "Search",
             aboutBtnTitle = "Open about section",
             addGameMenuAlt = "Open add game form",
@@ -131,8 +129,6 @@ class Navigation extends Component {
         if (!addGameIsActive && !aboutIsActive) navClass += " nav--sticky"
 
         if (searchIconSrc === del) { 
-            searchAlt = "Clear search input"
-            searchAria = false
             searchLabel = "Clear" 
             searchLabelClass += " nav__search-label--z"
         }
@@ -246,12 +242,11 @@ class Navigation extends Component {
                                 <span>{data.length}</span>
                             </p>
                             <div className="nav__progress-bar">
-                                <p className={"progress-bar__label progress-bar__label--" + label.toLowerCase()}>
-                                    {label + " progress"}
-                                </p>
+                                <span className={"progress-bar__label progress-bar__label--" + label.toLowerCase()}>
+                                    {label + " progress"}<span className="a11y">–</span>
+                                </span>
                                 <div className="progress-bar" style={progressbarStyle}></div>
                             </div>
-                            <span className="a11y">Percentage progress count:</span>
                             <span className="nav__progress-percent">{progressCount}</span>
                         </>
                     )}
@@ -260,7 +255,8 @@ class Navigation extends Component {
                     className="nav__search" 
                     aria-label="Search input" 
                     aria-describedby="nav__search-description">
-                    <span id="nav__search-description" className="a11y">Filter games that have a matching character string in the title with the character string provided by the user in the input field. When input has focus, it's associated button can be used to clear the input.</span>
+                    <span id="nav__search-description" className="a11y">Search game library for game titles that match the input string. There is no need to press Enter or the search button, since the search happens in real time. When input has focus, a button under search section can be used to clear the input.</span>
+                    <label htmlFor="nav__search-input" className="a11y">Search</label>
                     <input 
                         type="text" 
                         tabIndex={tabIndex} 
@@ -275,11 +271,10 @@ class Navigation extends Component {
                     <button 
                         type="button" 
                         tabIndex={tabIndex} 
-                        aria-hidden={searchAria} 
                         className="nav__search-btn" 
                         onClick={this.onDeleteClick}>
-                        <label htmlFor="nav__search-input" className={searchLabelClass}>{searchLabel}</label>
-                        <img className="nav__search-icon" alt={searchAlt} src={searchIconSrc} />
+                        <span className={searchLabelClass}>{searchLabel}</span>
+                        <img className="nav__search-icon" alt="" src={searchIconSrc} />
                     </button>
                 </section>
             </nav>

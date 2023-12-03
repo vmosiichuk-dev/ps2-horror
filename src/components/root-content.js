@@ -46,16 +46,18 @@ class RootContent extends Component {
 
 	render() {
 		const { animationReset, apiLoaded, transitionStart, welcomeClick, loaderError, buttonText, subtitleText } = this.state
-
-		let welcome = null
+		let welcome = null, appAria = true
+		
 		if (!welcomeClick || !apiLoaded) {
 			welcome = <Welcome animationReset={animationReset} transitionStart={transitionStart} welcomeClick={welcomeClick} loaderError={loaderError} buttonText={buttonText} subtitleText={subtitleText} onStateChange={this.handleStateChange} />
+		} else {
+			appAria = false
 		}
 
 		return (
 			<>
-				<App transitionStart={transitionStart} welcomeClick={welcomeClick} onStateChange={this.handleStateChange} onError={this.handleError}/>
 				{welcome}
+				<App transitionStart={transitionStart} welcomeClick={welcomeClick} onStateChange={this.handleStateChange} onError={this.handleError} appAria={appAria} />
 			</>
 		)
 	}

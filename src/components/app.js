@@ -350,39 +350,48 @@ class App extends Component {
 
     getMainError = (filteredData) => {
         const { playCount, collCount, activeFilter } = this.state
-        const collection = filteredData.filter(item => item.priceCategory !== "")
+        const wishCount = filteredData.filter(item => item.wish).length
+        console.log(playCount)
+        console.log(wishCount)
+        console.log(collCount)
+
+        let errorClass = "main__error",
+            errorMessage = ""
 
         if (filteredData.length === 0) {
-            if (activeFilter === "play" && playCount === 0) {
-                return (
-                    <p className="main__error is-active" role="status">
-                    There are no games marked as played yet.<br />
-                    To mark a game as played, hover or press on a game card and press a controller button.
-                    </p>
-                )
-            } else if (activeFilter === "wish" && collCount === 0) {
-                return (
-                    <p className="main__error is-active" role="status">
-                    There are no games in your wishlist yet.<br />
-                    To add a game to the collection, hover or press on a game card and press a star button.
-                    </p>
-                )
-            } else if (activeFilter === "coll" && collection.length === 0) {
-                return (
-                    <p className="main__error is-active" role="status">
-                    There are no games in your collection yet.<br />
-                    To add a game to the collection, press one of three buttons for price option to choose the one you own.
-                    </p>
-                )
-            }
-            return (
-                <p className="main__error is-active" role="status">
+            errorClass += " is-active"
+            errorMessage = (
+                <span>
                     The game you are looking for is not found.<br />
-                    You can add a game to the list from the menu in the navigation bar (+ plus sign).
-                </p>
+                    You can add a game to the list by opening an add game sidebar from the navigation (+ plus sign).
+                </span>
             )
         }
-        return null
+
+        if (activeFilter === "play" && playCount === 0) {
+            errorMessage = (
+                <span>
+                    There are no games marked as played yet.<br />
+                    To mark a game as played, hover or press on a game card and press the played button (controller icon).
+                </span>
+            )
+        } else if (activeFilter === "wish" && wishCount === 0) {
+            errorMessage = (
+                <span>
+                    There are no games in your wishlist yet.<br />
+                    To add a game to the wishlist, hover or press on a game card and press the wishlist button (star icon).
+                </span>
+            )
+        } else if (activeFilter === "coll" && collCount === 0) {
+            errorMessage = (
+                <span>
+                    There are no games in your collection yet.<br />
+                    To add a game to the collection, press one of three buttons with price options to select the one you own.
+                </span>
+            )
+        }
+
+        return <p className={errorClass} role="status">{errorMessage}</p>
     }
 
     gamePrices = [
@@ -700,6 +709,7 @@ class App extends Component {
             searchData,
             searchDataLoaded
         } = this.state
+        const {appAria} = this.props
 
         const renderData = this.searchGame(data, searchQuery)
 
@@ -720,7 +730,7 @@ class App extends Component {
         if (this.props.transitionStart)  appClass += " has-faded-in"
 
         return (
-            <div className={appClass} ref={this.appRef} >  
+            <div className={appClass} ref={this.appRef} aria-hidden={appAria}>  
                 <Navigation  
                     data={data} 
                     filteredData={filteredData} 

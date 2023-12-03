@@ -709,6 +709,12 @@
 	}
 }
 
+@media screen and ((hover: hover) or (orientation: landscape)) {
+	.info__title {
+		margin: 0 0 .75rem;
+	}
+}
+
 @media screen and (orientation: landscape) and (hover: none) and (min-width: 1079px) and (max-width: 1225px) {
 	.info__screenshot {
 		height: calc(100% + 35px);

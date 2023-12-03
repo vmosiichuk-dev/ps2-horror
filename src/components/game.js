@@ -63,6 +63,7 @@ class Game extends Component {
 
         let gameClass = "game",
             valueStatus = "",
+            wishStatus = "Added to Wishlist",
             deleteAlt = "Delete game",
             statusContainerClass = "game__status-container"
 
@@ -90,6 +91,22 @@ class Game extends Component {
             default: break
         }
 
+        switch (wishPriceCategory) {
+            case "loose": {
+                wishStatus += ": Loose copy"
+                break
+            }
+            case "cib": {
+                wishStatus += ": CIB copy"
+                break
+            } 
+            case "newg": {
+                wishStatus += ": New copy"
+                break
+            } 
+            default: break
+        }
+
         return (
             <li className={gameClass} id={slug}>
                 <div className="game__title-container" style={focusStyle}>
@@ -102,7 +119,7 @@ class Game extends Component {
                     <img className="game__status --play" src={game} alt="" />
                     <ul className="a11y" role="status" aria-label="Track the game's status:">
                         { priceCategory !== "" ? <li>{valueStatus}</li> : null }
-                        { wish ? <li>Added to Wishlist</li> : null }
+                        { wish ? <li>{wishStatus}</li> : null }
                         { play ? <li>Marked as Played</li> : null }
                     </ul>
                 </div>

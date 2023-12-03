@@ -43,7 +43,6 @@ class AddGame extends Component {
             }
 
             if (e.key === "Enter" && document.activeElement.type === "radio") {
-                console.log(document.activeElement)
                 e.preventDefault()
                 document.activeElement.checked = !document.activeElement.checked
                 this.props.onSearchRadioChange(e)

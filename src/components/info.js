@@ -645,12 +645,13 @@ class Info extends Component {
 
     handleTabBlur = (e) => {
         const nextFocusable = e.relatedTarget
-        const isNextFocusableInInfoSection = this.props.infoRef.current && this.props.infoRef.current.contains(nextFocusable)
         const lastGameSlug = this.props.lastGameSlug()
 
-        console.log(this.props.activeButtonRef.current)
-        console.log(!isNextFocusableInInfoSection && this.props.activeButtonRef.current !== null && this.props.activeButtonRef.current.id !== `${lastGameSlug}--toolbar-delete`)
-        if (!isNextFocusableInInfoSection && this.props.activeButtonRef.current !== null && this.props.activeButtonRef.current.id !== `${lastGameSlug}--toolbar-delete`) {
+        const nextFocusableInInfo = this.props.infoRef.current && this.props.infoRef.current.contains(nextFocusable)
+        const activeButtonIsLastGame = this.props.activeButtonRef.current !== null && this.props.activeButtonRef.current.id !== `${lastGameSlug}--toolbar-delete` && this.props.activeButtonRef.current.className !== "game-buttons" && this.props.activeButtonRef.current.className !== "info__description"
+        const hoverIsNone = matchMedia("(hover: none)").matches
+
+        if (!nextFocusableInInfo && activeButtonIsLastGame && hoverIsNone) {
             this.props.activeButtonRef.current.focus()
         }
     }
@@ -738,9 +739,9 @@ class Info extends Component {
                     </div>
                     <div className="info__description-wrapper" ref={this.infoDescWrapperRef}>
                         {(summary !== "" && summary !== undefined && summary.length > 86)
-                        ? <p className={infoDescriptionClass} ref={this.infoDescRef}>{summary}</p> 
+                        ? <p className={infoDescriptionClass} ref={this.infoDescRef} tabIndex={tabIndex}>{summary}</p> 
                         : (
-                            <p className={infoDescriptionClass} ref={this.infoDescRef}>
+                            <p className={infoDescriptionClass} ref={this.infoDescRef} tabIndex={tabIndex}>
                               {title} is a noteworthy addition to the PlayStation 2 library, offering a captivating and visually stunning
                               {genres.length > 0 ? ` ${genres[0].charAt(0).toLowerCase() + genres[0].substring(1)} experience` : " experience" }
                               {genres.length > 1 ? ` with ${genres[1].toLowerCase()} gameplay elements. ` : ". " }

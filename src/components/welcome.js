@@ -17,7 +17,7 @@ function Welcome({ animationReset, transitionStart, welcomeClick, onStateChange,
 
     return (
         <div className={wrapperClass}>
-            <p className="welcome__title"><span className="a11y">PS2 Game Library — </span><img src={ps} alt=""/>Survival Horror Classics</p>
+            <h1 className="welcome__title"><span className="a11y">PS2 Game Library — </span><img src={ps} alt=""/>Survival Horror Classics</h1>
             <section className="fog__section">
                 <div className="fog__container">
                     <div className="fog fog--one"></div>
