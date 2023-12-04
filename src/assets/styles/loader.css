@@ -11,7 +11,7 @@
 
 .loader.is-active {
 	opacity: 1;
-	transition: 1s opacity .75s cubic-bezier(.46,.03,.52,.96);
+	transition: 1s opacity .5s cubic-bezier(.46,.03,.52,.96);
 }
 
 .loader__gif {
