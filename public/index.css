@@ -88,6 +88,10 @@ button {
 	left: -200dvw;
 }
 
+.m-0 {
+	margin: 0;
+}
+
 ::-webkit-scrollbar {
 	width: 7px;
 }

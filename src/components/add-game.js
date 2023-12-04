@@ -97,7 +97,6 @@ class AddGame extends Component {
                 tabIndex={-1} >  
                 <div className="add-game__wrapper" >
                     <h2 className="add-game__title">Search and add PS2 games to your library</h2>
-                    <p className="a11y" id="add-game__description">To add a game to the library you first need to search PS2 games in the IGDB database by providing a title. Title should be at least 3 characters long.<br/><br/>Submit your search query by pressing the button next to an input field (or Enter on&nbsp;desktop). You will get all PS2 games with the title matching the search query, from which you may choose one option to add to the library. If the title is already in the library you will be prompted to choose a unique title to avoid duplication.<br/><br/>Remember, that added games will not have price information. Also, additional information for newly added games is limited to the completeness of such information in the database.</p>
                     <form 
                         className="add-game__form" 
                         onSubmit={onAddGameSubmit} 
@@ -154,6 +153,7 @@ class AddGame extends Component {
                         }
                     </form>
                 </div>
+                <p className="a11y" id="add-game__description">To add a game to the library you first need to search PS2 games in the IGDB database by providing a title. Title should be at least 3 characters long.<br/><br/>Submit your search query by pressing the button next to an input field (or Enter on&nbsp;desktop). You will get all PS2 games with the title matching the search query, from which you may choose one option to add to the library. If the title is already in the library you will be prompted to choose a unique title to avoid duplication.<br/><br/>Remember, that added games will not have price information. Also, additional information for newly added games is limited to the completeness of such information in the database.</p>
             </aside>
         )
     }

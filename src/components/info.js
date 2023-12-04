@@ -616,8 +616,32 @@ class Info extends Component {
 
     renderAgeRatings = (ratings) => {  
         return ratings.map(rating => {    
+            const startIndex = rating.indexOf("/static/media/") + "/static/media/".length;
+            const dotIndex = rating.indexOf(".", startIndex);
+            const ratingTransformed = dotIndex !== -1 ? rating.substring(startIndex, dotIndex) : null;
+
+            let ratingAlt = ""
+
+            switch (ratingTransformed) {
+                case "usk12": {
+                    ratingAlt = "USK 12"
+                    break
+                }
+                case "jpW": {
+                    ratingAlt = "Japanese violent content warning"
+                    break
+                }
+                default: {
+                    ratingAlt = ratingTransformed.slice(0, 4).toUpperCase() + " " + ratingTransformed.slice(4)
+                    break
+                }
+            }
+
             return (
-                <img key={rating} className="info__age" src={rating} alt=""/>
+                <div key={ratingTransformed}>
+                    <p key={ratingAlt} className="a11y">{ratingAlt}</p>
+                    <img key={rating} className="info__age" src={rating} alt=""/>
+                </div>
             )
         }) 
     }
@@ -628,7 +652,7 @@ class Info extends Component {
                 return (
                     title === "Links" 
                     ? <a key={item.label} href={item.url} className="info__category-link" target="_blank" rel="noopener noreferrer" tabIndex={tabIndex}>{item.label}</a> 
-                    : <span key={item}>{item}</span>
+                    : <p className="m-0" key={item}>{item}</p>
                 )
             })
         }
@@ -759,10 +783,11 @@ class Info extends Component {
                     </div>
                     {companyName !== "" ? this.renderCategory(companyLabel, companyName) : null}
                     {genres.length > 0 ? this.renderCategory("Genres", genres) : null}                
-                    {websites.length > 0 ? this.renderCategory("Links", websites, tabIndex) : null}
                     <div className={infoAgeRatingClass}>
+                        {ageRatings.length > 0 ? <h3 className="a11y">Age Ratings</h3> : null}
                         {ageRatings.length > 0 ? this.renderAgeRatings(ageRatings) : null}
                     </div>
+                    {websites.length > 0 ? this.renderCategory("Links", websites, tabIndex) : null}
                 </div>
             </article>
         )

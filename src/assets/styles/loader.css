@@ -33,12 +33,19 @@
 	border: 1px solid #c1bcda70;
 	border-radius: 6px;
 	background-color: #c1bcda36;
-	max-width: 255px;
+	max-width: 190px;
 	transition: .3s opacity cubic-bezier(.46,.03,.52,.96);
 }
 
 .loader__error.is-active {
 	opacity: 1;
+}
+
+@media screen and (min-width: 809px) {
+	.loader__error {
+		padding: 12px 12px 14px;
+		max-width: 400px;
+	}
 }
 
 @media screen and (orientation: landscape) and (hover: none) {
@@ -50,28 +57,25 @@
 	.loader__error {
 		bottom: 20px;
 		right: 20px;
-		max-width: 140px;
 	}
-}
-
-@media screen and (min-width: 809px) {
-	.loader__error {
-		padding: 12px 12px 14px;
-		max-width: 385px;
-	}
-
-	@media (orientation: landscape) and (hover: none) {
+	
+	@media (max-width: 1023px) {
 		.loader__error {
-			max-width: 220px;
+			max-width: 190px;
+		}
+	}
+
+	@media (max-width: 666px) {
+		.loader__error {
+			max-width: 130px;
 		}
 	}
 }
 
 @media screen and (min-width: 1023px) {
 	.loader__error {
-		max-width: 430px;
 		font-size: 1.125rem;
-		padding: 24px 24px 26px;
+		padding: 20px 20px 22px;
 	}
 	
 	@media (orientation: landscape) and (hover: none) {
@@ -89,9 +93,14 @@
 	}
 
 	.loader__error {
-		max-width: 340px;
 		font-size: .875rem;
 		bottom: 12%;
 		padding: 18px 24px 20px;
+	}
+}
+
+@media screen and (max-width: 370px) {
+	.loader__error {
+		bottom: 12%;
 	}
 }
