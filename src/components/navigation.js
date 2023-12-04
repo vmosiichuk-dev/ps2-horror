@@ -1,4 +1,4 @@
-import { Component } from "react"
+import React, { Component } from "react"
 import GamePrice from "./game-price"
 import "../assets/styles/navigation.css"
 
@@ -12,10 +12,26 @@ import menuImg from "../assets/img/plus.svg"
 class Navigation extends Component {
     constructor(props) {
         super(props)
+        this.skipNavRef = React.createRef()
         this.state = {
             logoRotated: false,
             searchQuery: "",
             searchIconSrc: search
+        }
+    }
+
+    componentDidMount() { 
+        this.skipNavRef.current.addEventListener("keydown", this.handleKeydown)
+    }
+    
+    componentWillUnmount() { 
+        this.skipNavRef.current.removeEventListener("keydown", this.handleKeydown)
+    }
+
+    handleKeydown = (e) => {
+        if (e.key === "Enter") {
+            e.preventDefault()
+            this.props.gameListRef.current.focus()
         }
     }
     
@@ -171,6 +187,7 @@ class Navigation extends Component {
                         <span className="a11y">PS2 Collection App — </span>
                         Survival Horror Classics
                     </h1>
+                    <button type="button" className="nav__skip" ref={this.skipNavRef}>Skip navigation</button>
                     {this.renderNavControls(
                         "mobile", 
                         onAsideChange, 

@@ -117,20 +117,23 @@ function GamePrice({ data, nav, slug, activeFilter, onPriceCategoryChange, price
 
     const PriceOption = nav ? "div" : "button"
 
-    const priceOptionContent = (iconClass, iconSrc, category, categoryKey) => {
+    const priceOptionContent = (iconClass, iconSrc, category, categoryKey, activeFilter) => {
         let a11yText, categoryKeyTransformed = categoryKey
 
-        if (categoryKeyTransformed === "newg") categoryKeyTransformed = categoryKeyTransformed.slice(0, -1)
-        if (categoryKeyTransformed === "cib") categoryKeyTransformed = categoryKeyTransformed.toUpperCase()
+        switch (categoryKey) {
+            case "newg": categoryKeyTransformed = categoryKeyTransformed.slice(0, -1); break
+            case "cib": categoryKeyTransformed = categoryKeyTransformed.toUpperCase(); break
+            default: break
+        }
 
-        if (!activeFilter === "wish") {
-            if (priceCategory === categoryKey && !nav) {
+        if (activeFilter !== "wish" && !nav) {
+            if (priceCategory === categoryKey) {
                 a11yText = `Remove ${categoryKeyTransformed} copy from collection.`
             } else {
                 a11yText = `Add ${categoryKeyTransformed} copy to collection.`
             }
-        } else {
-            if (wishPriceCategory === categoryKey && !nav) {
+        } else if (activeFilter === "wish" && !nav) {
+            if (wishPriceCategory === categoryKey) {
                 a11yText = `Remove ${categoryKeyTransformed} copy from wishlist.`
             } else {
                 a11yText = `Add ${categoryKeyTransformed} copy to wishlist.`
@@ -142,13 +145,18 @@ function GamePrice({ data, nav, slug, activeFilter, onPriceCategoryChange, price
         return (
         <>
             <img className={iconClass} src={iconSrc} alt="" />
-            {priceCategory === "loose" ? <span className="a11y">{a11yText}</span> : null}
-            {priceCategory === "cib" ? <span className="a11y">{a11yText}</span> : null}
-            {priceCategory === "newg" ? <span className="a11y">{a11yText}</span> : null}
-            {nav ? <p className="a11y">{a11yText}</p> : null}
-            {!nav ? <span className="a11y">Price: </span> : null}
-            {nav || category !== "n/a" ? <span className={usdClass}>$</span> : null}
-            <span>{nav ? value[categoryKey] : category}</span>
+            { nav 
+                ? <p className="a11y">{a11yText}</p> 
+                : <>
+                    <span className="a11y">{a11yText}</span>
+                    <span className="a11y">Price: </span>
+                </>
+            }
+            { nav || category !== "n/a" 
+                ? <span className={usdClass}>$</span> 
+                : null
+            }
+            <span>{ nav ? value[categoryKey] : category }</span>
         </>
         )
     }

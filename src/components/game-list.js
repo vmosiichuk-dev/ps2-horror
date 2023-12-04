@@ -1,7 +1,7 @@
 import Game from "./game"
 import "../assets/styles/game-list.css"
 
-function GameList({ onDelete, onMarkState, onPriceCategoryChange, onOpenInfo, delSrc, filteredData, activeFilter, infoRef, activeButtonRef }) {
+function GameList({ onDelete, onMarkState, onPriceCategoryChange, onOpenInfo, delSrc, filteredData, activeFilter, infoRef, activeButtonRef, gameListRef }) {
     const renderGames = () => {
         return filteredData.map(item => {    
             return (
@@ -38,7 +38,7 @@ function GameList({ onDelete, onMarkState, onPriceCategoryChange, onOpenInfo, de
     } 
 
     return (
-        <ul className={gameListClass}>
+        <ul className={gameListClass} ref={gameListRef}>
             {games}
         </ul>
     )

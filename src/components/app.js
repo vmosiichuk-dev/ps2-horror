@@ -13,6 +13,7 @@ import noCover from "../assets/img/no-cover.webp"
 class App extends Component {
     constructor(props) {
         super(props)
+        this.gameListRef = React.createRef()
         this.appRef = React.createRef()
         this.aboutBtnRef = React.createRef()
         this.addBtnRef = React.createRef()
@@ -129,7 +130,6 @@ class App extends Component {
     resetAddFormClass = (str, error) => {
         setTimeout(() => {
             this.setState({ addFormClass: `add-game__form-message ${str} is-inactive` })
-            /* this.resetAddFormMessage(error) */
         }, 5000)
     }
 
@@ -147,7 +147,6 @@ class App extends Component {
                     body = `search "${title}"; fields id,name; where platforms = (8); limit 299;`,
                     get = await this.iGDB.getToken(),
                     games = await this.iGDB.getGames(get.access_token, body),
-                    /* error = "Enter a game title. Title should be at least 3 characters.", */
                     error = "Search a game by providing a title consisting of at least 3 characters.",
                     errorAPI = `No PS2 games found with the title '${title}'. Check the spelling or try another title.`
                     
@@ -351,9 +350,6 @@ class App extends Component {
     getMainError = (filteredData) => {
         const { playCount, collCount, activeFilter } = this.state
         const wishCount = filteredData.filter(item => item.wish).length
-        console.log(playCount)
-        console.log(wishCount)
-        console.log(collCount)
 
         let errorClass = "main__error",
             errorMessage = ""
@@ -748,6 +744,7 @@ class App extends Component {
                     onAsideChange={this.updateAside}
                     aboutBtnRef={this.aboutBtnRef}
                     addBtnRef={this.addBtnRef}
+                    gameListRef={this.gameListRef}
                 />
                 <Info 
                     infoRef={this.infoRef}
@@ -760,6 +757,7 @@ class App extends Component {
                 <main className="main"> 
                     {mainError}  
                     <GameList 
+                        gameListRef={this.gameListRef}
                         infoRef={this.infoRef}
                         activeButtonRef={this.activeButtonRef}
                         activeFilter={activeFilter}

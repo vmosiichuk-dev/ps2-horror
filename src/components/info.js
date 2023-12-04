@@ -649,9 +649,9 @@ class Info extends Component {
 
         const nextFocusableInInfo = this.props.infoRef.current && this.props.infoRef.current.contains(nextFocusable)
         const activeButtonIsLastGame = this.props.activeButtonRef.current !== null && this.props.activeButtonRef.current.id !== `${lastGameSlug}--toolbar-delete` && this.props.activeButtonRef.current.className !== "game-buttons" && this.props.activeButtonRef.current.className !== "info__description"
-        const hoverIsNone = matchMedia("(hover: none)").matches
+        const mediaIsHover = matchMedia("(hover: hover)").matches
 
-        if (!nextFocusableInInfo && activeButtonIsLastGame && hoverIsNone) {
+        if (!nextFocusableInInfo && activeButtonIsLastGame && mediaIsHover) {
             this.props.activeButtonRef.current.focus()
         }
     }

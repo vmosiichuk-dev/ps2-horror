@@ -32,6 +32,27 @@
     justify-content: space-between;
 }
 
+.nav__skip {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    color: white;
+    font-size: .812575rem;
+    opacity: 0;
+    transition: opacity .3s cubic-bezier(.46,.03,.52,.96);
+    padding: 4px;
+    z-index: 10;
+    border: none;
+    background: transparent;
+    border-radius: 3px;
+}
+
+.nav__skip:active,
+.nav__skip:focus,
+.nav__skip:focus-visible {
+    opacity: 1;
+}
+
 .nav__title,
 .nav__progress {
     font-size: .875rem;
