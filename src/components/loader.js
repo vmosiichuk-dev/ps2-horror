@@ -15,7 +15,7 @@ function Loader({ welcomeClick, loaderError }) {
     useEffect(() => {
         if (welcomeClick) {
             const secondMessageTimeout = setTimeout(() => {
-                setLoaderMessage("Arranging the fear factors for your lineup...")
+                setLoaderMessage("Arranging your game library by the fear factor...")
             }, 1900)
 
             return () => clearTimeout(secondMessageTimeout)
