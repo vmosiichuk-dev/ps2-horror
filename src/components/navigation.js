@@ -63,7 +63,7 @@ class Navigation extends Component {
         }
     }
 
-    renderNavControls = (mediaClass, onAsideChange, aboutBtnClass, addGameBtnClass, addGameImgClass, aboutBtnTitle, addGameMenuAlt ) => {
+    renderNavControls = (mediaClass, onAsideChange, aboutBtnRef, addBtnRef, aboutBtnClass, addGameBtnClass, addGameImgClass, aboutBtnTitle, addGameMenuAlt ) => {
         return (
             <section className={"nav__controls-" + mediaClass} aria-label="Sidebar controls">
                 <button 
@@ -71,7 +71,7 @@ class Navigation extends Component {
                     className={aboutBtnClass} 
                     onClick={() => onAsideChange("aboutIsActive")} 
                     tabIndex={0}
-                    ref={this.props.aboutBtnRef}
+                    ref={mediaClass === "desktop" ? aboutBtnRef.desktop : aboutBtnRef.mobile}
                     title={aboutBtnTitle} >
                     <span className="nav__about-span nav__about-span--one"></span>
                     <span className="nav__about-span nav__about-span--two"></span>
@@ -81,7 +81,7 @@ class Navigation extends Component {
                     className={addGameBtnClass} 
                     onClick={() => onAsideChange("addGameIsActive")} 
                     tabIndex={0}
-                    ref={this.props.addBtnRef}>
+                    ref={mediaClass === "desktop" ? addBtnRef.desktop : addBtnRef.mobile}>
                     <img className={addGameImgClass} src={menuImg} alt={addGameMenuAlt}/>
                 </button>
             </section>
@@ -101,7 +101,9 @@ class Navigation extends Component {
             progressbarPlayStyle, 
             collCount, 
             progressCollCount, 
-            progressbarCollStyle 
+            progressbarCollStyle,
+            aboutBtnRef,
+            addBtnRef
         } = this.props
 
         let tabIndex = 0,
@@ -191,6 +193,8 @@ class Navigation extends Component {
                     {this.renderNavControls(
                         "mobile", 
                         onAsideChange, 
+                        aboutBtnRef,
+                        addBtnRef,
                         aboutBtnClass, 
                         addGameBtnClass, 
                         addGameImgClass, 
@@ -206,6 +210,8 @@ class Navigation extends Component {
                     {this.renderNavControls(
                         "desktop", 
                         onAsideChange, 
+                        aboutBtnRef,
+                        addBtnRef,
                         aboutBtnClass, 
                         addGameBtnClass, 
                         addGameImgClass, 

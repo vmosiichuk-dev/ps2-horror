@@ -15,10 +15,16 @@ class App extends Component {
         super(props)
         this.gameListRef = React.createRef()
         this.appRef = React.createRef()
-        this.aboutBtnRef = React.createRef()
-        this.addBtnRef = React.createRef()
         this.infoRef = React.createRef()
         this.activeButtonRef = React.createRef()
+        this.aboutBtnRef = {
+            desktop: React.createRef(),
+            mobile: React.createRef()
+        }
+        this.addBtnRef = {
+            desktop: React.createRef(),
+            mobile: React.createRef()
+        }
         this.state = {
             activeFilter: "all",
             addFormClass: "add-game__form-message is-inactive",
@@ -668,18 +674,49 @@ class App extends Component {
         }, 125)
     }
 
+    handleTabKeydown = (e, focusableElements) => {            
+        const firstElement = focusableElements[0]
+        const secondElement = focusableElements[1]
+        const lastElement = focusableElements[focusableElements.length - 1]
+
+        if (e.key === "Tab") {
+            if (e.shiftKey && document.activeElement === firstElement) {
+                e.preventDefault()
+                lastElement.focus()          
+            }
+            if (!e.shiftKey && document.activeElement === firstElement) {
+                e.preventDefault()
+                secondElement.focus()                 
+            }
+            if (!e.shiftKey && document.activeElement === lastElement) {
+                e.preventDefault()
+                firstElement.focus()       
+            }
+        }
+    }
+
+    handleWindowResize = () => {
+        const mediaClass = window.innerWidth >= 1225 ? "desktop" : "mobile"
+        this.aboutBtnRef.current = this.aboutBtnRef[mediaClass].current
+        this.addBtnRef.current = this.addBtnRef[mediaClass].current
+    }
+
     componentDidMount() {
         const app = this.appRef.current
         const infoShouldOpen = app.clientWidth > 1225 && app.clientHeight < 870
 
         if (infoShouldOpen) this.setState({ openedInfo: infoShouldOpen })
+
+        this.handleWindowResize()
+        window.addEventListener("resize", this.handleWindowResize)
     }
 
     componentDidUpdate() {
-        const { welcomeClick } = this.props
-        const { apiDataLoaded } = this.state
+        if (this.props.welcomeClick && !this.state.apiDataLoaded) this.handleWelcomeClick()
+    }
 
-        if (welcomeClick && !apiDataLoaded) this.handleWelcomeClick()
+    componentWillUnmount() { 
+        window.removeEventListener("resize", this.handleWindowResize)
     }
 
 // –––––––––––––––––––––––––––––—— END functions ––––––––––––––––––––––––––––––——–––––
@@ -705,7 +742,7 @@ class App extends Component {
             searchData,
             searchDataLoaded
         } = this.state
-        const {appAria} = this.props
+        const { appAria } = this.props
 
         const renderData = this.searchGame(data, searchQuery)
 
@@ -772,7 +809,8 @@ class App extends Component {
                 <About 
                     aboutIsActive={aboutIsActive}
                     aboutBtnRef={this.aboutBtnRef}
-                    addBtnRef={this.addBtnRef}
+                    onTabKeydown={this.handleTabKeydown}
+                    onWindowResize={this.handleWindowResize}
                 />
                 <AddGame 
                     addedTitle={addedTitle} 
@@ -787,6 +825,8 @@ class App extends Component {
                     onAddGameSubmit={this.handleAddGameSubmit} 
                     aboutBtnRef={this.aboutBtnRef}
                     addBtnRef={this.addBtnRef}
+                    onWindowResize={this.handleWindowResize}
+                    onTabKeydown={this.handleTabKeydown}
                 />
             </div>
         )
