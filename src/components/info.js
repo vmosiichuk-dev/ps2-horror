@@ -227,7 +227,8 @@ class Info extends Component {
                     newCompanyLabel = "Developer"
                     newCompanyName = "Artoon Co., Ltd."
                     newGenres = ["Action"]
-                    newScreenshot = ghostvibration; break 
+                    newScreenshot = ghostvibration
+                    break 
                 }
                 case "Lifeline": {
                     newScreenshot = lifeline
@@ -614,8 +615,10 @@ class Info extends Component {
         } else return null
     }
 
-    renderAgeRatings = (ratings) => {  
-        return ratings.map(rating => {    
+    renderAgeRatings = (ratings) => {
+        const uniqueRatings = Array.from(new Set(ratings));
+        
+        return uniqueRatings.map(rating => {
             const startIndex = rating.indexOf("/static/media/") + "/static/media/".length;
             const dotIndex = rating.indexOf(".", startIndex);
             const ratingTransformed = dotIndex !== -1 ? rating.substring(startIndex, dotIndex) : null;

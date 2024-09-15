@@ -73,7 +73,7 @@ function About({ aboutBtnRef, aboutIsActive, onTabKeydown, onWindowResize }) {
                     </div>
                     <div className="about__control">
                         <img src={info} width="17" height="17" alt="Info icon"/>
-                        <p className="about__p">Load the sidebar with game details, such as title, release date, rating, summary, genres, developer/publisher, age ratings and links.</p>
+                        <p className="about__p">Load game details, such as title, release date, rating, summary, genres, developer/publisher, age ratings and links.</p>
                     </div>
                     <div className="about__control">
                         <img src={del} width="17" height="17" alt="Delete icon"/>
@@ -101,7 +101,7 @@ function About({ aboutBtnRef, aboutIsActive, onTabKeydown, onWindowResize }) {
                     <h3 className="about__subtitle">Market Analysis</h3>
                     <p className="about__p">To establish collection value categories, we conducted extensive research in October of 2023 by analyzing prices on the most popular gaming marketplace, eBay. We specifically utilized the 'Buy It Now' filter on eBay to exclude auction listings and ensure that the chosen prices reflected readily available options.</p>
                     <h3 className="about__subtitle">Price Criteria</h3>
-                    <p className="about__p">Our analysis revealed that the NTSC U/C region (North America) had the most comprehensive coverage in terms of offers, demand, and pricing. For games with limited NTSC U/C availability, we occasionally used alternative region versions to fill in missing prices. It's important to acknowledge that NTSC J (Japan) and PAL (Europe) games have their own pricing dynamics, which can differ significantly from NTSC U/C.</p>
+                    <p className="about__p">Based on our analysis, the NTSC U/C region (North America) had the most comprehensive coverage in terms of offers, demand, and pricing. For games with limited NTSC U/C availability, we occasionally used alternative region versions to fill in missing prices. It's important to acknowledge that NTSC J (Japan) and PAL (Europe) games have their own pricing dynamics, which can differ significantly from NTSC U/C.</p>
                     <h3 className="about__subtitle">Representational Nature of Prices</h3>
                     <p className="about__p">The provided prices are for reference purposes and may not reflect real-time market values. The gaming market is dynamic, and prices can fluctuate due to factors such as demand, rarity, and game condition. Please consider these values as general estimates rather than definitive market prices when managing your collection.</p>
                 </article>

@@ -49,6 +49,7 @@
 	transition: outline-color .2s cubic-bezier(.46,.03,.52,.96), border-color .2s cubic-bezier(.46,.03,.52,.96), border-radius .15s cubic-bezier(.46,.03,.52,.96);
 	border-radius: 4px 0 0 4px;
 	width: calc(100% - 24px);
+	height: 32px;
 	grid-column: 1;
 	outline-offset: -3px;
 	border: 1px solid #939eb3;
