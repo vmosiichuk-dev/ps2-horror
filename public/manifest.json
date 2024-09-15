@@ -1,0 +1,9 @@
+{
+    "name": "PS2 Collector's App",
+    "short_name": "PS2 Horror",
+    "description": "PS2 Survival Horror Classics",
+    "start_url": "/ps2-horror",
+    "display": "standalone",
+    "background_color": "#2C5364",
+    "theme_color": "#fff"
+}
