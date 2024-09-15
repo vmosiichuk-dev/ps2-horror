@@ -592,7 +592,6 @@ class App extends Component {
                     get = await this.iGDB.getToken(),
                     games = await this.iGDB.getGames(get.access_token, body)
 
-                console.log(games)
                 games.forEach(game => {
                     const gameFiltered = this.filterGame(game)
                     if (gameFiltered.rating === "N/A") {

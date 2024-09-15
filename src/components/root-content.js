@@ -51,6 +51,7 @@ function RootContent() {
 		} else {
 			setState(prevState => ({...prevState, buttonText: startButtonText}))
 		}
+		// eslint-disable-next-line
 	}, [])
 	
 	const { animationReset, apiLoaded, transitionStart, welcomeClick, loaderError, buttonText, appAria } = state
