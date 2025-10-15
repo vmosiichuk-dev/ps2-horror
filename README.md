@@ -2,7 +2,7 @@
 
 This React Collector's App showcases a library of classic survival horror games for the PlayStation 2 (PS2). It allows users to keep track of their gaming progress, manage their collection & wishlist, and explore a curated list of iconic titles from the survival horror genre. The app provides interactive features for adding and deleting, review game details, add games to wishlist and/or mark them as played or collected.
 
-Its component-based architecture serves to create modular, reusable, and self-contained UI elements. Each functional piece, from the navigation bar to individual game items, is encapsulated as a component, enabling easy maintenance and scalability. It involves dynamic rendering based on conditions, presenting users with relevant information and controls. Other dynamic data, such as play counts, search queries, and item states, are tracked and updated seamlessly to ensure real-time responsiveness. This reactive approach ensures that the UI remains in sync with the underlying data and minimizes unnecessary re-renders. 
+Its component-based architecture serves to create modular, reusable, and self-contained UI elements. Each functional piece, from the navigation bar to individual game items, is encapsulated as a component, enabling easy maintenance and scalability. It involves dynamic rendering based on conditions, presenting users with relevant information and controls. Other dynamic data, such as play counts, search queries, and item states, are tracked and updated seamlessly to ensure real-time responsiveness. This reactive approach ensures that the UI remains in sync with the underlying data and minimizes unnecessary re-renders.
 
 Careful event handling enhances user engagement with UI updates and ensures consistent behavior across different user interactions. The semantic structure of the application and proper markup adheres to HTML5 and WCAG standards, promoting accessibility and providing search engine optimization. CSS classes are dynamically modified to reflect changes in the app's state. The app's visual design centers around simplicity, promoting effortless navigation and engagement. The minimalist approach helps to reduces clutter and distractions, allowing users to focus on essential information and interactions.
 
@@ -14,7 +14,7 @@ https://github.com/vladnomad/ps2-horror/assets/98449247/3d4ffcda-30a0-4dd1-932e-
 
 Integration with the IGDB API lets you explore each game's rich details and brings a substantial expansion of an initial game collection of PS2 horror games, presenting users with 88 titles, a threefold increase from v1.0. Plus, you can now add games to your library directly from the database. Furthermore, I have conducted a market research to provide pricing insights in three distinct categories (loose, CIB, and new copies). With an enhanced Welcome section to improve initial loading experience and an informative About section to clarify controls and pricing methodologies, the design and interactivity has been given a significant upgrade throughout the app. Wishlist is now back, alongside the Collection feature. Finally, you can get helpful insight into the current value of your collection or wishlist, based on the selected price options to plan your collector's journey and cherish the games you own.
 
-## v1.0 Screenshots  
+## v1.0 Screenshots
 
 <img src="screenshot--desktop.webp" alt="Desktop Screenshot" width="100%">
 <p float="left">
@@ -83,15 +83,15 @@ The user interface embodies an intuitive design, ensuring users promptly compreh
 ## Future Improvements
 I am committed to improving the PS2 Survival Horror Classics Game Library App to provide an even better user experience. Here are some potential future enhancements I'm considering:
 
-- [x] **Integration with IGDB API** <br> 
+- [x] **Integration with IGDB API** <br>
 - [x] **Value Calculation** <br>
 - [x] **Wishlist Filter** <br>
 - [x] **Expanded Accessibility** <br>
 - [x] **Landscape Styling on Mobile Devices** <br>
 - [ ] **User Accounts and Syncing** <br>
-Implementing user accounts will enable users to create profiles, save their progress, and synchronize their collections across different devices.
+  Implementing user accounts will enable users to create profiles, save their progress, and synchronize their collections across different devices.
 - [ ] **Sorting** <br>
-This enhancement would help users to quickly identify and access games based on several sorting options like rating, name and release date.
+  This enhancement would help users to quickly identify and access games based on several sorting options like rating, name and release date.
 
 ## Acknowledgments
 I extend my heartfelt gratitude to the developers of the iconic PS2 survival horror classics, whose dedication has left an indelible mark on the gaming world. Survival horror on the PS2 transcended mere entertainment, becoming an artistic expression that pushed the boundaries of storytelling, audiovisual design, and emotional engagement. The intricate environments, psychological tension, and spine-tingling soundscapes pushed players to the edge of their seats, delivering an adrenaline-fueled thrill like never before. The legacy of these classics endures as a testament to the power of interactive storytelling and the lasting impact that games can have on our lives.

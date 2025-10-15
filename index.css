@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Unbounded|Didact+Gothic:wght@400;600&subset=latin,latin-ext");
+@import url('https://fonts.googleapis.com/css?family=Unbounded|Didact+Gothic:wght@400;600&subset=latin,latin-ext');
 
 body {
 	--main: #2e29365c;
@@ -15,8 +15,8 @@ body {
 	--filter-gold: invert(89%) sepia(59%) saturate(3802%) hue-rotate(313deg) brightness(108%) contrast(98%);
 	--filter-fallback: invert(75%) sepia(9%) saturate(389%) hue-rotate(140deg) brightness(91%) contrast(91%);
 	--shadow: 14px 14px 0px -4px #4c4c45;
-	--unbounded: "Unbounded", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Helvetica Neue", sans-serif;
-	--didact-gothic: "Didact Gothic", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Helvetica Neue", sans-serif;
+	--unbounded: 'Unbounded', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Helvetica Neue';
+	--didact-gothic: 'Didact Gothic', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Helvetica Neue';
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	color: var(--accent);
@@ -27,26 +27,26 @@ body {
 }
 
 body, input, input::placeholder {
-	font-family: var(--didact-gothic);
+	font-family: var(--didact-gothic), sans-serif;
 }
 
 input {
 	font-size: 1rem;
 }
 
-input[type="text"] {
+input[type='text'] {
 	transition: box-shadow .1s cubic-bezier(.46,.03,.52,.96), border-color .1s cubic-bezier(.46,.03,.52,.96);
 }
 
-input[type="text"]:hover {
+input[type='text']:hover {
 	border-color: skyblue;
-	box-shadow: 0px 0px 8px #c1bcda70;
+	box-shadow: 0 0 8px #c1bcda70;
 	transition: box-shadow .1s cubic-bezier(.46,.03,.52,.96), border-color .1s cubic-bezier(.46,.03,.52,.96);
 }
 
-input[type="text"]:hover,
-input[type="text"]:focus-visible,
-input[type="text"]:active {
+input[type='text']:hover,
+input[type='text']:focus-visible,
+input[type='text']:active {
 	z-index: 0;
 }
 
@@ -59,31 +59,31 @@ button {
 }
 
 .btn {
-    color: var(--accent);
-    border-radius: 4px;
-    padding: 3px 8px 4px;
-    margin: 6px 0;
-    transition: box-shadow .1s cubic-bezier(.46,.03,.52,.96), border-color .1s cubic-bezier(.46,.03,.52,.96);
-    box-shadow: 0px 0px 4px transparent;
-    font-family: var(--didact-gothic);
+	color: var(--accent);
+	border-radius: 4px;
+	padding: 3px 8px 4px;
+	margin: 6px 0;
+	transition: box-shadow .1s cubic-bezier(.46,.03,.52,.96), border-color .1s cubic-bezier(.46,.03,.52,.96);
+	box-shadow: 0 0 4px transparent;
+	font-family: var(--didact-gothic), sans-serif;
 	background-color: var(--btn-bg);
 	border: 1px solid var(--btn-border);
 }
-  
+
 .btn:hover {
 	border-color: skyblue;
-    box-shadow: 0px 0px 8px #c1bcda70;
-    transition: box-shadow .1s cubic-bezier(.46,.03,.52,.96), border-color .1s cubic-bezier(.46,.03,.52,.96);
+	box-shadow: 0 0 8px #c1bcda70;
+	transition: box-shadow .1s cubic-bezier(.46,.03,.52,.96), border-color .1s cubic-bezier(.46,.03,.52,.96);
 }
 
 .btn.is-active {
 	background: var(--btn-active-bg);
 	border-color: skyblue;
-    box-shadow: 0px 0px 4px #c1bcda70;
+	box-shadow: 0 0 4px #c1bcda70;
 }
 
 .a11y {
-    position: absolute;
+	position: absolute;
 	top: -200dvh;
 	left: -200dvw;
 }
@@ -116,14 +116,14 @@ button {
 }
 
 .welcome {
-    position: fixed;
-    top: 0;
+	position: fixed;
+	top: 0;
 	display: grid;
 	align-items: center;
 	grid-template-columns: minmax(50px, 1fr) minmax(230px, 840px) minmax(50px, 1fr);
 	background: black;
 	z-index: 30;
-	font-family: var(--unbounded);
+	font-family: var(--unbounded), sans-serif;
 }
 
 .welcome.is-active {
@@ -132,8 +132,7 @@ button {
 
 .welcome__title {
 	font-size: 1rem;
-	margin: 42px;
-	margin-right: 0;
+	margin: 42px 0 42px 42px;
 	z-index: 30;
 	grid-column: 1 / span 3;
 	grid-row: 1;
@@ -152,8 +151,8 @@ button {
 }
 
 .welcome__title img {
-    width: 30px;
-    margin: 0 10px -5px 0;
+	width: 30px;
+	margin: 0 10px -5px 0;
 }
 
 .welcome__container {
@@ -200,7 +199,7 @@ button {
 	text-decoration: underline;
 	position: relative;
 	text-decoration-thickness: 2px;
-  	text-underline-offset: 4px;
+	text-underline-offset: 4px;
 }
 
 .btn.btn--welcome {
@@ -208,7 +207,7 @@ button {
 	font-size: .9375rem;
 	padding: .875rem 2.25rem;
 	letter-spacing: 2px;
-	font-family: var(--unbounded);
+	font-family: var(--unbounded), sans-serif;
 	border: 1px solid #939eb3;
 	background-color: #1d1f24;
 }
@@ -256,32 +255,30 @@ button {
 }
 
 .fog--one {
-	background: url("./img/fog1.png") repeat-x;
-	background-position: center;
+	background: url('./images/fog1.png') repeat-x center;
 	background-size: cover;
 	animation: fog 120s linear infinite;
 }
 
 .fog--two {
-	background: url("./img/fog2.png") repeat-x;
-	background-position: center;
+	background: url('./images/fog2.png') repeat-x center;
 	background-size: cover;
 	animation: fog 80s linear infinite;
 }
 
 @keyframes fog {
-	0% { 
+	0% {
 		transform: translate3d(0, 0, 0);
 	}
-	100% { 
+	100% {
 		transform: translate3d(-200vw, 0, 0);
 	}
 }
 
 
-/* ––——– INDEX –– MEDIA QUERIES ——————————————————————————————————————————————————— */
+/* ––——– INDEX –– MEDIA QUERIES ––——– */
 
-
+/* Min-width 809px */
 @media screen and (min-width: 809px) {
 	.welcome__text {
 		font-size: 1.125rem;
@@ -299,14 +296,23 @@ button {
 	.fog--two {
 		animation: fog 160s linear infinite;
 	}
+}
 
-	@media (max-width: 1023px) and ((orientation: portrait) or ((min-width: 843px) and (max-width: 925px) and (orientation: landscape))) {
-		.welcome__text {
-			max-width: 498px;
-		}
+/* Max-width 1023px and portrait */
+@media screen and (max-width: 1023px) and (orientation: portrait) {
+	.welcome__text {
+		max-width: 498px;
 	}
 }
 
+/* Min-width 843px, max-width 925px, landscape */
+@media screen and (min-width: 843px) and (max-width: 925px) and (orientation: landscape) {
+	.welcome__text {
+		max-width: 498px;
+	}
+}
+
+/* Orientation landscape, hover none, max-width 1225px */
 @media screen and (orientation: landscape) and (hover: none) and (max-width: 1225px) {
 	body {
 		overflow: initial;
@@ -322,50 +328,56 @@ button {
 	}
 }
 
+/* Min-width 1023px */
 @media screen and (min-width: 1023px) {
 	.welcome__text {
 		max-width: inherit;
 	}
+}
 
-	@media ((orientation: landscape) and (hover: none)) {
-		.welcome__title {
-			margin: 42px;
-		}
-	
-		.welcome__container {
-			margin-top: 0;
-		}
+/* Orientation landscape, hover none */
+@media screen and (orientation: landscape) and (hover: none) {
+	.welcome__title {
+		margin: 42px;
+	}
+
+	.welcome__container {
+		margin-top: 0;
 	}
 }
 
+/* Min-width 1225px */
 @media screen and (min-width: 1225px) {
 	input::placeholder {
 		font-size: .9375rem;
 	}
+}
 
-	@media (hover: hover) and (max-width: 1545px) {
-		.btn {
-			margin: 7px 0;
-		}
-
-		@media (max-height: 720px) {
-			.welcome__subtitle {
-				font-size: 1.125rem;
-			}
-
-			.welcome__text {
-				font-size: 1rem;
-				line-height: normal;
-			}
-
-			.btn.btn--welcome {
-				font-size: .75rem;
-				padding: .75rem 1.25rem;
-			}
-		}
+/* Hover hover, max-width 1545px */
+@media screen and (hover: hover) and (max-width: 1545px) {
+	.btn {
+		margin: 7px 0;
 	}
 }
 
+/* Max-height 720px */
+@media screen and (max-height: 720px) {
+	.welcome__subtitle {
+		font-size: 1.125rem;
+	}
+
+	.welcome__text {
+		font-size: 1rem;
+		line-height: normal;
+	}
+
+	.btn.btn--welcome {
+		font-size: .75rem;
+		padding: .75rem 1.25rem;
+	}
+}
+
+/* Hover hover for welcome link */
 @media screen and (hover: hover) {
 	.welcome__noscript-link {
 		transition: .3s color cubic-bezier(.46,.03,.52,.96);
@@ -380,7 +392,7 @@ button {
 	.welcome__noscript-link:after {
 		display: inline-block;
 		position: absolute;
-		content: "";
+		content: '';
 		padding: 0 2px;
 		width: 37%;
 		transition: .3s width cubic-bezier(.46,.03,.52,.96);
@@ -395,13 +407,30 @@ button {
 	}
 }
 
-@media screen and (((max-width: 1225px) and (orientation: portrait)) or ((min-width: 1079px) and (orientation: landscape)) or (min-height: 720px)) {
+/* Overflow hidden conditions */
+@media screen and (max-width: 1225px) and (orientation: portrait) {
 	html {
 		overflow: hidden;
 	}
 }
 
-@media screen and ((min-height: 720px) or (min-width: 1545px)) {
+@media screen and (min-width: 1079px) and (orientation: landscape) {
+	html {
+		overflow: hidden;
+	}
+}
+
+@media screen and (min-height: 720px) {
+	html {
+		overflow: hidden;
+	}
+
+	input::placeholder {
+		font-size: 1.0625rem;
+	}
+}
+
+@media screen and (min-width: 1545px) {
 	input::placeholder {
 		font-size: 1.0625rem;
 	}
