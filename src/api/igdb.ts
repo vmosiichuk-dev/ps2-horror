@@ -1,8 +1,4 @@
-export const fetchGames = async (query: string) => {
-    const search = `search "${query}"`;
-    const fields = 'fields name,cover.url,first_release_date,summary,rating';
-    const limit = 'limit 10';
-
+export const fetchGames = async (body: string) => {
     const response = await fetch(
         `${import.meta.env.VITE_API_BASE_URL}/igdb/games`,
         {
@@ -11,7 +7,7 @@ export const fetchGames = async (query: string) => {
                 'Content-Type': 'text/plain',
                 'X-Requested-With': 'XMLHttpRequest'
             },
-            body: `${search};${fields};${limit};`,
+            body
         }
     );
 

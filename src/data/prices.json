@@ -1,0 +1,706 @@
+[
+	{
+		"title": "Aliens Versus Predator: Extinction",
+		"prices": {
+			"loose": 25,
+			"cib": 35,
+			"newg": 225
+		}
+	},
+	{
+		"title": "Alone in the Dark",
+		"prices": {
+			"loose": 5,
+			"cib": 10,
+			"newg": 34
+		}
+	},
+	{
+		"title": "Alone in the Dark: The New Nightmare",
+		"prices": {
+			"loose": 25,
+			"cib": 35,
+			"newg": "n/a"
+		}
+	},
+	{
+		"title": "Area 51",
+		"prices": {
+			"loose": 15,
+			"cib": 25,
+			"newg": 260
+		}
+	},
+	{
+		"title": "Baroque",
+		"prices": {
+			"loose": 49,
+			"cib": 64,
+			"newg": 150
+		}
+	},
+	{
+		"title": "Berserk Millennium Empire Arc: Chapter of the Holy Demon War",
+		"prices": {
+			"loose": 37,
+			"cib": 47,
+			"newg": 345
+		}
+	},
+	{
+		"title": "Blood Omen 2: Legacy of Kain",
+		"prices": {
+			"loose": 11,
+			"cib": 17,
+			"newg": 135
+		}
+	},
+	{
+		"title": "BloodRayne",
+		"prices": {
+			"loose": 4,
+			"cib": 17,
+			"newg": 108
+		}
+	},
+	{
+		"title": "BloodRayne 2",
+		"prices": {
+			"loose": 5,
+			"cib": 13,
+			"newg": 125
+		}
+	},
+	{
+		"title": "Castlevania: Curse of Darkness",
+		"prices": {
+			"loose": 35,
+			"cib": 51,
+			"newg": 400
+		}
+	},
+	{
+		"title": "Clock Tower 3",
+		"prices": {
+			"loose": 43,
+			"cib": 80,
+			"newg": 360
+		}
+	},
+	{
+		"title": "Cold Fear",
+		"prices": {
+			"loose": 35,
+			"cib": 58,
+			"newg": 160
+		}
+	},
+	{
+		"title": "Constantine",
+		"prices": {
+			"loose": 8,
+			"cib": 12,
+			"newg": 35
+		}
+	},
+	{
+		"title": "Curse: The Eye of Isis",
+		"prices": {
+			"loose": 6,
+			"cib": 27,
+			"newg": 106
+		}
+	},
+	{
+		"title": "Daemon Summoner",
+		"prices": {
+			"loose": 4,
+			"cib": 6,
+			"newg": 25
+		}
+	},
+	{
+		"title": "Darkwatch",
+		"prices": {
+			"loose": 23,
+			"cib": 30,
+			"newg": 150
+		}
+	},
+	{
+		"title": "Devil May Cry 2",
+		"prices": {
+			"loose": 5,
+			"cib": 11,
+			"newg": 44
+		}
+	},
+	{
+		"title": "Devil May Cry 3: Dante's Awakening - Special Edition",
+		"prices": {
+			"loose": 6,
+			"cib": 8,
+			"newg": 49
+		}
+	},
+	{
+		"title": "Dino Stalker",
+		"prices": {
+			"loose": 10,
+			"cib": 25,
+			"newg": 134
+		}
+	},
+	{
+		"title": "Disaster Report",
+		"prices": {
+			"loose": 40,
+			"cib": 50,
+			"newg": "n/a"
+		}
+	},
+	{
+		"title": "Drakengard",
+		"prices": {
+			"loose": 25,
+			"cib": 55,
+			"newg": 500
+		}
+	},
+	{
+		"title": "Echo Night: Beyond",
+		"prices": {
+			"loose": 95,
+			"cib": 170,
+			"newg": 619
+		}
+	},
+	{
+		"title": "Evil Dead: A Fistful of Boomstick",
+		"prices": {
+			"loose": 18,
+			"cib": 29,
+			"newg": 160
+		}
+	},
+	{
+		"title": "Evil Dead: Regeneration",
+		"prices": {
+			"loose": 30,
+			"cib": 38,
+			"newg": 250
+		}
+	},
+	{
+		"title": "Evil Twin: Cyprien's Chronicles",
+		"prices": {
+			"loose": 6,
+			"cib": 7,
+			"newg": 53
+		}
+	},
+	{
+		"title": "Extermination",
+		"prices": {
+			"loose": 5,
+			"cib": 8,
+			"newg": 85
+		}
+	},
+	{
+		"title": "Fatal Frame",
+		"prices": {
+			"loose": 50,
+			"cib": 82,
+			"newg": 649
+		}
+	},
+	{
+		"title": "Fatal Frame II: Crimson Butterfly",
+		"prices": {
+			"loose": 50,
+			"cib": 96,
+			"newg": 308
+		}
+	},
+	{
+		"title": "Fatal Frame III: The Tormented",
+		"prices": {
+			"loose": 65,
+			"cib": 80,
+			"newg": 333
+		}
+	},
+	{
+		"title": "Forbidden Siren 2",
+		"prices": {
+			"loose": "n/a",
+			"cib": 51,
+			"newg": 610
+		}
+	},
+	{
+		"title": "Galerians: Ash",
+		"prices": {
+			"loose": 11,
+			"cib": 35,
+			"newg": 160
+		}
+	},
+	{
+		"title": "Gantz: The Game",
+		"prices": {
+			"loose": 30,
+			"cib": 50,
+			"newg": "n/a"
+		}
+	},
+	{
+		"title": "Ghosthunter",
+		"prices": {
+			"loose": 16,
+			"cib": 55,
+			"newg": 425
+		}
+	},
+	{
+		"title": "Ghost Vibration",
+		"prices": {
+			"loose": "n/a",
+			"cib": 32,
+			"newg": 138
+		}
+	},
+	{
+		"title": "Gregory Horror Show",
+		"prices": {
+			"loose": "n/a",
+			"cib": 89,
+			"newg": 385
+		}
+	},
+	{
+		"title": "Haunting Ground",
+		"prices": {
+			"loose": "n/a",
+			"cib": 350,
+			"newg": 2000
+		}
+	},
+	{
+		"title": "Hungry Ghosts",
+		"prices": {
+			"loose": 20,
+			"cib": 37,
+			"newg": 150
+		}
+	},
+	{
+		"title": "Jaws Unleashed",
+		"prices": {
+			"loose": 4,
+			"cib": 7,
+			"newg": 1000
+		}
+	},
+	{
+		"title": "Killer7",
+		"prices": {
+			"loose": 18,
+			"cib": 44,
+			"newg": 60
+		}
+	},
+	{
+		"title": "King's Field IV",
+		"prices": {
+			"loose": 42,
+			"cib": 75,
+			"newg": 450
+		}
+	},
+	{
+		"title": "Kuon",
+		"prices": {
+			"loose": 595,
+			"cib": 865,
+			"newg": 2500
+		}
+	},
+	{
+		"title": "Legacy of Kain: Defiance",
+		"prices": {
+			"loose": 17,
+			"cib": 23,
+			"newg": 110
+		}
+	},
+	{
+		"title": "Legacy of Kain: Soul Reaver 2",
+		"prices": {
+			"loose": 10,
+			"cib": 15,
+			"newg": 135
+		}
+	},
+	{
+		"title": "Lifeline",
+		"prices": {
+			"loose": 35,
+			"cib": 50,
+			"newg": 199
+		}
+	},
+	{
+		"title": "Manhunt",
+		"prices": {
+			"loose": 10,
+			"cib": 25,
+			"newg": 350
+		}
+	},
+	{
+		"title": "Manhunt 2",
+		"prices": {
+			"loose": 31,
+			"cib": 60,
+			"newg": 250
+		}
+	},
+	{
+		"title": "Michigan: Report from Hell",
+		"prices": {
+			"loose": 500,
+			"cib": 597,
+			"newg": "n/a"
+		}
+	},
+	{
+		"title": "Mystic Nights",
+		"prices": {
+			"loose": 9,
+			"cib": 22,
+			"newg": "n/a"
+		}
+	},
+	{
+		"title": "ObsCure",
+		"prices": {
+			"loose": 100,
+			"cib": 200,
+			"newg": 7000
+		}
+	},
+	{
+		"title": "ObsCure: The Aftermath",
+		"prices": {
+			"loose": 20,
+			"cib": 30,
+			"newg": 150
+		}
+	},
+	{
+		"title": "Onimusha: Warlords",
+		"prices": {
+			"loose": 6,
+			"cib": 10,
+			"newg": 999
+		}
+	},
+	{
+		"title": "Onimusha 2: Samurai's Destiny",
+		"prices": {
+			"loose": 7,
+			"cib": 14,
+			"newg": 55
+		}
+	},
+	{
+		"title": "Phase Paradox",
+		"prices": {
+			"loose": 12,
+			"cib": 17,
+			"newg": "n/a"
+		}
+	},
+	{
+		"title": "Raw Danger!",
+		"prices": {
+			"loose": 17,
+			"cib": 22,
+			"newg": 52
+		}
+	},
+	{
+		"title": "Resident Evil Code: Veronica X",
+		"prices": {
+			"loose": 5,
+			"cib": 12,
+			"newg": 360
+		}
+	},
+	{
+		"title": "Resident Evil: Dead Aim",
+		"prices": {
+			"loose": 24,
+			"cib": 40,
+			"newg": 315
+		}
+	},
+	{
+		"title": "Resident Evil Outbreak",
+		"prices": {
+			"loose": 10,
+			"cib": 16,
+			"newg": 300
+		}
+	},
+	{
+		"title": "Resident Evil Outbreak File #2",
+		"prices": {
+			"loose": 40,
+			"cib": 44,
+			"newg": 300
+		}
+	},
+	{
+		"title": "Resident Evil Survivor 2 Code: Veronica",
+		"prices": {
+			"loose": 35,
+			"cib": 80,
+			"newg": "n/a"
+		}
+	},
+	{
+		"title": "Resident Evil 4",
+		"prices": {
+			"loose": 6,
+			"cib": 15,
+			"newg": 140
+		}
+	},
+	{
+		"title": "Resident Evil 4: Premium Edition",
+		"prices": {
+			"loose": 50,
+			"cib": 60,
+			"newg": 700
+		}
+	},
+	{
+		"title": "Return to Castle Wolfenstein",
+		"prices": {
+			"loose": 4,
+			"cib": 12,
+			"newg": 119
+		}
+	},
+	{
+		"title": "Rule of Rose",
+		"prices": {
+			"loose": 550,
+			"cib": 700,
+			"newg": 1723
+		}
+	},
+	{
+		"title": "Run Like Hell: Hunt or Be Hunted",
+		"prices": {
+			"loose": 5,
+			"cib": 12,
+			"newg": 40
+		}
+	},
+	{
+		"title": "Silent Hill 2",
+		"prices": {
+			"loose": 85,
+			"cib": 120,
+			"newg": 850
+		}
+	},
+	{
+		"title": "Silent Hill 2: Restless Dreams",
+		"prices": {
+			"loose": 44,
+			"cib": 56,
+			"newg": 373
+		}
+	},
+	{
+		"title": "Silent Hill 2: Special 2 Disc Set",
+		"prices": {
+			"loose": 86,
+			"cib": 129,
+			"newg": "n/a"
+		}
+	},
+	{
+		"title": "Silent Hill 3",
+		"prices": {
+			"loose": 105,
+			"cib": 150,
+			"newg": 999
+		}
+	},
+	{
+		"title": "Silent Hill 4: The Room",
+		"prices": {
+			"loose": 70,
+			"cib": 100,
+			"newg": 330
+		}
+	},
+	{
+		"title": "Silent Hill: Origins",
+		"prices": {
+			"loose": 80,
+			"cib": 100,
+			"newg": 350
+		}
+	},
+	{
+		"title": "Silent Hill: Shattered Memories",
+		"prices": {
+			"loose": 200,
+			"cib": 300,
+			"newg": 999
+		}
+	},
+	{
+		"title": "Shadow Man: 2econd Coming",
+		"prices": {
+			"loose": 7,
+			"cib": 12,
+			"newg": 40
+		}
+	},
+	{
+		"title": "Shadow Tower: Abyss",
+		"prices": {
+			"loose": 52,
+			"cib": 68,
+			"newg": 234
+		}
+	},
+	{
+		"title": "Simple 2000 Series Vol. 113: The Tairyou Jigoku",
+		"prices": {
+			"loose": 35,
+			"cib": 47,
+			"newg": "n/a"
+		}
+	},
+	{
+		"title": "Siren",
+		"prices": {
+			"loose": 19,
+			"cib": 40,
+			"newg": 315
+		}
+	},
+	{
+		"title": "The Fear",
+		"prices": {
+			"loose": 39,
+			"cib": 46,
+			"newg": 122
+		}
+	},
+	{
+		"title": "The Haunted Mansion",
+		"prices": {
+			"loose": 10,
+			"cib": 13,
+			"newg": "n/a"
+		}
+	},
+	{
+		"title": "The Silent Hill Collection",
+		"prices": {
+			"loose": 80,
+			"cib": 152,
+			"newg": 1830
+		}
+	},
+	{
+		"title": "The Suffering",
+		"prices": {
+			"loose": 23,
+			"cib": 42,
+			"newg": 405
+		}
+	},
+	{
+		"title": "The Suffering: Ties That Bind",
+		"prices": {
+			"loose": 20,
+			"cib": 45,
+			"newg": 630
+		}
+	},
+	{
+		"title": "The Thing",
+		"prices": {
+			"loose": 18,
+			"cib": 30,
+			"newg": 405
+		}
+	},
+	{
+		"title": "The X-Files: Resist or Serve",
+		"prices": {
+			"loose": 40,
+			"cib": 61,
+			"newg": 599
+		}
+	},
+	{
+		"title": "Trapt",
+		"prices": {
+			"loose": 25,
+			"cib": 60,
+			"newg": 250
+		}
+	},
+	{
+		"title": "Turok: Evolution",
+		"prices": {
+			"loose": 5,
+			"cib": 10,
+			"newg": 250
+		}
+	},
+	{
+		"title": "Van Helsing",
+		"prices": {
+			"loose": 5,
+			"cib": 10,
+			"newg": 125
+		}
+	},
+	{
+		"title": "Vampire Night",
+		"prices": {
+			"loose": 16,
+			"cib": 23,
+			"newg": 249
+		}
+	},
+	{
+		"title": "Zombie Hunters",
+		"prices": {
+			"loose": 48,
+			"cib": 53,
+			"newg": 80
+		}
+	},
+	{
+		"title": "Zombie Hunters 2",
+		"prices": {
+			"loose": "n/a",
+			"cib": 100,
+			"newg": 135
+		}
+	}
+]

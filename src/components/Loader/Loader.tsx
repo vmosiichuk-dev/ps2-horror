@@ -1,41 +1,47 @@
 import { clsx } from 'clsx';
 import { useState, useEffect } from 'react';
+import { useGameStore } from '@store/useGameStore';
 import { LOADER_MESSAGE } from '@constants/text';
 import loaderGif from '@images/loader.gif';
 import '@styles/loader.css';
 
-const LOADER_TIMEOUT = 1900;
+const LOADER_TIMEOUT = 1200;
 
 interface LoaderProps {
-	welcomeClick: boolean;
-	loaderError: boolean;
+	loaderVisible: boolean;
+	setTransitionStart: (transitionStart: boolean) => void;
 }
 
-export const Loader = ({
-	welcomeClick,
-	loaderError,
-}: LoaderProps) => {
+export const Loader = ({ loaderVisible, setTransitionStart }: LoaderProps) => {
+	const { gamesLoaded, gameError } = useGameStore();
 	const [loaderMessage, setLoaderMessage] = useState(LOADER_MESSAGE.INITIAL);
 
 	useEffect(() => {
-		if (loaderError) {
+		if (loaderVisible && gameError) {
 			setLoaderMessage(LOADER_MESSAGE.ERROR);
-		} else if (welcomeClick) {
+		} else if (loaderVisible && gamesLoaded) {
 			const secondMessageTimeout = setTimeout(() => {
 				setLoaderMessage(LOADER_MESSAGE.ACTIVE);
 			}, LOADER_TIMEOUT);
 
-			return () => clearTimeout(secondMessageTimeout);
+			const endLoadingTimeout = setTimeout(() => {
+				setTransitionStart(true);
+			}, LOADER_TIMEOUT * 2);
+
+			return () => {
+				clearTimeout(secondMessageTimeout);
+				clearTimeout(endLoadingTimeout);
+			}
 		}
-	}, [welcomeClick, loaderError]);
+	}, [loaderVisible, gamesLoaded, gameError]);
 
 	return (
 		<div
-			className={clsx('loader', { ['is-active']: welcomeClick })}
+			className={clsx('loader', { ['is-active']: loaderVisible })}
 			role="status"
 		>
 			<img className="loader__gif" src={loaderGif} alt="" />
-			<p className={clsx('loader__error', { ['is-active']: welcomeClick })}>
+			<p className={clsx('loader__error', { ['is-active']: loaderVisible })}>
 				{loaderMessage}
 			</p>
 		</div>

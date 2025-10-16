@@ -8,10 +8,11 @@ export default defineConfig({
 			'@api': '/src/api',
 			'@components': '/src/components',
 			'@constants': '/src/constants',
+			'@data': '/src/data',
 			'@images': '/src/assets/images',
-			'@pages': '/src/pages',
 			'@store': '/src/store',
-			'@styles': '/src/assets/styles'
+			'@styles': '/src/assets/styles',
+			'@utils': '/src/utils'
 		}
 	}
 });
