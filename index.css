@@ -126,8 +126,26 @@ button {
 	font-family: var(--unbounded), sans-serif;
 }
 
-.welcome.is-active {
-	animation: 1.25s fade-in cubic-bezier(.46,.03,.52,.96) reverse forwards;
+.welcome-enter {
+	opacity: 0;
+	transform: scale(0.98);
+}
+
+.welcome-enter-active {
+	opacity: 1;
+	transform: scale(1);
+	transition: opacity 800ms cubic-bezier(.46,.03,.52,.96), transform 800ms cubic-bezier(.46,.03,.52,.96);
+}
+
+.welcome-exit {
+	opacity: 1;
+	transform: scale(1);
+}
+
+.welcome-exit-active {
+	opacity: 0;
+	transform: scale(1.03);
+	transition: opacity 1000ms cubic-bezier(.46,.03,.52,.96), transform 1000ms cubic-bezier(.46,.03,.52,.96);
 }
 
 .welcome__title {
