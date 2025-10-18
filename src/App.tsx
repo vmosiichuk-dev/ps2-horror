@@ -1,4 +1,5 @@
-import type { GameItem } from '@utils/game';
+import type { GameItem } from '@modules/game';
+
 import { clsx } from 'clsx';
 import { useState } from 'react';
 import { useGameStore } from '@store/useGameStore';
@@ -8,7 +9,7 @@ import '@styles/app.css';
 import '@styles/game-list.css';
 
 export const App = () => {
-	const { data, gamesLoaded } = useGameStore();
+	const { games, gamesLoaded } = useGameStore();
 	const [transitionStart, setTransitionStart] = useState(false);
 
 	return (
@@ -27,14 +28,14 @@ export const App = () => {
 
 					<ul
 						className={clsx('game-list', {
-							'game-list--8': data.length <= 8,
-							'game-list--10': data.length <= 10,
-							'game-list--12': data.length <= 12,
-							'game-list--24': data.length <= 24,
+							'game-list--8': games.length <= 8,
+							'game-list--10': games.length > 8 && games.length <= 10,
+							'game-list--12': games.length > 10 && games.length <= 12,
+							'game-list--24': games.length > 12 && games.length <= 24,
 						})}
 					>
-						{data.map((game: GameItem) => (
-							<Game key={game.slug} game={game} />
+						{games.map((game: GameItem) => (
+							<Game key={game.id} game={game} />
 						))}
 					</ul>
 				</main>

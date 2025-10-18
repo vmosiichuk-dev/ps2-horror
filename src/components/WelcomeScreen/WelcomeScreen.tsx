@@ -13,14 +13,14 @@ interface WelcomeScreenProps {
 
 export const WelcomeScreen = ({ transitionStart, setTransitionStart }: WelcomeScreenProps) => {
 	const nodeRef = useRef(null);
-	const { gamesLoaded, setInitialData } = useGameStore();
+	const { gamesLoaded, setInitialGames } = useGameStore();
 	const [loaderVisible, setLoaderVisible] = useState(false);
 
 	const handleWelcomeClick = async () => {
 		setLoaderVisible(true);
 
 		try {
-			await setInitialData();
+			await setInitialGames();
 		} catch {
 			setLoaderVisible(false);
 		}

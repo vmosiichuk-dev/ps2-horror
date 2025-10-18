@@ -1,13 +1,16 @@
-import type { GameItem } from '@utils/game';
+import type { GameItem } from '@modules/game';
+
 import { clsx } from 'clsx';
-import { GamePrice } from '@components';
-import controller from '@images/controller.png';
-import star from '@images/star.png';
-import info from '@images/info.png';
-// import question from '@images/question.png';
-import overlay from '@images/overlay.png';
-import del from '@images/del.png';
+import { usePriceStore } from '@store/usePriceStore';
+import { GamePrices } from '@components';
 import '@styles/game.css';
+
+import playIcon from '@images/play-icon.png';
+import wishIcon from '@images/wish-icon.png';
+import infoIcon from '@images/info-icon.png';
+import deleteIcon from '@images/delete-icon.png';
+import overlay from '@images/overlay.png';
+// import question from '@images/question.png';
 
 interface GameProps {
 	game: GameItem
@@ -16,84 +19,90 @@ interface GameProps {
 export const Game = ({
 	game
 }: GameProps) => {
-	const { slug, title, src, wish, play, priceCategory } = game;
+	const { getPrice } = usePriceStore();
+	const { priceCategory } = getPrice(game.id);
 	const focusStyle = { opacity: 0 };
 
 	return (
 		<li
-			id={slug}
+			id={game.slug}
 			className={clsx('game', {
-				['--wish']: wish,
-				['--play']: play,
+				['--wish']: game.wish,
+				['--play']: game.play,
 				[`game--${priceCategory}`]: priceCategory
 			})}
 		>
 			<div className="game__title-container" style={focusStyle}>
-				<h2 className="game__title">{title}</h2>
+				<h2 className="game__title">{game.title}</h2>
 			</div>
 
-			<img className="game__cover-img" src={src} alt={"PS2 game cover for " + title} />
+			<img
+				className="game__cover-img"
+				src={game.src}
+				alt={'PS2 game cover for ' + game.title}
+			/>
+
 			<img className="game__cover-overlay" src={overlay} alt="" />
 
 			<div className="game__status-container">
-				<img className="game__status --wish" src={star} alt="" />
-				<img className="game__status --play" src={controller} alt="" />
+				<img className="game__status --wish" src={wishIcon} alt="" />
+				<img className="game__status --play" src={playIcon} alt="" />
 			</div>
 
 			<div
 				className="game-buttons"
 				tabIndex={0}
 				role="toolbar"
-				aria-activedescendant={slug + "--toolbar-wish"}
-				aria-label={"Control options for " + title + ":"}
+				aria-activedescendant={game.slug + '--toolbar-wish'}
+				aria-label={"Control options for " + game.title + ":"}
 				style={focusStyle}
 			>
 				<button
 					type="button"
-					id={slug + "--toolbar-wish"}
+					id={game.slug + '--toolbar-wish'}
 					className="btn-sm btn-wish"
 					data-toggle="wish"
 				>
 					<img
 						className="icon icon-wish"
-						src={star}
-						alt={wish ? "Remove from wishlist" : "Add to wishlist"}
+						src={wishIcon}
+						alt={game.wish ? 'Remove from wishlist' : 'Add to wishlist'}
 					/>
 				</button>
 
 				<button
 					type="button"
-					id={slug + "--toolbar-play"}
+					id={game.slug + '--toolbar-play'}
 					className="btn-sm btn-play"
 					data-toggle="play"
 				>
 					<img
 						className="icon icon-played"
-						src={controller}
-						alt={play ? "Remove from played" : "Mark as played"}
+						src={playIcon}
+						alt={game.play ? 'Remove from played' : 'Mark as played'}
 					/>
 				</button>
 
 				<button
 					type="button"
-					id={slug + "--toolbar-info"}
+					id={game.slug + '--toolbar-info'}
 					className="btn-sm btn-info"
 				>
 					<img
 						className="icon icon-info"
-						src={info}
+						src={infoIcon}
 						alt="Load game data"
 					/>
 				</button>
 
 				<button
 					type="button"
-					id={slug + "--toolbar-delete"}
+					id={game.slug + '--toolbar-delete'}
 					className="btn-sm btn-delete"
 				>
 					<img
 						className="icon icon-delete"
-						src={del}
+						src={deleteIcon}
 						alt="Delete game"
 					/>
 				</button>
@@ -103,7 +112,7 @@ export const Game = ({
 				</p>
 			</div>
 
-			<GamePrice />
+			<GamePrices game={game} />
 		</li>
 	);
 };

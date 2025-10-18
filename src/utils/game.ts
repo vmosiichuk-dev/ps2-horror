@@ -1,24 +1,5 @@
-import gamePrices from '@data/prices.json';
+import type { GameItem } from '@modules/game';
 import noCover from '@images/no-cover.webp';
-
-export interface GameItem {
-	slug: string;
-	title: string;
-	rating: number | 'N/A';
-	play: boolean;
-	wish: boolean;
-	priceCategory: string;
-	ageRatings: number[];
-	genres: string[];
-	companyLabel: string;
-	companyName: string;
-	screenshots: string[];
-	websites: { category: string; url: string }[];
-	src: string;
-	loose: string | number | 'n/a';
-	cib: string | number | 'n/a';
-	newg: string | number | 'n/a';
-}
 
 export const formatGame = (game: any): GameItem => {
 	const rating = Math.round(game.total_rating || game.rating || game.aggregated_rating || 0);
@@ -56,15 +37,13 @@ export const formatGame = (game: any): GameItem => {
 		return { category: website.category, url: website.url };
 	});
 
-	const gamePrice = gamePrices.find((game) => game.title === title)?.prices;
-
 	return {
+		id: String(game.id),
 		slug: game.slug,
 		title,
 		rating: rating === 0 ? 'N/A' : rating,
 		play: false,
 		wish: false,
-		priceCategory: '',
 		ageRatings,
 		genres,
 		companyLabel,
@@ -72,9 +51,6 @@ export const formatGame = (game: any): GameItem => {
 		screenshots,
 		websites,
 		src,
-		loose: gamePrice?.loose || 'n/a',
-		cib: gamePrice?.cib || 'n/a',
-		newg: gamePrice?.newg || 'n/a'
 	};
 };
 

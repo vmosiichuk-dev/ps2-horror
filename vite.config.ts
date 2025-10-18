@@ -8,10 +8,10 @@ export default defineConfig({
 			'@api': '/src/api',
 			'@components': '/src/components',
 			'@constants': '/src/constants',
-			'@data': '/src/data',
 			'@images': '/src/assets/images',
 			'@store': '/src/store',
 			'@styles': '/src/assets/styles',
+			'@modules': '/src/modules',
 			'@utils': '/src/utils'
 		}
 	}

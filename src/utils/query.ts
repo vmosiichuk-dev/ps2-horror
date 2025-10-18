@@ -1,4 +1,4 @@
-import type { QueryWhereValues } from '@constants/queries';
+import type { QueryWhereValues } from '@modules/query';
 
 export const queryWhere = (key: string, values: QueryWhereValues) => {
 	const queries = [];

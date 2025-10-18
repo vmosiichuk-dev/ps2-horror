@@ -30,10 +30,10 @@
 			"@api/*": ["api/*"],
 			"@components": ["components"],
 			"@constants/*": ["constants/*"],
-			"@data/*": ["data/*"],
 			"@images/*": ["assets/images/*"],
 			"@store/*": ["store/*"],
 			"@styles/*": ["assets/styles/*"],
+			"@modules/*": ["modules/*"],
 			"@utils/*": ["utils/*"]
 		}
 	},

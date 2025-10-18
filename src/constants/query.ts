@@ -1,22 +1,9 @@
+import type { Query } from '@modules/query';
 import { queryWhere } from '@utils/query';
-
-export type QueryWhereValues = {
-	included: string[];
-	excluded: string[];
-};
-
-interface Query {
-	FIELDS: string[];
-	LIMIT: number;
-	WHERE: Record<string, QueryWhereValues>;
-	SORT: {
-		key: string;
-		order: 'asc' | 'desc';
-	};
-}
 
 const INITIAL_QUERY: Query = {
 	FIELDS: [
+		'id',
 		'genres.name',
 		'name',
 		'total_rating',
@@ -65,7 +52,7 @@ const INITIAL_QUERY: Query = {
 		},
 		ID: {
 			included: [],
-			excluded: ['3837', '2862', '6200', '5143', '2861', '210296', '43614', '11286', '5868', '43262', '43264', '20829', '1159', '43301', '253324', '85965', '172551', '91643', '43633', '43210', '49405', '132163', '136', '260797', '77219', '127959', '20640', '37045', '144966', '203260', '13901', '24096', '64108', '72157', '73012', '726', '3945', '291916']
+			excluded: ['40106', '145057', '351585', '3837', '2862', '6200', '5143', '2861', '210296', '43614', '11286', '5868', '43262', '43264', '20829', '1159', '43301', '253324', '85965', '172551', '91643', '43633', '43210', '49405', '132163', '136', '260797', '77219', '127959', '20640', '37045', '144966', '203260', '13901', '24096', '64108', '72157', '73012', '726', '3945', '291916']
 		}
 	}
 };
@@ -81,6 +68,6 @@ const initialWhereQueries = Object.entries(INITIAL_QUERY.WHERE)
 
 const INITIAL_WHERE = initialWhereQueries ? `where ${initialWhereQueries};` : '';
 
-export const INITIAL_FETCH_BODY = [INITIAL_FIELDS, INITIAL_LIMIT, INITIAL_WHERE, INITIAL_SORT]
+export const INITIAL_QUERY_BODY = [INITIAL_FIELDS, INITIAL_LIMIT, INITIAL_WHERE, INITIAL_SORT]
 	.filter(Boolean)
 	.join(' ');
