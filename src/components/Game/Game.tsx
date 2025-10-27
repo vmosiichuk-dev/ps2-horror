@@ -1,6 +1,7 @@
 import type { GameItem } from '@modules/game';
 
 import { clsx } from 'clsx';
+import { useInfoStore } from '@store/useInfoStore';
 import { usePriceStore } from '@store/usePriceStore';
 import { GamePrices } from '@components';
 import '@styles/game.css';
@@ -19,8 +20,10 @@ interface GameProps {
 export const Game = ({
 	game
 }: GameProps) => {
-	const { getPrice } = usePriceStore();
-	const { priceCategory } = getPrice(game.id);
+	const getPrice = usePriceStore(state => state.getPrice);
+	const setActiveGame = useInfoStore(state => state.setActiveGame);
+
+	const { priceCategory } = getPrice(game);
 	const focusStyle = { opacity: 0 };
 
 	return (
@@ -38,7 +41,7 @@ export const Game = ({
 
 			<img
 				className="game__cover-img"
-				src={game.src}
+				src={game.cover}
 				alt={'PS2 game cover for ' + game.title}
 			/>
 
@@ -87,6 +90,7 @@ export const Game = ({
 					type="button"
 					id={game.slug + '--toolbar-info'}
 					className="btn-sm btn-info"
+					onClick={() => setActiveGame(game)}
 				>
 					<img
 						className="icon icon-info"

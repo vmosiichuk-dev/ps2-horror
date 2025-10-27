@@ -3,13 +3,14 @@ import type { GameItem } from '@modules/game';
 import { clsx } from 'clsx';
 import { useState } from 'react';
 import { useGameStore } from '@store/useGameStore';
-import { WelcomeScreen, Game } from '@components';
+import { WelcomeScreen, Navigation, Info, Game } from '@components';
 import { ERRORS } from '@constants/text';
-import '@styles/app.css';
 import '@styles/game-list.css';
+import '@styles/app.css';
 
 export const App = () => {
-	const { games, gamesLoaded } = useGameStore();
+	const games = useGameStore(state => state.games);
+	const gamesLoaded = useGameStore(state => state.gamesLoaded);
 	const [transitionStart, setTransitionStart] = useState(false);
 
 	return (
@@ -23,6 +24,10 @@ export const App = () => {
 				className={clsx('app', { ['has-faded-in']: transitionStart })}
 				aria-hidden={!gamesLoaded}
 			>
+				<Navigation />
+
+				<Info />
+
 				<main className="main">
 					{!gamesLoaded && <p className="error">{ERRORS.MAIN_PAGE}</p>}
 

@@ -12,8 +12,10 @@ interface WelcomeScreenProps {
 }
 
 export const WelcomeScreen = ({ transitionStart, setTransitionStart }: WelcomeScreenProps) => {
+	const gamesLoaded = useGameStore(state => state.gamesLoaded);
+	const setInitialGames = useGameStore(state => state.setInitialGames);
+
 	const nodeRef = useRef(null);
-	const { gamesLoaded, setInitialGames } = useGameStore();
 	const [loaderVisible, setLoaderVisible] = useState(false);
 
 	const handleWelcomeClick = async () => {

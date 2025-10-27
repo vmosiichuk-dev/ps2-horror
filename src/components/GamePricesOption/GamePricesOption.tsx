@@ -8,7 +8,7 @@ import cibIcon from '@images/cib-icon.png';
 import newgIcon from '@images/newg-icon.png';
 
 interface GamePriceOptionProps {
-	id: string,
+	id?: string,
 	slug?: string;
 	price: Price,
 	category: PriceCategory;
@@ -22,7 +22,8 @@ export const GamePricesOption = ({
 	category,
 	targetCategory,
 }: GamePriceOptionProps) => {
-	const { updatePriceCategory } = usePriceStore();
+	const updatePriceCategory = usePriceStore(state => state.updatePriceCategory);
+
 	const Element = id ? 'button' : 'div';
 
 	const getIcon = (category: PriceCategory) => {

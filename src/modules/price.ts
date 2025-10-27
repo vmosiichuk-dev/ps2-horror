@@ -6,6 +6,12 @@ export type ActiveFilter = 'all' | 'play' | 'wish' | 'coll';
 
 export type TargetCategory = 'wishPriceCategory' | 'priceCategory';
 
+export type TotalPrices = {
+	loose: number;
+	cib: number;
+	newg: number;
+};
+
 export interface PriceItem {
 	title: string;
 	priceCategory: PriceCategory;

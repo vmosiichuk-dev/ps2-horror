@@ -1,4 +1,13 @@
-import type { PriceItem } from '@modules/price.ts';
+import type { PriceItem } from '@modules/price';
+
+export const getInitialPriceItem = (title: string): PriceItem => ({
+	title,
+	priceCategory: '',
+	wishPriceCategory: '',
+	loose: 'n/a',
+	cib: 'n/a',
+	newg: 'n/a',
+});
 
 export const PRICES = {
 	'5720': {

@@ -13,7 +13,9 @@ interface LoaderProps {
 }
 
 export const Loader = ({ loaderVisible, setTransitionStart }: LoaderProps) => {
-	const { gamesLoaded, gamesError } = useGameStore();
+	const gamesError = useGameStore(state => state.gamesError);
+	const gamesLoaded = useGameStore(state => state.gamesLoaded);
+
 	const [loaderMessage, setLoaderMessage] = useState(LOADER_MESSAGE.INITIAL);
 
 	useEffect(() => {
@@ -33,7 +35,7 @@ export const Loader = ({ loaderVisible, setTransitionStart }: LoaderProps) => {
 				clearTimeout(endLoadingTimeout);
 			}
 		}
-	}, [loaderVisible, gamesLoaded, gamesError]);
+	}, [loaderVisible, gamesLoaded, gamesError, setTransitionStart]);
 
 	return (
 		<div
