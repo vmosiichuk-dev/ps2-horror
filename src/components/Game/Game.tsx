@@ -20,10 +20,9 @@ interface GameProps {
 export const Game = ({
 	game
 }: GameProps) => {
-	const getPrice = usePriceStore(state => state.getPrice);
+	const { priceCategory } = usePriceStore(state => state.getPrice(game));
 	const setActiveGame = useInfoStore(state => state.setActiveGame);
 
-	const { priceCategory } = getPrice(game);
 	const focusStyle = { opacity: 0 };
 
 	return (

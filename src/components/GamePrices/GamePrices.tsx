@@ -11,10 +11,8 @@ interface GamePriceProps {
 export const GamePrices = ({
 	game,
 }: GamePriceProps) => {
-	const getPrice = usePriceStore(state => state.getPrice);
 	const activeFilter = usePriceStore(state => state.activeFilter);
-
-	const { wishPriceCategory, priceCategory, loose, cib, newg } = getPrice(game);
+	const { wishPriceCategory, priceCategory, loose, cib, newg } = usePriceStore(state => state.getPrice(game));
 
 	const isWish = activeFilter === 'wish';
 	const targetCategory = isWish ? wishPriceCategory : priceCategory;

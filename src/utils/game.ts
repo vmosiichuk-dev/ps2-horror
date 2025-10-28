@@ -37,7 +37,7 @@ const mergeGameWithInfo = (game: GameItem, screenshots: string[]): GameItem => {
 	return {
 		...game,
 		...info,
-		screenshot: allInfo.screenshot || screenshots[screenshotIndex ?? 0] || game.screenshot,
+		screenshot: allInfo?.screenshot || screenshots[screenshotIndex ?? 0] || game.screenshot,
 	};
 };
 

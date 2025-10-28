@@ -14,7 +14,19 @@ import searchIcon from '@images/search.png';
 import deleteIcon from '@images/delete-icon.png';
 // import menuImg from '@images/plus.svg';
 
-export const Navigation = () => {
+interface NavigationProps {
+	progressCount: number;
+	progressTotal: number;
+	progressPercent: string;
+	progressLabel: 'Played' | 'Collected';
+}
+
+export const Navigation = ({
+	progressCount,
+	progressTotal,
+	progressPercent,
+	progressLabel,
+}: NavigationProps) => {
 	const activeFilter = usePriceStore(state => state.activeFilter);
 	const setActiveFilter = usePriceStore(state => state.setActiveFilter);
 
@@ -62,42 +74,78 @@ export const Navigation = () => {
 			</div>
 
 			<section
-				className="nav__filters"
 				role="toolbar"
 				aria-label="Filter controls"
+				className="nav__filters"
 			>
 				<button
 					type="button"
-					className={clsx('btn nav__filter-btn', { 'is-active': activeFilter === 'all' })}
 					onClick={() => handleFilterClick('all')}
+					className={clsx('btn nav__filter-btn', { 'is-active': activeFilter === 'all' })}
 				>
 					All
 				</button>
 
 				<button
 					type="button"
-					className={clsx('btn nav__filter-btn', { 'is-active': activeFilter === 'play' })}
 					onClick={() => handleFilterClick('play')}
+					className={clsx('btn nav__filter-btn', { 'is-active': activeFilter === 'play' })}
 				>
 					<img className="nav__filter-icon" src={playIcon} alt="" /> Played
 				</button>
 
 				<button
 					type="button"
-					className={clsx('btn nav__filter-btn', { 'is-active': activeFilter === 'wish' })}
 					onClick={() => handleFilterClick('wish')}
+					className={clsx('btn nav__filter-btn', { 'is-active': activeFilter === 'wish' })}
 				>
 					<img className="nav__filter-icon" src={wishIcon} alt="" /> Wishlist
 				</button>
 
 				<button
 					type="button"
-					className={clsx('btn nav__filter-btn', { 'is-active': activeFilter === 'coll' })}
 					onClick={() => handleFilterClick('coll')}
+					className={clsx('btn nav__filter-btn', { 'is-active': activeFilter === 'coll' })}
 				>
 					Collection
 				</button>
 			</section>
+
+			{(activeFilter === 'all' || activeFilter === 'wish') && (
+				<section className="nav__progress nav__progress--value">
+					<TotalGamePrices />
+				</section>
+			)}
+
+			{(activeFilter === 'play' || activeFilter === 'coll') && (
+				<section className="nav__progress nav__progress--value">
+					<p className="nav__progress-count">
+						<span>{progressCount}</span>
+						<span>&nbsp;/&nbsp;</span>
+						<span>{progressTotal}</span>
+					</p>
+
+					<div className="nav__progress-bar">
+						<span
+							className={clsx(
+								'progress-bar__label',
+								`progress-bar__label--${progressLabel.toLowerCase()}`
+							)}
+						>
+							{`${progressLabel} progress`}
+						</span>
+
+						<div
+							className="progress-bar" style={{
+								width: progressPercent,
+								borderRadius: progressPercent === '100%' ? '4px' : '4px 0 0 4px'
+							}}
+						></div>
+					</div>
+
+					<span className="nav__progress-percent">{progressPercent}</span>
+				</section>
+			)}
 
 			<section className="nav__search" aria-label="Search input">
 				<label htmlFor="nav__search-input" className="a11y">Search</label>
@@ -125,12 +173,6 @@ export const Navigation = () => {
 					<img className="nav__search-icon" alt="" src={searchIconSrc} />
 				</button>
 			</section>
-
-			{(activeFilter === 'coll' || activeFilter === 'wish') && (
-				<section className="nav__progress nav__progress--value">
-					<TotalGamePrices />
-				</section>
-			)}
 		</nav>
 	);
 };
