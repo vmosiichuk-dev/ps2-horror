@@ -1,8 +1,10 @@
 import type { GameItem } from '@modules/game';
 
 import { clsx } from 'clsx';
+import { useState } from 'react';
 import { useInfoStore } from '@store/useInfoStore';
 import { usePriceStore } from '@store/usePriceStore';
+import { useGameStore } from '@store/useGameStore';
 import { GamePrices } from '@components';
 import '@styles/game.css';
 
@@ -22,19 +24,29 @@ export const Game = ({
 }: GameProps) => {
 	const { priceCategory } = usePriceStore(state => state.getPrice(game));
 	const setActiveGame = useInfoStore(state => state.setActiveGame);
+	const updateGame = useGameStore(state => state.updateGame);
 
-	const focusStyle = { opacity: 0 };
+	const [hovered, setHovered] = useState(false);
+
+	const handleToggle = (field: 'play' | 'wish') => {
+		updateGame(game.id, { [field]: !game[field] });
+	};
 
 	return (
 		<li
 			id={game.slug}
+			tabIndex={0}
+			onMouseEnter={() => setHovered(true)}
+			onMouseLeave={() => setHovered(false)}
+			onFocus={() => setHovered(true)}
+			onBlur={() => setHovered(false)}
 			className={clsx('game', {
 				['--wish']: game.wish,
 				['--play']: game.play,
 				[`game--${priceCategory}`]: priceCategory
 			})}
 		>
-			<div className="game__title-container" style={focusStyle}>
+			<div className="game__title-container"  style={{ opacity: hovered ? 1 : 0 }}>
 				<h2 className="game__title">{game.title}</h2>
 			</div>
 
@@ -57,13 +69,14 @@ export const Game = ({
 				role="toolbar"
 				aria-activedescendant={game.slug + '--toolbar-wish'}
 				aria-label={"Control options for " + game.title + ":"}
-				style={focusStyle}
+				style={{ opacity: hovered ? 1 : 0 }}
 			>
 				<button
 					type="button"
 					id={game.slug + '--toolbar-wish'}
 					className="btn-sm btn-wish"
 					data-toggle="wish"
+					onClick={() => handleToggle('wish')}
 				>
 					<img
 						className="icon icon-wish"
@@ -77,6 +90,7 @@ export const Game = ({
 					id={game.slug + '--toolbar-play'}
 					className="btn-sm btn-play"
 					data-toggle="play"
+					onClick={() => handleToggle('play')}
 				>
 					<img
 						className="icon icon-played"
