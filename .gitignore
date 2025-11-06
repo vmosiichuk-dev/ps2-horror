@@ -7,3 +7,8 @@
 
 # environment
 .env
+.env.development
+.env.production
+
+# DS_Store
+*.DS_Store
