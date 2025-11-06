@@ -1,10 +1,11 @@
 import type { ReactNode } from 'react';
+
 import { clsx } from 'clsx';
 
-interface InfoCategoryProps {
+type InfoCategoryProps = {
 	title: string;
 	children: ReactNode;
-}
+};
 
 export const InfoCategory = ({ title, children }: InfoCategoryProps) => {
 	return (

@@ -1,5 +1,5 @@
 import { clsx } from 'clsx';
-import { useInfoStore } from '@store/useInfoStore';
+import { useInfoStore } from '@store';
 import { InfoCategories, InfoDescription, InfoMedia, InfoTitle } from './components';
 import menuImg from '@images/plus.svg';
 import '@styles/info.css';

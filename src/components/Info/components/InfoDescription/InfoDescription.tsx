@@ -1,17 +1,17 @@
-import type { GameItem } from '@modules/game';
+import type { GameItem } from '@models/game';
 
 import { clsx } from 'clsx';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { getSummary } from '@utils/info';
+import { getSummary } from './InfoDescription.utils';
 
 import upArrow from '@images/up.svg';
 import downArrow from '@images/down.svg';
 
-interface InfoDescriptionProps {
+type InfoDescriptionProps = {
 	activeGame: GameItem;
 	hasReleaseDate: boolean;
 	openedInfo: boolean;
-}
+};
 
 export const InfoDescription = ({
 	activeGame,

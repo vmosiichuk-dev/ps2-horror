@@ -27,7 +27,7 @@
     margin-bottom: 62px;
 }
 
-.game-buttons {
+.game-toolbar {
     display: grid;
     align-items: center;
     justify-content: center;
@@ -40,9 +40,10 @@
     height: 100%;
     width: 100%;
     border-radius: 6px;
+    cursor: pointer;
 }
 
-.game-buttons:hover {
+.game-toolbar:hover {
     opacity: 1;
 }
 
@@ -85,6 +86,12 @@
 .btn-sm.btn-info,
 .btn-sm.btn-delete {
     margin-left: -28px;
+}
+
+
+.btn-sm.btn-info[disabled],
+.btn-sm.btn-delete[disabled] {
+    filter: brightness(75%) saturate(0);
 }
 
 .btn-sm.btn-wish {
@@ -202,9 +209,10 @@
     margin: -13px;
     border-radius: 6px;
     cursor: default;
+    pointer-events: none;
 }
 
-.game-buttons.is-active, 
+.game-toolbar.is-active, 
 .delete-p.is-active {
     opacity: 1;
 }
@@ -236,7 +244,7 @@
         margin: 4px 0 5px;
     }
 
-    .game-buttons {
+    .game-toolbar {
         grid-template-rows: 1fr 26px 15px 26px 0 26px 15px 26px 1fr;
     }
     
@@ -263,7 +271,7 @@
             margin: 2px 0;
         }
 
-        .game-buttons {
+        .game-toolbar {
             grid-template-rows: 1fr 26px 10px 26px 0 26px 10px 26px 1fr;
         }
     
@@ -301,7 +309,7 @@ screen and (hover: hover) and (min-width: 1545px) {
         top: 16px;
     }
 
-    .game-buttons {
+    .game-toolbar {
         grid-template-rows: 1fr 26px 18px 26px 1.5fr 26px 18px 26px 1fr;
         opacity: 0;
     }

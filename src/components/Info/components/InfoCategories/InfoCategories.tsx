@@ -1,14 +1,15 @@
-import type { AgeRating, Website } from '@modules/game';
+import type { AgeRating, Website } from '@models/game';
+
 import { InfoCategory } from './components';
 
-interface InfoCategoriesProps {
+type InfoCategoriesProps = {
 	companyLabel: string;
 	companyName: string;
 	genres: string[];
 	ageRatings : AgeRating[];
 	websites: Website[];
 	openedInfo: boolean;
-}
+};
 
 export const InfoCategories = ({
 	companyLabel,

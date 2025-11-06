@@ -1,13 +1,13 @@
 import { useEffect, useRef } from 'react';
-import overlay from "@images/overlay.png";
+import overlay from '@images/overlay.png';
 
-interface InfoMediaProps {
+type InfoMediaProps = {
 	id: string;
 	screenshot: string;
 	cover: string;
 	title: string;
 	openedInfo: boolean;
-}
+};
 
 export const InfoMedia = ({
 	id,

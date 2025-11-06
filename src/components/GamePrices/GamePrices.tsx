@@ -1,12 +1,12 @@
-import type { GameItem } from '@modules/game';
+import type { GameItem } from '@models/game';
 
-import { usePriceStore } from '@store/usePriceStore';
+import { usePriceStore } from '@store';
 import { GamePricesOption } from '@components';
 import '@styles/game-price.css';
 
-interface GamePriceProps {
+type GamePriceProps = {
 	game: GameItem;
-}
+};
 
 export const GamePrices = ({
 	game,

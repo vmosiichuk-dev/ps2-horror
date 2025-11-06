@@ -9,9 +9,10 @@ export default defineConfig({
 			'@components': '/src/components',
 			'@constants': '/src/constants',
 			'@images': '/src/assets/images',
+			'@lib': '/src/lib',
 			'@store': '/src/store',
 			'@styles': '/src/assets/styles',
-			'@modules': '/src/modules',
+			'@models': '/src/models',
 			'@utils': '/src/utils'
 		}
 	}

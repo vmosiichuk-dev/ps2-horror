@@ -31,9 +31,10 @@
 			"@components": ["components"],
 			"@constants/*": ["constants/*"],
 			"@images/*": ["assets/images/*"],
-			"@store/*": ["store/*"],
+			"@lib/*": ["lib/*"],
+			"@store": ["store"],
 			"@styles/*": ["assets/styles/*"],
-			"@modules/*": ["modules/*"],
+			"@models/*": ["models/*"],
 			"@utils/*": ["utils/*"]
 		}
 	},

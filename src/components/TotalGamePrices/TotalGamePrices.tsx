@@ -1,6 +1,5 @@
 import { useMemo } from 'react';
-import { useGameStore } from '@store/useGameStore';
-import { usePriceStore } from '@store/usePriceStore';
+import { useGameStore, usePriceStore } from '@store';
 import { GamePricesOption } from '@components';
 import '@styles/game-price.css';
 

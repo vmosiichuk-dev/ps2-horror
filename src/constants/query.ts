@@ -1,4 +1,5 @@
-import type { Query } from '@modules/query';
+import type { Query } from '@models/query';
+
 import { queryWhere } from '@utils/query';
 
 const INITIAL_QUERY: Query = {

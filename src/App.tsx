@@ -1,10 +1,8 @@
-import type { GameItem } from '@modules/game';
+import type { GameItem } from '@models/game';
 
 import { clsx } from 'clsx';
 import { useEffect, useMemo, useState } from 'react';
-import { useGameStore } from '@store/useGameStore';
-import { useInfoStore } from '@store/useInfoStore';
-import { usePriceStore } from '@store/usePriceStore';
+import { useGameStore, useInfoStore, usePriceStore } from '@store';
 import { WelcomeScreen, Navigation, Info, Game } from '@components';
 import { ERRORS } from '@constants/text';
 import '@styles/game-list.css';

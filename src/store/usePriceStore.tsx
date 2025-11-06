@@ -1,11 +1,18 @@
-import type { ActiveFilter, PriceItem, PriceCategory, TargetCategory, TotalPrices } from '@modules/price';
-import type { GameItem } from '@modules/game';
+import type { GameItem } from '@models/game';
+
+import type {
+	ActiveFilter,
+	PriceItem,
+	PriceCategory,
+	TargetCategory,
+	TotalPrices,
+} from '@models/price';
 
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { getInitialPriceItem, PRICES } from '@constants/prices';
 
-export interface PriceStore {
+type PriceStore = {
 	prices: Record<string, PriceItem>;
 	activeFilter: ActiveFilter;
 	getPrice: (game: GameItem) => PriceItem,
@@ -13,7 +20,7 @@ export interface PriceStore {
 	setActiveFilter: (filter: ActiveFilter) => void;
 	updatePriceCategory: (id: string, category: PriceCategory) => void;
 	getTotal: (games: GameItem[], activeFilter: ActiveFilter) => TotalPrices;
-}
+};
 
 const getTargetCategory = (activeFilter: ActiveFilter): TargetCategory => {
 	return activeFilter === 'wish' ? 'wishPriceCategory' : 'priceCategory';

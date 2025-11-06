@@ -1,9 +1,9 @@
-import type { ActiveFilter } from '@modules/price';
+import type { ActiveFilter } from '@models/price';
 import type { ChangeEvent } from 'react';
 
 import { clsx } from 'clsx';
 import { useState } from 'react';
-import { usePriceStore } from '@store/usePriceStore';
+import { usePriceStore } from '@store';
 import { TotalGamePrices } from '@components';
 import '@styles/navigation.css';
 
@@ -14,12 +14,12 @@ import searchIcon from '@images/search.png';
 import deleteIcon from '@images/delete-icon.png';
 // import menuImg from '@images/plus.svg';
 
-interface NavigationProps {
+type NavigationProps = {
 	progressCount: number;
 	progressTotal: number;
 	progressPercent: string;
 	progressLabel: 'Played' | 'Collected';
-}
+};
 
 export const Navigation = ({
 	progressCount,

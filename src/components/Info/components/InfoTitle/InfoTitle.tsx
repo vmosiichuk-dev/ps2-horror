@@ -1,13 +1,14 @@
-import type { Rating } from '@modules/game';
+import type { Rating } from '@models/game';
+
 import { clsx } from 'clsx';
 
-interface InfoTitleProps {
+type InfoTitleProps = {
 	ageRatingsLength: number;
 	title: string;
 	subtitle: string;
 	rating: Rating;
 	hasReleaseDate: boolean;
-}
+};
 
 export const InfoTitle = ({
 	ageRatingsLength,

@@ -1,4 +1,4 @@
-import type { PriceItem } from '@modules/price';
+import type { PriceItem } from '@models/price';
 
 export const getInitialPriceItem = (title: string): PriceItem => ({
 	title,

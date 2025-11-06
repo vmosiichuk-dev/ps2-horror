@@ -7,7 +7,8 @@
 }
 
 .app.has-faded-in {
-	animation: 1.175s fade-in .9s cubic-bezier(.46,.03,.52,.96) forwards;
+	animation: 0.6s fade-in 0.3s cubic-bezier(.46,.03,.52,.96) forwards;
+    /*animation: 1.175s fade-in .9s cubic-bezier(.46,.03,.52,.96) forwards;*/
 }
 
 .main {

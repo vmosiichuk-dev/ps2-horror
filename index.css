@@ -156,7 +156,8 @@ button {
 	grid-row: 1;
 	position: relative;
 	align-self: flex-start;
-	animation: 4.5s fade-in cubic-bezier(.46,.03,.52,.96) forwards;
+	animation: 1.5s fade-in cubic-bezier(.46,.03,.52,.96) forwards;
+	/*animation: 4.5s fade-in cubic-bezier(.46,.03,.52,.96) forwards;*/
 }
 
 @keyframes fade-in {
@@ -179,7 +180,8 @@ button {
 	grid-column: 2;
 	grid-row: 1;
 	display: grid;
-	animation: 4s scale-up--fade-in cubic-bezier(.46,.03,.52,.96) forwards;
+	animation: 2s scale-up--fade-in cubic-bezier(.46,.03,.52,.96) forwards;
+	/*animation: 4s scale-up--fade-in cubic-bezier(.46,.03,.52,.96) forwards;*/
 }
 
 @keyframes scale-up--fade-in {
@@ -232,7 +234,8 @@ button {
 
 .btn--welcome.has-faded-in {
 	opacity: 0;
-	animation: 1.5s fade-in 3s cubic-bezier(.46,.03,.52,.96) forwards;
+	animation: 1.5s fade-in 1s cubic-bezier(.46,.03,.52,.96) forwards;
+	/*animation: 1.5s fade-in 3s cubic-bezier(.46,.03,.52,.96) forwards;*/
 }
 
 .btn--welcome.has-faded-out,
@@ -256,7 +259,8 @@ button {
 	width: 100dvw;
 	grid-column: 1 / span 3;
 	grid-row: 1;
-	animation: 3s fade-in cubic-bezier(.46,.03,.52,.96) forwards;
+	animation: 1s fade-in cubic-bezier(.46,.03,.52,.96) forwards;
+	/*animation: 3s fade-in cubic-bezier(.46,.03,.52,.96) forwards;*/
 }
 
 .fog__container {

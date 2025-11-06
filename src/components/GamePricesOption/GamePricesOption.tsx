@@ -1,19 +1,19 @@
-import type { PriceCategory, Price } from '@modules/price';
+import type { PriceCategory, Price } from '@models/price';
 
 import { clsx } from 'clsx';
-import { usePriceStore } from '@store/usePriceStore';
+import { usePriceStore } from '@store';
 
 import looseIcon from '@images/loose-icon.png';
 import cibIcon from '@images/cib-icon.png';
 import newgIcon from '@images/newg-icon.png';
 
-interface GamePriceOptionProps {
+type GamePriceOptionProps = {
 	id?: string,
 	slug?: string;
 	price: Price,
 	category: PriceCategory;
 	targetCategory?: PriceCategory,
-}
+};
 
 export const GamePricesOption = ({
 	id,

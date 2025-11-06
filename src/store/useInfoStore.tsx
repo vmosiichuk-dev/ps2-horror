@@ -1,12 +1,13 @@
-import type { GameItem } from '@modules/game';
+import type { GameItem } from '@models/game';
+
 import { create } from 'zustand';
 
-interface InfoStore {
+type InfoStore = {
 	activeGame: GameItem | null;
 	openedInfo: boolean;
 	setActiveGame: (game: GameItem, openedInfo?: boolean) => void;
 	closeInfo: () => void;
-}
+};
 
 export const useInfoStore = create<InfoStore>()((set) => ({
 	activeGame: null,
