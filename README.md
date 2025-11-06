@@ -6,6 +6,8 @@ Its component-based architecture serves to create modular, reusable, and self-co
 
 Careful event handling enhances user engagement with UI updates and ensures consistent behavior across different user interactions. The semantic structure of the application and proper markup adheres to HTML5 and WCAG standards, promoting accessibility and providing search engine optimization. CSS classes are dynamically modified to reflect changes in the app's state. The app's visual design centers around simplicity, promoting effortless navigation and engagement. The minimalist approach helps to reduces clutter and distractions, allowing users to focus on essential information and interactions.
 
+## v3.0 In development...
+
 ## v2.0 Showcase
 
 https://github.com/vladnomad/ps2-horror/assets/98449247/3d4ffcda-30a0-4dd1-932e-decb732ede74
